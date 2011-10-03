@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>I am Martin &amp; I am looking for a flatshare.</title>
+	<meta name="description" content="Martin is searching for a flatshare.">
+	<meta name="author" content="Martin Klepsch">
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/skeleton.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
+	<link rel="stylesheet" href="stylesheets/mklappstuhl.css">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+</head>
+<body>
+
+
+
+	<!-- Primary Page Layout
+	================================================== -->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+
+	<div class="container">
+	<div class="ten columns">
+		<h1>Hi! I am Martin &amp;
+			I am searching for a flatshare<br> with interesting people.</h1>
+		<hr>
+		<p>I am currently studying Computer Science at the Institute of Technology Berlin.
+		Actually I am doing a lot of stuff &#8220;on the side&#8221; so I am studying at
+		a slower speed than most other people I know.</p>
+
+		<p>After living in a dorm for a year I am now finally looking for a nicer and
+		more social place. Somewhere within the highlighted area below would be
+		super-tastic!</p>
+
+		<hr>
+		<h3>Why I am a cool flatmate</h3>
+		<div class="four columns alpha">
+			<h4>Interests (yeah!)</h4>
+			<ul>
+				<li>Climbing</li>
+				<li>Programming</li>
+				<li>Startups</li>
+				<li>Doppelkopf</li>
+				<li>Linux</li>
+				<li>DIY</li>
+				<li>Design</li>
+			</ul>
+		</div>
+		<div class="six columns omega">
+		<h4>What Makes Me</h4>
+		<p>
+			I am a very talkative guy. I have an opinion on everything. I do drink alcohol.
+			I like to try new things. I don't have a driver's license. I am lucky. I love to
+			do things that appear to be risky. I do the dishes after I used them. I am
+			tolerant.
+		</p>
+		<h4>Where I'd Like to Live</h4>
+		<p>
+			I want to go for drinks in the evening if there is no work to do.
+			I prefer lunch over breakfast. I want to do <a href="TODO">small hacking 
+			projects</a>, that increase the joy of living in a flat.
+			I want to make tasty meals with my flatmates. I don't care about age.
+		</p>
+		</div>
+		<br class="clear" />
+		<hr>
+		<div class"eight columns">
+		<h3>Find Me Elsewhere</h3>
+			<a href="http://facebook.com/martinklepsch">Facebook</a>
+			<a href="http://twitter.com/mklappstuhl">Twitter</a>
+			<a href="http://github.com/mklappstuhl">Github</a>
+			<a href="http://profile.google.com">Google</a>
+		<div>
+	</div>
+	</div><!-- container -->
+
+
+
+	<!-- JS
+	================================================== -->
+	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script src="javascripts/tabs.js"></script>
+
+<!-- End Document
+================================================== -->
+</body>
+</html>
