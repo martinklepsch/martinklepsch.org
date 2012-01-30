@@ -1,0 +1,99 @@
+---
+---
+// Color Palette:
+$lila: hsl(297, 53%, 76%);
+$green: hsl(117, 53%, 76%);
+$black: hsl(0, 0%, 25%);
+$semiblack: hsl(0, 0%, 60%);
+$gray: hsl(0, 0%, 80%);
+
+
+body {
+	background: hsl(91, 75%, 99%);
+	font-family: 'Arvo', serif;
+	font-size: 0.875em;
+}
+.container {
+	padding-top: 60px;
+}
+
+article, section {
+	margin: 0 0 5em 0;
+}
+
+ol#archive {
+	list-style-type: none;
+	margin: 0;
+}
+
+// Text Formatting
+a {
+	color: $green;
+	text-decoration: none;
+	&:hover {
+		color: $lila;
+	}
+}
+
+code {
+	font-family: monospace;
+}
+
+pre {
+	border-top: 1px dashed $gray;
+	border-bottom: 1px dashed $gray;
+	margin: 0 1em 1.2em 0;
+	padding: .875em;
+	display: block;
+}
+
+nav {
+	text-align: center;
+	font-size: .875em;
+}
+
+// HEADLINES
+////////////
+
+h1 {
+	font-size: 1.5em;
+	display: inline;
+	a {
+		color: $black;
+	}
+}
+
+h2 {
+	font-size: 1em;
+	font-weight: bold;
+}
+
+.date, footer {
+	font-size: .825em;
+	color: $gray;
+}
+
+.date {
+	margin: 0 0 0 .75em;
+}
+
+p {
+	margin: 0 0 1.2em 0;
+	line-height: 1.8em;
+}
+
+blockquote {
+	font-style: italic;
+	margin: 1em;
+	padding: .5em 1em 0 1em;
+	border-left: 1px solid $gray;
+	color: $semiblack;
+	cite {
+		display: block;
+		font-size: .825em;
+		&:before {
+			content: "\2014 \0020";
+		}
+	}
+}
+

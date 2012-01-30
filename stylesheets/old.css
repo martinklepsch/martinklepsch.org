@@ -1,0 +1,27 @@
+/*
+Color Palette:
+lila: hsl(297, 53%, 76%)
+green: hsl(117, 53%, 76%)
+*/
+
+
+
+body {
+	background: hsl(91, 75%, 99%);
+	font-family: 'Arvo', serif;
+}
+.container {
+	padding-top: 60px;
+}
+
+a {
+	color: hsl(117, 53%, 76%)
+	text-decoration: none;
+}
+
+#menu {
+	text-align: center;
+}
+
+h1 {
+	font-size: 1.5em;

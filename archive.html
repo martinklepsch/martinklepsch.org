@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<h1>All Posts</h1>
+<section>
+<ol id="archive">
+{% for post in site.posts %}
+<li>{{ post.date | date_to_string }} –– <a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a></li>
+{% endfor %}
+</ol>
+</section>

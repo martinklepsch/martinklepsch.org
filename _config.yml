@@ -1,0 +1,4 @@
+auto: true
+permalink: /:year/:month/:day/:title
+markdown: kramdown
+pygments: true
