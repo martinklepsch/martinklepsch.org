@@ -1,5 +1,7 @@
 ---
-YAML STUFF
+layout: post
+title: Becoming A Better Programmer
+category: draft
 ---
 
 Definition of Good

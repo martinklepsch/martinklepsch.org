@@ -3,6 +3,7 @@
 // Color Palette:
 $lila: hsl(297, 53%, 76%);
 $green: hsl(117, 53%, 76%);
+$transparentgreen: hsla(117, 53%, 76%, .2);
 $black: hsl(0, 0%, 25%);
 $semiblack: hsl(0, 0%, 60%);
 $gray: hsl(0, 0%, 80%);
@@ -17,8 +18,28 @@ body {
 	padding-top: 60px;
 }
 
+#hey {
+	background: $transparentgreen;
+	padding: 1em;
+	padding-top: 25px;
+	margin: -70px 0 2.2em 0;
+}
+
 article, section {
 	margin: 0 0 5em 0;
+}
+
+figure {
+	background: $transparentgreen;
+	padding: 5px;
+}
+
+aside {
+	padding: .125em;
+	padding-left: 2.25em;
+	font-size: .9em;
+	font-family: Verdana, sans-serif;
+	color: $gray;
 }
 
 ol#archive {
@@ -70,6 +91,10 @@ h2 {
 
 .date, footer {
 	font-size: .825em;
+	color: $gray;
+}
+
+footer a {
 	color: $gray;
 }
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Twitter & Clojure
+category: draft
 ---
 
 ## Goal

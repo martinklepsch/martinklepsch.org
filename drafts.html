@@ -1,0 +1,14 @@
+---
+layout: default
+title: martinklepsch.org — Drafts
+---
+<h1>Drafts</h1>
+<section>
+<ol id="drafts">
+{% for post in site.posts %}
+  {% if post.categories contains 'draft' %}
+    <li><a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a></li>
+  {% endif %}
+{% endfor %}
+</ol>
+</section>
