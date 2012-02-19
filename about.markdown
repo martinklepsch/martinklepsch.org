@@ -3,11 +3,12 @@ layout: static
 title: About
 ---
 
-Martin Klepsch is a young web developer from Berlin, Germany.
-
+Martin Klepsch is a young web developer from Berlin, Germany.<br>
 Beside backend programming Martin is also interested in many aspects of application
-development like user interaction design.
+development like user interaction design. In all areas Martin is striving to find the
+simplest possible solution to a problem.
 
+When Martin is not working on any of these serious things he enjoys longboarding and partying. Sometimes beerpong.
 
 ## Colophon
 This site was coded mostly by hand in [Vim](http://www.vim.org/).
