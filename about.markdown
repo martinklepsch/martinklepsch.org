@@ -3,12 +3,14 @@ layout: static
 title: About
 ---
 
-Martin Klepsch is a young web developer from Berlin, Germany.<br>
-Beside backend programming Martin is also interested in many aspects of application
-development like user interaction design. In all areas Martin is striving to find the
-simplest possible solution to a problem.
+Hi I'm Martin! I am young web developer from Berlin, Germany.<br>
+Beside backend programming I'm also interested in many aspects of application
+development like user interaction design. I usually tend to think a lot about those things
+even if I am not in a position where this is a requirement.
+I like to solve problems with their simplest possible solution.
 
-When Martin is not working on any of these serious things he enjoys longboarding and partying. Sometimes beerpong.
+When I'm not working I'm mostly [reading](http://www.readability.com/mklappstuhl/latest)
+or hanging out with [friends](http://facebook.com/martinklepsch).
 
 ## Colophon
 This site was coded mostly by hand in [Vim](http://www.vim.org/).
@@ -19,3 +21,4 @@ served by [Google webfonts](http://www.google.com/webfonts).
 I used the [Skeleton framework](http://getskeleton.com) to have a basic grid system and
 a responsive design across different screen resolutions.
 
+{% include twitter-reply.html %}
