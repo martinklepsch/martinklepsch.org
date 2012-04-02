@@ -1,67 +1,60 @@
 <!DOCTYPE html>
 <head>
 
-	<meta charset="utf-8">
-	<title>martinklepsch.org</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
+  <meta charset="utf-8">
+  <title>{% if page.title %} {{ page.title }} — Martin Klepsch | {% endif %} Martin Klepsch</title>
+  <meta name="description" content="Personal Website and Blog of Martin Klepsch">
+  <meta name="author" content="Martin Klepsch">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="/stylesheets/base.css">
-	<link rel="stylesheet" href="/stylesheets/skeleton.css">
-	<link rel="stylesheet" href="/stylesheets/layout.css">
-	<link rel="stylesheet" href="/stylesheets/martinklepschorg.css">
+  <link rel="stylesheet" href="/stylesheets/martinklepschorg.css">
 
-	<!-- Arvo -->
-	<link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!-- Arvo -->
+  <link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-	<!-- Favicons -->
-	<link rel="shortcut icon" href="images/favicon.ico">
-	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-	<script src="http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael-min.js"></script>
-	<script src="/js/martinklepschorg.js"></script>
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <script src="/js/raphael-min.js"></script>
+  <script src="/js/martinklepschorg.js"></script>
 
-	<script type="text/javascript">
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-3138561-8']);
-	_gaq.push(['_setDomainName', 'martinklepsch.org']);
-	_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3138561-8']);
+  _gaq.push(['_setDomainName', 'martinklepsch.org']);
+  _gaq.push(['_trackPageview']);
 
-	(function() {
-	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-	</script>
+  (function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
 
 </head>
 <body>
-	<div class="container">
-		<nav class="four columns">
-			<div id="pseudologo">
-			</div>
-			<ul>
-				<li><a href="/work.html">Work</a></li>
-				<li><a href="/about.html">About</a></li>
-				<li><a href="/archive.html">Archive</a></li>
-				<li><a>Subscribe</a></li>
-				<li><a href="mailto:martinklepsch+martinklepsch.org@googlemail.com"
-					alt="Send me an email">Email</a></li>
-			</ul>
-		</nav>
-		<div class="nine columns">
-			{{ content }}
-			<hr>
-			<footer id="copyright">
-			<p>© 2012 Martin Klepsch. All rights reserved.
-				<a rel="nofollow" href="/drafts.html">Drafts.</a>
-			</p>
-			</footer>
-		</div>
-	</div>
+  <div class="container">
+    <nav class="four columns">
+      <div id="pseudologo">
+      </div>
+      <ul>
+        <li><a href="/work.html">Work</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/archive.html">Archive</a></li>
+        <li><a href="/Martin_Klepsch_Resume.pdf">Resume</a></li>
+        <li><a href="mailto:martinklepsch+martinklepsch.org@googlemail.com"
+          alt="Send me an email">Email</a></li>
+      </ul>
+    </nav>
+    <div class="nine columns">
+      {{ content }}
+      <hr>
+      <footer id="copyright">
+      <p>© 2012 Martin Klepsch. All rights reserved.
+        <a rel="nofollow" href="/drafts.html">Drafts.</a>
+      </p>
+      </footer>
+    </div>
+  </div>
 </body>
 </html>
