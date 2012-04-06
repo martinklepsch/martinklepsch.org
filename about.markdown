@@ -21,4 +21,7 @@ served by [Google webfonts](http://www.google.com/webfonts).
 I used the [Skeleton framework](http://getskeleton.com) to have a basic grid system and
 a responsive design across different screen resolutions.
 
+Some parts of this website are not implemented respecting best-practices. The reasons for
+this are a) I don't care because I don't sell anything and b) I like to play with stuff.
+
 {% include twitter-reply.html %}
