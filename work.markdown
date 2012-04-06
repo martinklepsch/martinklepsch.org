@@ -34,4 +34,4 @@ What I am taking away from my stay at madvertise is that a good continuous
 integration/testing setup is worth a lot and that awareness of certain tools is important
 when working in teams.
 
-Right now I am looking for the *next* so don't hesitate to contact me.
+Right now I am looking for the *next* so don't hesitate to contact me. (May '12)
