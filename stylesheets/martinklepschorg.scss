@@ -11,7 +11,7 @@ $copygreen: hsl(117, 53%, 46%);
 $transparentgreen: hsla(117, 53%, 76%, .1125);
 $black: hsl(0, 0%, 25%);
 $semiblack: hsl(0, 0%, 60%);
-$gray: hsl(0, 0%, 80%);
+$gray: hsl(0, 0%, 70%);
 $background: hsl(91, 75%, 99%);
 
 
@@ -36,8 +36,8 @@ article, section {
   margin: 0 0 5em 0;
 }
 
-::selection {
-  background: $green;
+*::selection {
+  background: $copygreen;
   color: $background;
   text-shadow: none;
 }
@@ -68,6 +68,9 @@ a {
   &:hover {
     color: $lila;
   }
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  transition: .2s;
 }
 
 code {
@@ -100,7 +103,7 @@ nav {
 
 h1 {
   font-size: 1.5em;
-  display: inline;
+  // display: inline;
   a {
     color: $black;
   }
@@ -111,17 +114,23 @@ h2 {
   font-weight: bold;
 }
 
-.date, footer {
+.date, footer{
   font-size: .825em;
   color: $gray;
 }
 
-footer a {
-  color: $gray;
-}
 
-.date {
-  margin: 0 0 0 .75em;
+.linked {
+  a .date {
+    color: $gray;
+    &:hover { text-decoration: underline; }
+  }
+  h1 > a {
+    // color: $copygreen;
+    font-size: .8em;
+    padding-bottom: 3px;
+    border-bottom: 1px solid $gray;
+  }
 }
 
 p {
@@ -133,7 +142,7 @@ blockquote {
   font-style: italic;
   margin: 1em;
   padding: .5em 1em 0 1em;
-  border-left: 1px solid $gray;
+  border-left: 5px solid $green;
   color: $semiblack;
   cite {
     display: block;
@@ -142,4 +151,19 @@ blockquote {
       content: "\2014 \0020";
     }
   }
+}
+
+// Icons
+////////////////////////////////////////
+
+@font-face {
+    font-family: 'EntypoRegular';
+    src: url('/fonts/entypo/entypo-webfont.woff') format('woff');
+}
+
+.entypo {
+  font-family: 'EntypoRegular', none;
+  font-size: 1.45em;
+  padding-left: .15em;
+  border-bottom: none;
 }
