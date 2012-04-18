@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Hosting A Static Site On Amazon S3
-category: draft
+category: howto
 ---
 
 ## Preface
@@ -20,8 +20,8 @@ If you do however you'll quickly notice that Github [disabled custom Ruby code](
 everything secure.
 
 <aside><p>
-There are still ways to host your static site with Github but without the autogeneration
-magic.</p></aside>
+There are still ways to host your static site with Github but using these would mean
+losing nearly all the benefits from hosting at Github (eg. Autogeneration).</p></aside>
 
 Since the requirements for hosting a static site are nearly non-existent you can easily move
 it onto any Server.
@@ -31,10 +31,10 @@ I decided for Amazon S3 because it's widely used, reliable and cheap.
 ## Static Site Generators
 
 While there are
-[quite](http://nanoc.stoneship.org) [a](http://middlemanapp.com)
-[lot](https://www.ruby-toolbox.com/categories/static_website_generation) Jekyll is used by
-most people. When I chose Jekyll it was mostly because of it's active community and the fact
-that it is developed and used heavily by Github.
+[quite](http://nanoc.stoneship.org/ "Nanoc") [a](http://middlemanapp.com "Middleman")
+[lot](https://www.ruby-toolbox.com/categories/static_website_generation "Ruby-Toolbox Listing").
+Jekyll is used by most people. When I chose Jekyll it was mostly because of it's active
+community and the fact that it is developed and used heavily by Github.
 Before I settled on Jekyll I gave nanoc a try. I don't exactly remember why I ditched nanoc
 but in the end Jekyll feels lighter and I also prefer Liquid Markup over ERB
 Syntax.
@@ -55,34 +55,46 @@ have some subdomain.
 
 **Step 1:** Enable S3's website feature by enabling it in the properties pane of your bucket.
 
-<figure>
-<img src="/images/website-settings-s3.png" alt="AWS Console Website Settings">
-<figcaption>Website settings in the bucket propertie pane</figcaption>
-</figure>
+![Website settings in the bucket propertie pane](/images/website-settings-s3.png)
 
 **Step 2:** Set a bucket policy that basically allows everyone to view the contents of your bucket.
 
-  <pre><code>
-    {
-      "Version":"2008-10-17",
-      "Statement":[{
+{% highlight json %}
+{
+  "Version":"2008-10-17",
+    "Statement":[{
       "Sid":"PublicReadForGetBucketObjects",
-            "Effect":"Allow",
-        "Principal": {
-                "AWS": "*"
-             },
-          "Action":["s3:GetObject"],
-          "Resource":["arn:aws:s3:::www.martinklepsch.org/*"]
-        }
-      ]
+      "Effect":"Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action":["s3:GetObject"],
+      "Resource":["arn:aws:s3:::www.REPLACE-THIS.org/*"]
     }
-  </code></pre>
+  ]
+}
+{% endhighlight %}
 
-> Prices, Error handling, Privacy Policy, Website Settings
+**Step 3:** Upload your static website to S3. You can either do that manually by using the
+AWS Management Console or you can automate the process by writing some small programm. There
+are S3 libraries for many programming languages.
+I built a [small rake
+task](https://github.com/mklappstuhl/martinklepsch.org/blob/master/Rakefile
+"Rakefile on Github") that does the job.
 
 If you are experiencing problems with the setup of S3 I recommend the official [AWS
-documentation](http://docs.amazonwebservices.com/AmazonS3/latest/dev/WebsiteHosting.html).
+documentation](http://docs.amazonwebservices.com/AmazonS3/latest/dev/WebsiteHosting.html
+"AWS Static Website Hosting Documentation").
 
 ## Naked Domain Name Fowarding
 
-wwwizer gani etc
+DNS does not allow to set the whats apparently called "zone apex" (`"example.com"`) to be
+a CNAME for another domain like `www.example.com.s3-website-us-east-1.amazonaws.com`.
+Therefore you need to redirect all requests going to your domain without `www` to you
+domain with `www` (`example.com` to `www.example.com`).
+[Read more.](https://forums.aws.amazon.com/thread.jspa?threadID=55995
+"A thread in AWS forums with good information about the issue")
+
+You can either do this by using your domain registrars control panel or by using a service
+like [wwwizer](http://wwwizer.com/naked-domain-redirect). I did it with
+[Gandi](http://gandi.net)'s control panel and it works fine.

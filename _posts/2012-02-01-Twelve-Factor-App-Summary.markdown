@@ -5,9 +5,8 @@ category: draft
 ---
 
 Recently [Adam Wiggins](https://twitter.com/#!/hirodusk) of Heroku fame released a very
-insightful document.
-It is called [The Twelve Factor App](http://12factor.net) and contains twelve one-pagers about
-different areas of application development.
+insightful document addressing many aspects of modern application development.
+It is called [The Twelve Factor App](http://12factor.net).
 
 I will try to give a brief overview about every *factor* below.
 
