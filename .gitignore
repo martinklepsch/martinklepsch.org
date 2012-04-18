@@ -1,3 +1,5 @@
 _site
 stylesheets/martinklepschorg.css
 stylesheets/.sass-cache
+.sass-cache
+_aws-s3.yml
