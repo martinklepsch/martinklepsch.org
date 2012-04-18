@@ -1,17 +1,33 @@
 ---
 layout: default
-title: martinklepsch.org
+title:
 ---
 <section id="hey">
-Hey there! This is the blog of Martin Klepsch, a young engineer living in Berlin. You can
+Hey there! This is the blog of Martin Klepsch, a young developer living in Berlin. You can
 read more <a href="about.html" alt="more about Martin Klepsch">about him</a> if you want.
 </section>
 
-{% for post in site.posts %}
-{% unless post.categories contains 'draft' %}
-<section>
-<h1><a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a></h1>
-{{ post.content }}
-</section>
-{% endunless %}
-{% endfor %}
+<div id="all-posts">
+  {% for post in site.posts %}
+    {% unless post.categories contains 'draft' %}
+
+      {% if post.categories contains 'linked' %}
+        <section class="linked">
+          <h1>
+            <a href="{{post.resource}}">{{ post.title }}</a>
+            <span class="entypo"><a href="{{post.url}}" alt="Permalink to {{post.title}}">'</a></span>
+          </h1>
+      {% else %}
+        <section>
+          <h1>
+            <a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a>
+              <!-- <span class="date">{{ post.date | date_to_string }}</span> -->
+            <!-- <span class="entypo">l</span> -->
+          </h1>
+      {% endif %}
+
+      {{ post.content }}
+      </section>
+    {% endunless %}
+  {% endfor %}
+</div>
