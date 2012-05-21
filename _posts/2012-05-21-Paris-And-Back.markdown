@@ -20,7 +20,7 @@ cheap flights which I could book&mdash;*last minute*.
 There was a flight. It was not cheap with a 182€ pricetag though. Given the fact that
 I payed 100€ for the original flights I was completely pissed. After a couple of minutes
 I decided to take the flight for 182€ and we even made a little fun about what it costs to
-sleep in.
+sleep in. Nevertheless I still hated myself for not being able to get up in time.
 
 Now this is already a story worth telling but it had to come better.
 
