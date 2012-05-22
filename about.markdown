@@ -9,7 +9,7 @@ development like user interaction design. I usually tend to think a lot about th
 even if I am not in a position where this is a requirement.
 I like to solve problems with their simplest possible solution.
 
-When I'm not working I'm mostly [reading](http://www.readability.com/mklappstuhl/latest)
+When I'm not working I'm mostly [reading](http://www.readability.com/mklappstuhl/archives)
 or hanging out with [friends](http://facebook.com/martinklepsch).
 
 ## Colophon
