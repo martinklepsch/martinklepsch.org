@@ -34,8 +34,9 @@ who was sitting there what she asked. And here it comes. She asked if you would 
 flight in exchange for 250€. When I heard that I immediately ran to the flight assistant and
 told her: *"I'm in!"* and so I got 250€.
 
-As a small bonus we even got a voucher for a restaurant at the airport where we spent our
-2 hours extra waiting time eating some good meat and french fries.
+As a small bonus we even got a voucher for a restaurant at the airport where I another
+french girl and one american guy spent our 2 hours extra waiting time eating some good meat
+and french fries.
 
 *I felt so incredibly lucky.*
 
