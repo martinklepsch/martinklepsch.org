@@ -17,7 +17,7 @@ other math olympiades.
 From a technical point of view he is mostly comfortable with Python and C++. He did not work
 a lot in any special area of software development so he might be unexperienced with the
 special limitations or technologies that are used in one area. He has some experience with
-web technologies though.
+web technologies (including Django) though.
 
 If you'd like to get in touch and to get to know some great new talent just send me a short
 note and I will introduce you gladly.
