@@ -4,6 +4,7 @@ gem 'jekyll'
 gem 'redcarpet'
 gem 'sass'
 gem 'rake'
+gem 'thor'
 gem 'aws-s3'
 
 gem 'pry'
