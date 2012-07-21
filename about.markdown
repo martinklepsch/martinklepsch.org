@@ -4,9 +4,9 @@ title: About
 ---
 
 Hi I'm Martin! I am young web developer from Berlin, Germany.<br>
-Beside backend programming I'm also interested in many aspects of application
-development like user interaction design. I usually tend to think a lot about those things
-even if I am not in a position where this is a requirement.
+Beside backend development I'm also interested in many aspects of application
+development like user interaction design. I usually tend to read and think
+a lot about those things even if I don't explicitly need it for something.
 I like to solve problems with their simplest possible solution.
 
 When I'm not working I'm mostly [reading](http://www.readability.com/mklappstuhl/archives)
@@ -22,6 +22,6 @@ I used the [Skeleton framework](http://getskeleton.com) to have a basic grid sys
 a responsive design across different screen resolutions.
 
 Some parts of this website are not implemented respecting best-practices. The reasons for
-this are a) I don't care because I don't sell anything and b) I like to play with stuff.
+this are a) I don't care and b) I like to play with stuff.
 
 {% include twitter-reply.markdown %}
