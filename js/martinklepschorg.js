@@ -41,16 +41,22 @@ window.onload = function(){
     var barVisible = false
 
     function showCircle(){
-      setTimeout(function() { uparrow.stop().animate(uparrowattrs[+(othernow = !othernow)], 50) }, 20)
-      setTimeout(function() { el.stop().animate(elattrs[+(now = !now)], 300) }, 80)
+      uparrow.stop().animate(uparrowattrs[+(othernow = !othernow)], 50)
+      el.stop().animate(elattrs[+(now = !now)], 300)
       $('#pseudologo').css({'position': '', 'margin-top': '90px'})
       $('nav ul').css({'margin-top': '30px'})
+      el.click(function() { location = "/"; this.style.curser = 'pointer'; })
     }
     function showBar(){
-      setTimeout(function() { el.stop().animate(elattrs[+(now = !now)], 300) }, 20)
-      setTimeout(function() { uparrow.stop().animate(uparrowattrs[+(othernow = !othernow)], 50) }, 330)
+      el.stop().animate(elattrs[+(now = !now)], 300)
+      uparrow.stop().animate(uparrowattrs[+(othernow = !othernow)], 50)
       $('#pseudologo').css({'position': 'fixed', 'margin-top': '-30px'})
       $('nav ul').css({'margin-top': '186px'})
+      el.click(function() {
+        var destination = $('body').offset().top;
+        $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination-20}, 500 );
+        return false;
+      })
     }
 
     $('#pseudologo').waypoint({
