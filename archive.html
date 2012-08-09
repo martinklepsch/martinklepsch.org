@@ -6,7 +6,7 @@ layout: default
 <ol id="archive">
 {% for post in site.posts %}
 {% unless post.categories contains 'draft' %}
-<li>{{ post.date | date_to_string }} –– <a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a></li>
+<li><a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a> {{ post.date | date_to_string }}</li>
 {% endunless %}
 {% endfor %}
 </ol>
