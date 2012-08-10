@@ -48,7 +48,7 @@ class Tools < Thor
   no_tasks do
     def files
       Dir.chdir('_site')
-      Dir.glob('**/*.{xml,html,js,css,png,jpg,jpeg,pdf,woff}')
+      Dir.glob('**/*.{xml,html,js,css,png,jpg,jpeg,ico,pdf,woff}')
     end
   end
 end
