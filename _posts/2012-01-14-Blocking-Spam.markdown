@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Blocking Spammers Within Your Network
+categories: draft
 ---
 Julius Werner: naja, du musst auf hubble alle ausgehenden pakete auf tcp port 25 die nicht von domino
 kommen sperren

@@ -8,10 +8,10 @@ I'm happy to announce *Better Programmer's Calendar* today!
 Better Programmer's Calendar is a full year calendar that supplies you with a new
 programming puzzle every week.
 
-These puzzles are:
+These puzzles are
 
-- increasingly difficult
-- programming language agnostic
+ * increasingly difficult
+ * programming language agnostic
 
 ## Resources
 
