@@ -182,3 +182,25 @@ blockquote {
   padding-left: .15em;
   border-bottom: none;
 }
+
+// Make Embedded Content Responsive
+///////////////////////////////////
+
+.responsive-embed {
+  position: relative;
+  padding-bottom: 56.25%; /* 16/9 ratio */
+  padding-top: 30px; /* IE6 workaround*/
+  height: 0;
+  overflow: hidden;
+}
+
+.responsive-embed iframe,
+.responsive-embed object,
+.responsive-embed embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
