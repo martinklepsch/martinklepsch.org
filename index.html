@@ -11,20 +11,9 @@ read more <a href="about.html" alt="more about Martin Klepsch">about him</a> if 
   {% for post in site.posts %}
     {% unless post.categories contains 'draft' %}
 
-      {% if post.categories contains 'linked' %}
-        <section class="linked">
-          <h1>
-            <a href="{{post.resource}}">{{ post.title }}</a>
-            <span class="entypo"><a href="{{post.url}}" alt="Permalink to {{post.title}}">'</a></span>
-          </h1>
-      {% else %}
-        <section>
-          <h1>
-            <a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a>
-              <!-- <span class="date">{{ post.date | date_to_string }}</span> -->
-            <!-- <span class="entypo">l</span> -->
-          </h1>
-      {% endif %}
+      {% assign index = true %}
+      {% assign entry = post %}
+        {% include post-title.html %}
 
       {{ post.content }}
       </section>

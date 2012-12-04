@@ -1,10 +1,9 @@
 ---
 layout: default
 ---
-<article class="post">
-  <h1>
-    <a href="{{ page.url }}" alt="{{ page.title }}">{{ page.title }}</a>
-  </h1>
-  {{ content }}
-  {% include twitter-reply.markdown %}
+{% assign entry = page %}
+{% include post-title.html %}
+
+{{ content }}
+{% include twitter-reply.markdown %}
 </article>
