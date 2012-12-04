@@ -1,11 +1,11 @@
 ---
-layout: linked
+layout: post
 title: The Twelve Factor App
 resource: http://www.12factor.net/
 categories: linked
 ---
 Around December 2011 the awesome crowd around Heroku released a [now open-source
-document](https://github.com/adamwiggins/12factor) that describes 12 factors that 
+document](https://github.com/adamwiggins/12factor) that describes 12 factors that
 build up a methodology of developing software-as-a-service products.
 
 The main goals of [those 12 rules](http://www.12factor.net/) are:

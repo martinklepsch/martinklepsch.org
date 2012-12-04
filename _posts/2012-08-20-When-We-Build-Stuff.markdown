@@ -1,5 +1,5 @@
 ---
-layout: linked
+layout: post
 title: When We Build Stuff
 resource: https://vimeo.com/34017777
 categories: linked

@@ -1,5 +1,5 @@
 ---
-layout: linked
+layout: post
 title: Models, Operations, Views and Events
 resource: http://cirw.in/blog/time-to-move-on
 categories: linked

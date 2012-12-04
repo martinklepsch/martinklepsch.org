@@ -1,5 +1,5 @@
 ---
-layout: linked
+layout: post
 title: Entypo Icon Set
 resource: http://www.entypo.com/
 categories: linked
