@@ -1,0 +1,222 @@
+---
+---
+@import "frameless";
+
+// Color Palette:
+$lila: hsl(297, 53%, 76%);
+$green: hsl(117, 53%, 76%);
+$copygreen: hsl(117, 53%, 46%);
+$transparentgreen: hsla(117, 53%, 76%, .1125);
+$black: hsl(0, 0%, 25%);
+$semiblack: hsl(0, 0%, 60%);
+$gray: hsl(0, 0%, 70%);
+$background: hsl(91, 75%, 99%);
+
+
+body {
+  font-family: 'adelle-1', serif;
+  font-size: 16px;
+  line-height: 1.7em;
+}
+
+#container {
+  margin: auto;
+  margin-top: 3em;
+  @include width(6);
+}
+
+#hey {
+  background: $transparentgreen;
+  padding: 1em;
+  margin: 0 0 2.2em 0;
+}
+
+#pseudologo {
+  margin-top: 90px;
+  // position: fixed;
+}
+
+article, section {
+  margin: 60px 0 5em 0;
+}
+
+#all-posts section {
+  margin: 0 0 5em 0;
+}
+
+*::selection {
+  background: $green;
+  color: $background;
+  text-shadow: none;
+}
+
+img {
+	background: $transparentgreen;
+	padding: 5px;
+  max-width: 100%;
+}
+
+aside {
+  padding: .125em;
+  padding-left: 2.25em;
+  font-size: .9em;
+  font-family: Verdana, sans-serif;
+  color: $gray;
+  word-spacing: 0;
+}
+
+ol#archive {
+  list-style-type: none;
+  margin: 0;
+  color: $gray;
+}
+
+// Text Formatting
+a {
+  color: $copygreen;
+  text-decoration: none;
+  &:hover {
+    color: $lila;
+  }
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  transition: .2s;
+}
+
+code {
+  font-family: monospace;
+}
+
+article ul, section ul {
+  list-style: disc outside;
+  margin-left: 30px;
+}
+
+pre {
+  border-top: 1px dashed $gray;
+  border-bottom: 1px dashed $gray;
+  margin: 0 1em 1.2em 0;
+  padding: .875em;
+  display: block;
+}
+
+nav {
+  text-align: center;
+  font-size: .875em;
+  margin-top: 0px;
+  ul {
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  nav li {
+    display: inline-block;
+    padding: 0 5px;
+  }
+}
+
+// HEADLINES
+////////////
+
+// Never make entypo icons look bold
+.entypo{
+  font-weight:normal;
+}
+
+h1 {
+  font-size: 1.5em;
+  // display: inline;
+  font-weight: 800;
+  a {
+    color: $black;
+  }
+}
+
+h2 {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.date, footer{
+  font-size: .825em;
+  color: $gray;
+}
+
+
+.linked {
+  a .date {
+    color: $gray;
+    &:hover { text-decoration: underline; }
+  }
+  h1 > a {
+    // color: $copygreen;
+    font-weight: normal;
+    font-size: .9em;
+    padding-bottom: 3px;
+    border-bottom: 1px solid $gray;
+  }
+}
+
+p {
+  margin: 0 0 1.2em 0;
+  line-height: 1.8em;
+}
+
+blockquote {
+  font-style: italic;
+  margin: 1em;
+  padding: .5em 1em 0 1em;
+  border-left: 5px solid $green;
+  color: $semiblack;
+  cite {
+    display: block;
+    font-size: .825em;
+    &:before {
+      content: "\2014 \0020";
+    }
+  }
+}
+
+// Icons
+////////////////////////////////////////
+
+@font-face {
+    font-family: 'EntypoRegular';
+    src: url('/fonts/entypo/entypo-webfont.woff') format('woff');
+}
+
+.entypo {
+  font-family: 'EntypoRegular', none;
+  font-size: 1.45em;
+  padding-left: .15em;
+  border-bottom: none;
+}
+
+// Make Embedded Content Responsive
+///////////////////////////////////
+
+.responsive-embed {
+  position: relative;
+  padding-bottom: 56.25%; /* 16/9 ratio */
+  padding-top: 30px; /* IE6 workaround*/
+  height: 0;
+  overflow: hidden;
+}
+
+.responsive-embed iframe,
+.responsive-embed object,
+.responsive-embed embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+@media screen and (max-width: 320px) { }
+@media screen and (max-width: 640px) { }
+@media screen and (max-width: 800px) { }
+@media screen and (max-width: 1024px) { }
+@media screen and (max-width: 320px) { }
