@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Git Prompt for Fish Shell
+title: Git Information in Fish Shell's Prompt
 ---
 After toying around with [Zsh](http://zsh.org) for a while I stumbled upon Fish
 or more precisely [Ridiculous Fish](http://ridiculousfish.com/shell)
