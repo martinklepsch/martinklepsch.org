@@ -17,9 +17,8 @@ $background: hsl(91, 75%, 99%);
 
 body {
   background: $background;
-  font-family: 'Arvo', serif;
-  font-size: 0.875em;
-  word-spacing: 0.2em;
+  font-family: 'adelle-1', serif;
+  font-size: 0.925em;
 }
 
 #hey {
@@ -116,9 +115,15 @@ nav {
 // HEADLINES
 ////////////
 
+// Never make entypo icons look bold
+.entypo{
+  font-weight:normal;
+}
+
 h1 {
   font-size: 1.5em;
   // display: inline;
+  font-weight: 800;
   a {
     color: $black;
   }
@@ -142,7 +147,8 @@ h2 {
   }
   h1 > a {
     // color: $copygreen;
-    font-size: .8em;
+    font-weight: normal;
+    font-size: .9em;
     padding-bottom: 3px;
     border-bottom: 1px solid $gray;
   }
