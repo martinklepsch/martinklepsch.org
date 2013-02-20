@@ -123,8 +123,7 @@ h1,h2,h3,h4,h5,h6,aside,.gist,article > p, section > p,img,ul,ol,blockquote,pre 
   padding: 0em 1em;
 }
 
-h1,h2,h3,h4,h5,h6,aside,blockquote,
-ul,ol,.gist,pre {
+h1,h2,h3,h4,h5,h6,.gist{
   padding: 2em 20px 1em 20px;
   max-width: 640px;
 }
@@ -134,13 +133,21 @@ article > p, section > p, ul, ol {
   padding: 1em 40px 1em 40px;
 }
 
-h2,h3,h4,h5,h6,aside,blockquote {
+h2,h3,h4,h5,h6,aside,pre{
   max-width: 500px;
 }
 
+aside,pre{
+  padding: 1em 20px 1em 20px;
+}
+
+
 blockquote {
+  max-width: 680px;
+  padding: 1em 20px 3em 20px;
   position: relative;
   cite {
+    margin-top: 1em;
     display: block;
     position: absolute;
     right: 0;
