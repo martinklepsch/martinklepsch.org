@@ -5,17 +5,3 @@ title:
 <section id="hey">
 <h1>Hi, I&rsquo;m <a href="about.html" alt="more about Martin Klepsch">Martin</a>. Nice to meet you.</h1>This blog is currently being redesigned. Doing so I&rsquo;m progressively reducing the old layout while baking a new one.
 </section>
-
-<div id="all-posts">
-  {% for post in site.posts %}
-    {% unless post.categories contains 'draft' %}
-
-      {% assign index = true %}
-      {% assign entry = post %}
-        {% include post-title.html %}
-
-      {{ post.content }}
-      </section>
-    {% endunless %}
-  {% endfor %}
-</div>
