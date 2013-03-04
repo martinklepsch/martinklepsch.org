@@ -76,6 +76,11 @@ blockquote {
   }
 }
 
+#archive {
+  li    { padding: 0.5em 0; }
+  .date { color: lighten($dark, 40%); display: block }
+}
+
 
 // 2. Color
 body {

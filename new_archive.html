@@ -1,12 +1,12 @@
 ---
-layout: default
+layout: V2
 ---
 <section>
 <h1>All Posts</h1>
 <ol id="archive">
 {% for post in site.posts %}
 {% unless post.categories contains 'draft' %}
-<li><a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a> {{ post.date | date_to_string }}</li>
+<li><span class="date">{{ post.date | date_to_string }}</span><a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a></li>
 {% endunless %}
 {% endfor %}
 </ol>
