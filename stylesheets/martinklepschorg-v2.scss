@@ -1,6 +1,7 @@
 ---
 ---
 @import "entypo";
+@import "reset";
 
 $dark: hsl(10, 0%, 0%);
 $base: hsl(10, 89%, 80%);
@@ -17,6 +18,7 @@ body {
   font-family: 'adelle-1', serif;
   font-size: 16px;
   line-height: 1.7em;
+  text-rendering: optimizeLegibility;
 }
 
 [class*="icon-"], [class^="icon-"] {
@@ -27,7 +29,7 @@ body {
   }
 }
 
-#hibar,h1,blockquote {
+#hibar,h1,blockquote,aside {
   // NOTE Source Sans Pro might also be an option
   font-family: 'Open Sans', sans-serif;
 }
@@ -47,6 +49,7 @@ h1 {
 
 h2 {
   font-size: 1em;
+  font-weight: bold;
 }
 
 ul { list-style-type: circle }
@@ -55,9 +58,6 @@ ul { list-style-type: circle }
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   font-size: 0.8em;
   line-height: 1.5em;
-}
-
-code {
 }
 
 blockquote {
@@ -120,12 +120,21 @@ h1,h2,h3,h4,h5,h6,aside,.gist,article > p, section > p,img,ul,ol,blockquote,pre 
   bottom: 0;
   right: 0;
   left: 0;
-  padding: 0em 1em;
+  padding: 0.7em 0.7em;
+}
+
+@media screen and (max-width: 550px) {
+  #hibar .nice {
+    display: none;
+  }
 }
 
 h1,h2,h3,h4,h5,h6,.gist{
   padding: 2em 20px 1em 20px;
   max-width: 640px;
+}
+h1,h2,h3,h4,h5,h6 {
+  padding: 2em 2em 1em 20px;
 }
 
 article > p, section > p, ul, ol {
@@ -141,10 +150,9 @@ aside,pre{
   padding: 1em 20px 1em 20px;
 }
 
-
 blockquote {
-  max-width: 680px;
   padding: 1em 10px 3em 10px;
+  display: table;
   position: relative;
   cite {
     margin-top: 1em;
@@ -156,12 +164,21 @@ blockquote {
 
 article {
   padding-bottom: 6em;
+  margin: auto;
 }
 
+article .media {
+  text-align: center;
+  img {
+  max-width: 680px;
+  width: 94%;
+}}
+
+// maybe just inline this into the frontpage
 .ragged-icon {
   float: left;
   text-align: center;
-  margin: 0 0 0 -3em;
+  margin: 0 0 0 -2em;
   padding: 10px 0;
 }
 
