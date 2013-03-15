@@ -23,7 +23,7 @@ marathon yet unfortunately, especially since the [Berlin
 marathon](http://www.bmw-berlin-marathon.com/)&rsquo;s registration is closed already.
 
 My training schedule isn&rsquo;t finished yet but for the first month I&rsquo;m planning to
-run at least [3 days a week](www.runmap.net/route/437129) at an average distance
+run at least [3 days a week](http://www.runmap.net/route/437129) at an average distance
 of six kilometers.  I hope to run longer distances irregularly as soon as possible as
 well.
 
