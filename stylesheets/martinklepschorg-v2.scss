@@ -29,7 +29,7 @@ body {
   }
 }
 
-#hibar,h1,blockquote,aside {
+#hibar,h1,blockquote,aside,.awesome {
   // NOTE Source Sans Pro might also be an option
   font-family: 'Open Sans', sans-serif;
 }
@@ -109,7 +109,7 @@ a {
 
 * { box-sizing: border-box; -moz-box-sizing: border-box; }
 
-h1,h2,h3,h4,h5,h6,aside,.gist,article > p, section > p,img,ul,ol,blockquote,pre {
+h1,h2,h3,h4,h5,h6,aside,.gist,article > p, section > p,img,ul,ol,blockquote,pre,.awesome {
   margin: auto;
   max-width: 940px;
 }
@@ -178,6 +178,15 @@ article .media {
   width: 94%;
 }}
 
+// properly align twitter & facebook buttons
+.social {
+  display: none;
+  iframe { vertical-align: top; }
+  .fb-like, .twitter { font-size: 1px; display: inline-block; }
+  .fb_reset { display: inline; }
+}
+
+
 // maybe just inline this into the frontpage
 .ragged-icon {
   float: left;
@@ -208,3 +217,27 @@ article .media {
     width: 100%;
     height: 100%;
 }
+
+
+
+
+.awesome {
+  margin-top: 2em;
+  text-align: center;
+  a {
+    border-radius: 3px;
+    text-transform: uppercase;
+    padding: 1em 2em;
+    background-color: lighten($dark, 10%);
+    color: lighten($dark, 95%);
+    &:hover {
+      background-color: lighten($dark, 30%);
+      text-decoration: none;
+    }
+    .icon-heart {
+      padding-left: 0.5em;
+      font-size: 1em;
+    }
+}}
+
+
