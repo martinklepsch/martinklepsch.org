@@ -1,5 +1,6 @@
 ---
 layout: post
+FBimage: /images/flyknitbw.png
 title: From Zero to Marathon in Six Monthts
 ---
 
