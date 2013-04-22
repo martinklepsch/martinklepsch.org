@@ -21,6 +21,9 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+strong { font-weight: bold }
+em { font-style: italic }
+
 [class*="icon-"], [class^="icon-"] {
   font-size: 1.5em;
   border: none;
