@@ -6,6 +6,7 @@ title: Asynchronous Communication
 Communication is a central part of working in teams.
 I believe having asynchronous communication channels and making heavy use of them can have
 great effects on productivity, transparency and therefore happiness and fun within teams.
+Here are a few reasons why.
 
 ## Interruptions
 
