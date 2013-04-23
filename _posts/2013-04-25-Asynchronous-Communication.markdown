@@ -30,7 +30,7 @@ increases acceptance of decisions by keeping everyone in the loop. Companies lik
 advocating this approach. I could go into lengths about how important this is.
 
 Achieving this level of transparency with meetings and written reports is very time
-consuming if not impossible at all. Channeling most communication through async
+consuming if not impossible at all. Channeling most communication through asynchronous
 communication channels allows other people to passively follow along and saves a bunch
 of time that would otherwise have been spent in inefficient meetings.
 
