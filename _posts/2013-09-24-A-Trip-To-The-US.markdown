@@ -12,8 +12,9 @@ weekend, spend some time around Philadelphia within the week after that and
 then go to Miami for another week.
 
 I'd love to meet some interesting people, have some beers, crash some parties.
+So if you have some friends I should meet, let me know!
 
 Also me and the friend I'm visiting (who is from Philadelphia) are looking for
 a couch to crash.
 
-Cheers to that!
+Cheers to that — It's gonna be fun!
