@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <title>{% if page.title %}{{ page.title }} — Martin Klepsch{% else %}Martin Klepsch {% endif %}</title>
-  <meta name="description" content="Personal Website and Blog of Martin Klepsch">
+  <meta name="description" content="{%if page.abstract %}{{page.abstract}}{% else %}Personal Website and Blog of Martin Klepsch{% endif %}">
   <meta name="author" content="Martin Klepsch">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
