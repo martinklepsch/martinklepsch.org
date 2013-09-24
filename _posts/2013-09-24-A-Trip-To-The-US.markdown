@@ -12,7 +12,8 @@ weekend, spend some time around Philadelphia within the week after that and
 then go to Miami for another week.
 
 I'd love to meet some interesting people, have some beers, crash some parties.
-So if you have some friends I should meet, let me know!
+So if you have some friends I should meet, [let me
+know](mailto:martinklepsch+us@googlemail.com)!
 
 Also me and the friend I'm visiting (who's from Philadelphia) are looking for
 a couch to crash while we're staying in New York and Miami.
