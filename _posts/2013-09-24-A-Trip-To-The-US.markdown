@@ -15,6 +15,6 @@ I'd love to meet some interesting people, have some beers, crash some parties.
 So if you have some friends I should meet, let me know!
 
 Also me and the friend I'm visiting (who's from Philadelphia) are looking for
-a couch to crash.
+a couch to crash while we're staying in New York and Miami.
 
 Cheers to that — It's gonna be fun!
