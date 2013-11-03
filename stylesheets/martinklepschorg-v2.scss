@@ -32,23 +32,30 @@ em { font-style: italic }
   }
 }
 
-#hibar,h1,blockquote,aside,.awesome {
+h1,blockquote,aside,.awesome {
   // NOTE Source Sans Pro might also be an option
   font-family: 'Open Sans', sans-serif;
 }
 
-#hibar{
-  font-size: 2em;
-  font-weight: 300;
-  [class*="icon-"], [class^="icon-"] {
-    font-size: 0.875em;
-  }
-}
+#me { text-align: center; }
+
 
 h1 {
   font-weight:300;
   line-height: 1.2em;
   font-size: 3em;
+}
+
+.date {
+  display: block;
+  font-size: 1rem;
+  color: grey;
+}
+
+article > h1 {
+  font-family: 'adelle-1', serif;
+  font-size: 1.5rem;
+  text-decoration: none;
 }
 
 h2 {
@@ -113,14 +120,12 @@ a {
 
 * { box-sizing: border-box; -moz-box-sizing: border-box; }
 
-h1,h2,h3,h4,h5,h6,aside,.gist,article > p, section > p,img,ul,ol,blockquote,pre,.awesome {
+h1,h2,h3,h4,h5,h6,aside,.gist,article > p, section > p,img,ul,ol,pre,.awesome,blockquote {
   margin: auto;
   max-width: 940px;
 }
 
-#container {
-  margin-bottom: 100px;
-}
+#container { margin-bottom: 100px; }
 
 #hibar {
   border-top: 1px solid lighten($dark, 90%);
@@ -143,24 +148,23 @@ h1,h2,h3,h4,h5,h6,.gist{
   max-width: 640px;
 }
 h1,h2,h3,h4,h5,h6 {
-  padding: 2em 2em 1em 20px;
+  padding: 2em 2em 1em 2em;
 }
 
 article > p, section > p, ul, ol {
   max-width: 500px;
-  padding: 1em 40px 1em 40px;
+  padding: 2em 2em 1em 2em;
 }
 
-h2,h3,h4,h5,h6,aside,pre{
+h2,h3,h4,h5,h6,aside,pre, blockquote {
   max-width: 500px;
 }
 
-aside,pre{
+aside, pre, blockquote {
   padding: 1em 20px 1em 20px;
 }
 
 blockquote {
-  padding: 1em 10px 3em 10px;
   position: relative;
   cite {
     padding: 1em 10px 0 10px;
@@ -171,8 +175,13 @@ blockquote {
 }
 
 article {
-  padding-bottom: 6em;
+  padding: 4em 0 6em 0;
   margin: auto;
+}
+
+hr {
+  opacity: .2;
+  margin: 0 20%;
 }
 
 article .media {

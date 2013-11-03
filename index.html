@@ -2,25 +2,43 @@
 layout: V2
 title:
 ---
-<h1>Hi, I&rsquo;m Martin.<br>Nice to meet you.</h1>
-<section id="hi">
-<p>I develop digital products with other people.</p>
-<p>Occassionally I publish random things I wrote here. Beside
-that there is also a <a title="links to my Pinboard account. I'll setup a more filtered
-  version here soon." href="http://pinboard.in/u:mklappstuhl">linklog</a> which is updated
-more frequently with links I find interesting.</p>
-</section>
+<!-- <h1>Hi, I&rsquo;m Martin.<br>Nice to meet you.</h1> -->
+<!-- <section id="hi"> -->
+<!-- <p>I develop digital products with other people.</p> -->
+<!-- <p>Occassionally I publish random things I wrote here. Beside -->
+<!-- that there is also a <a title="links to my Pinboard account. I'll setup a more filtered -->
+<!--   version here soon." href="http://pinboard.in/u:mklappstuhl">linklog</a> which is updated -->
+<!-- more frequently with links I find interesting.</p> -->
+<!-- </section> -->
 
+<article id='me'>
+<blockquote><p>Hi, I‘m Martin.</p></blockquote>
 <section id="socialize">
 <p>
 <a href="http://twitter.com/mklappstuhl" class="icon-twitter"></a>
 <a href="http://github.com/mklappstuhl" class="icon-github"></a>
 <a href="http://facebook.com/martinklepsch" class="icon-facebook"></a>
+<a href="http://foursquare.com/mklappstuhl" class="icon-location" alt='ugh, no proper icon for foursquare :('></a>
 <a href="http://instagram.com/mklappstuhl" class="icon-instagram"></a>
 <a href="http://soundcloud.com/mklappstuhl" class="icon-soundcloud"></a>
 <a href="http://pinterest.com/martinklepsch" class="icon-pinterest"></a>
 </p>
 </section>
+</article>
+<hr>
+
+{% for post in site.posts %}
+{% unless post.categories contains 'draft' %}
+<article>
+<h1>
+  <span class="date"><a href="{{ post.url }}" alt="{{ post.title }}">{{ post.date | date_to_string }}</a></span>
+  {{ post.title }}
+</h1>
+{{ post.content }}
+</article>
+<hr>
+{% endunless %}
+{% endfor %}
 
 <section id="more">
 <p><i class="ragged-icon icon-pencil"></i>
