@@ -15,34 +15,63 @@ title:
 <blockquote><p>Hi, I‘m Martin.</p></blockquote>
 <section id="socialize">
 <p>
-<a href="http://twitter.com/mklappstuhl" class="icon-twitter"></a>
-<a href="http://github.com/mklappstuhl" class="icon-github"></a>
-<a href="http://facebook.com/martinklepsch" class="icon-facebook"></a>
-<a href="http://foursquare.com/mklappstuhl" class="icon-location" alt='ugh, no proper icon for foursquare :('></a>
-<a href="http://instagram.com/mklappstuhl" class="icon-instagram"></a>
-<a href="http://soundcloud.com/mklappstuhl" class="icon-soundcloud"></a>
-<a href="http://pinterest.com/martinklepsch" class="icon-pinterest"></a>
+<a href="http://twitter.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I say stupid things in public on Twitter">&#59160;</span></a>
+<a href="http://github.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I share code on Github">&#59156;</span></a>
+<a href="http://pinboard.in/u:mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I save interesting links at Pinboard">&#128209;</a>
+<a href="http://facebook.com/martinklepsch" target="_blank" class="icon"><span class="hint--bottom" data-hint="I have “friends” on Facebook">&#128101;</a>
+<a href="http://foursquare.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I check in in places on Foursquare">&#59175;</a>
+<a href="http://instagram.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I post pretty pictures to Instagram">&#127748;</a>
+<a href="http://soundcloud.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I listen to and share music on Soundcloud">&#128266;</a>
+<a href="http://pinterest.com/martinklepsch" target="_blank" class="icon"><span class="hint--bottom" data-hint="I collect pretty things on Pinterest">&#59392;</a>
 </p>
 </section>
 </article>
 <hr>
 
-{% for post in site.posts %}
-{% unless post.categories contains 'draft' %}
+{% for post in paginator.posts %}
+<!-- {% unless post.categories contains 'draft' %} -->
 <article>
 <h1>
-  <span class="date"><a href="{{ post.url }}" alt="{{ post.title }}">{{ post.date | date_to_string }}</a></span>
+  <span class="date"><a href="{{ post.url }}" alt="{{ post.title }} permalink page">{{ post.date | date_to_string }}</a></span>
   {{ post.title }}
 </h1>
+<section class='post_content'>
 {{ post.content }}
+</section>
 </article>
 <hr>
-{% endunless %}
+<!-- {% endunless %} -->
 {% endfor %}
 
-<section id="more">
-<p><i class="ragged-icon icon-pencil"></i>
-Most recent:<br>
-<a href="/2013/09/24/A-Trip-To-The-US/">A Trip To The US</a><br>
-There's also a <a href="/archive.html">full archive.</a></p>
+
+
+<section id="pagination">
+{% if paginator.total_pages > 1 %}
+<p>
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path  | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
+  {% else %}
+    <span>&laquo; Prev</span>
+  {% endif %}
+
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <strong>{{ page }}</strong>
+    {% elsif page == 1 %}
+      <a href="{{ site.baseurl | replace: '//', '/' }}">{{ page }}</a> {% else %}
+      <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if paginator.next_page %}
+  <a href="{{ paginator.next_page_path  | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+  {% else %}
+  <span>Next &raquo;</span>
+  {% endif %}
+</p>
+{% endif %}
+<!-- <p><i class="ragged-icon icon-pencil"></i> -->
+<!-- Most recent:<br> -->
+<!-- <a href="/2013/09/24/A-Trip-To-The-US/">A Trip To The US</a><br> -->
+<!-- There's also a <a href="/archive.html">full archive.</a></p> -->
 </section>
