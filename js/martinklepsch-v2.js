@@ -2,10 +2,17 @@ $(function(){
   $(".awesome a").click(function(){
     $(".awesome a").animate({opacity: 0}, 400,
       function(){
-        $(this).hide();
-        $(".awesome .social").fadeIn(400);
+        $(this).remove();
+        $(".awesome").load('/subscribe.html');
       }
     );
     _gaq.push(['_trackEvent', 'Articles', 'Awesome', document.title]);
   });
+
+  $('a').mouseenter(function() {
+    var color = '#' + Math.random().toString(16).slice(2, 8);
+    $(this).css({'color': color, 'border-color': color})
+  }).mouseleave(function() {
+    $(this).removeAttr('style')
+  })
 });
