@@ -1,9 +1,10 @@
 ---
 ---
-@import "entypo";
 @import "reset";
+@import "../bower_components/hint.css/hint.min.css";
 
-$dark: hsl(10, 0%, 0%);
+$strong: hsl(0, 0%, 10%);
+$dark: hsl(0, 0%, 20%);
 $base: hsl(10, 89%, 80%);
 
 // Table of Contents
@@ -19,25 +20,18 @@ body {
   font-size: 16px;
   line-height: 1.7em;
   text-rendering: optimizeLegibility;
+  color: $dark;
 }
 
 strong { font-weight: bold }
 em { font-style: italic }
-
-[class*="icon-"], [class^="icon-"] {
-  font-size: 1.5em;
-  border: none;
-  &:hover {
-    border: none;
-  }
-}
 
 h1,blockquote,aside,.awesome {
   // NOTE Source Sans Pro might also be an option
   font-family: 'Open Sans', sans-serif;
 }
 
-#me { text-align: center; }
+#me, #pagination { text-align: center; }
 
 
 h1 {
@@ -89,22 +83,17 @@ blockquote {
 
 #archive {
   li    { padding: 0.5em 0; }
-  .date { color: lighten($dark, 40%); display: block }
+  .date { color: lighten($dark, 30%); display: block }
 }
 
 
-// 2. Color
-body {
-  color: $dark;
-}
-
+// Links
 a {
-  color: lighten($dark, 20%);
+  color: lighten($dark, 10%);
   text-decoration: none;
-  border-bottom: 1px solid lighten($dark, 90%);
+  border-bottom: 1px solid lighten($dark, 60%);
   &:hover {
-    color: lighten($dark, 10%);
-    border-bottom: 1px solid lighten($dark, 30%);
+    border-bottom: 1px solid lighten($dark, 20%);
   }
   -webkit-transition: .2s;
   -moz-transition: .2s;
@@ -112,7 +101,7 @@ a {
 }
 
 ::selection {
-  background: lighten($dark, 80%);
+  background: lighten($dark, 70%);
   color: darken($dark, 40%);
 }
 
@@ -127,15 +116,15 @@ h1,h2,h3,h4,h5,h6,aside,.gist,article > p, section > p,img,ul,ol,pre,.awesome,bl
 
 #container { margin-bottom: 100px; }
 
-#hibar {
-  border-top: 1px solid lighten($dark, 90%);
-  background-color: white;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  padding: 0.7em 0.7em;
-}
+// #hibar {
+//   border-top: 1px solid lighten($dark, 90%);
+//   background-color: white;
+//   position: fixed;
+//   bottom: 0;
+//   right: 0;
+//   left: 0;
+//   padding: 0.7em 0.7em;
+// }
 
 @media screen and (max-width: 550px) {
   #hibar .nice {
@@ -151,7 +140,7 @@ h1,h2,h3,h4,h5,h6 {
   padding: 2em 2em 1em 2em;
 }
 
-article > p, section > p, ul, ol {
+section > p, ul, ol {
   max-width: 500px;
   padding: 2em 2em 1em 2em;
 }
@@ -177,12 +166,17 @@ blockquote {
 article {
   padding: 4em 0 6em 0;
   margin: auto;
+  section > p:nth-child(1) {
+    color: $strong;
+    font-size: 1.1em;
+    line-height: 1.7em;
+  }
 }
 
 hr { display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid lighten($dark, 90%);
+  border-top: 1px solid lighten($dark, 70%);
   margin: 1em 20%;
   padding: 0;
 }
@@ -244,10 +238,11 @@ article .media {
     border-radius: 3px;
     text-transform: uppercase;
     padding: 1em 2em;
-    background-color: lighten($dark, 10%);
+    background-color: $dark;
     color: lighten($dark, 95%);
     &:hover {
-      background-color: lighten($dark, 30%);
+      border: 1px solid lighten($dark, 70%);
+      background: none;
       text-decoration: none;
     }
     .icon-heart {
@@ -255,4 +250,38 @@ article .media {
     }
 }}
 
+// Tooltips
 
+.hint:after, [data-hint]:after {
+  font-family: 'Open Sans', sans-serif;
+  box-shadow: none;
+  border-radius: 3px
+}
+
+// Entypo @font-face
+
+@font-face {
+  font-family: 'entypo';
+  src: url("../fonts/entypo.eot");
+  src: url("../fonts/entypo.eot?#iefix") format('embedded-opentype'), url("../fonts/entypo.woff") format('woff'), url("../fonts/entypo.ttf") format('truetype'), url("../fonts/entypo.svg#entypo") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  font-family: 'entypo';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  font-size: 2.3em;
+  text-align: center;
+  line-height: 1em;
+/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  border: none;
+  &:hover {
+    border: none;
+  }
+}
