@@ -33,7 +33,6 @@ h1,blockquote,aside,.awesome {
 
 #me, #pagination { text-align: center; }
 
-
 h1 {
   font-weight:300;
   line-height: 1.2em;
@@ -86,6 +85,21 @@ blockquote {
   .date { color: lighten($dark, 30%); display: block }
 }
 
+input {
+  margin: 1em;
+  padding: 1em;
+  border-radius: 3px;
+  border: 1px solid lighten($dark, 30%);
+  background: none;
+  &:focus {
+    outline: none;
+    border-color: blue;
+  }
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  transition: .2s;
+
+}
 
 // Links
 a {
@@ -235,6 +249,8 @@ article .media {
   margin-top: 2em;
   text-align: center;
   a {
+    width: 2em; height: 2em;
+    padding-top: 0.55em;
     border-radius: 999px;
     text-transform: uppercase;
     background-color: $dark;
@@ -244,7 +260,10 @@ article .media {
       background: none;
       text-decoration: none;
     }
-}}
+  }
+  input[type=text] { margin-right: 0; }
+  input[type=submit]:hover { cursor: pointer; }
+}
 
 // Tooltips
 
@@ -253,6 +272,7 @@ article .media {
   box-shadow: none;
   border-radius: 3px
 }
+.hint--bottom:before, .hint--bottom:after { left: 25%; }
 
 // Entypo @font-face
 
