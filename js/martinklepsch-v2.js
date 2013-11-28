@@ -16,11 +16,11 @@ $(function(){
     "mouseleave": function() {
       $(this).removeAttr('style') }})
 
-  $(".awesome").delegate('input', 'focusin mouseenter', function() {
+  $(document.body).delegate('input', 'focusin mouseenter', function() {
     var color = '#' + Math.random().toString(16).slice(2, 8);
     $(this).css({'color': color, 'border-color': color}) })
 
-  $(".awesome").delegate('input', 'focusout mouseleave', function() {
+  $(document.body).delegate('input', 'focusout mouseleave', function() {
     if (!$(this).is(":focus")) {
       $(this).removeAttr('style') }})
 });
