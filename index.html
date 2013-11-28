@@ -34,7 +34,12 @@ title:
 <article>
 <h1>
   <span class="date"><a href="{{ post.url }}" alt="{{ post.title }} permalink page">{{ post.date | date_to_string }}</a></span>
-  {{ post.title }}
+  {% if post.resource %}
+  {{ post.title }} <a class="icon" href="{{ post.resource}}" alt="Link to external resource"
+    target="blank">&#10150;</a>
+  {% else %}
+    {{ post.title }}
+  {% endif %}
 </h1>
 <section class='post_content'>
 {{ post.content }}

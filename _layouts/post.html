@@ -4,12 +4,31 @@ layout: V2
 
 <article>
 <h1>
-  <span class="date"><a href="/" alt="Back home">&laquo; go back</a></span>
-  {{page.title}}
+  <span class="date"><a href="/" alt="Back home">&laquo; Index</a></span>
+  {% if page.resource %}
+  {{ page.title }} <a class="icon" href="{{ page.resource}}" alt="Link to external resource"
+    target="blank">&#10150;</a>
+  {% else %}
+    {{ page.title }}
+  {% endif %}
 </h1>
 
 <section class='post_content'>
   {{ content }}
 </section>
-{% include awesome.html %}
 </article>
+<section class='subscribe'>
+<form style="text-align:center;"
+  action="https://tinyletter.com/martinklepsch" method="post"
+  target="popupwindow"
+  onsubmit="window.open('https://tinyletter.com/martinklepsch', 'popupwindow',
+  'scrollbars=yes,width=800,height=600');return true">
+  
+  <aside>
+  <p><label for="tlemail">Low volume, no spam, handwritten updates.</label></p>
+  </aside>
+  <input type="text" style="width:140px" placeholder="your@email.com" name="email" id="tlemail" />
+  <input type="hidden" value="1" name="embed"/>
+  <input type="submit" value="Subscribe" />
+</form>
+</section>
