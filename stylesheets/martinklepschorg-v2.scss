@@ -37,6 +37,7 @@ h1 {
   font-weight:300;
   line-height: 1.2em;
   font-size: 3em;
+  .icon { font-size: 1.3em; }
 }
 
 .date {
@@ -57,6 +58,7 @@ h2 {
 }
 
 ul { list-style-type: circle }
+ol { list-style-type: decimal }
 
 .gist,code {
   font-family: Consolas, "Liberation Mono", Courier, monospace;
@@ -159,6 +161,8 @@ section > p, ul, ol {
   padding: 2em 2em 1em 2em;
 }
 
+ol > li { padding: 1em 0 }
+
 h2,h3,h4,h5,h6,aside,pre, blockquote {
   max-width: 500px;
 }
@@ -177,8 +181,12 @@ blockquote {
   }
 }
 
+section.subscribe {
+  text-align: center;
+}
 article {
-  padding: 4em 0 6em 0;
+  padding: 4em 0 4em 0;
+  &#me { padding: 4em 0 4em 0; }
   margin: auto;
   section > p:nth-child(1) {
     color: $strong;
@@ -253,7 +261,7 @@ article .media {
     padding-top: 0.55em;
     border-radius: 999px;
     text-transform: uppercase;
-    background-color: $dark;
+    background-color: lighten($dark, 60%);
     color: lighten($dark, 95%);
     &:hover {
       border: 1px solid lighten($dark, 70%);
