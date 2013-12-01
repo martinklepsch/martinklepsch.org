@@ -17,23 +17,18 @@ cleanness and simplicity which allows you to easily integrate it into most desig
 Below you can see some of my favorites from the set. The cool thing about having it as
 a font is also that you can change colors very easy.
 
-<span class="entypo" style="font-size:2.45em;color:green;">
-<span>i</span>
-<span>C</span>
-<span>N</span>
-<span>Q</span>
-<span>!</span>
-<span>V</span>
-<span>W</span>
-<span>X</span>
-<span>)</span>
-<span>/</span>
-<span>></span>
-<span>'</span>
-<span>;</span>
-<span>:</span>
-<span>&ocirc;</span>
-</span>
+<section id="socialize">
+<p>
+<a href="http://twitter.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I say stupid things in public on Twitter">&#59160;</span></a>
+<a href="http://github.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I share code on Github">&#59156;</span></a>
+<a href="http://pinboard.in/u:mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I save interesting links at Pinboard">&#128209;</span></a>
+<a href="http://facebook.com/martinklepsch" target="_blank" class="icon"><span class="hint--bottom" data-hint="I have “friends” on Facebook">&#128101;</span></a>
+<a href="http://foursquare.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I check in in places on Foursquare">&#59175;</span></a>
+<a href="http://instagram.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I post pretty pictures to Instagram">&#127748;</span></a>
+<a href="http://soundcloud.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I listen to and share music on Soundcloud">&#128266;</span></a>
+<a href="http://pinterest.com/martinklepsch" target="_blank" class="icon"><span class="hint--bottom" data-hint="I collect pretty things on Pinterest">&#59392;</span></a>
+</p>
+</section>
 
 For a complete listing including a character map [check this out](http://bistro.convergencecms.co/entypo).
 Be sure to follow [Daniel on Twitter](http://twitter.com/danielbruce_) for more icon

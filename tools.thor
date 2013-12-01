@@ -7,7 +7,7 @@ class Tools < Thor
 
   desc 'go', 'start jekyll development server'
   def go
-    system('jekyll --server --auto')
+    system('jekyll serve --watch --drafts')
   end
 
   desc 'deploy', 'push changes to S3'

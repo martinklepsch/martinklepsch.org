@@ -2,28 +2,94 @@
 layout: V2
 title:
 ---
-<h1>Hi, I&rsquo;m Martin.<br>Nice to meet you.</h1>
-<section id="hi">
-<p>I develop digital products with other people.</p>
-<p>Occassionally I publish random things I wrote here. Beside
-that there is also a <a title="links to my Pinboard account. I'll setup a more filtered
-  version here soon." href="http://pinboard.in/u:mklappstuhl">linklog</a> which is updated
-more frequently with links I find interesting.</p>
-</section>
+<!-- <h1>Hi, I&rsquo;m Martin.<br>Nice to meet you.</h1> -->
+<!-- <section id="hi"> -->
+<!-- <p>I develop digital products with other people.</p> -->
+<!-- <p>Occassionally I publish random things I wrote here. Beside -->
+<!-- that there is also a <a title="links to my Pinboard account. I'll setup a more filtered -->
+<!--   version here soon." href="http://pinboard.in/u:mklappstuhl">linklog</a> which is updated -->
+<!-- more frequently with links I find interesting.</p> -->
+<!-- </section> -->
 
+<article id='me'>
+<blockquote><p>Hi, I‘m Martin.</p></blockquote>
 <section id="socialize">
 <p>
-<a href="http://twitter.com/mklappstuhl" class="icon-twitter"></a>
-<a href="http://github.com/mklappstuhl" class="icon-github"></a>
-<a href="http://facebook.com/martinklepsch" class="icon-facebook"></a>
-<a href="http://instagram.com/mklappstuhl" class="icon-instagram"></a>
-<a href="http://soundcloud.com/mklappstuhl" class="icon-soundcloud"></a>
+<a href="http://twitter.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I say stupid things in public on Twitter">&#59160;</span></a>
+<a href="http://github.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I share code on Github">&#59156;</span></a>
+<a href="http://pinboard.in/u:mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I save interesting links at Pinboard">&#128209;</span></a>
+<a href="http://facebook.com/martinklepsch" target="_blank" class="icon"><span class="hint--bottom" data-hint="I have “friends” on Facebook">&#128101;</span></a>
+<a href="http://readmill.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I read books with Readmill">&#128214;</span></a>
+<a href="http://foursquare.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I check in in places on Foursquare">&#59175;</span></a>
+<a href="http://instagram.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I post pretty pictures to Instagram">&#127748;</span></a>
+<a href="http://soundcloud.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I listen to and share music on Soundcloud">&#128266;</span></a>
+<a href="http://pinterest.com/martinklepsch" target="_blank" class="icon"><span class="hint--bottom" data-hint="I collect pretty things on Pinterest">&#59392;</span></a>
 </p>
 </section>
+<span class="hint--bottom" data-hint="Low volume, no spam, handwritten updates.">
+<form style="text-align:center;"
+  action="https://tinyletter.com/martinklepsch" method="post"
+  target="popupwindow"
+  onsubmit="window.open('https://tinyletter.com/martinklepsch', 'popupwindow',
+  'scrollbars=yes,width=800,height=600');return true">
+  
+  <input type="text" style="width:140px" placeholder="your@email.com" name="email" id="tlemail" />
+  <input type="hidden" value="1" name="embed"/>
+  <input type="submit" value="Subscribe" />
+</form>
+</span>
+</article>
+<hr>
 
-<section id="more">
-<p><i class="ragged-icon icon-pencil"></i>
-Most recent:<br>
-<a href="/2013/09/24/A-Trip-To-The-US/">A Trip To The US</a><br>
-There's also a <a href="/archive.html">full archive.</a></p>
+{% for post in paginator.posts %}
+<!-- {% unless post.categories contains 'draft' %} -->
+<article>
+<h1>
+  <span class="date"><a href="{{ post.url }}" alt="{{ post.title }} permalink page">{{ post.date | date_to_string }}</a></span>
+  {% if post.resource %}
+  {{ post.title }} <a class="icon" href="{{ post.resource}}" alt="Link to external resource"
+    target="blank">&#10150;</a>
+  {% else %}
+    {{ post.title }}
+  {% endif %}
+</h1>
+<section class='post_content'>
+{{ post.content }}
+</section>
+</article>
+<hr>
+<!-- {% endunless %} -->
+{% endfor %}
+
+
+
+<section id="pagination">
+{% if paginator.total_pages > 1 %}
+<p>
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path  | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
+  {% else %}
+    <span>&laquo; Prev</span>
+  {% endif %}
+
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <strong>{{ page }}</strong>
+    {% elsif page == 1 %}
+      <a href="{{ site.baseurl | replace: '//', '/' }}">{{ page }}</a> {% else %}
+      <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if paginator.next_page %}
+  <a href="{{ paginator.next_page_path  | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+  {% else %}
+  <span>Next &raquo;</span>
+  {% endif %}
+</p>
+{% endif %}
+<!-- <p><i class="ragged-icon icon-pencil"></i> -->
+<!-- Most recent:<br> -->
+<!-- <a href="/2013/09/24/A-Trip-To-The-US/">A Trip To The US</a><br> -->
+<!-- There's also a <a href="/archive.html">full archive.</a></p> -->
 </section>
