@@ -57,8 +57,6 @@ h2 {
   font-weight: bold;
 }
 
-ul { list-style-type: circle }
-ol { list-style-type: decimal }
 
 .gist,code {
   font-family: Consolas, "Liberation Mono", Courier, monospace;
@@ -161,7 +159,13 @@ section > p, ul, ol {
   padding: 2em 2em 1em 2em;
 }
 
-ol > li { padding: 1em 0 }
+ul { list-style-type: circle }
+
+ol {
+  padding: 1em 2em;
+  list-style-type: decimal;
+  li { padding: 1em 0 }
+}
 
 h2,h3,h4,h5,h6,aside,pre, blockquote {
   max-width: 500px;
