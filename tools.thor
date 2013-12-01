@@ -2,7 +2,7 @@ class Tools < Thor
 
   desc 'build', 'run jekyll to generate static site'
   def build
-    system('jekyll')
+    system('jekyll build')
   end
 
   desc 'go', 'start jekyll development server'
