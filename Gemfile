@@ -5,7 +5,7 @@ gem 'redcarpet'
 gem 'sass'
 gem 'rake'
 gem 'thor'
-gem 'aws-s3'
 
 gem 'pry'
 gem 'juicer'
+gem 's3_website'
