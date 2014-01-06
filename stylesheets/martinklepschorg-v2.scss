@@ -130,33 +130,23 @@ h1,h2,h3,h4,h5,h6,aside,.gist,article > p, section > p,img,ul,ol,pre,.awesome,bl
 
 #container { margin-bottom: 100px; }
 
-// #hibar {
-//   border-top: 1px solid lighten($dark, 90%);
-//   background-color: white;
-//   position: fixed;
-//   bottom: 0;
-//   right: 0;
-//   left: 0;
-//   padding: 0.7em 0.7em;
-// }
-
-@media screen and (max-width: 550px) {
-  #hibar .nice {
-    display: none;
-  }
-}
 
 h1,h2,h3,h4,h5,h6,.gist{
   padding: 2em 20px 1em 20px;
   max-width: 640px;
 }
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3,h4,h5,h6, figure {
   padding: 2em 2em 1em 2em;
 }
 
 section > p, ul, ol {
   max-width: 500px;
   padding: 2em 2em 1em 2em;
+}
+
+figure img { 
+  display: block;
+  margin: 0 auto;
 }
 
 ul { list-style-type: circle }

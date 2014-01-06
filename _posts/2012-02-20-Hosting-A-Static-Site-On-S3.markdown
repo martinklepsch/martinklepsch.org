@@ -55,7 +55,9 @@ have some subdomain.
 
 **Step 1:** Enable S3's website feature by enabling it in the properties pane of your bucket.
 
-![Website settings in the bucket propertie pane](/images/website-settings-s3.png)
+<figure>
+<img alt='Website settings in the bucket propertie pane' src='/images/website-settings-s3.png'>
+</figure>
 
 **Step 2:** Set a bucket policy that basically allows everyone to view the contents of your bucket.
 

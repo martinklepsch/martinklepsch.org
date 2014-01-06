@@ -4,6 +4,7 @@ resource: http://alistapart.com/column/never-heard-of-it
 tags: webdevelopment
 title: What do we need to know?
 ---
+
 > I go through periods of self-doubt about my qualifications as a web developer.
 > I have a sense I’m not alone in this. Our field is by nature a generalists’
 > field, where expertise involves synthesis of concepts and technologies, not
@@ -15,6 +16,8 @@ describes a situation we all have been in: someone talks about that *new feature
 you never heard of* and you have no idea what they are talking about. Web
 development being a profession that develops so fast and in so many directions
 at the same time <strike>sometimes</strike> makes it hard to follow along.
+
+<figure> <img src='/images/fear.gif' > </figure>
 
 > There’s no defined lesson plan or standardized test for the many branches of
 > real-world applied web development, and the whole profession is a moving target.
