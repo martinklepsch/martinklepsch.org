@@ -3,3 +3,4 @@ permalink: /:year/:month/:day/:title
 pygments: true
 markdown: kramdown
 paginate: 5
+github: https://github.com/mklappstuhl/martinklepsch.org/commits/master/
