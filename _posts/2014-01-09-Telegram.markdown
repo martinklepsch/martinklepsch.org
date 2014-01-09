@@ -25,9 +25,11 @@ after Facebook (especially popular in Russia).
    multiple devices (with proper syncing).
 5. Groups can hold up to 200 users (compared to WhatsApp that allows you to
    create 50 groups à 50 participants max.)
-6. All communication in Telegram [is encrypted](https://telegram.org/faq#security)
-   and there is even an option to create “secret chats” that: won’t be stored in
-   the cloud, can’t be fowarded and will delete themself after some time.
+6. All communication in Telegram [is
+   encrypted](https://telegram.org/faq#security) and there is even an option to
+   create “[secret chats](https://telegram.org/faq#secret-chats)” that: won’t be
+   stored in the cloud, can’t be fowarded and will delete themself after some
+   time.
 
 Currently available for
 [iOS](https://itunes.apple.com/us/app/telegram-messenger/id686449807),
