@@ -28,7 +28,7 @@ after Facebook (especially popular in Russia).
 6. All communication in Telegram [is
    encrypted](https://telegram.org/faq#security) and there is even an option to
    create “[secret chats](https://telegram.org/faq#secret-chats)” that: won’t be
-   stored in the cloud, can’t be fowarded and will delete themself after some
+   stored on Telegram’s servers, can’t be fowarded and will delete themself after some
    time.
 
 Currently available for
