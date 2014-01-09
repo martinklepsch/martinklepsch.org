@@ -33,3 +33,6 @@ Currently available for
 switch.
 
 **Send me a message how you like it:** <a href="tel:+4917664718250">+49176 64718250</a>
+
+**Edit:** Although it's not a completely decentralized service as communication services
+should eventually be in the future it seems to be a big step in the right direction.
