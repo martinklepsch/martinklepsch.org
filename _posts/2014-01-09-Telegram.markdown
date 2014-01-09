@@ -20,9 +20,10 @@ after Facebook (especially popular in Russia).
 3. There is an [API](https://core.telegram.org/api) that allows anyone to hook
    into Telegram and build clients, bots and additional tools.
 4. The open API has led to the creation of 
-   [Mac](https://itunes.apple.com/de/app/messenger-for-telegram/id747648890) and
-   [Windows](http://tdesktop.com/) clients that allow you to use Telegram on
-   multiple devices (with proper syncing).
+   [Mac](https://itunes.apple.com/de/app/messenger-for-telegram/id747648890),
+   [Windows](http://tdesktop.com/) and various other clients
+   (eg. [commandline](https://github.com/vysheng/tg)) that allow you to use Telegram
+   on multiple devices (with proper syncing).
 5. Groups can hold up to 200 users (compared to WhatsApp that allows you to
    create 50 groups à 50 participants max.)
 6. All communication in Telegram [is
