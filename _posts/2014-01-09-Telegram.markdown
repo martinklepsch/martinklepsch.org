@@ -10,7 +10,7 @@ after Facebook (especially popular in Russia).
 
 ## A Few Reasons Why It's Great
 
-1. Unlike most other messaging apps their [clients (Android, iOS) source and the
+1. Unlike most other messaging apps their [clients (Android, iOS) source code and the
    underlying protocols are released with an open source
    license](https://telegram.org/source) (GPL v2)
 2. The founders note that they have no intention of [making money with
