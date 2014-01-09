@@ -54,9 +54,9 @@ the option of not going.
 **Surprisingly it was possible**. The around 15 obstacles usually took some time to pass
 and equally gave some to rest. The hardest part (stamina-wise)
 was a 2-4km trail up and down a hill over and over again. The whole course took
-us around 3 hours to complete. We got a bit dirty on the way. I say **we** because
-completing the course on your own is almost impossible and we certainly have
-been a great team:
+us around 3 hours to complete.  
+We got a bit dirty on the way. I say **we** because completing the course on
+your own is almost impossible and we certainly have been a great team:
 
 <figure>
 <img src='/images/tough-mudder.jpg'>
