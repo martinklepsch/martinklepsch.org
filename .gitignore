@@ -3,3 +3,7 @@ stylesheets/martinklepschorg.css
 stylesheets/.sass-cache
 .sass-cache
 _aws-s3.yml
+bower_components
+s3_website.yml
+cljs
+target
