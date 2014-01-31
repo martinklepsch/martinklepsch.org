@@ -14,8 +14,8 @@
 
 (defn transform-to-new-format [link]
   (let [path   (s/split link #"/")
-        file   (last path)
-        title  (first (s/split file #"\W"))
+        slug   (last path)
+        title  (s/lower-case slug)
         target (str "/posts/" title ".html")]
     target))
 
