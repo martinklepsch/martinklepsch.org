@@ -4,6 +4,8 @@ title: Chaf, better Chat.
 ---
 &laquo;Chaf&raquo; is a chat application with simple threading.
 
+## Why bring threading to chat?
+
 ## General Idea
 
 There is a global thread (the **Room**) where you can either send a message or create a new thread by
@@ -13,13 +15,13 @@ explicitly replying to a specific message. The latter is called *branching*.
 
 A thread contains messages. In all threads except the **Room** the first message
 can be edited and those threads can also be concluded. Concluding will also
-close the thread i.e. no new messages can be posted.
+close the thread i.e. new messages can no longer be posted.
 
 **Concluding** of threads can is a good way to  summarize a discussion or consolidate
 knowledge for later reference. This is especially useful to get a quick overview
-when only a preview of the is rendered. To make sure the conclusion makes
-sense the first message of a thread has to be edited before the thread can be
-concluded.
+when only a preview of a thread is rendered. To make sure the conclusion has
+enough context the first message of a thread has to be edited before the thread
+can be concluded.
 
 ## Branching
 
