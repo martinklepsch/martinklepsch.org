@@ -11,10 +11,17 @@
   :source-paths ["_src"]
 
   :cljsbuild {
-    :builds [{:id "mkl"
+    :builds [{:id "dev"
               :source-paths ["_src"]
               :compiler {
-                :output-to "cljs/mkl.js"
-                :output-dir "cljs"
+                :output-to "cljs-dev/main.js"
+                :output-dir "cljs-dev"
                 :optimizations :none
-                :source-map true}}]})
+                :source-map true}}
+
+             {:id "production"
+              :source-paths ["_src"]
+              :compiler {
+                :output-to "cljs-production/main.js"
+                :output-dir "cljs-production"
+                :optimizations :advanced }}]})
