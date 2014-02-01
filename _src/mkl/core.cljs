@@ -16,7 +16,7 @@
   (let [path   (s/split link #"/")
         slug   (last path)
         title  (s/lower-case slug)
-        target (str "/posts/" title ".html")]
+        target (str "/p/" title ".html")]
     target))
 
 (defn add-find-link! []

@@ -1,5 +1,5 @@
 # auto: true
-permalink: /posts/:title.html
+permalink: /p/:title.html
 exclude: [ "target", "src", "project.clj", "s3_website.yml" ]
 pygments: true
 markdown: kramdown
