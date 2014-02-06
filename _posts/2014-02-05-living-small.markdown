@@ -16,7 +16,7 @@ In his post he also mentions the [Tiny Housing Movement](http://thetinylife.com/
 
 I believe as thoughtful members of our society we should **rethink our relationship to stuff**. How can we, as a society, make better use of the things we have at our disposal? What do I really need to **own** to live my life? Ideas like [the share economy](http://en.wikipedia.org/wiki/Sharing_economy) seem like a logical step with the increasing ease of sharing/routing information.
 
-Also purposely living with less is obviously not a new idea and so it happens to be part of things like [the 100 Things Challenge](http://zenhabits.net/minimalist-fun-the-100-things-challenge/).
+Purposely living with less is obviously not a new idea and so it happens to be part of things like [the 100 Things Challenge](http://zenhabits.net/minimalist-fun-the-100-things-challenge/).
 Coming across the 100 Things Challenge again and again I want to try it myself. In February I'm going to create an inventory of the things I own. Let’s see if the number of things I own is going to be above or below 100.
 
 > Stuff has gotten a lot cheaper, but our attitudes toward it haven't changed correspondingly. We overvalue stuff.
