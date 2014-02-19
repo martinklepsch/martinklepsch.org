@@ -62,6 +62,7 @@ h2 {
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   font-size: 0.8em;
   line-height: 1.5em;
+  table { margin: 0; }
 }
 
 blockquote {
@@ -261,9 +262,9 @@ article .media {
 
 .responsive-embed {
   margin: auto;
-  max-width: 940px;
+  max-width: 550px;
   position: relative;
-  padding-bottom: 42%;
+  padding-bottom: 24.2%;
   height: 0;
   overflow: hidden;
 }
