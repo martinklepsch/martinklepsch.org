@@ -211,6 +211,7 @@ blockquote {
 }
 
 section.subscribe {
+  hr { margin-bottom: 4em; }
   text-align: center;
 }
 article {
@@ -264,7 +265,7 @@ article .media {
   margin: auto;
   max-width: 550px;
   position: relative;
-  padding-bottom: 24.2%;
+  padding-bottom: 17.8%;
   height: 0;
   overflow: hidden;
 }
