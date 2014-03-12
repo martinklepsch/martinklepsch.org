@@ -7,7 +7,7 @@ set up a small machine on DigitalOcean that basically offers Heroku-like
 deployment. It was surprisingly simple so here is some rough outline that should
 get you going.
 
-<aside>This guide is slightly opinionated and things cab be done differently.
+<aside>This guide is slightly opinionated and things can be done differently.
 I decided to settle for the way thats closest to Heroku to keep things short.</aside>
 
 ## Create a Droplet at Digitalocean
