@@ -65,8 +65,10 @@ hostname you set earlier, not the complete domain.
     *.apps 10800 IN A 107.170.35.171
     apps 10800 IN A 107.170.35.171
 
-After youve done that (and waited three hours) you should be able to do
-something like:
+## Deploying
+
+After you’ve waited three hours for DNS servers to propagate the changes you
+should be able to do something like the following:
 
     git clone git@github.com:heroku/node-js-sample.git
     cd node-js-sample
@@ -79,5 +81,9 @@ we just cloned and pushed.
 If you want to add have a custom domain point to your app you'll need to either
 push to a remote like `dokku@apps.example.com:example.com` or edit the
 nginx.conf that comes with Dokku’s nginx plugin.
+
+Thanks to Dokku’s [Buildstep](https://github.com/progrium/buildstep) that
+utilizes Heroku’s opensource buildpacks you can now deploy almost every application
+you can deploy to Heroku to Dokku as well.
 
 **Have fun!**
