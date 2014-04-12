@@ -14,7 +14,7 @@ from somewhere without having an idea what they actually do.
 
 It took me a while to find [this
 part](https://github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_git_prompt.fish) of the Fish source code
-which documents this functionality quite well. An example follows
-below.
+which documents this functionality quite well. An example which you can put into
+`~/.config/fish/config.fish` follows below:
 
 <script src="https://gist.github.com/mklappstuhl/4991069.js"></script>
