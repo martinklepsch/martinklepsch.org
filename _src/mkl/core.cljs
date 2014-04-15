@@ -12,6 +12,10 @@
     ISeqable
     (-seq [nl] (array-seq nl 0)))
 
+(extend-type js/HTMLCollection
+    ISeqable
+    (-seq [nl] (array-seq nl 0)))
+
 (defn transform-to-new-format [link]
   (let [path   (s/split link #"/")
         slug   (last path)
