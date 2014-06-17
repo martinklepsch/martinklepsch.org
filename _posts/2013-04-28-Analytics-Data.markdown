@@ -26,7 +26,7 @@ taking your data with you is not as easy as that.
 While I'm usually a fan of outsourcing certain complex things (i.e. hosting)
 I feel like this is one of the rare occasions where people should think twice.
 Unfortunately I'm not aware of good alternatives.
-If you are please [tweet me](http://twitter.com/mklappstuhl).
+If you are please [tweet me](http://twitter.com/martinklepsch).
 
 <!--
 <aside>

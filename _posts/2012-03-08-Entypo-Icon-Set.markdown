@@ -19,7 +19,7 @@ a font is also that you can change colors very easy.
 
 <section id="socialize">
 <p>
-<a href="http://twitter.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I say stupid things in public on Twitter">&#59160;</span></a>
+<a href="http://twitter.com/martinklepsch" target="_blank" class="icon"><span class="hint--bottom" data-hint="I say stupid things in public on Twitter">&#59160;</span></a>
 <a href="http://github.com/mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I share code on Github">&#59156;</span></a>
 <a href="http://pinboard.in/u:mklappstuhl" target="_blank" class="icon"><span class="hint--bottom" data-hint="I save interesting links at Pinboard">&#128209;</span></a>
 <a href="http://facebook.com/martinklepsch" target="_blank" class="icon"><span class="hint--bottom" data-hint="I have “friends” on Facebook">&#128101;</span></a>

@@ -31,5 +31,5 @@ what you would put on it. What are the high level concepts in web development
 everyone should know about? Is it “How the DOM works” or is it “What Prototypes are in Javascript”
 or is it ...?
 
-I'd love to hear what you think is “required knowledge” on Twitter ([@mklappstuhl](https://twitter.com/mklappstuhl))
+I'd love to hear what you think is “required knowledge” on Twitter ([@martinklepsch](https://twitter.com/martinklepsch))
 or elsewhere.
