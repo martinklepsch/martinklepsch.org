@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem 'jekyll', :git => 'https://github.com/mojombo/jekyll.git', :tag => 'v1.3.0'
+gem 'jekyll', :git => 'https://github.com/jekyll/jekyll.git'
 gem 'redcarpet'
 gem 'sass'
 gem 'rake'
