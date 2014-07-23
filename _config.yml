@@ -1,7 +1,9 @@
 # auto: true
 permalink: /posts/:title.html
 exclude: [ "target", "src", "project.clj", "s3_website.yml" ]
-pygments: true
+highlighter: pygments
+sass:
+  sass_dir: stylesheets
 markdown: kramdown
 paginate: 5
 github: https://github.com/mklappstuhl/martinklepsch.org/commits/master/
