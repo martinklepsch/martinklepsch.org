@@ -1,12 +1,13 @@
 ---
 layout: V2
 ---
+{% include head.html %}
 
 <article>
 <h1>
-  <span class="date"><a href="/" alt="Back home">&laquo; Index</a></span>
+  <span class="date">{{ page.date | date: "%B %Y"}}</span>
   {% if page.resource %}
-  {{ page.title }} <a class="icon" href="{{ page.resource}}" alt="Link to external resource"
+  {{ page.title }}<a class="icon" href="{{ page.resource}}" alt="Link to external resource"
     target="blank">&#10150;</a>
   {% else %}
     {{ page.title }}
