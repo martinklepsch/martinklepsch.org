@@ -24,7 +24,7 @@
     target))
 
 (defn add-find-link! []
-  (let [a (aget (query "[data-behave='find'") 0)
+  (let [a (aget (query "[data-behave='find']") 0)
         path (aget js/window "location" "pathname")]
     (when a (set! (.-href a) (transform-to-new-format path)))))
 
