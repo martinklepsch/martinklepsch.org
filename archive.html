@@ -1,12 +1,23 @@
 ---
 layout: V2
 ---
+<div id="me">
+  <a class="marked" href="/">
+    Hi, I‘m Martin.
+  </a>
+  <span class="me__do-it">
+    This is the archive.
+  </span>
+</div>
+
 <section>
-<h1>All Posts</h1>
 <ol id="archive">
 {% for post in site.posts %}
 {% unless post.categories contains 'draft' %}
-<li><span class="date">{{ post.date | date_to_string }}</span><a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a></li>
+<li>
+<span class="date">{{ post.date | date: "%B %Y" }}</span>
+<a href="{{ post.url }}" alt="{{ post.title }}">{{ post.title }}</a>
+</li>
 {% endunless %}
 {% endfor %}
 </ol>
