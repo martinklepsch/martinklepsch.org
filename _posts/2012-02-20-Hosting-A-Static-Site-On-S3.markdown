@@ -61,7 +61,20 @@ have some subdomain.
 
 **Step 2:** Set a bucket policy that basically allows everyone to view the contents of your bucket.
 
-<script src="https://gist.github.com/mklappstuhl/4991741.js"></script>
+    {
+      "Version":"2008-10-17",
+      "Statement":[{
+        "Sid":"PublicReadForGetBucketObjects",
+        "Effect":"Allow",
+        "Principal": {
+          "AWS": "*"
+        },
+        "Action":["s3:GetObject"],
+        "Resource":["arn:aws:s3:::www.REPLACE-THIS.org/*"]
+      }]
+    }
+
+<!-- <script src="https://gist.github.com/mklappstuhl/4991741.js"></script> -->
 
 **Step 3:** Upload your static website to S3. You can either do that manually by using the
 AWS Management Console or you can automate the process by writing some small programm. There
