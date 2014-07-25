@@ -74,8 +74,8 @@ being properly fixed at least until NeoVim becomes the go-to Vim
 implementation. Emacs allows me to kick off commands and do other
 things until they return. In addition to that it nicely embeds Vim's
 most notable idea, mode-based editing, very well, allowing me to
-productively edit text while having a solid base to interactively
-write programs.
+productively edit text while having a solid base to extend and to
+interactively write programs.
 
 If you are interested in seeing how all that comes together in my
 Emacs configuration you can find it
