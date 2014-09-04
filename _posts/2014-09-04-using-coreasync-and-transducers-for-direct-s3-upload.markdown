@@ -123,3 +123,8 @@ with transducers. I assume many things can be done better and I still
 need to look into some things like how to properly shut down the `go`
 blocks. **Any feedback is welcome!** [Tweet](https://twitter.com/martinklepsch) or
 [mail](mailto://martinklepsch@googlemail.com) me!
+
+**Thanks** to Dave Liepmann who let me peek into some code
+he wrote that did similar things and to Kevin Downey (*hiredman*)
+who helped me understand core.async and transducers by answering
+my stupid questions in `#clojure` on Freenode.
