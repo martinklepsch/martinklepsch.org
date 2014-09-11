@@ -76,7 +76,7 @@ should be able to do something like the following:
     git push digital-ocean master
 
 Now going to `nodeapp.<dokku-hostname>` should bring up “Hello World” from the app
-we just cloned and pushed. 
+we just cloned and pushed.
 
 If you want to add have a custom domain point to your app you'll need to either
 push to a remote like `dokku@apps.example.com:example.com` or edit the
