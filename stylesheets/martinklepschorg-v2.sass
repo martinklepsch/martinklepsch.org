@@ -90,6 +90,20 @@ blockquote cite
   &:before
     content: "\2014 \0020"
 
+// Footnotes
+div.footnotes
+  font-family: "Open Sans", sans-serif
+  font-size: 0.825em
+  line-height: 1.6em
+
+sup
+  vertical-align: super
+  font-size: 0.8em
+  line-height: 0
+  padding-left: .2em
+  a
+    border: none
+
 ol#archive
   list-style-type: none
   font-family: 'Open Sans', sans-serif
@@ -181,6 +195,12 @@ article
     &:before
       content: "\2014 \0020"
 
+@media (max-width: 600px)
+  article .post_content
+    font-size: .9em
+    line-height: 1.7em
+  section > p:nth-child(1)
+    font-size: 1.1em
 
 #me
   padding: 1em 20px 1em
