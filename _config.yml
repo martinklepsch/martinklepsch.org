@@ -1,4 +1,7 @@
 # auto: true
+name: Martin Klepsch
+description: Clojure(script), Docker, Design, Programming and more.
+url: http://www.martinklepsch.org
 permalink: /posts/:title.html
 exclude: [ "target", "src", "project.clj", "s3_website.yml" ]
 highlighter: pygments
