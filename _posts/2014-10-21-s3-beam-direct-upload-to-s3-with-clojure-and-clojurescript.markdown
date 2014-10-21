@@ -5,8 +5,8 @@ title: S3-Beam — Direct Upload to S3 with Clojure & Clojurescript
 
 In a
 [previous post](http://www.martinklepsch.org/posts/using-coreasync-and-transducers-for-direct-s3-upload.html)
-I described how to upload files from the browser to S3 using Clojure
-and Clojurescript. I now packaged this up into a small (tiny,
+I described how to upload files from the browser directly to S3 using
+Clojure and Clojurescript. I now packaged this up into a small (tiny,
 actually) library:
 [s3-beam](https://github.com/martinklepsch/s3-beam).
 
