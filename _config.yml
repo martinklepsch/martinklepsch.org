@@ -7,6 +7,8 @@ exclude: [ "target", "src", "project.clj", "s3_website.yml" ]
 highlighter: pygments
 sass:
   sass_dir: stylesheets
+gems:
+  - jekyll-last-modified-at
 markdown: kramdown
 paginate: 5
 github: https://github.com/mklappstuhl/martinklepsch.org/commits/master/
