@@ -32,6 +32,9 @@ em
 h1,blockquote,aside,.awesome
   // NOTE Source Sans Pro might also be an option
   font-family: 'Open Sans', sans-serif
+aside
+  color: lighten($dark, 30%)
+
 
 #pagination
   text-align: center
@@ -58,6 +61,10 @@ h1
 h2
   margin-top: 2em
   font-size: 1.2em
+  font-weight: bold
+
+h3
+  margin-top: 1em
   font-weight: bold
 
 code
@@ -184,6 +191,7 @@ article
   padding: 2em 20px 4em
   section > p:nth-child(1)
     color: $strong
+    padding-top: 1.5em
     font-size: 1.3em
     line-height: 1.7em
   section
@@ -233,7 +241,7 @@ ol#archive
 
 section > p, ul, ol,
 aside, pre, blockquote
-  padding: 2em 0 1em 0
+  padding: 1em 0 .5em 0
 
 figure
   padding-left: 0
