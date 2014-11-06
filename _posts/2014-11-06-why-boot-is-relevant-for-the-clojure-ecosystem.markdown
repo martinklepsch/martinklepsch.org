@@ -138,3 +138,5 @@ If you need help or have questions join the
 [#hoplon channel on freenode IRC](http://webchat.freenode.net/?channels=hoplon).
 I'll try to help and if I can't Alan or Micha, the authors of Boot,
 probably can.
+
+Discuss on [Hacker News](https://news.ycombinator.com/item?id=8568496).
