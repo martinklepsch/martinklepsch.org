@@ -79,4 +79,4 @@ interactively write programs.
 
 If you are interested in seeing how all that comes together in my
 Emacs configuration you can find it
-[on Github](https://github.com/mklappstuhl/dotfiles/blob/master/emacs.d/init.el).
+[on Github](https://github.com/martinklepsch/dotfiles/blob/master/emacs.d/init.el).

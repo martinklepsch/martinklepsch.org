@@ -35,7 +35,7 @@ We end up with the following procedure to upload a file to S3:
 ## Server-side code
 
 I won't go into detail here, but here's
-[some rough Clojure code](https://gist.github.com/mklappstuhl/0c6b40f45a415046f0fe)
+[some rough Clojure code](https://gist.github.com/martinklepsch/0c6b40f45a415046f0fe)
 illustrating the construction of the special parameters and how
 they're sent to the client.
 
@@ -65,7 +65,7 @@ channels and transducers turned out very useful:
 This function takes one channel as argument where it will `put!` the
 result of the S3 request. You can take a look at the `upload-file` and
 `sign-file` functions
-[in this gist](https://gist.github.com/mklappstuhl/96e548d9595e111d70ce).
+[in this gist](https://gist.github.com/martinklepsch/96e548d9595e111d70ce).
 
 **So what's happening here?** We use a channel for each step of the
 process: `signing-chan` and `upload-chan`. Both of those channels have

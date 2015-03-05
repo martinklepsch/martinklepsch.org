@@ -74,13 +74,13 @@ have some subdomain.
       }]
     }
 
-<!-- <script src="https://gist.github.com/mklappstuhl/4991741.js"></script> -->
+<!-- <script src="https://gist.github.com/martinklepsch/4991741.js"></script> -->
 
 **Step 3:** Upload your static website to S3. You can either do that manually by using the
 AWS Management Console or you can automate the process by writing some small programm. There
 are S3 libraries for many programming languages.
 I built a [small rake
-task](https://github.com/mklappstuhl/martinklepsch.org/blob/master/Rakefile
+task](https://github.com/martinklepsch/martinklepsch.org/blob/master/Rakefile
 "Rakefile on Github") that does the job.
 
 If you are experiencing problems with the setup of S3 I recommend the official [AWS
