@@ -1,8 +1,9 @@
----
+<!--
 layout: post
 FBimage: /images/dome-cropped.jpg
 title: Living Small
----
+-->
+
 Living in a world where consumerism appears to be the predominant behaviour it seems more and more exciting to me to live a less materialistic lifestyle. What follows are some of the things that stimulated my thinking — maybe they do the same for you.
 
 After stumbling upon Bruce Hauman’s blog while trying to figure out some Clojure stuff I discovered another post on his blog where he talks about [building a geodesic dome](http://rigsomelight.com/2013/09/09/frameless-geodesic-dome.html) in which he’s now (partly?) living for 3.5 years. It’s an amazingly analytical post about building something and simplifying it to it’s purest, most functional form. Motivated by spending less money on rent he iterated on his idea resulting in this construction:

@@ -1,7 +1,8 @@
----
+<!--
 layout: post
 title: Git Information in Fish Shell&rsquo;s Prompt
----
+-->
+
 After toying around with [Zsh](http://zsh.org) for a while I stumbled upon Fish
 or more precisely [Ridiculous Fish](http://ridiculousfish.com/shell)
 which is a fork of the original [Fish Shell](http://fishshell.com/).
@@ -17,7 +18,7 @@ part](https://github.com/fish-shell/fish-shell/blob/master/share/functions/__fis
 which documents this functionality quite well. An example which you can put into
 `~/.config/fish/config.fish` follows below:
 
-{% highlight sh %}
+```
 set normal (set_color normal)
 set magenta (set_color magenta)
 set yellow (set_color yellow)
@@ -54,4 +55,4 @@ function fish_prompt
 
   set_color normal
 end
-{% endhighlight %}
+```

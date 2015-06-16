@@ -1,8 +1,9 @@
----
+<!--
 layout: post
 title: Woodworking Masterclasses
 resource: http://woodworkingmasterclasses.com/
----
+-->
+
 Back when I lived at home my dad used to make fun of my mechanical skills.
 He said if everyone just sits in front of computers the whole day no one will
 know how to drill a hole at some point. He would like what follows.

@@ -1,7 +1,8 @@
----
+<!--
 title: A Friend Is Looking For A Summer Internship
 layout: post
----
+-->
+
 This summer a friend of mine is visiting Berlin for around 6 weeks by end of June. 
 I encouraged him to work somewhere to get an impression of working in technology companies during that time.
 

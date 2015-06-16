@@ -1,7 +1,7 @@
----
+<!--
 layout: post
 title: Code Simplicity
----
+-->
 When O'Reilly promoted their cyber monday I somehow really got into a shopping
 spree.
 

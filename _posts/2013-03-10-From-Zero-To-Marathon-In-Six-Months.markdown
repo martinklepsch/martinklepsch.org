@@ -1,8 +1,8 @@
----
+<!--
 layout: post
 FBimage: /images/flyknitbw.png
 title: From Zero to Marathon in Six Monthts
----
+-->
 
 After moving to Berlin I kind of failed to continue some regular sports activity.
 This is two years ago now. Today I'm going to change that.

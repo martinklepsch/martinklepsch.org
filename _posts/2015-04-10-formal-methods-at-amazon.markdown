@@ -1,7 +1,7 @@
----
+<!--
 layout: post
 title: Formal Methods at Amazon
----
+-->
 
 I saw this paper being mentioned again and again in my Twitter
 feed. Basically not even knowing what "formal methods" really means I

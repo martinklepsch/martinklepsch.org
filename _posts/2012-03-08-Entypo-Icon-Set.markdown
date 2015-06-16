@@ -1,9 +1,10 @@
----
+<!--
 layout: post
 title: Entypo Icon Set
 resource: http://www.entypo.com/
 categories: linked
----
+-->
+
 Daniel Bruce:
 
 > Entypo is a set of 100+ carefully crafted pictograms available as an OpenType font, vector

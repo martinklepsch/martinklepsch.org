@@ -1,7 +1,8 @@
----
+<!--
 layout: post
 title: Why Boot is Relevant For The Clojure Ecosystem
----
+-->
+
 Boot is a build system for Clojure projects. It roughly competes
 in the same area as Leiningen but Boot's new version brings some
 interesting features to the table that make it an alternative

@@ -1,9 +1,10 @@
----
+<!--
 layout: post
 resource: http://telegram.org
 FBimage: /images/telegram-logo.png
 title: Sending You a Telegram
----
+-->
+
 [Telegram](https://telegram.org) is a new messenger built by Pavel and Nikolai
 Durov.  They previously founded vk.com, Europe's second largest social network
 after Facebook (especially popular in Russia).
