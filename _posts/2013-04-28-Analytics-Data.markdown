@@ -1,9 +1,8 @@
-<!--
+---
 layout: post
 FBimage:
 title: Analytics Data
--->
-
+---
 For quite a while now there is this idea of *being data-driven* and analyzing
 everything that is happening on your platform in order to identify potential
 changes that could improve your core metrics such as user engagement.

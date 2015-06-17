@@ -1,10 +1,9 @@
-<!--
+---
 layout: post
 title: When We Build Stuff
 resource: https://vimeo.com/34017777
 categories: linked
--->
-
+---
 I recently discovered this great presentation by checking out some of my follow-recommendations on
 twitter. [Wilson Miner](https://twitter.com/wilsonminer) was one of them.
 This talk adresses everyone who builds software and makes some of the broader side-effects

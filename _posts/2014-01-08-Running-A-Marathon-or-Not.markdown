@@ -1,9 +1,8 @@
-<!--
+---
 layout: post
 FBimage: /images/tough-mudder.jpg
 title: Running a Marathon, Or Not
--->
-
+---
 Earlier this year I came to the “very” surprising conclusion that I'm not doing enough
 sports in relation to the hours I spend in front of a computer every day.
 [I decided to run a marathon this September](/2013/03/10/From-Zero-To-Marathon-In-Six-Months/).

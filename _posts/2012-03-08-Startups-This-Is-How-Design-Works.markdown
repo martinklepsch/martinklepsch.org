@@ -1,9 +1,9 @@
-<!--
+---
 layout: post
 title: Startups, This Is How Design Works
 category: linked
 resource: http://www.startupsthisishowdesignworks.com/
--->
+---
 
 > Companies like Apple are making design impossible for startups to ignore. Startups like Path,
 > Airbnb, Square, and Massive Health have design at the core of their business, and they're

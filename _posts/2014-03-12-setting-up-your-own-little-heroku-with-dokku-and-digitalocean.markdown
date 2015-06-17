@@ -1,8 +1,7 @@
-<!--
+---
 layout: post
 title: Heroku-like Deployment With Dokku And DigitalOcean
--->
-
+---
 Over the weekend I sat down to play around with Docker/Dokku and was able to
 set up a small machine on DigitalOcean that basically offers Heroku-like
 deployment. It was surprisingly simple so here is some rough outline that should

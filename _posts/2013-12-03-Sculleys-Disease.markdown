@@ -1,10 +1,9 @@
-<!--
+---
 layout: post
 resource: http://37signals.com/svn/posts/3497-you-know-one-of-the-things-that-really-hurt
 tags: quotes
 title: Sculley's Disease
--->
-
+---
 <p style='display:none'></p>
 
 Just found this quote by Steve Jobs on 37signals’ blog. It's taken from [The

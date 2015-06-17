@@ -1,7 +1,7 @@
-<!--
+---
 layout: post
 title: Managing Local and Project-wide Development Parameters in Leiningen
--->
+---
 
 Little tip. Long headline.
 

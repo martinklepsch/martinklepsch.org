@@ -1,7 +1,7 @@
-<!--
+---
 layout: post
 title: S3-Beam — Direct Upload to S3 with Clojure & Clojurescript
--->
+---
 
 In a
 [previous post](http://www.martinklepsch.org/posts/using-coreasync-and-transducers-for-direct-s3-upload.html)

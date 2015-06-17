@@ -1,7 +1,7 @@
-<!--
+---
 layout: post
 title: Emacs & Vim
--->
+---
 
 After using Vim for more than four years my recent contacts with Lisp
 encouraged me to take another look at Emacs. I used to make jokes

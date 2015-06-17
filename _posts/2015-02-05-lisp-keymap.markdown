@@ -1,8 +1,7 @@
-<!--
+---
 layout: post
 title: (lisp keymap)
--->
-
+---
 A while back I wanted to setup hotkeys for the various apps I use.
 Mostly because I was annoyed by the cognitive effort you need to
 make to figure out how often you need to press `Alt + Tab` exactly

@@ -1,7 +1,7 @@
-<!--
+---
 layout: post
 title: Running a Clojure Uberjar inside Docker
--->
+---
 
 For a sideproject I wanted to deploy a Clojure uberjar on a remote server
 using Docker. I imagined that to be fairly straight foward but there are some

@@ -1,8 +1,8 @@
-<!--
+---
 layout: post
 title: Hosting A Static Site On Amazon S3
 category: howto
--->
+---
 
 ## Preface
 

@@ -1,9 +1,9 @@
-<!--
+---
 layout: post
 resource: http://alistapart.com/column/never-heard-of-it
 tags: webdevelopment
 title: What do we need to know?
--->
+---
 
 > I go through periods of self-doubt about my qualifications as a web developer.
 > I have a sense I’m not alone in this. Our field is by nature a generalists’

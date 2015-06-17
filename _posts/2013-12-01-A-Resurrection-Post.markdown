@@ -1,7 +1,7 @@
-<!--
+---
 layout: post
 title: A Resurrection Post
--->
+---
 
 After not being active here for the last couple of months I thought a bit about
 what to do with this blog and came up with some changes and ideas.

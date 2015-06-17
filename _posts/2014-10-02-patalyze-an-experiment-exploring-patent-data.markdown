@@ -1,8 +1,7 @@
-<!--
+---
 title: Patalyze &mdash; An Experiment Exploring Publicly Available Patent Data
 layout: post
--->
-
+---
 For a few months now I've been working on and off on a little
 "data-project" analyzing patents published by the US Patent &
 Trademark Office. Looking at the time I spent on this until now I

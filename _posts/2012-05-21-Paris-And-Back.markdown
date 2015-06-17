@@ -1,8 +1,7 @@
-<!--
+---
 layout: post
 title: Paris And Back
--->
-
+---
 After being back home from Paris where I stayed the last two weeks I have a fun story to
 share. It's not about something great that happened in Paris but about something that
 started the evening before my departure.

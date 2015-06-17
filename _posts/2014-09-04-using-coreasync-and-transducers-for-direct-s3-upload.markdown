@@ -1,7 +1,7 @@
-<!--
+---
 layout: post
 title: Using core.async and Transducers to upload files from the browser to S3
--->
+---
 
 In a project I'm working on we needed to enable users to upload media
 content. In many scenarios it makes sense to upload to S3 directly
