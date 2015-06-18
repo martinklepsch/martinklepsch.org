@@ -1,6 +1,7 @@
 ---
 layout: post
 FBimage: /images/dome-cropped.jpg
+date-published: 2014-02-05
 title: Living Small
 ---
 Living in a world where consumerism appears to be the predominant behaviour it seems more and more exciting to me to live a less materialistic lifestyle. What follows are some of the things that stimulated my thinking — maybe they do the same for you.

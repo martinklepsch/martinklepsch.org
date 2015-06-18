@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2014-10-21
 title: S3-Beam — Direct Upload to S3 with Clojure & Clojurescript
 ---
 

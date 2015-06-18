@@ -1,6 +1,6 @@
 ---
 layout: post
-FBimage:
+date-published: 2013-04-25
 title: Asynchronous Communication
 ---
 Communication is a central part of working in teams.

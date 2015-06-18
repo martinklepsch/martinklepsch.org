@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2014-01-06
 title: Code Simplicity
 ---
 When O'Reilly promoted their cyber monday I somehow really got into a shopping

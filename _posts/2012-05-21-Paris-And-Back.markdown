@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2012-05-21
 title: Paris And Back
 ---
 After being back home from Paris where I stayed the last two weeks I have a fun story to

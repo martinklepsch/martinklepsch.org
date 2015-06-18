@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2014-03-12
 title: Heroku-like Deployment With Dokku And DigitalOcean
 ---
 Over the weekend I sat down to play around with Docker/Dokku and was able to

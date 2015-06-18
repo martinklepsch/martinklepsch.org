@@ -1,8 +1,9 @@
 ---
 layout: post
-title: Models, Operations, Views and Events
-resource: http://cirw.in/blog/time-to-move-on
 categories: linked
+date-published: 2012-07-25
+resource: http://cirw.in/blog/time-to-move-on
+title: Models, Operations, Views and Events
 ---
 Conrad Irwin:
 

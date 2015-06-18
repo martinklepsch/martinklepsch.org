@@ -1,6 +1,6 @@
 ---
 layout: post
-FBimage:
+date-published: 2013-04-28
 title: Analytics Data
 ---
 For quite a while now there is this idea of *being data-driven* and analyzing

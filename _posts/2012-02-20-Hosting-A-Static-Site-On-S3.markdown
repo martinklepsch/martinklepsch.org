@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Hosting A Static Site On Amazon S3
 category: howto
+date-published: 2012-02-20
+title: Hosting A Static Site On Amazon S3
 ---
 
 ## Preface

@@ -1,8 +1,9 @@
 ---
 layout: post
-title: Entypo Icon Set
-resource: http://www.entypo.com/
 categories: linked
+date-published: 2012-03-08
+resource: http://www.entypo.com/
+title: Entypo Icon Set
 ---
 Daniel Bruce:
 

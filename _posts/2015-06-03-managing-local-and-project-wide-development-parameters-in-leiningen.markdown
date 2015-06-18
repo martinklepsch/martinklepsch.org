@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2015-06-03
 title: Managing Local and Project-wide Development Parameters in Leiningen
 ---
 

@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2014-09-11
 title: Running a Clojure Uberjar inside Docker
 ---
 

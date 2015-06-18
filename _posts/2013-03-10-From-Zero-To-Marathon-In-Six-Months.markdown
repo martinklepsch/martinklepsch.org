@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2013-03-10
 FBimage: /images/flyknitbw.png
 title: From Zero to Marathon in Six Monthts
 ---

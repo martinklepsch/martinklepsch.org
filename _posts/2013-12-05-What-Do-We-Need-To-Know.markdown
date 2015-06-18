@@ -1,7 +1,8 @@
 ---
 layout: post
-resource: http://alistapart.com/column/never-heard-of-it
 tags: webdevelopment
+date-published: 2013-12-05
+resource: http://alistapart.com/column/never-heard-of-it
 title: What do we need to know?
 ---
 

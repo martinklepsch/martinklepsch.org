@@ -1,6 +1,7 @@
 ---
 layout: post
 FBimage: /images/tough-mudder.jpg
+date-published: 2014-01-08
 title: Running a Marathon, Or Not
 ---
 Earlier this year I came to the “very” surprising conclusion that I'm not doing enough

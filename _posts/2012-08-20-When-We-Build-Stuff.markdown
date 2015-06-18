@@ -1,8 +1,9 @@
 ---
 layout: post
-title: When We Build Stuff
-resource: https://vimeo.com/34017777
 categories: linked
+date-published: 2012-08-20
+resource: https://vimeo.com/34017777
+title: When We Build Stuff
 ---
 I recently discovered this great presentation by checking out some of my follow-recommendations on
 twitter. [Wilson Miner](https://twitter.com/wilsonminer) was one of them.

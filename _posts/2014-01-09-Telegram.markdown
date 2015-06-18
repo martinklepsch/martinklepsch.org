@@ -2,6 +2,7 @@
 layout: post
 resource: http://telegram.org
 FBimage: /images/telegram-logo.png
+date-published: 2014-01-09
 title: Sending You a Telegram
 ---
 [Telegram](https://telegram.org) is a new messenger built by Pavel and Nikolai

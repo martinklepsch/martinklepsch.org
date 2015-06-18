@@ -1,6 +1,7 @@
 ---
-title: Patalyze &mdash; An Experiment Exploring Publicly Available Patent Data
 layout: post
+date-published: 2014-10-02
+title: Patalyze &mdash; An Experiment Exploring Publicly Available Patent Data
 ---
 For a few months now I've been working on and off on a little
 "data-project" analyzing patents published by the US Patent &

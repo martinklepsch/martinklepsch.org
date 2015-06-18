@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2014-09-04
 title: Using core.async and Transducers to upload files from the browser to S3
 ---
 

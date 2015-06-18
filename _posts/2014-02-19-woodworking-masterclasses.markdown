@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Woodworking Masterclasses
 resource: http://woodworkingmasterclasses.com/
+date-published: 2014-02-19
+title: Woodworking Masterclasses
 ---
 Back when I lived at home my dad used to make fun of my mechanical skills.
 He said if everyone just sits in front of computers the whole day no one will

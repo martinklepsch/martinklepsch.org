@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2015-01-05
 title: CLJSJS - Use Javascript Libraries in Clojurescript With Ease
 ---
 In Clojure, Java interoperability or “interop” is a core feature. In

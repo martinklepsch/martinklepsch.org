@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2012-01-28
 title: Exim4 Fix Wrongly Decoded Mail Subject
 ---
 

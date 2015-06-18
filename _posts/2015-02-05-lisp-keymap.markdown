@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2015-02-05
 title: (lisp keymap)
 ---
 A while back I wanted to setup hotkeys for the various apps I use.

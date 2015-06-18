@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2014-11-06
 title: Why Boot is Relevant For The Clojure Ecosystem
 ---
 Boot is a build system for Clojure projects. It roughly competes

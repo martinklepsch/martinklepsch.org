@@ -1,6 +1,6 @@
 ---
 layout: post
-FBimage:
+date-published: 2013-09-24
 abstract: I'm going on a short trip to the US (NYC, PHL & MIA) and I'd love to meet some fun people!
 title: A Trip To The US
 ---

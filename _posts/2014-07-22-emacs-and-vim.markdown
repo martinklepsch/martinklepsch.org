@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2014-07-22
 title: Emacs & Vim
 ---
 

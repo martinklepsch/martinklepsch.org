@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2015-04-10
 title: Formal Methods at Amazon
 ---
 
