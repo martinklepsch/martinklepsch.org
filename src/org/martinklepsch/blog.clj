@@ -8,6 +8,9 @@
   (prn x)
   x)
 
+(def +twitter-uri+
+  "https://twitter.com/martinklepsch")
+
 (defn date-fmt [date]
   (.format (java.text.SimpleDateFormat. "MMMM yyyy") date))
 
@@ -25,7 +28,7 @@
    [:h1
     [:span.date
      ;; [:a.title {:href (str (:filename post)) :itemprop "name"} (:title post)]
-     [:a {:href (:permalink post) :alt (str (:title post) "permalink page")}
+     [:a {:href (:permalink post) :alt (str (:title post) " permalink page")}
       (date-fmt (:date-published post))]]
     (if (:resource post)
       (:title post) ; TODO add linkthing here
@@ -44,8 +47,7 @@
 (defn signed-post [post]
   (conj (render-post post)
         [:span.article__signoff
-         [:a {:href "https://twitter.com/martinklepsch"}
-          "@martinklepsch"]
+         [:a {:href +twitter-uri+} "@martinklepsch"]
          ", " (date-fmt (:date-published post))]))
 
 (defn archive-page [posts]
@@ -66,9 +68,16 @@
               [:p "This blog was born."]]))]])))
 
 (defn index-page [posts]
-  (base (for [post posts]
-          (list (render-post post)
-                [:hr]))))
+  (base
+   (concat
+    (list [:div#me
+           [:a.marked {:href "/"} "Hi, I'm Martin."]
+           [:span.me__do-it
+            "You should follow me: "
+            [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]])
+    (for [post posts]
+      (list (render-post post)
+            [:hr])))))
 
 (defn post-page [post]
   (base (signed-post post)
