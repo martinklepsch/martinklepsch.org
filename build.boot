@@ -23,6 +23,8 @@
        (string/join "-")
        string/lower-case))
 
+(defn permalink-fn [post-data]
+  (str  "/posts/" (:slug post-data) ".html"))
 
 (deftask build
   "Build blog."
@@ -30,7 +32,7 @@
   (comp (sass :output-dir "public/stylesheets/")
         (p/markdown)
         (p/slug :slug-fn jekyll-slug-fn)
-        (p/permalink)
+        (p/permalink :permalink-fn permalink-fn)
         ;; (draft)
         ;; (ttr)
         (p/render :renderer blog/post-page)
