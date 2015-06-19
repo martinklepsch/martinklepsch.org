@@ -1,11 +1,15 @@
 (ns org.martinklepsch.blog
   (:require [org.martinklepsch.blog.common :as common]
             [hiccup.page :as hp]
-            [hiccup.core :as hiccup]))
+            [hiccup.core :as hiccup])
+  (:import  java.text.SimpleDateFormat))
 
 (defn trace [x]
   (prn x)
   x)
+
+(defn date-fmt [date]
+  (.format (java.text.SimpleDateFormat. "MMMM yyyy") date))
 
 (defn base
   ([content]
@@ -22,7 +26,7 @@
     [:span.date
      ;; [:a.title {:href (str (:filename post)) :itemprop "name"} (:title post)]
      [:a {:href (:permalink post) :alt (str (:title post) "permalink page")}
-      (or (:date-published post) "no date specified")]]
+      (date-fmt (:date-published post))]]
     (if (:resource post)
       (:title post) ; TODO add linkthing here
       ;; {{ post.title }} <a class="icon" href="{{ post.resource}}" alt="Link to external resource" target="blank">&#10150;</a>
@@ -42,7 +46,7 @@
         [:span.article__signoff
          [:a {:href "https://twitter.com/martinklepsch"}
           "@martinklepsch"]
-         ", " (:date-published post)]))
+         ", " (date-fmt (:date-published post))]))
 
 (defn archive-page [posts]
   (base
@@ -55,7 +59,7 @@
       (concat
        (for [post posts]
          [:li
-          [:span.date (:date-published post)]
+          [:span.date (date-fmt (:date-published post))]
           [:a {:href (:permalink post) :alt (:title post)} (:title post)]])
        (list [:li
               [:span.date "December 2011"]
