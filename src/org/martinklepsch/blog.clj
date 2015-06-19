@@ -1,6 +1,20 @@
 (ns org.martinklepsch.blog
-  (:require [hiccup.page :as hp]
+  (:require [org.martinklepsch.blog.common :as common]
+            [hiccup.page :as hp]
             [hiccup.core :as hiccup]))
+
+(defn trace [x]
+  (prn x)
+  x)
+
+(defn base
+  ([content]
+   (base content {}))
+  ([content opts]
+   (hp/html5 {:lang "en" :itemtype "http://schema.org/Blog"}
+             (common/head :title (:title opts))
+             [:body
+              [:div#container content]])))
 
 (defn render-post [post]
   [:article {:itemprop "blogPost" :itemscope "" :itemtype "http://schema.org/BlogPosting"}
@@ -8,61 +22,53 @@
     [:span.date
      ;; [:a.title {:href (str (:filename post)) :itemprop "name"} (:title post)]
      [:a {:href (:permalink post) :alt (str (:title post) "permalink page")}
-      (or (:date post) "no date specified")]]
+      (or (:date-published post) "no date specified")]]
     (if (:resource post)
       (:title post) ; TODO add linkthing here
       ;; {{ post.title }} <a class="icon" href="{{ post.resource}}" alt="Link to external resource" target="blank">&#10150;</a>
       (:title post))]
    [:section.post_content
     (:content post)]
-   [:hr]
+   ;; Maybe implrement some of that stuff later
    #_[:div.item-meta
     [:meta {:itemprop "author" :content (str (:author post) " (" (:author_email post) ")" )}]
     [:img.author-avatar {:src (:author_avatar post) :title (:author post)}]
     #_[:p.pub-data (str (dates/reformat-datestr (:date_published post) "YYYY-MM-dd", "MMM dd, YYYY") ", by " (:author post))
      [:span.reading-time (str " " (:ttr post) " mins read")]]
      [:p {:itemprop "description"} (:description post)]]])
-;; <article>
-;; <h1>
-;;   <span class="date"><a href="{{ post.url }}" alt="{{ post.title }} permalink page">{{ post.date | date: "%B %Y" }}</a></span>
-;;   {% if post.resource %}
-;;   {{ post.title }} <a class="icon" href="{{ post.resource}}" alt="Link to external resource" target="blank">&#10150;</a>
-;;   {% else %}
-;;     {{ post.title }}
-;;   {% endif %}
-;; </h1>
-;; <section class='post_content'>
-;; {{ post.content }}
-;; </section>
-;; </article>
-;; <hr>
 
+(defn signed-post [post]
+  (conj (render-post post)
+        [:span.article__signoff
+         [:a {:href "https://twitter.com/martinklepsch"}
+          "@martinklepsch"]
+         ", " (:date-published post)]))
 
+(defn archive-page [posts]
+  (base
+   (list 
+    [:div#me
+     [:a.marked {:href "/"} "Hi, I'm Martin."]
+     [:span.me__do-it "This is the archive."]]
+    [:section
+     [:ol#archive
+      (concat
+       (for [post posts]
+         [:li
+          [:span.date (:date-published post)]
+          [:a {:href (:permalink post) :alt (:title post)} (:title post)]])
+       (list [:li
+              [:span.date "December 2011"]
+              [:p "This blog was born."]]))]])))
 
-(defn index-render [posts]
-  (hp/html5 {:lang "en" :itemtype "http://schema.org/Blog"}
-    [:head
-     ;; {% include opengraph.html %}
-     ;; <link rel="alternate" type="application/rss+xml" href="feed.xml">
-      [:meta {:charset "utf-8"}]
-      [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
-      [:meta {:name "viewport" :content "width=device-width, initial-scale=1, maximum-scale=1"}]
-      [:meta {:itemprop "author" :name "author" :content "Martin Klephsch (martinklepsch@googlemail.com)"}]
-      [:meta {:name "keywords" :itemprop "keywords" :content "hashobject, blog, clojure, development, heroku, amazon route 53, aws"}]
-      [:meta {:name "description" :itemprop "description" :content "Personal Website and Blog of Martin Klepsch"}]
-      [:title "Martin Klepsch"]
-      [:link {:rel "shortcut icon" :href "images/favicon.ico"}]
-      [:link {:rel "author" :href "humans.txt"}]
-      [:link {:rel "alternate" :type "application/rss+xml" :title "RSS" :href "/feed.rss"}]
-      (hp/include-css "/stylesheets/martinklepschorg-v2.css")
-      (hp/include-css "http://fonts.googleapis.com/css?family=Open+Sans:300")
-      #_(common/ga)
-     ]
-    [:body
-       #_(common/header)
-       [:div#container
-        (for [post posts] (render-post post))]
-       #_(common/footer)]))
+(defn index-page [posts]
+  (base (for [post posts]
+          (list (render-post post)
+                [:hr]))))
+
+(defn post-page [post]
+  (base (signed-post post)
+        {:title (:title post)}))
 
 ;; <body class="tl-adelle">
 ;;   <div id="container">
