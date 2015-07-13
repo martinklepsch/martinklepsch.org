@@ -35,7 +35,9 @@
    [:link {:rel "shortcut icon" :href "images/favicon.ico"}]
    [:link {:rel "author" :href "humans.txt"}]
    [:link {:rel "alternate" :type "application/rss+xml" :title "RSS" :href "/feed.rss"}]
-   (hp/include-css "/stylesheets/martinklepschorg-v2.css")
-   (hp/include-css "http://fonts.googleapis.com/css?family=Open+Sans:300")
+   [:link {:type "text/css" :rel "stylesheet"
+           :href "/stylesheets/martinklepschorg-v2.css"}]
+   [:link {:type "text/css" :rel "stylesheet"
+           :href "http://fonts.googleapis.com/css?family=Open+Sans:300|Roboto+Slab:400,700"}]
    (google-analytics)])
 
