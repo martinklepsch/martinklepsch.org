@@ -50,7 +50,7 @@
          [:a {:href +twitter-uri+} "@martinklepsch"]
          ", " (date-fmt (:date-published post))]))
 
-(defn archive-page [posts]
+(defn archive-page [global posts]
   (base
    (list 
     [:div#me
@@ -67,7 +67,7 @@
               [:span.date "December 2011"]
               [:p "This blog was born."]]))]])))
 
-(defn index-page [posts]
+(defn index-page [global posts]
   (base
    (concat
     (list [:div#me
@@ -79,7 +79,7 @@
       (list (render-post post)
             [:hr])))))
 
-(defn post-page [post]
+(defn post-page [global post]
   (base (signed-post post)
         {:title (:title post)}))
 

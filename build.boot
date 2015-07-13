@@ -4,8 +4,8 @@
  :dependencies '[[jeluard/boot-notify "0.1.1" :scope "test"]
                  [pandeiro/boot-http  "0.6.3-SNAPSHOT" :scope "test"]
                  [boot-sassc          "0.1.2" :scope "test"]
-                 [hiccup "1.0.5"]
-                 [perun "0.1.2-SNAPSHOT"]])
+                 [perun               "0.1.3-SNAPSHOT"]
+                 [hiccup              "1.0.5"]])
 
 (require '[jeluard.boot-notify :refer [notify]]
          '[pandeiro.boot-http  :refer [serve]]
@@ -35,9 +35,9 @@
         (p/permalink :permalink-fn permalink-fn)
         ;; (draft)
         ;; (ttr)
-        (p/render :renderer blog/post-page)
-        (p/collection :renderer blog/archive-page :page "archive.html")
-        (p/collection :renderer blog/index-page :page "index.html")))
+        (p/render     :renderer 'org.martinklepsch.blog/post-page)
+        (p/collection :renderer 'org.martinklepsch.blog/archive-page :page "archive.html")
+        (p/collection :renderer 'org.martinklepsch.blog/index-page :page "index.html")))
 
 (deftask dev
   []
