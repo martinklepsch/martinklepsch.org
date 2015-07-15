@@ -16,12 +16,12 @@ So you have a project setup that uses
 [environ](https://github.com/weavejester/environ) to determine the
 context the project is run in (`development` vs. `production`).
 
-{% highlight clojure %}
+```clojure
 ; in project.clj:
 (defproject your-app "0.1.0-SNAPSHOT"
   ; ...
   :profiles {:dev {:env {:environment "development"}}})
-{% endhighlight %}
+```
 
 Now you also want to use environment variables (or anything else thats
 supported by environ) to store AWS credentials to access Amazon
@@ -30,11 +30,11 @@ therefore you can't add them to `project.clj`. The way to go is to
 create a file `profiles.clj` in your project to store workstation
 specific information. Naively this could look something like this
 
-{% highlight clojure %}
+```clojure
 {:dev {:env {:aws-access-key "abc"
              :aws-secret-key "xyz"
              :s3-bucket "mybucket"}}}
-{% endhighlight %}
+```
 
 If you run your project with this `profiles.clj` you will be able to
 access your AWS credentials. You might also notice that `(environ/env
@@ -44,16 +44,16 @@ The problem here is that Leiningen will override keys in profiles
 defined in `project.clj` if **the same profile** has also been defined
 in `profiles.clj`.  To recursively merge Leiningen profiles combine them like so:
 
-{% highlight clojure %}
-; in project.clj:
+```clojure
+;; in project.clj:
 (defproject your-app "0.1.0-SNAPSHOT"
-  ; ...
+  ;; ...
   :profiles {:dev [:project/dev :local/dev]
              :project/dev {:env {:environment "development"}}})
 
-; in profiles.clj
+;; in profiles.clj
 {:local/dev {:env {:secret-key "xyz"}}}
-{% endhighlight %}
+```
 
 Now both, `:envrionment` and `:secret-key` should be defined when you
 retrieve them using environ.

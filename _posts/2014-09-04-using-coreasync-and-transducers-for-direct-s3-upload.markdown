@@ -49,7 +49,6 @@ To wrap all that up into a useful minimal API that hides all the
 complex back and forth happening until a file is uploaded core.async
 channels and transducers turned out very useful:
 
-{% highlight clojure %}
     (defn s3-upload [report-chan]
       (let [upload-files (map #(upload-file % report-chan))
             upload-chan  (chan 10 upload-files)
@@ -61,7 +60,6 @@ channels and transducers turned out very useful:
                 ; that's not really required but has been useful
                 (log v))))
         signing-chan))
-{% endhighlight %}
 
 This function takes one channel as argument where it will `put!` the
 result of the S3 request. You can take a look at the `upload-file` and
@@ -92,12 +90,9 @@ Putting this into a library and opening it up for other people to use
 isn't overly complicated, the exposed API is actually very simple.
 Imagine an [Om](https://github.com/swannodette/om) component `upload-form`:
 
-{% highlight clojure %}
     (defn queue-file [e owner {:keys [upload-queue]}]
       (put! upload-queue (first (array-seq (.. e -target -files)))))
-{% endhighlight %}
 
-{% highlight clojure %}
     (defcomponent upload-form [text owner]
       (init-state [_]
         (let [rc (chan 10)]
@@ -110,7 +105,6 @@ Imagine an [Om](https://github.com/swannodette/om) component `upload-form`:
         (dom/form
          (dom/input {:type "file" :name "file"
                      :on-change #(queue-file % owner state)} nil))))
-{% endhighlight %}
 
 I really like how simple this is. You put a file into a channel and
 whenever it's done you take the result from another
