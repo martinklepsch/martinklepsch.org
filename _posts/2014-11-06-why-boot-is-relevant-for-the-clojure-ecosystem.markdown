@@ -24,10 +24,12 @@ you open two terminals and start them separately or you fall back to
 something like below that you run in a `dev` profile (this is how it's
 done in [Chestnut](https://github.com/plexus/chestnut)):
 
-    (defn start-garden []
-    (future
-        (print "Starting Garden.\n")
-        (lein/-main ["garden" "auto"])))
+```clojure
+(defn start-garden []
+(future
+  (print "Starting Garden.\n")
+  (lein/-main ["garden" "auto"])))
+```
 
 Now there are issues with both of these options in my opinion. Opening
 two terminals to initiate your development environment is just not
@@ -63,13 +65,15 @@ Because we're lazy we'll define it as a task in our project's
 `build.boot` file. (Command-line task and their arguments are
 symmetric to their Clojure counterparts.)
 
-    (require '[boot.core          :refer [deftask]]
+```clojure
+(require '[boot.core          :refer [deftask]]
             '[boot.task.built-in :refer [pom add-src jar install]])
 
-    (deftask build-jar
-    "Build jar and install to local repo."
-    []
-    (comp (pom) (add-src) (jar) (install)))
+(deftask build-jar
+  "Build jar and install to local repo."
+  []
+  (comp (pom) (add-src) (jar) (install)))
+```
 
 Now `boot build-jar` is roughly equivalent to `lein install`. To have
 any changes directly reflected on our classpath we can just compose
