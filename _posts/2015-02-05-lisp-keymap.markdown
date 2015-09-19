@@ -28,15 +28,11 @@ when pressed in combination with other keys.
 A few days ago I was typing some stuff at a collegues computer and
 it immediately felt cumbersome when having to type a parenthesis.
 
-{::options parse_block_html="true" /}
-
-<aside>
-PS. Here are Steve Losh's original
-[OS X Instructions][space-cadet-shifting]. (What's KeyRemap4MacBook in
-this post is now [Karabiner][karabiner].)
+<aside> PS. Here are Steve Losh's original <a
+href="http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#shift-parentheses">OS
+X Instructions</a>.  (What's KeyRemap4MacBook in this post is now <a
+href="https://pqrs.org/osx/karabiner/index.html.en">Karabiner</a>.)
 </aside>
 
 [space-cadet]: http://stevelosh.com/blog/2012/10/a-modern-space-cadet/
-[space-cadet-shifting]: http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#shift-parentheses
-[karabiner]: https://pqrs.org/osx/karabiner/index.html.en
 
