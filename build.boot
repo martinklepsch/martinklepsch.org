@@ -18,13 +18,6 @@
 
 (defn renderer [data] (:title data))
 
-(defn jekyll-slug-fn [filename]
-  (->> (string/split filename #"[-\.]")
-       drop-last
-       (drop 3)
-       (string/join "-")
-       string/lower-case))
-
 (defn permalink-fn [post-data]
   (str  "/posts/" (:slug post-data) ".html"))
 
@@ -33,7 +26,7 @@
   []
   (comp (sass :output-dir "public/stylesheets/")
         (p/markdown)
-        (p/slug :slug-fn jekyll-slug-fn)
+        (p/slug)
         (p/permalink :permalink-fn permalink-fn)
         ;; (draft)
         ;; (ttr)
