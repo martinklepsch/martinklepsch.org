@@ -1,5 +1,6 @@
 (ns org.martinklepsch.blog
   (:require [org.martinklepsch.blog.common :as common]
+            [boot.util :as util]
             [hiccup.page :as hp]
             [hiccup.core :as hiccup])
   (:import  java.text.SimpleDateFormat))
@@ -24,25 +25,29 @@
               [:div#container content]])))
 
 (defn render-post [post]
-  [:article {:itemprop "blogPost" :itemscope "" :itemtype "http://schema.org/BlogPosting"}
-   [:h1
-    [:span.date
-     ;; [:a.title {:href (str (:filename post)) :itemprop "name"} (:title post)]
-     [:a {:href (:permalink post) :alt (str (:title post) " permalink page")}
-      (date-fmt (:date-published post))]]
-    (if (:resource post)
-      (:title post) ; TODO add linkthing here
-      ;; {{ post.title }} <a class="icon" href="{{ post.resource}}" alt="Link to external resource" target="blank">&#10150;</a>
-      (:title post))]
-   [:section.post_content
-    (:content post)]
-   ;; Maybe implrement some of that stuff later
-   #_[:div.item-meta
-    [:meta {:itemprop "author" :content (str (:author post) " (" (:author_email post) ")" )}]
-    [:img.author-avatar {:src (:author_avatar post) :title (:author post)}]
-    #_[:p.pub-data (str (dates/reformat-datestr (:date_published post) "YYYY-MM-dd", "MMM dd, YYYY") ", by " (:author post))
-     [:span.reading-time (str " " (:ttr post) " mins read")]]
-     [:p {:itemprop "description"} (:description post)]]])
+  (try
+    [:article {:itemprop "blogPost" :itemscope "" :itemtype "http://schema.org/BlogPosting"}
+     [:h1
+      [:span.date
+       ;; [:a.title {:href (str (:filename post)) :itemprop "name"} (:title post)]
+       [:a {:href (:permalink post) :alt (str (:title post) " permalink page")}
+        (date-fmt (:date-published post))]]
+      (if (:resource post)
+        (:title post) ; TODO add linkthing here
+        ;; {{ post.title }} <a class="icon" href="{{ post.resource}}" alt="Link to external resource" target="blank">&#10150;</a>
+        (:title post))]
+     [:section.post_content
+      (:content post)]
+     ;; Maybe implrement some of that stuff later
+     #_[:div.item-meta
+        [:meta {:itemprop "author" :content (str (:author post) " (" (:author_email post) ")" )}]
+        [:img.author-avatar {:src (:author_avatar post) :title (:author post)}]
+        #_[:p.pub-data (str (dates/reformat-datestr (:date_published post) "YYYY-MM-dd", "MMM dd, YYYY") ", by " (:author post))
+           [:span.reading-time (str " " (:ttr post) " mins read")]]
+        [:p {:itemprop "description"} (:description post)]]]
+    (catch Exception e
+      (util/fail "Rendering %s failed:\n" (:slug post))
+      (throw e))))
 
 (defn signed-post [post]
   (conj (render-post post)
