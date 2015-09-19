@@ -70,46 +70,39 @@
           [:a {:href (:permalink post) :alt (:title post)} (:title post)]])
        (list [:li
               [:span.date "December 2011"]
-              [:p "This blog was born."]]))]])))
+              [:p "This blog came into existence."]]))]])))
+
+(defn pagination-path [page-no]
+  (if (= page-no 0)
+    "index.html"
+    (str "page" (inc page-no) "/index.html")))
 
 (defn index-page [global posts]
-  (base
-   (concat
-    (list [:div#me
-           [:a.marked {:href "/"} "Hi, I'm Martin."]
-           [:span.me__do-it
-            "You should follow me: "
-            [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]])
-    (for [post posts]
-      (list (render-post post)
-            [:hr])))))
+  (let [[curr-page no-of-pages] (:page (first posts))]
+    (base
+     (concat
+      (list [:div#me
+             [:a.marked {:href "/"} "Hi, I'm Martin."]
+             [:span.me__do-it
+              "You should follow me: "
+              [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]])
+      (for [post posts]
+        (list (render-post post)
+              (if-not (= (last posts) post) [:hr])))
+      (if (> no-of-pages 1)
+        (list [:section {:id "pagination"}
+               (for [i (range no-of-pages)]
+                 (if (= i curr-page)
+                   [:strong (inc i)]
+                   [:a {:href (str "/" (pagination-path i))} (inc i)]))]))))))
 
 (defn post-page [global post]
-  (base (signed-post post)
-        {:title (:title post)}))
-
-;; <body class="tl-adelle">
-;;   <div id="container">
-;;     {{ content }}
-;;   </div>
-;;   <script src="/cljs-production/main.js" type="text/javascript"></script>
-;;   <script type="text/javascript">
-
-;;     var _gaq = _gaq || [];
-;;     _gaq.push(['_setAccount', 'UA-3138561-8']);
-;;     _gaq.push(['_setDomainName', 'martinklepsch.org']);
-;;     _gaq.push(['_trackPageview']);
-
-;;     setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
-
-;;     (function() {
-;;      var ga = document.createElement('script'); ga.type = 'text/javascript';
-;;      ga.async = true;
-;;      ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-;;        : 'http://www') + '.google-analytics.com/ga.js';
-;;      var s = document.getElementsByTagName('script')[0];
-;;      s.parentNode.insertBefore(ga, s);
-;;      })();
-;;    </script>
-;; </body>
-;; </html>
+  (base
+   (list 
+    [:div#me
+     [:a.marked {:href "/"} "Hi, I'm Martin."]
+     [:span.me__do-it
+      "You should follow me: "
+      [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]]
+    (signed-post post))
+   {:title (:title post)}))
