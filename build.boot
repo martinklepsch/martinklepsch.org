@@ -3,7 +3,7 @@
  :resource-paths  #{"resources"}
  :dependencies '[[jeluard/boot-notify "0.1.1"          :scope "test"]
                  [pandeiro/boot-http  "0.6.3-SNAPSHOT" :scope "test"]
-                 [boot-sassc          "0.1.2"          :scope "test"]
+                 [mathias/boot-sassc  "0.1.5"          :scope "test"]
                  [hashobject/boot-s3  "0.1.0-SNAPSHOT" :scope "test"]
                  [perun               "0.1.3-SNAPSHOT" :scope "test"]
                  [hiccup              "1.0.5"]])
