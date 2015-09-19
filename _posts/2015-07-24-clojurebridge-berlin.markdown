@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2015-07-24
 title: ClojureBridge Berlin
 ---
 

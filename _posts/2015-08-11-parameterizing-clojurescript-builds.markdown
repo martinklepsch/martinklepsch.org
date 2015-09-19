@@ -1,5 +1,6 @@
 ---
 layout: post
+date-published: 2015-08-11
 title: Parameterizing ClojureScript Builds
 ---
 Just like with most server side software we often want to make minor
