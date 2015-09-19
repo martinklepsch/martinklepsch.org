@@ -23,7 +23,7 @@ than 76 characters in the subject line** (usually people don't do that).
 > final ?= delimiter) before it can decide whether a token is an
 > "encoded-word" or something else.
 >
-> <cite>Excerpt from [RFC2047](http://www.ietf.org/rfc/rfc2047.txt)</cite>
+> <cite>Excerpt from <a href="http://www.ietf.org/rfc/rfc2047.txt">RFC2047</a></cite>
 
 
 ## Fix It
