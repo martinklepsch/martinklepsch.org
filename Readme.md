@@ -1,0 +1,19 @@
+# This is my blog
+
+This blog is built using Clojure & [Boot][boot-clj]. To get an
+overview you can take a look at the `build.boot` file. Templates are
+defined as functions returning hiccup in `src/org/martinklepsch/blog.clj`.
+
+### Common workflows
+
+Building the blog:
+```
+boot build
+```
+
+Continously build blog and serve on localhost:3000:
+```
+boot dev
+```
+
+[boot-clj]: http://boot-clj.com/
