@@ -13,7 +13,7 @@ like a database URI. In ClojureScript we don't have access to those.
 You can work around that with macros and emit code based on environment
 variables but this requires additional code and separate tools.
 
-With ClojureScript 1.7.48 (**Update:** There was a bug in 1.7.48
+With ClojureScript 1.7.48 (<strong>Update:</strong> There was a bug in 1.7.48
 `goog-define`. Use 1.7.107 instead.) a new macro `goog-define` has
 been added which allows build customization at compile time using
 plain compiler options. Let's walk through an example:
