@@ -33,5 +33,5 @@ was: “What's important to you in the development of a product?”
 > problem or a new opportunity to fit these things together a little
 > differently.
 
-> <strong>And it’s that process that is the magic.</strong>
+> And it’s that process that is the magic.
 > <cite>Steve Jobs</cite>

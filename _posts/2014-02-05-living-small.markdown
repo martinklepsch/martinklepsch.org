@@ -22,5 +22,3 @@ Coming across the 100 Things Challenge again and again I want to try it myself. 
 
 > Stuff has gotten a lot cheaper, but our attitudes toward it haven't changed correspondingly. We overvalue stuff.
 > <cite><a href='http://paulgraham.com/stuff.html'>Stuff</a> by Paul Graham</cite>
-
-**Think about it.**
