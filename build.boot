@@ -64,7 +64,7 @@
         (watch)
         (build)))
 
-(deftask deploy-wip []
+(deftask deploy []
   (s3-sync :source "target/public"
            :bucket "www.martinklepsch.org"
            :access-key (System/getenv "S3_ACCESS_KEY")
