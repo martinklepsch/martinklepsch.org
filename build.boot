@@ -54,6 +54,7 @@
         ;; (draft)
         ;; (ttr)
         (p/render     :renderer 'org.martinklepsch.blog/post-page)
+        (p/collection :renderer 'org.martinklepsch.blog/error-page :page "error.html")
         (p/collection :renderer 'org.martinklepsch.blog/archive-page :page "archive.html")
         (p/collection :renderer 'org.martinklepsch.blog/index-page :groupby #(-> % :page first blog/pagination-path))))
 

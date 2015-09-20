@@ -55,6 +55,13 @@
          [:a {:href +twitter-uri+} "@martinklepsch"]
          ", " (date-fmt (:date-published post))]))
 
+(defn error-page [_ _]
+  (base
+   [:section {:style "max-width: 733px; margin: 100px auto"}
+    [:h1 "Oops. Looks like this page went missing."]
+    [:p "Most likely you can still find it in the "
+     [:a {:href "/archive.html"} "archive"] "."]]))
+
 (defn archive-page [global posts]
   (base
    (list 
