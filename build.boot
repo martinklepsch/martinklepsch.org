@@ -19,8 +19,10 @@
 
 (defn renderer [data] (:title data))
 
-(defn permalink-fn [post-data]
-  (str  "/posts/" (:slug post-data) ".html"))
+(defn permalink-fn [{:keys [slug path filename] :as post-data}]
+  (if (.startsWith path "posts")
+    (str "posts/" slug ".html")
+    (str (string/replace filename #"(?i).[a-z]+$" ".html"))))
 
 (def ^:private +paginate-defaults+
   {:per-page 5
@@ -57,17 +59,25 @@
 (deftask build
   "Build blog."
   []
-  (comp (sass :output-dir "public/stylesheets/")
-        (p/markdown)
-        (p/slug)
-        (p/permalink :permalink-fn permalink-fn)
-        (paginate)
-        ;; (draft)
-        ;; (ttr)
-        (p/render     :renderer 'org.martinklepsch.blog/post-page)
-        (p/collection :renderer 'org.martinklepsch.blog/error-page :page "error.html")
-        (p/collection :renderer 'org.martinklepsch.blog/archive-page :page "archive.html")
-        (p/collection :renderer 'org.martinklepsch.blog/index-page :groupby #(-> % :page first blog/pagination-path))))
+  (let [post? (fn [{:keys [path]}] (.startsWith path "posts"))
+        page? (fn [{:keys [path]}] (.startsWith path "pages"))]
+    (comp (sass :output-dir "public/stylesheets/")
+          (p/base)
+          (p/markdown)
+          (p/slug)
+          (p/permalink  :permalink-fn permalink-fn)
+          (paginate     :filterer post?)
+          (p/render     :renderer 'org.martinklepsch.blog/post-page :filterer post?)
+          (p/render     :renderer 'org.martinklepsch.blog/simple-page :filterer page?)
+          (p/collection :renderer 'org.martinklepsch.blog/error-page
+                        :page     "error.html"
+                        :filterer (constantly false))
+          (p/collection :renderer 'org.martinklepsch.blog/archive-page
+                        :page     "archive.html"
+                        :filterer post?)
+          (p/collection :renderer 'org.martinklepsch.blog/index-page
+                        :groupby  #(-> % :page first blog/pagination-path)
+                        :filterer post?))))
 
 (deftask dev
   []

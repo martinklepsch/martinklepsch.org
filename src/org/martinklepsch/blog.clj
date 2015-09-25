@@ -113,3 +113,14 @@
       [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]]
     (signed-post post))
    {:title (:title post)}))
+
+(defn simple-page [global page]
+  (base
+   (list
+    [:div#me
+     [:a.marked {:href "/"} "Hi, I'm Martin."]
+     [:span.me__do-it
+      "Say Hi on Twitter: "
+      [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]]
+    [:article [:section (:content page)]])
+   {:title (:title page)}))
