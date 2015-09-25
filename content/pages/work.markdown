@@ -1,5 +1,4 @@
 ---
-layout: static
 title: Work
 ---
 

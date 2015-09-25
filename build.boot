@@ -1,5 +1,5 @@
 (set-env!
- :source-paths    #{"src" "_posts" "stylesheets"}
+ :source-paths    #{"src" "stylesheets" "content"}
  :resource-paths  #{"resources"}
  :dependencies '[[jeluard/boot-notify "0.1.1"          :scope "test"]
                  [pandeiro/boot-http  "0.6.3-SNAPSHOT" :scope "test"]
