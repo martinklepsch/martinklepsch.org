@@ -24,24 +24,35 @@
 
 (def ^:private +paginate-defaults+
   {:per-page 5
-   :sortby (fn [[path file]] (:date-published file))
+   :filterer identity
+   :sortby (fn [metad] (:date-published metad))
    :comparator (fn [i1 i2] (compare i2 i1))})
 
-(defn add-page-key [pages]
-  (let [inj (fn [i posts] (map #(assoc-in % [1 :page] [i (count pages)]) posts))]
-    (reduce (fn [x o] (merge x (into {} o))) {} (map-indexed inj pages))))
+(defn add-page [pages]
+  (let [no-of-pages (count pages)
+        add-key     (fn [i posts] (map #(assoc % :page [i no-of-pages]) posts))]
+    (flatten (map-indexed add-key pages))))
+
+(defn debug [metad & to-remove]
+  (apply merge (map (fn [[k v]] {k (apply dissoc v to-remove)}) metad)))
 
 (deftask paginate
   "Add :page key to perun metadata"
   [p per-page NUMBER int "Number of items to put on one page"
+   f filterer FILTER code "Filter function"
    s sortby   SORTBY code "Sort by function"
    c comparator COMPARATOR code "Sort by comparator function"]
   (with-pre-wrap fileset
-    (let [options (merge +paginate-defaults+ *opts*)
-          files   (perun/get-meta fileset)
-          sorted  (sort-by (:sortby options) (:comparator options) files)
-          pages   (partition (:per-page options) sorted)]
-      (perun/set-meta fileset (add-page-key pages)))))
+    (let [options  (merge +paginate-defaults+ *opts*)
+          metadata (perun/get-meta fileset)
+          files    (filter (:filterer options) metadata)
+          sorted   (sort-by (:sortby options) (:comparator options) files)
+          pages    (partition-all (:per-page options) sorted)]
+      (doseq [[idx articles] (map-indexed vector pages)]
+        (util/dbug "Articles on page %s:\n" (inc idx))
+        (doseq [a articles]
+          (util/dbug " - %s\n" (:title a))))
+      (perun/merge-meta fileset (add-page pages)))))
 
 (deftask build
   "Build blog."
