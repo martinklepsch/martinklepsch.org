@@ -91,7 +91,7 @@
       (list [:div#me
              [:a.marked {:href "/"} "Hi, I'm Martin."]
              [:span.me__do-it
-              "You should follow me: "
+              "Say Hi on Twitter: "
               [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]])
       (for [post posts]
         (list (render-post post)
@@ -109,7 +109,7 @@
     [:div#me
      [:a.marked {:href "/"} "Hi, I'm Martin."]
      [:span.me__do-it
-      "You should follow me: "
+      "Say Hi on Twitter: "
       [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]]
     (signed-post post))
    {:title (:title post)}))
