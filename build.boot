@@ -12,6 +12,7 @@
          '[pandeiro.boot-http  :refer [serve]]
          '[mathias.boot-sassc  :refer [sass]]
          '[hashobject.boot-s3  :refer [s3-sync]]
+         '[boot.util           :as    util]
          '[clojure.string      :as    string]
          '[io.perun            :as    p]
          '[io.perun.core       :as    perun]
