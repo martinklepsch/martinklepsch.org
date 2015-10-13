@@ -70,9 +70,6 @@
           (paginate     :filterer post?)
           (p/render     :renderer 'org.martinklepsch.blog/post-page :filterer post?)
           (p/render     :renderer 'org.martinklepsch.blog/simple-page :filterer page?)
-          (p/collection :renderer 'org.martinklepsch.blog/error-page
-                        :page     "error.html"
-                        :filterer (constantly false))
           (p/collection :renderer 'org.martinklepsch.blog/archive-page
                         :page     "archive.html"
                         :filterer post?)
