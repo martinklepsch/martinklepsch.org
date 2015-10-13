@@ -17,11 +17,12 @@ A thread contains messages. In all threads except the **Room** the first message
 can be edited and those threads can also be concluded. Concluding will also
 close the thread i.e. new messages can no longer be posted.
 
-**Concluding** of threads can is a good way to  summarize a discussion or consolidate
-knowledge for later reference. This is especially useful to get a quick overview
-when only a preview of a thread is rendered. To make sure the conclusion has
-enough context the first message of a thread has to be edited before the thread
-can be concluded.
+**Concluding** of threads is a good way to summarize a discussion or
+consolidate knowledge for later reference. This is especially useful
+to get a quick overview when only a preview of a thread is
+rendered. To make sure the conclusion has enough context the first
+message of a thread has to be edited before the thread can be
+concluded.
 
 ## Branching
 
