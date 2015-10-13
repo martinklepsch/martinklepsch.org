@@ -8,7 +8,7 @@ hesitate to contact me.
 In the past I've helped clients in the following areas:
 
 - Design and implement rich client side applications.
-- Solve build tool/tooling needs for an existing project.
+- Solve build tool/tooling needs for existing projects.
 - Create prototypes and iteratively develop them further.
 - Transition existing systems to Clojure.
 
