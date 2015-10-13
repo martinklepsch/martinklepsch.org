@@ -122,5 +122,7 @@
      [:span.me__do-it
       "Say Hi on Twitter: "
       [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]]
-    [:article [:section (:content page)]])
+    [:article
+     [:h1 (:title page)]
+     [:section (:content page)]])
    {:title (:title page)}))
