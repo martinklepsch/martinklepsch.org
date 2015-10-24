@@ -33,6 +33,9 @@ just need to pass the appropriate `:closure-defines` compiler option:
 
     :closure-defines {'your.app/api-uri "http://your-dev.api.com"}
 
+**Note:** When using Leinigen quoting is implicit so there is no quote
+  necessary before the symbol.
+
 <aside>
 Prior to 1.7.48 you could annotate things with <code>@define</code> but without
 using <code>goog.define</code> overriding those defines is not possible when
