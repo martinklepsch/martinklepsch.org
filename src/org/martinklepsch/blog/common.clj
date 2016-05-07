@@ -50,6 +50,6 @@
    [:link {:type "text/css" :rel "stylesheet"
            :href "/stylesheets/martinklepschorg-v2.css"}]
    [:link {:type "text/css" :rel "stylesheet"
-           :href "http://fonts.googleapis.com/css?family=Open+Sans:300|Roboto+Slab:400,700"}]
+           :href "https://fonts.googleapis.com/css?family=Open+Sans:300|Roboto+Slab:400,700"}]
    (google-analytics)])
 

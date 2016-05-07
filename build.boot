@@ -1,17 +1,19 @@
 (set-env!
  :source-paths    #{"src" "stylesheets" "content"}
  :resource-paths  #{"resources"}
- :dependencies '[[jeluard/boot-notify "0.1.1"          :scope "test"]
-                 [pandeiro/boot-http  "0.6.3-SNAPSHOT" :scope "test"]
-                 [mathias/boot-sassc  "0.1.5"          :scope "test"]
-                 [hashobject/boot-s3  "0.1.0-SNAPSHOT" :scope "test"]
-                 [perun               "0.1.3-SNAPSHOT" :scope "test"]
+ :dependencies '[[jeluard/boot-notify "0.2.1" :scope "test"]
+                 [pandeiro/boot-http  "0.7.3" :scope "test"]
+                 [adzerk/boot-reload  "0.4.0" :scope "test"]
+                 [deraen/boot-sass    "0.2.1" :scope "test"]
+                 [confetti/confetti   "0.1.2-SNAPSHOT" :scope "test"]
+                 [perun               "0.3.0" :scope "test"]
                  [hiccup              "1.0.5"]])
 
 (require '[jeluard.boot-notify :refer [notify]]
          '[pandeiro.boot-http  :refer [serve]]
-         '[mathias.boot-sassc  :refer [sass]]
-         '[hashobject.boot-s3  :refer [s3-sync]]
+         ;; '[mathias.boot-sassc  :refer [sass]]
+         '[deraen.boot-sass    :refer [sass]]
+         '[confetti.boot-confetti :refer [sync-bucket create-site]]
          '[boot.util           :as    util]
          '[clojure.string      :as    string]
          '[io.perun            :as    p]
@@ -60,9 +62,11 @@
 (deftask build
   "Build blog."
   []
-  (let [post? (fn [{:keys [path]}] (.startsWith path "posts"))
-        page? (fn [{:keys [path]}] (.startsWith path "pages"))]
-    (comp (sass :output-dir "public/stylesheets/")
+  (let [post?     (fn [{:keys [path]}] (.startsWith path "posts"))
+        daily-ui? (fn [{:keys [path]}] (.startsWith path "public/daily-ui"))
+        page?     (fn [{:keys [path]}] (.startsWith path "pages"))]
+    (comp (sass)
+          (sift :move {#"martinklepschorg-v2.css" "public/stylesheets/martinklepschorg-v2.css"})
           (p/base)
           (p/markdown)
           (p/slug)
@@ -73,18 +77,29 @@
           (p/collection :renderer 'org.martinklepsch.blog/archive-page
                         :page     "archive.html"
                         :filterer post?)
+          (p/collection :renderer 'org.martinklepsch.blog/daily-ui-page
+                        :page     "daily-ui/index.html"
+                        :filterer daily-ui?)
           (p/collection :renderer 'org.martinklepsch.blog/index-page
                         :groupby  #(-> % :page first blog/pagination-path)
                         :filterer post?))))
 
 (deftask dev
   []
-  (comp (serve :resource-root "public")
+  (comp (serve :resource-root "public"
+               :port 4000)
         (watch)
         (build)))
 
+(def confetti-edn
+  (read-string (slurp "martinklepsch-org.confetti.edn")))
+
 (deftask deploy []
-  (s3-sync :source "target/public"
-           :bucket "www.martinklepsch.org"
-           :access-key (System/getenv "S3_ACCESS_KEY")
-           :secret-key (System/getenv "S3_SECRET_KEY")))
+  (comp
+   (sift :include #{#"^public/"})
+   (sift :move {#"^public/" ""})
+   (sync-bucket :bucket (:bucket-name confetti-edn)
+                :prune true
+                :cloudfront-id (:cloudfront-id confetti-edn)
+                :access-key (:access-key confetti-edn)
+                :secret-key (:secret-key confetti-edn))))

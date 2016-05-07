@@ -1,8 +1,7 @@
 (ns org.martinklepsch.blog
   (:require [org.martinklepsch.blog.common :as common]
             [boot.util :as util]
-            [hiccup.page :as hp]
-            [hiccup.core :as hiccup])
+            [hiccup.page :as hp])
   (:import  java.text.SimpleDateFormat))
 
 (defn trace [x]
@@ -55,7 +54,7 @@
          [:a {:href +twitter-uri+} "@martinklepsch"]
          ", " (date-fmt (:date-published post))]))
 
-(defn archive-page [global posts]
+(defn archive-page [{:keys [entries]}]
   (base
    (list 
     [:div#me
@@ -64,7 +63,7 @@
     [:section
      [:ol#archive
       (concat
-       (for [post posts]
+       (for [post entries]
          [:li
           [:span.date (date-fmt (:date-published post))]
           [:a {:href (:permalink post) :alt (:title post)} (:title post)]])
@@ -77,8 +76,8 @@
     "index.html"
     (str "page" (inc page-no) "/index.html")))
 
-(defn index-page [global posts]
-  (let [[curr-page no-of-pages] (:page (first posts))]
+(defn index-page [{:keys [entries]}]
+  (let [[curr-page no-of-pages] (:page (first entries))]
     (base
      (concat
       (list [:div#me
@@ -86,9 +85,9 @@
              [:span.me__do-it
               "Say Hi on Twitter: "
               [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]])
-      (for [post posts]
+      (for [post entries]
         (list (render-post post)
-              (if-not (= (last posts) post) [:hr])))
+              (if-not (= (last entries) post) [:hr])))
       (if (> no-of-pages 1)
         (list [:section {:id "pagination"}
                (for [i (range no-of-pages)]
@@ -96,26 +95,42 @@
                    [:strong (inc i)]
                    [:a {:href (str "/" (pagination-path i))} (inc i)]))]))))))
 
-(defn post-page [global post]
-  (base
-   (list 
-    [:div#me
-     [:a.marked {:href "/"} "Hi, I'm Martin."]
-     [:span.me__do-it
-      "Say Hi on Twitter: "
-      [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]]
-    (signed-post post))
-   {:title (:title post)}))
+(def me
+  [:div#me
+   [:a.marked {:href "/"} "Hi, I'm Martin."]
+   [:span.me__do-it
+    "Say Hi on Twitter: "
+    [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]])
 
-(defn simple-page [global page]
+(defn post-page [{:keys [entry]}]
   (base
    (list
-    [:div#me
-     [:a.marked {:href "/"} "Hi, I'm Martin."]
-     [:span.me__do-it
-      "Say Hi on Twitter: "
-      [:a {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]]
+    me
+    (signed-post entry))
+   {:title (:title entry)}))
+
+(defn simple-page [{:keys [entry]}]
+  (base
+   (list
+    me
     [:article
-     [:h1 (:title page)]
-     [:section (:content page)]])
-   {:title (:title page)}))
+     [:h1 (:title entry)]
+     [:section (:content entry)]])
+   {:title (:title entry)}))
+
+(defn daily-ui-page [{:keys [entries] :as stuff}]
+  (base
+   (list
+    [:link {:rel "stylesheet" :href "/tachyons.css"}]
+    (for [[day images] (group-by #(first (re-seq #"\d{3}" (:short-filename %))) entries)]
+      [:div
+       [:span.db.pa4
+        {:id day}
+        (str "Daily UI #" day)
+        [:a.fr {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]
+       [:div.dt
+        (map (fn [{f :filename}]
+               (let [uri (str "/daily-ui/" f)]
+                 [:a.dtc.bn.v-top.pr4 {:href uri}
+                  [:img {:src uri}]]))
+             images)]]))))
