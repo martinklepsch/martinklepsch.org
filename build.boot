@@ -96,6 +96,7 @@
 
 (deftask deploy []
   (comp
+   (build)
    (sift :include #{#"^public/"})
    (sift :move {#"^public/" ""})
    (sync-bucket :bucket (:bucket-name confetti-edn)
