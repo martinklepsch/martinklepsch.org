@@ -122,15 +122,16 @@
   (base
    (list
     [:link {:rel "stylesheet" :href "/tachyons.css"}]
-    (for [[day images] (group-by #(first (re-seq #"\d{3}" (:short-filename %))) entries)]
-      [:div
-       [:span.db.pa4
-        {:id day}
-        (str "Daily UI #" day)
-        [:a.fr {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]
-       [:div.dt
-        (map (fn [{f :filename}]
-               (let [uri (str "/daily-ui/" f)]
-                 [:a.dtc.bn.v-top.pr4 {:href uri}
-                  [:img {:src uri}]]))
-             images)]]))))
+    (let [grouped (group-by #(first (re-seq #"\d{3}" (:short-filename %))) entries)]
+      (for [[day images] (reverse (sort-by first grouped))]
+        [:div
+         [:span.db.pa4
+          {:id day}
+          (str "Daily UI #" day)
+          [:a.fr {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]
+         [:div.dt
+          (map (fn [{f :filename}]
+                 (let [uri (str "/daily-ui/" f)]
+                   [:a.dtc.bn.v-top.pr4 {:href uri}
+                    [:img {:src uri}]]))
+               images)]])))))
