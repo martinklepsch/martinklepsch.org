@@ -5,6 +5,7 @@
                  [pandeiro/boot-http  "0.7.3" :scope "test"]
                  [adzerk/boot-reload  "0.4.0" :scope "test"]
                  [deraen/boot-sass    "0.2.1" :scope "test"]
+                 [org.slf4j/slf4j-nop "1.7.13" :scope "test"]
                  [confetti/confetti   "0.1.2-SNAPSHOT" :scope "test"]
                  [perun               "0.3.0" :scope "test"]
                  [hiccup              "1.0.5"]])
