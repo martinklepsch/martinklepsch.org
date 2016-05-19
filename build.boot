@@ -24,7 +24,7 @@
 
 (defn permalink-fn [{:keys [slug path filename] :as post-data}]
   (if (.startsWith path "posts")
-    (str "posts/" slug ".html")
+    (str "/posts/" slug ".html")
     (str (string/replace filename #"(?i).[a-z]+$" ".html"))))
 
 (def ^:private +paginate-defaults+
