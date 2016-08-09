@@ -2,6 +2,7 @@
 layout: post
 date-published: 2015-11-03
 title: Om/Next Reading List
+uuid: e2aa0cae-c4ce-42c0-9052-f1b001e51c0e
 ---
 
 A small dump of things I read to learn more about Om/Next. Most of these

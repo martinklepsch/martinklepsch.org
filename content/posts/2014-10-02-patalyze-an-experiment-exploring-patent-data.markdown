@@ -2,6 +2,7 @@
 layout: post
 date-published: 2014-10-02
 title: Patalyze &mdash; An Experiment Exploring Publicly Available Patent Data
+uuid: 15184838-af2e-4ea1-b9a5-57f1ed52cf77
 ---
 For a few months now I've been working on and off on a little
 "data-project" analyzing patents published by the US Patent &

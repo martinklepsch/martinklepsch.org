@@ -4,6 +4,7 @@ date-published: 2012-05-03
 categories: linked
 resource: https://github.com/cloudfuji/kandan
 title: Kandan Team Chat
+uuid: 31835991-b050-4b17-b56d-c2fcbb06dbb7
 ---
 I just discovered [Kandan](http://kandan.me) which seems to be a great opensource alternative to
 [Campfire](http://campfirenow.com/) (a web-based team chat application).

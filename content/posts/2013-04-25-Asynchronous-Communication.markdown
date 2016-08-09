@@ -2,6 +2,7 @@
 layout: post
 date-published: 2013-04-25
 title: Asynchronous Communication
+uuid: d3811416-0031-4a02-8578-521a4540f889
 ---
 Communication is a central part of working in teams.
 I believe having asynchronous communication channels and making heavy use of them can have

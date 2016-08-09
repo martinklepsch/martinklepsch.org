@@ -2,6 +2,7 @@
 layout: post
 date-published: 2015-06-03
 title: Managing Local and Project-wide Development Parameters in Leiningen
+uuid: 47b430b8-3e76-48c5-a68e-a12fe88b2e4e
 ---
 
 Little tip. Long headline.

@@ -4,6 +4,7 @@ resource: http://telegram.org
 FBimage: /images/telegram-logo.png
 date-published: 2014-01-09
 title: Sending You a Telegram
+uuid: 28bbfb38-f744-443c-808e-ad3f1ebd808f
 ---
 [Telegram](https://telegram.org) is a new messenger built by Pavel and Nikolai
 Durov.  They previously founded vk.com, Europe's second largest social network

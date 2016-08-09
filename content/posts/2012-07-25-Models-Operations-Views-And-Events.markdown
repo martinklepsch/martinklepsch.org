@@ -4,6 +4,7 @@ categories: linked
 date-published: 2012-07-25
 resource: http://cirw.in/blog/time-to-move-on
 title: Models, Operations, Views and Events
+uuid: 22ccc641-b55e-4c29-83b1-631fbd4598f6
 ---
 Conrad Irwin:
 

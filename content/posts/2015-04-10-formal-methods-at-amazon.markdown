@@ -2,6 +2,7 @@
 layout: post
 date-published: 2015-04-10
 title: Formal Methods at Amazon
+uuid: 915cc2e8-d190-4d54-b746-0e1c34dff835
 ---
 
 I saw this paper being mentioned again and again in my Twitter

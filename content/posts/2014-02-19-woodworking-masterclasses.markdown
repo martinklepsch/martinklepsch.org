@@ -3,6 +3,7 @@ layout: post
 resource: http://woodworkingmasterclasses.com/
 date-published: 2014-02-19
 title: Woodworking Masterclasses
+uuid: 103f391e-8ccb-46ab-ac3b-7051d646a5fb
 ---
 Back when I lived at home my dad used to make fun of my mechanical skills.
 He said if everyone just sits in front of computers the whole day no one will

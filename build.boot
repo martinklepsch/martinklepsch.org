@@ -1,17 +1,15 @@
 (set-env!
  :source-paths    #{"src" "stylesheets" "content"}
  :resource-paths  #{"resources"}
- :dependencies '[[jeluard/boot-notify "0.2.1" :scope "test"]
-                 [pandeiro/boot-http  "0.7.3" :scope "test"]
-                 [adzerk/boot-reload  "0.4.0" :scope "test"]
+ :dependencies '[[pandeiro/boot-http  "0.7.3" :scope "test"]
+                 [adzerk/boot-reload  "0.4.12" :scope "test"]
                  [deraen/boot-sass    "0.2.1" :scope "test"]
-                 [org.slf4j/slf4j-nop "1.7.13" :scope "test"]
+                 [org.slf4j/slf4j-nop "1.7.21" :scope "test"]
                  [confetti/confetti   "0.1.2-SNAPSHOT" :scope "test"]
-                 [perun               "0.3.0" :scope "test"]
+                 [perun               "0.4.0-SNAPSHOT" :scope "test"]
                  [hiccup              "1.0.5"]])
 
-(require '[jeluard.boot-notify :refer [notify]]
-         '[pandeiro.boot-http  :refer [serve]]
+(require '[pandeiro.boot-http  :refer [serve]]
          ;; '[mathias.boot-sassc  :refer [sass]]
          '[deraen.boot-sass    :refer [sass]]
          '[confetti.boot-confetti :refer [sync-bucket create-site]]
@@ -69,6 +67,7 @@
     (comp (sass)
           (sift :move {#"martinklepschorg-v2.css" "public/stylesheets/martinklepschorg-v2.css"})
           (p/base)
+          (p/global-metadata)
           (p/markdown)
           (p/slug)
           (p/permalink  :permalink-fn permalink-fn)
@@ -83,7 +82,12 @@
                         :filterer daily-ui?)
           (p/collection :renderer 'org.martinklepsch.blog/index-page
                         :groupby  #(-> % :page first blog/pagination-path)
-                        :filterer post?))))
+                        :filterer post?)
+          (p/canonical-url)
+          (p/atom-feed :filterer post?
+                       :site-title "Martin Klepsch"
+                       :description "Martin Klepsch's blog"
+                       :base-url "https://www.martinklepsch.org/"))))
 
 (deftask dev
   []

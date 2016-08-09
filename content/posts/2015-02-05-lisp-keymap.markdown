@@ -2,6 +2,7 @@
 layout: post
 date-published: 2015-02-05
 title: (lisp keymap)
+uuid: 92c021b4-d645-48fd-aeb5-333305edfdb5
 ---
 A while back I wanted to setup hotkeys for the various apps I use.
 Mostly because I was annoyed by the cognitive effort you need to

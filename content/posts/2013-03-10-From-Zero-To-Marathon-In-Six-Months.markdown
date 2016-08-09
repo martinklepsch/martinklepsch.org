@@ -3,6 +3,7 @@ layout: post
 date-published: 2013-03-10
 FBimage: /images/flyknitbw.png
 title: From Zero to Marathon in Six Monthts
+uuid: 73abd373-1c0b-44d1-aed4-2e48a5abfc6f
 ---
 
 After moving to Berlin I kind of failed to continue some regular sports activity.

@@ -4,6 +4,7 @@ categories: linked
 date-published: 2012-03-08
 resource: http://www.entypo.com/
 title: Entypo Icon Set
+uuid: 58f62d22-8347-41b0-a368-81ee4b1771f1
 ---
 Daniel Bruce:
 

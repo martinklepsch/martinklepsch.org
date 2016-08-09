@@ -1,0 +1,7 @@
+{:site-title "Martin Klepsch's Blog"
+ :author "Martin Klepsch"
+ :author-email "martinklepsch@googlemail.com"
+ :base-url "https://www.martinklepsch.org/"
+ :language "en"
+ :keywords #{"clojure" "clojurescript" "blog"}
+ :description ""}

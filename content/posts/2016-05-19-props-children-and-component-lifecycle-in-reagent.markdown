@@ -2,6 +2,7 @@
 layout: post
 date-published: 2016-05-19
 title: Props, Children & Component Lifecycle in Reagent
+uuid: bdabdf1d-742c-468f-89bb-032986a9d99f
 ---
 
 Every now and then I come across the situation that I need to compare

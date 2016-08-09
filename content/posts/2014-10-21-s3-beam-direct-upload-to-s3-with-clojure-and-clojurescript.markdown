@@ -2,6 +2,7 @@
 layout: post
 date-published: 2014-10-21
 title: S3-Beam — Direct Upload to S3 with Clojure & Clojurescript
+uuid: 8b07ff10-d213-41b5-b388-5cc9dbc17bfd
 ---
 
 In a

@@ -2,6 +2,7 @@
 layout: post
 date-published: 2013-12-01
 title: A Resurrection Post
+uuid: ecc821bc-1816-4571-aab4-da5ef4e8d346
 ---
 
 After not being active here for the last couple of months I thought a bit about
