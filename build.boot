@@ -65,13 +65,14 @@
         daily-ui? (fn [{:keys [path]}] (.startsWith path "public/daily-ui"))
         page?     (fn [{:keys [path]}] (.startsWith path "pages"))]
     (comp (sass)
-          (sift :move {#"martinklepschorg-v2.css" "public/stylesheets/martinklepschorg-v2.css"})
+          (sift :move {#"martinklepschorg-v2.css" "public/stylesheets/martinklepschorg-v2.css"
+                       #"martinklepschorg-v3.css" "public/stylesheets/martinklepschorg-v3.css"})
           (p/base)
           (p/global-metadata)
           (p/markdown)
           (p/slug)
           (p/permalink  :permalink-fn permalink-fn)
-          (paginate     :filterer post?)
+          ;; (paginate     :filterer post?)
           (p/render     :renderer 'org.martinklepsch.blog/post-page :filterer post?)
           (p/render     :renderer 'org.martinklepsch.blog/simple-page :filterer page?)
           (p/collection :renderer 'org.martinklepsch.blog/archive-page
@@ -81,7 +82,7 @@
                         :page     "daily-ui/index.html"
                         :filterer daily-ui?)
           (p/collection :renderer 'org.martinklepsch.blog/index-page
-                        :groupby  #(-> % :page first blog/pagination-path)
+                        ;; :groupby  #(-> % :page first blog/pagination-path)
                         :filterer post?)
           (p/canonical-url)
           (p/atom-feed :filterer post?

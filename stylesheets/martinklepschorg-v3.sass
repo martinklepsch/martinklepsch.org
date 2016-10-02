@@ -1,0 +1,30 @@
+@import "tachyons"
+
+.link
+  // tachyons blue
+  color: #357edd
+
+// selector for styling the results of markdown transformation
+.mkdwn
+  a
+    color: #357edd
+    text-decoration: none
+  code
+    color: #333
+    font-size: .8rem
+  p > code
+    background-color: #f4f4f4
+    border-radius: 2px
+    padding: 2px 5px
+  img
+    width: 100%
+  pre
+    background-color: #f4f4f4
+    border-radius: 2px
+    padding: 1rem
+    font-size: .8rem
+    
+    
+.em-before
+  &:before
+      content: "\2014 \0020"

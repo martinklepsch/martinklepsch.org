@@ -48,8 +48,8 @@
    [:link {:rel "author" :href "humans.txt"}]
    ;[:link {:rel "alternate" :type "application/rss+xml" :title "RSS" :href "/feed.rss"}]
    [:link {:type "text/css" :rel "stylesheet"
-           :href "/stylesheets/martinklepschorg-v2.css"}]
-   [:link {:type "text/css" :rel "stylesheet"
+           :href "/stylesheets/martinklepschorg-v3.css"}]
+   #_[:link {:type "text/css" :rel "stylesheet"
            :href "https://fonts.googleapis.com/css?family=Open+Sans:300|Roboto+Slab:400,700"}]
    (google-analytics)])
 
