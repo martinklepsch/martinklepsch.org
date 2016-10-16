@@ -18,7 +18,7 @@ pinch me so that this nightmare ends.
 
 We went to the trainstation then and asked about a train. 125€ and an 8 hours trainride.
 Since that was a nighttrain we decided to go to the airport and check out if there are some
-cheap flights which I could book&mdash;*last minute*.
+cheap flights which I could book — *last minute*.
 There was a flight. It was not cheap with a 182€ pricetag though. Given the fact that
 I payed 100€ for the original flights I was completely pissed. After a couple of minutes
 I decided to take the flight for 182€ and we even made a little fun about what it costs to
@@ -44,6 +44,6 @@ and french fries.
 
 Before we got to the airport I told my friend:
 
-  > Oh, and that happens to me. Usually I am so lucky.
+> Oh, and that happens to me. Usually I am so lucky.
 
 

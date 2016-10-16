@@ -24,12 +24,37 @@ obviously have a thing for mode-based editing but Emacs' keybindings
 are beyond my understanding. Some simple movement commands to
 illustrate this:
 
-Command | Emacs | Vim
---- | --- | ---
-Move cursor down one line | `Ctrl-n` | `j`
-Move cursor up one line | `Ctrl-p` | `k`
-Move cursor left one character | `Ctrl-b` | `h`
-Move cursor right one character | `Ctrl-f` | `l`
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Emacs</th>
+      <th>Vim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Move cursor down one line</td>
+      <td><code>Ctrl-n</code></td>
+      <td><code>j</code></td>
+    </tr>
+    <tr>
+      <td>Move cursor up one line</td>
+      <td><code>Ctrl-p</code></td>
+      <td><code>k</code></td>
+    </tr>
+    <tr>
+      <td>Move cursor left one character</td>
+      <td><code>Ctrl-b</code></td>
+      <td><code>h</code></td>
+    </tr>
+    <tr>
+      <td>Move cursor right one character</td>
+      <td><code>Ctrl-f</code></td>
+      <td><code>l</code></td>
+    </tr>
+  </tbody>
+</table>
 
 These are the commands recommended in the Emacs tutorial (which you
 open with `Ctrl-h t`). They are mnemonic, what makes them easy to
