@@ -95,6 +95,7 @@
   (comp (serve :resource-root "public"
                :port 4000)
         (watch)
+        (speak)
         (build)))
 
 (def confetti-edn
