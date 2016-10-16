@@ -77,7 +77,7 @@ the result of a concluded thread. They serve as a way to get insight
 into conversations that just branched from the current thread while
 not overwhelming.
 
-<figure style="margin: 0 -100px">
+<figure>
 <img src='/images/threads.png'>
 </figure>
 
@@ -91,7 +91,7 @@ As branching a thread is natural in Chaf the interface has to support
 taking part in multiple conversations at once. A multi column layout
 suits this situation well as chat is usually taller than wide.
 
-<figure style="margin: 0 -100px">
+<figure>
 <img src='/images/multi-column.png'>
 </figure>
 

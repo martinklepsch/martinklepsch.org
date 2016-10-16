@@ -137,10 +137,10 @@
 (defn simple-page [{:keys [entry]}]
   (base
    {:title (:title entry)}
-   me
-   [:article
-    [:h1 (:title entry)]
-    [:section (:content entry)]]))
+   [:div.mt5.mw6.center me]
+   [:article.mb6
+    [:h1.f1-ns.f2.fw1.w-80-ns.lh-title.mw6.center (:title entry)]
+    [:section.mkdwn.lh-copy (:content entry)]]))
 
 (defn daily-ui-page [{:keys [entries] :as stuff}]
   (base
