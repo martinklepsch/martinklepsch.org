@@ -21,17 +21,27 @@
             [:body.system-sans-serif.dark-gray
              (into [:div.mh3] content)]))
 
-(defn render-post [post]
+(defn render-post [post opts]
   (try
-    [:article.lh-copy {:itemprop "blogPost" :itemscope "" :itemtype "http://schema.org/BlogPosting"}
-     [:h1
-      [:a.db.f6.normal.link {:href (:permalink post) :title (str "Permalink: " (:title post))}
-       (date-fmt (:date-published post))]
+    [:article.mt5 {:itemprop "blogPost" :itemscope "" :itemtype "http://schema.org/BlogPosting"}
+     [:div.f6.db.normal.mw6.center
+      [:a.link {:href (:permalink post) :title (str "Permalink: " (:title post))}
+       (if (:permalink-page? opts)
+         (date-fmt (:date-published post))
+         "Latest Post")]
+      (when (:permalink-page? opts) [:span.ph2 "/"])
+      (when (:permalink-page? opts) [:a.link {:href "/" :title "Home"} "Home"])
+      [:span.ph2 "/"]
+      [:a.link {:href +twitter-uri+ :title "@martinklepsch on Twitter"} "@martinklepsch"]
+      ;; [:span.ph2 "/"]
+      ;; [:a.link {:href "/archive.html" :title "View all posts"} "Older Posts"]
+      ]
+     [:h1.f1-ns.f2.fw1.w-80-ns.lh-title.mw6.center
       (if (:resource post)
         (:title post) ; TODO add linkthing here
         ;; {{ post.title }} <a class="icon" href="{{ post.resource}}" alt="Link to external resource" target="blank">&#10150;</a>
         (:title post))]
-     [:section.mkdwn
+     [:section.mkdwn.lh-copy
       (:content post)]
      ;; Maybe implrement some of that stuff later
      #_[:div.item-meta
@@ -44,31 +54,46 @@
       (util/fail "Rendering %s failed:\n" (:slug post))
       (throw e))))
 
-(defn signed-post [post]
-  (conj (render-post post)
-        [:div.mv4.em-before
+(defn signed-post [post opts]
+  (conj (render-post post opts)
+        [:div.mv4.em-before.mw6.center
          [:a.link {:href +twitter-uri+} "@martinklepsch"]
          ", " (date-fmt (:date-published post))]))
 
 (defn posts-list [title entries]
-  [:section.lh-copy.mv5
-   (when title [:h3 title])
+  [:section.lh-copy
+   (when title [:h3.mb0 title])
+   (when title [:div.bb.bw1.b--silver.w2.mv4])
    (into
     [:ol.list.pa0]
     (for [post entries]
-      [:li.mb2
+      [:li.mb3
        [:a.f4.link.mr2
         {:href (:permalink post)}
         (:title post)]
        [:span.db.dib-ns.f6 (date-fmt (:date-published post))]]))])
 
+(defn posts-blocks [title entries]
+  [:section.lh-copy
+   (when title [:h3.mb0.ph2 title])
+   (when title [:div.bb.bw1.b--silver.w2.mv4])
+   (into
+    [:ol.list.pa0]
+    (for [post entries]
+      [:li
+       [:a.w-50.fl.pv2.h4.border-box.link
+        {:href (:permalink post)}
+        [:div.ph2.bl.b--blue.bw2
+         [:span.db.f4.mr2 (:title post)]
+         [:span.f6.dark-gray (date-fmt (:date-published post))]]]]))])
+
 (defn archive-page [{:keys [entries]}]
   (base
    {}
-   [:div.mt4
+   [:div.mt4.mw7.center
     [:a.link {:href "/"} "Hi, I'm Martin. "]
-    [:span "This is the archive."]]
-   (posts-list "All Posts. Ever." entries)
+    [:span "This is the archive."]
+    (posts-list "All Posts. Ever." entries)]
    #_[:section.lh-copy
     [:ol.list
      (concat
@@ -86,32 +111,28 @@
     "index.html"
     (str "page" (inc page-no) "/index.html")))
 
-(defn index-page [{:keys [entries]}]
-  (base
-   {}
-   [:div.mt4
-    [:a.link {:href "/"} "Hi, I'm Martin. "]
-    [:span
-     "Say Hi on Twitter: "
-     [:a.link {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]]
-
-   [:div.mw6 (render-post (first entries))]
-
-   (posts-list "Older Posts" (->> entries rest (sort-by :date-published) reverse))))
-
 (def me
-  [:div.mt4
+  [:div.mt4.f6
    [:a.link {:href "/"} "Hi, I'm Martin. "]
    [:span
     "Say Hi on Twitter: "
     [:a.link {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]])
 
+(defn index-page [{:keys [entries]}]
+  (base
+   {}
+   [:div.mw7.center
+    (render-post (first entries) {})
+    [:div.mv6.mw6.center
+     (posts-list "Other Posts" (->> entries rest (sort-by :date-published) reverse))]]))
+
 (defn post-page [{:keys [entry entries]}]
   (base
    {:title (:title entry)}
-   me
-   [:div.mw6 (signed-post entry)]
-   (posts-list "Other Posts" (->> entries (remove #{entry}) (sort-by :date-published) reverse))))
+   [:div.mw7.center
+    (signed-post entry {:permalink-page? true})
+    [:div.mv6.mw6.center
+     (posts-list "Other Posts" (->> entries (remove #{entry}) (sort-by :date-published) reverse))]]))
 
 (defn simple-page [{:keys [entry]}]
   (base
