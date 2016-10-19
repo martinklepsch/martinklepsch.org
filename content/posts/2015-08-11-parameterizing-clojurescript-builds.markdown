@@ -60,4 +60,4 @@ define to your build causing `goog.define` to use the value in there
 instead of the default value you defined in your source files.
 
 For details see
-[the source of goog.define](http://google.github.io/closure-library/api/source/closure/goog/base.js.src.html#l147).
+[the source of goog.define](https://github.com/google/closure-library/blob/master/closure/goog/base.js#L147-L172).
