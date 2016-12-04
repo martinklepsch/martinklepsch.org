@@ -56,7 +56,7 @@ You can access it’s previously passed arguments like this:
 :component-did-update (fn [comp [_ prev-props prev-more]] …))
 ```
 
-`comp` is a reference to the current component. The second argument which is being destructured here contains what we’re looking for. As far as I understood the first item is the components constructor. The rest are the previously rendered inputs (again in React they’re all `props`, in Reagent they’re `props` and `children`).
+`comp` is a reference to the current component. The second argument which is being destructured here contains what we’re looking for. As far as I understood the first item is the component's constructor. The rest are the previously rendered inputs (again in React they’re all `props`, in Reagent they’re `props` and `children`).
 
 As you can see you can inspect all previous arguments to a component. The way you access them differs from the default React lifecycle method signatures so hopefully this post helps to clear up some confusion about this stuff. :)
 
