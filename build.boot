@@ -5,7 +5,7 @@
                  [adzerk/boot-reload  "0.4.12" :scope "test"]
                  [deraen/boot-sass    "0.2.1" :scope "test"]
                  [org.slf4j/slf4j-nop "1.7.21" :scope "test"]
-                 [confetti/confetti   "0.1.2-SNAPSHOT" :scope "test"]
+                 [confetti/confetti   "0.1.4" :scope "test"]
                  [perun               "0.4.0-SNAPSHOT" :scope "test"]
                  [hiccup              "1.0.5"]])
 
@@ -72,6 +72,7 @@
           (p/markdown)
           (p/slug)
           (p/permalink  :permalink-fn permalink-fn)
+          (p/canonical-url)
           ;; (paginate     :filterer post?)
           (p/render     :renderer 'org.martinklepsch.blog/post-page :filterer post?)
           (p/render     :renderer 'org.martinklepsch.blog/simple-page :filterer page?)
@@ -84,7 +85,6 @@
           (p/collection :renderer 'org.martinklepsch.blog/index-page
                         ;; :groupby  #(-> % :page first blog/pagination-path)
                         :filterer post?)
-          (p/canonical-url)
           (p/atom-feed :filterer post?
                        :site-title "Martin Klepsch"
                        :description "Martin Klepsch's blog"
@@ -98,16 +98,10 @@
         (speak)
         (build)))
 
-(def confetti-edn
-  (read-string (slurp "martinklepsch-org.confetti.edn")))
-
 (deftask deploy []
   (comp
    (build)
    (sift :include #{#"^public/"})
    (sift :move {#"^public/" ""})
-   (sync-bucket :bucket (:bucket-name confetti-edn)
-                :prune true
-                :cloudfront-id (:cloudfront-id confetti-edn)
-                :access-key (:access-key confetti-edn)
-                :secret-key (:secret-key confetti-edn))))
+   (sync-bucket :confetti-edn "martinklepsch-org.confetti.edn"
+                :prune true)))
