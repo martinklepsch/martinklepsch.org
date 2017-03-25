@@ -1,6 +1,6 @@
 ---
 layout: post
-date-published: 2017-03-19
+date-published: 2017-03-25
 title: Making Remote Work
 uuid: a658e901-04ec-4ff4-a2d5-c8c72231e3e7
 ---
@@ -11,11 +11,11 @@ What follows are some basic ideas to make remote teams work. I hope these help c
 
 ### Focus on Self Sufficiency 
 
-Start thinking of communication as a cost factor. In an office you walk up to somebody (read: interrupt their work) and discuss stuff. In a remote environment you may need to schedule, then wait, then deal with connectivity issues, then have a discussion. The waiting part alone can be an entire day depending on timezones.
+In an office you walk up to somebody (read: interrupt their work) and discuss stuff. In a remote environment you may need to schedule, then wait, then deal with connectivity issues, then have a discussion. The waiting part alone can be an entire day depending on timezones.
 
 Synchronous communication, including chat, is great and necessary but the more your work routine relies on it, the more you might unknowingly slow everyone down.
 
-So, now that we've established communication as a cost we might as well look at how to chop it down. That's where self-sufficiency comes in.
+With that in mind, start thinking of communication as a cost factor. Being slowed down costs time, momentum and motivation. These are the things you usually want to preserve at all cost—that's where self-sufficiency comes in.
 
 Being self sufficient in work means knowing what to do in order to advance the project and having the means to execute. The easiest way to make people understand what is worth working on is making them understand the business. Sometimes more specific goals will also do the job. But don't be too specific.
 
@@ -24,7 +24,7 @@ Once everyone is able to develop ideas based on their understanding of the busin
 
 ### Document With Rigour 
 
-Again, communication has a cost. It's fun and important too. You want to spend that valuable face-time with your colleagues chatting about last weekends hike or that problem you're banging your head against. You don't want to spend it figuring out how to run migrations or update your environment so that things work again with those latest changes.
+Again, communication has a cost. It's fun and important too. You want to spend that valuable face-time with your colleagues chatting about last weekends hike or that tricky problem you're banging your head against. You don't want to spend it figuring out how to run migrations or update your environment so that things work again with those latest changes.
 
 Have a `README`. Make sure to add a table of contents. This is reference material, not an essay. Maybe try Asciidoc if Markdown feels too restrictive. Ensure that pull requests are reviewed with documentation changes in mind. With GitHub's pull request templates it's easy to remind team members to update documentation.
 
