@@ -131,7 +131,7 @@
    {:title (:title entry)}
    [:div.mw7.center
     (signed-post entry {:permalink-page? true})
-    [:div.mv6.mw6.center
+    #_[:div.mv6.mw6.center
      (posts-list "Other Posts" (->> entries (remove #{entry}) (sort-by :date-published) reverse))]]))
 
 (defn simple-page [{:keys [entry]}]
