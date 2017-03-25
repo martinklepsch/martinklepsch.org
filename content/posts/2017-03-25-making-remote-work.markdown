@@ -11,15 +11,15 @@ What follows are some basic ideas to make remote teams work. I hope these help c
 
 ### Focus on Self Sufficiency 
 
-In an office you walk up to somebody (read: interrupt their work) and discuss stuff. In a remote environment you may need to schedule, then wait, then deal with connectivity issues, then have a discussion. The waiting part alone can be an entire day depending on timezones.
+In an office you walk up to somebody (read: interrupt their work) and discuss stuff. In a remote environment you may need to schedule, then wait, then deal with connectivity issues, then have a discussion. Sometimes the waiting part alone can take the better part of a day.
 
 Synchronous communication, including chat, is great and necessary but the more your work routine relies on it, the more you might unknowingly slow everyone down.
 
-With that in mind, start thinking of communication as a cost factor. Being slowed down costs time, momentum and motivation. These are the things you usually want to preserve at all cost—that's where self-sufficiency comes in.
+With that in mind, start thinking of communication as a cost factor. Being slowed down costs time, momentum and motivation. These are the things you usually want to preserve at all cost. And that's where self-sufficiency comes in.
 
-Being self sufficient in work means knowing what to do in order to advance the project and having the means to execute. The easiest way to make people understand what is worth working on is making them understand the business. Sometimes more specific goals will also do the job. But don't be too specific.
+Being self sufficient in work means knowing what to do in order to advance the project and having the means to execute. The easiest way to make people understand what is worth working on is making them understand the business. Sometimes more specific goals will also do the job. But generally the broader the better.
 
-Once everyone is able to develop ideas based on their understanding of the business all that is missing is The Feedback Loop™. Feedback is often a critical part of UI design but that does not mean it isn't applicable to other domains. Enable your team to see the impact of their work. Define relevant metrics and measure, measure, measure, graph, graph, graph.
+Once everyone is able to develop ideas based on their understanding of the business all that is missing is The Feedback Loop™. Feedback is often a critical part of UI design but that does not mean it isn't applicable to other domains. Enable your team to see the impact of their work. Define relevant metrics and measure, measure, measure, graph, graph, graph. Share and celebrate accomplishments.
 
 
 ### Document With Rigour 
