@@ -129,7 +129,7 @@
 (defn post-page [{:keys [entry entries]}]
   (base
    {:title (:title entry)}
-   [:div.mw7.center
+   [:div.mw7.center.mb6
     (signed-post entry {:permalink-page? true})
     #_[:div.mv6.mw6.center
      (posts-list "Other Posts" (->> entries (remove #{entry}) (sort-by :date-published) reverse))]]))
