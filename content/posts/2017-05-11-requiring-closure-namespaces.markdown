@@ -106,7 +106,7 @@ Last but not least another weird one. `goog.string.format` is a namespace
 that
 [seems to](https://google.github.io/closure-library/api/goog.string.format.html) contain
 a single function called `format`. If you require the format namespace,
-however, it turn out to contain no function of that name:
+however, you'll find out it contains no such function:
 
 ```
 (:require [goog.string.format :as format])
@@ -134,14 +134,14 @@ I have no idea why they chose to split things up in that way.
 I scratched my head many times about one or the other aspect of this
 and usually ended up looking at old code. Next time I'll look at the handy list below 🙂
 
-- Require Google Closure namespaces just as in ClojureScript
+- Require Google Closure namespaces just as you'd require ClojureScript namespaces
     - `(:require [goog.events :as events])`
-- Require constructors using one of the two forms. In eiter case you
-  may use `Timer.` to construct new objects.
+- Require constructors using one of the two forms. In either case `Timer` is referred
+  and you may use `Timer.` to construct new objects.
     - `(:import [goog Timer])`
     - `(:import goog.Timer)`
-- Only access non-constructor parts of a namespace through a namespace binding previously established via `:require`
-- Always use a slash after a namespace alias; use a dot for deep property access.
+- Only access non-constructor parts of a namespace through a namespace that has been `:require`d
+- Always use a slash after a namespace alias; use dots for deep property access.
 - Requiring `goog.string.format` will define a function `format` in the `goog.string` namespace.
 
 ## Enjoy
