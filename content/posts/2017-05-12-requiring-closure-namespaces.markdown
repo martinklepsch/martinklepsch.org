@@ -1,6 +1,6 @@
 ---
 layout: post
-date-published: 2017-05-12
+date-published: 2017-05-11
 title: Requiring Closure Namespaces
 uuid: 461f273b-8587-42ce-be1a-6efe22a78d2e
 ---
