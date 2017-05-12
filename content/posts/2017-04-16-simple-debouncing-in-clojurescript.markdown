@@ -99,3 +99,7 @@ Also not a big surprise I guess but all of the Closure Library's code
 is Closure Compiler compatible just like your ClojureScript code. This
 means any functions, constants etc. that are never used will be
 removed by the compiler's Dead Code Elimination feature. Yeah!
+
+**Update 2017-05-12** — Multiple people have noted that there also
+is a function [`goog.functions.debounce`](https://google.github.io/closure-library/api/goog.functions.html#debounce). For many basic cases this
+might result in simpler, more concise code.
