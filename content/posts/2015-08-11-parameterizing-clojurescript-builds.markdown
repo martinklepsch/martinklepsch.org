@@ -37,6 +37,11 @@ just need to pass the appropriate `:closure-defines` compiler option:
 **Note:** When using Leinigen quoting is implicit so there is no quote
   necessary before the symbol.
 
+**Note:** Sometimes for debugging you may want to pass the Closure
+define as a string. If you decide to do so make sure it matches the
+string in the `goog.define` call in your emitted Javascript
+(i.e. account for name mangling).
+
 <aside>
 Prior to 1.7.48 you could annotate things with <code>@define</code> but without
 using <code>goog.define</code> overriding those defines is not possible when
