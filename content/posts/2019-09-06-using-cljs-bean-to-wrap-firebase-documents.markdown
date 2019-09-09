@@ -158,3 +158,5 @@ Ultimately we ended up with plain beans and storing metadata under a well known 
 ```
 
 If you're using Firebase or comparable systems, I'd be curious to [hear if you do something similar on ClojureVerse](https://clojureverse.org/t/working-with-firebase-documents-in-clojurescript/4813).
+
+*Thanks to Matt Huebert and Mike Fikes for their feedback & ideas.*
