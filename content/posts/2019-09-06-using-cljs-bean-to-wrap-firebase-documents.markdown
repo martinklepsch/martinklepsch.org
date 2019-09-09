@@ -157,4 +157,4 @@ Ultimately we ended up with plain beans and storing metadata under a well known 
   (cljs-bean/->js (dissoc doc ::meta)))
 ```
 
-If you're using Firebase or comparable systems, I'd be curious to [hear how you address these issues](https://clojureverse.org/t/working-with-firebase-documents-in-clojurescript/4813).
+If you're using Firebase or comparable systems, I'd be curious to [hear if you do something similar on ClojureVerse](https://clojureverse.org/t/working-with-firebase-documents-in-clojurescript/4813).
