@@ -93,7 +93,7 @@ Another approach could be to add metadata directly to the document data.
                      :ref (.-ref query-doc-snapshot})))
 ```
 
-This is reasonable and makes document fields directly accessible. However it also requires us to separate document fields and metadata before passing the data to any function writing too Firestore.
+This is reasonable and makes document fields directly accessible. However it also requires us to separate document fields and metadata before passing the data to any function writing to Firestore.
 
 ```clj
 ;; before writing we need to remove ::meta
