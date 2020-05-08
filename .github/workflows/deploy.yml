@@ -1,0 +1,11 @@
+on: [push]
+
+steps:
+- uses: actions/checkout@latest
+- uses: actions/setup-java@v1
+  with:
+    java-version: '8'
+- uses: DeLaGuardo/setup-clojure@2.0
+  with:
+    tools-deps: '1.9.0'
+- run: clojure deploy.clj
