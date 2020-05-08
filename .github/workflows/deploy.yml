@@ -1,11 +1,19 @@
-on: [push]
+name: Deploy Site
 
-steps:
-- uses: actions/checkout@latest
-- uses: actions/setup-java@v1
-  with:
-    java-version: '8'
-- uses: DeLaGuardo/setup-clojure@2.0
-  with:
-    tools-deps: '1.9.0'
-- run: clojure deploy.clj
+on: push
+
+jobs:
+  deploy:
+    env:
+      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+    steps:
+    - uses: actions/checkout@latest
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '8'
+    - uses: DeLaGuardo/setup-clojure@2.0
+      with:
+        tools-deps: '1.9.0'
+    - run: clojure deploy.clj
