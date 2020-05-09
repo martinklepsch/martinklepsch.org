@@ -1,8 +1,9 @@
 ---
 layout: post
-date-published: 2015-07-24
+date-published: 2015-07-24T00:00:00Z
 title: ClojureBridge Berlin
 uuid: 3264b651-0aac-4e62-8751-77b88828f856
+permalink: /posts/clojurebridge-berlin.html
 ---
 
 About two weeks ago something awesome happened: the very first

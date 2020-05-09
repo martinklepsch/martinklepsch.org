@@ -1,8 +1,9 @@
 ---
 layout: post
-date-published: 2012-05-21
+date-published: 2012-05-21T00:00:00Z
 title: Paris And Back
 uuid: 9b66924e-12c5-4f70-bfcc-c2b732defb0d
+permalink: /posts/paris-and-back.html
 ---
 After being back home from Paris where I stayed the last two weeks I have a fun story to
 share. It's not about something great that happened in Paris but about something that

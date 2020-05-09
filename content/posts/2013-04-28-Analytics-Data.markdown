@@ -1,8 +1,9 @@
 ---
 layout: post
-date-published: 2013-04-28
+date-published: 2013-04-28T00:00:00Z
 title: Analytics Data
 uuid: 4682a859-015c-401e-a3e4-f47938c9312b
+permalink: /posts/analytics-data.html
 ---
 For quite a while now there is this idea of *being data-driven* and analyzing
 everything that is happening on your platform in order to identify potential

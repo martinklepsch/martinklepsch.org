@@ -1,8 +1,9 @@
 ---
 layout: post
-date-published: 2013-12-01
+date-published: 2013-12-01T00:00:00Z
 title: A Resurrection Post
 uuid: ecc821bc-1816-4571-aab4-da5ef4e8d346
+permalink: /posts/a-resurrection-post.html
 ---
 
 After not being active here for the last couple of months I thought a bit about

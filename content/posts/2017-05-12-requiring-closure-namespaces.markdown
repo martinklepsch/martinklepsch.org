@@ -1,8 +1,9 @@
 ---
 layout: post
-date-published: 2017-05-11
+date-published: 2017-05-11T00:00:00Z
 title: Requiring Closure Namespaces
 uuid: 461f273b-8587-42ce-be1a-6efe22a78d2e
+permalink: /posts/requiring-closure-namespaces.html
 ---
 
 Yet another post on properly using

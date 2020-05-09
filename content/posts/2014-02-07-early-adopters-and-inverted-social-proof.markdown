@@ -1,9 +1,10 @@
 ---
 layout: post
-date-published: 2014-02-07
+date-published: 2014-02-07T00:00:00Z
 resource: http://ideolalia.com/early-adopters-and-inverted-social-proof/index.html
 title: Early Adopters And Inverted Social Proof
 uuid: c1881d68-6011-4888-a698-25339be6114f
+permalink: /posts/early-adopters-and-inverted-social-proof.html
 ---
 > Hirschman credits the stability of early America with the fact that
 > discontents could simply travel west until they felt sufficiently freed from

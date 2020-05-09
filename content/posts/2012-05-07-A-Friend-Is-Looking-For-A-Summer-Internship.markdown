@@ -1,8 +1,9 @@
 ---
 layout: post
-date-published: 2012-05-07
+date-published: 2012-05-07T00:00:00Z
 title: A Friend Is Looking For A Summer Internship
 uuid: 2c16f352-042b-4c2d-b294-d9d3f34ba0f4
+permalink: /posts/a-friend-is-looking-for-a-summer-internship.html
 ---
 This summer a friend of mine is visiting Berlin for around 6 weeks by end of June. 
 I encouraged him to work somewhere to get an impression of working in technology companies during that time.
