@@ -1,3 +1,4 @@
+SHELL = /bin/bash -o pipefail
 .PHONY: update-frontmatter site
 
 update-frontmatter:
