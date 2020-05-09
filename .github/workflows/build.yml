@@ -19,6 +19,7 @@ jobs:
          curl -s https://raw.githubusercontent.com/borkdude/babashka/master/install -o install-bb
          chmod +x install-bb
          sudo ./install-bb
+         rm install-bb
 
     - name: Fill in blanks
       run: make update-frontmatter
@@ -27,7 +28,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add content/
-        git commit -m "Update frontmatter"
+        git diff --staged --exit-code || git commit -m "Update frontmatter"
 
     - name: Build site
       run: make site
@@ -36,7 +37,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add _site/
-        git commit -m "Update compiled _site"
+        git diff --staged --exit-code || git commit -m "Update compiled _site"
 
     - name: Push changes
       uses: ad-m/github-push-action@master
