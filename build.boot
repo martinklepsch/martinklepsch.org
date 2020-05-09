@@ -1,7 +1,8 @@
 (set-env!
  :source-paths    #{"src" "stylesheets" "content"}
  :resource-paths  #{"resources"}
- :dependencies '[[pandeiro/boot-http  "0.7.3" :scope "test"]
+ :dependencies '[[org.clojure/clojure "1.9.0"]
+                 [pandeiro/boot-http  "0.7.3" :scope "test"]
                  [adzerk/boot-reload  "0.4.12" :scope "test"]
                  [deraen/boot-sass    "0.2.1" :scope "test"]
                  [org.slf4j/slf4j-nop "1.7.21" :scope "test"]
@@ -80,6 +81,14 @@
         (watch)
         (speak)
         (build)))
+
+(deftask build-to-site-dir
+  []
+  (comp
+   (build)
+   (sift :include #{#"^public/"})
+   (sift :move {#"^public/" ""})
+   (target :dir #{"_site"})))
 
 (deftask deploy []
   (comp
