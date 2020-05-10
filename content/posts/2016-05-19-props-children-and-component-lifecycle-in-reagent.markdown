@@ -4,6 +4,7 @@ date-published: 2016-05-19T00:00:00Z
 title: Props, Children & Component Lifecycle in Reagent
 uuid: bdabdf1d-742c-468f-89bb-032986a9d99f
 permalink: /posts/props-children-and-component-lifecycle-in-reagent.html
+og-image: /images/selfies/3.jpg
 ---
 
 Every now and then I come across the situation that I need to compare

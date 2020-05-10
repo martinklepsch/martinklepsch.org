@@ -4,6 +4,7 @@ date-published: 2014-09-11T00:00:00Z
 title: Running a Clojure Uberjar inside Docker
 uuid: 1f571433-ffa3-4d3b-9c5d-6220cf9ebe54
 permalink: /posts/running-a-clojure-uberjar-inside-docker.html
+og-image: /images/selfies/2.jpg
 ---
 
 For a sideproject I wanted to deploy a Clojure uberjar on a remote server

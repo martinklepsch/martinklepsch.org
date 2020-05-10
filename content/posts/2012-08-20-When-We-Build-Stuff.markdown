@@ -6,6 +6,7 @@ resource: https://vimeo.com/34017777
 title: When We Build Stuff
 uuid: fa108763-3ed7-4ba6-bc4a-c39ddde35b5a
 permalink: /posts/when-we-build-stuff.html
+og-image: /images/selfies/1.jpg
 ---
 I recently discovered this great presentation by checking out some of my follow-recommendations on
 twitter. [Wilson Miner](https://twitter.com/wilsonminer) was one of them.

@@ -4,6 +4,7 @@ date-published: 2016-11-25T00:00:00Z
 title: Just-in-Time Script Loading With React And ClojureScript
 uuid: 21eecbc4-1be6-4930-89ae-9c36c69e0a16
 permalink: /posts/just-in-time-script-loading-with-react-and-clojuresript.html
+og-image: /images/selfies/3.jpg
 ---
 
 In the last projects I've been working on I've come accross the situation that I needed to load some external script (Stripe, Google Maps, ...) at a certain point and then do something with the features exposed by this newly imported library. Some times you might be able to circumvent loading a library at runtime by bundling it with your main application but even then you might want to consider splitting it into a separate module and loading it when it's actually needed.

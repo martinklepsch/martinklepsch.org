@@ -6,6 +6,7 @@ resource: http://www.entypo.com/
 title: Entypo Icon Set
 uuid: 58f62d22-8347-41b0-a368-81ee4b1771f1
 permalink: /posts/entypo-icon-set.html
+og-image: /images/selfies/3.jpg
 ---
 Daniel Bruce:
 

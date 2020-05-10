@@ -4,6 +4,7 @@ date-published: 2015-02-05T00:00:00Z
 title: (lisp keymap)
 uuid: 92c021b4-d645-48fd-aeb5-333305edfdb5
 permalink: /posts/lisp-keymap.html
+og-image: /images/selfies/1.jpg
 ---
 A while back I wanted to setup hotkeys for the various apps I use.
 Mostly because I was annoyed by the cognitive effort you need to

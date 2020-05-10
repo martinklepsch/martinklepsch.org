@@ -4,6 +4,7 @@ date-published: 2019-01-28T00:00:00Z
 title: 4 Small Steps Towards Awesome Clojure Docstrings
 uuid: b728ab75-373e-46b5-ba68-b01d5918cd70
 permalink: /posts/writing-awesome-docstrings.html
+og-image: /images/selfies/2.jpg
 ---
 
 Through my work on [cljdoc](https://cljdoc.org) I spent a lot of time looking at documentation

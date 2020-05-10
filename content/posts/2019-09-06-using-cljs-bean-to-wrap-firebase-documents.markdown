@@ -4,6 +4,7 @@ date-published: 2019-09-09T00:00:00Z
 title: Working with Firebase Documents in ClojureScript
 uuid: 3e616db0-a417-4bc4-93d0-b2a24256ab86
 permalink: /posts/using-cljs-bean-to-wrap-firebase-documents.html
+og-image: /images/selfies/1.jpg
 ---
 
 In a project [I’m currently working on](https://icebreaker.video) we’re making use of Google's [Firebase](https://firebase.google.com) to store domain data and run cloud functions.
