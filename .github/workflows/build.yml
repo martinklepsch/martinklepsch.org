@@ -1,6 +1,9 @@
 name: Build Site
 
-on: push
+on:
+  push:
+    paths-ignore:
+    - '_site/**'
 
 jobs:
   build:
