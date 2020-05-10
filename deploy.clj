@@ -7,7 +7,7 @@
      :secret-key (System/getenv "AWS_SECRET_KEY")}
     (System/getenv "S3_BUCKET_NAME")
     (s3/dir->file-maps (io/file "_site"))
-    {:dry-run? true
+    {:dry-run? false
      :report-fn (fn [{:keys [s3-key op]}]
                   #_(println op s3-key))}))
 
