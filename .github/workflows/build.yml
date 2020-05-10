@@ -7,6 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        # required for personal access token to be used below
+        persist-credentials: false
     - uses: actions/setup-java@v1
       with:
         java-version: '8'
@@ -43,4 +46,7 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        # Any activity created using the GITHUB_TOKEN provided by the GitHub Action environment does
+        # not trigger any workflows, so we use a personal access token
+        # https://github.community/t5/GitHub-Actions/Push-from-Action-does-not-trigger-subsequent-action/m-p/37872
+        github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
