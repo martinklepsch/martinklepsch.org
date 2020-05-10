@@ -10,6 +10,7 @@ jobs:
     - uses: actions/setup-java@v1
       with:
         java-version: '8'
+    - run: sudo apt-get install -y patchutils
     - name: Install boot
       uses: DeLaGuardo/setup-clojure@master
       with:
@@ -27,7 +28,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add content/
+        ./stage-if-changed.sh content/
         git diff --staged --exit-code || git commit -m "Update frontmatter"
 
     - name: Build site
@@ -36,7 +37,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add _site/
+        ./stage-if-changed.sh _site/
         git diff --staged --exit-code || git commit -m "Update compiled _site"
 
     - name: Push changes
