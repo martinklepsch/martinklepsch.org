@@ -12,7 +12,8 @@
     (s3/dir->file-maps (io/file "_site"))
     {:dry-run? false
      :report-fn (fn [{:keys [s3-key op]}]
-                  #_(println op s3-key))}))
+                  (binding [*out* *err*]
+                    (println op s3-key)))}))
 
 (let [sync-results (sync!)
       inv-paths (->> (mapcat sync-results [:uploaded :updated :deleted])
