@@ -2,8 +2,10 @@ name: Deploy Site
 
 on:
   push:
+    branches:
+    - master
     paths:
-    - '_site/*'
+    - '_site/**'
 
 jobs:
   deploy:
