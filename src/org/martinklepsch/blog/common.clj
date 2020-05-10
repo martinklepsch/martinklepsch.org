@@ -20,36 +20,29 @@
     s.parentNode.insertBefore(ga, s);
     })();"])
 
-
-(defn opengraph [opts]
-  ;; TODO use this
-  (list
-   [:meta {:property "og:title" :content (:title opts)}]
-   [:meta {:property "og:type" :content "article"}]
-   [:meta {:property "og:description" :content (:abstract opts)}]
-   [:meta {:property "og:url" :content (str "http://martinklepsch.org" (:permalink opts))}]
-   (if-let [fbi (:FBimage opts)]
-     [:meta {:property "og:image" :content (str "http://martinklepsch.org" fbi)}])
-   [:meta {:property "og:site_name" :content "martinklepsch.org"}]
-   [:meta {:property "fb:admins" :content "1539288439"}]))
-
 (defn head
-  [& {:keys [title] :as opts}]
-  [:head
-   ;; {% include opengraph.html %}
-   [:meta {:charset "utf-8"}]
-   [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
-   [:meta {:name "viewport" :content "width=device-width, initial-scale=1, maximum-scale=1"}]
-   [:meta {:itemprop "author" :name "author" :content "Martin Klepsch (martinklepsch@googlemail.com)"}]
-   [:meta {:name "keywords" :itemprop "keywords" :content "blog, clojure, development, clojurescript, heroku, amazon s3, aws"}]
-   [:meta {:name "description" :itemprop "description" :content "Personal Website and Blog of Martin Klepsch"}]
-   [:title (if title (str title " — Martin Klepsch") "Martin Klepsch")]
-   [:link {:rel "shortcut icon" :href "images/favicon.ico"}]
-   [:link {:rel "author" :href "humans.txt"}]
-   ;[:link {:rel "alternate" :type "application/rss+xml" :title "RSS" :href "/feed.rss"}]
-   [:link {:type "text/css" :rel "stylesheet"
-           :href "/stylesheets/martinklepschorg-v3.css"}]
-   #_[:link {:type "text/css" :rel "stylesheet"
-           :href "https://fonts.googleapis.com/css?family=Open+Sans:300|Roboto+Slab:400,700"}]
-   (google-analytics)])
-
+  [{:keys [title] :as opts}]
+  ;; (prn (dissoc opts :content))
+  ;; TODO use first couple of lines from :content
+  (let [desc (or (:description title) "Personal Website and Blog of Martin Klepsch")]
+    [:head
+     [:meta {:charset "utf-8"}]
+     [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
+     [:meta {:name "viewport" :content "width=device-width, initial-scale=1, maximum-scale=1"}]
+     [:meta {:itemprop "author" :name "author" :content "Martin Klepsch (martinklepsch@googlemail.com)"}]
+     [:meta {:name "keywords" :itemprop "keywords" :content "blog, clojure, development, clojurescript, heroku, amazon s3, aws"}]
+     [:meta {:name "description" :itemprop "description" :content desc}]
+     [:title (if title (str title " — Martin Klepsch") "Martin Klepsch")]
+     ;; OpenGraph
+     [:meta {:property "og:title" :content (:title opts)}]
+     [:meta {:property "og:type" :content "article"}]
+     [:meta {:property "og:description" :content desc}]
+     [:meta {:property "og:url" :content (str "http://martinklepsch.org" (:permalink opts))}]
+     [:meta {:property "og:image" :content (str "http://martinklepsch.org" (:og-image opts))}]
+     [:meta {:property "og:site_name" :content "martinklepsch.org"}]
+     ;; Misc
+     [:link {:rel "shortcut icon" :href "/images/favicon.ico"}]
+     [:link {:rel "alternate" :type "application/atom+xml" :title "Sitewide Atom Feed" :href "/atom.xml"}]
+     [:link {:type "text/css" :rel "stylesheet"
+             :href "/stylesheets/martinklepschorg-v3.css"}]
+     (google-analytics)]))

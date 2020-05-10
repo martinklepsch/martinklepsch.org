@@ -17,7 +17,7 @@
 (defn base
   [opts & content]
   (hp/html5 {:lang "en" :itemtype "http://schema.org/Blog"}
-            (common/head :title (:title opts))
+            (common/head opts)
             [:body.system-sans-serif.dark-gray
              (into [:div.mh3] content)]))
 
@@ -120,7 +120,8 @@
 
 (defn index-page [{:keys [entries]}]
   (base
-   {}
+   {:permalink "/index.html"
+    :og-image "/images/selfies/1.jpg"}
    [:div.mw7.center
     (render-post (first entries) {})
     [:div.mv6.mw6.center
@@ -128,7 +129,7 @@
 
 (defn post-page [{:keys [entry entries]}]
   (base
-   {:title (:title entry)}
+   entry
    [:div.mw7.center.mb6
     (signed-post entry {:permalink-page? true})
     #_[:div.mv6.mw6.center
@@ -136,7 +137,7 @@
 
 (defn simple-page [{:keys [entry]}]
   (base
-   {:title (:title entry)}
+    entry
    [:div.mt5.mw6.center me]
    [:article.mb6
     [:h1.f1-ns.f2.fw1.w-80-ns.lh-title.mw6.center (:title entry)]
