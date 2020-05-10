@@ -1,6 +1,7 @@
 (ns org.martinklepsch.blog.common
   (:require [hiccup.page :as hp]
-            [hiccup.core :as hiccup]))
+            [hiccup.core :as hiccup]
+            [clojure.string :as string]))
 
 (defn with-base-url [s]
   (assert (.startsWith s "/") s)
@@ -24,11 +25,18 @@
     s.parentNode.insertBefore(ga, s);
     })();"])
 
+(defn truncate [s length]
+  (str (subs s 0 (min length (count s))) "..."))
+
 (defn head
   [{:keys [title] :as opts}]
-  ;; (prn (dissoc opts :content))
-  ;; TODO use first couple of lines from :content
-  (let [desc (or (:description title) "Personal Website and Blog of Martin Klepsch")]
+  (let [desc (or (:description opts)
+                 (some-> (:content opts)
+                         (string/replace #"<.*?>" "")
+                         (string/replace #"\n" " ")
+                         (string/trim)
+                         (truncate 190))
+                 "Personal Website and Blog of Martin Klepsch")]
     [:head
      [:meta {:charset "utf-8"}]
      [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
