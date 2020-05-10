@@ -17,9 +17,10 @@
 
 (let [sync-results (sync!)
       inv-paths (->> (mapcat sync-results [:uploaded :updated :deleted])
-                     (map #(str "/" %)))]
+                     (mapv #(str "/" %)))]
   (when (seq inv-paths)
     (binding [*out* *err*]
-      (println "Invalidating" inv-paths))
-    (s3/cloudfront-invalidate! creds (System/getenv "CLOUDFRONT_ID") inv-paths))
+      (println "Invalidating" inv-paths)
+      (println "Invalidation result:"
+               (s3/cloudfront-invalidate! creds (System/getenv "CLOUDFRONT_ID") inv-paths))))
   (prn (assoc sync-results :unchanged :hidden)))
