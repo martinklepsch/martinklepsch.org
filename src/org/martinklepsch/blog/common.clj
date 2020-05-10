@@ -44,6 +44,13 @@
      [:meta {:property "og:url" :content (some-> opts :permalink with-base-url)}]
      [:meta {:property "og:image" :content (some-> opts :og-image with-base-url)}]
      [:meta {:property "og:site_name" :content "martinklepsch.org"}]
+     ;; Twitter
+     [:meta {:name "twitter:card" :content "summary"}]
+     [:meta {:name "twitter:site" :content "@martinklepsch"}]
+     [:meta {:name "twitter:creator" :content "@martinklepsch"}]
+     [:meta {:name "twitter:title" :content (:title opts)}]
+     [:meta {:name "twitter:description" :content desc}]
+     [:meta {:name "twitter:image" :content (some-> opts :og-image with-base-url)}]
      ;; Misc
      [:link {:rel "shortcut icon" :href "/images/favicon.ico"}]
      [:link {:rel "alternate" :type "application/atom+xml" :title "Sitewide Atom Feed" :href "/atom.xml"}]
