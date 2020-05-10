@@ -4,7 +4,12 @@ This blog is built using Clojure, [Boot][boot-clj] & [perun][perun]. To get an
 overview you can take a look at the `build.boot` file. Templates are
 defined as functions returning hiccup in `src/org/martinklepsch/blog.clj`.
 
-Testing prose.io.
+### Dependencies
+
+- `filterdiff` from [patchutils](http://cyberelk.net/tim/software/patchutils/)
+- `bb` from [babashka](https://github.com/borkdude/babashka)
+- `bootleg` from [bootleg](https://github.com/retrogradeorbit/bootleg)
+- `boot` from [boot-clj](https://github.com/boot-clj/boot)
 
 ### Common workflows
 
