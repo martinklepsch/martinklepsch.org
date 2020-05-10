@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Props, Children & Component Lifecycle in Reagent — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/props-children-and-component-lifecycle-in-reagent.html" title="Permalink: Props, Children &amp; Component Lifecycle in Reagent">May 2016</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Props, Children & Component Lifecycle in Reagent</h1><section class="mkdwn lh-copy"><p>Every now and then I come across the situation that I need to compare previous and next props passed to a Reagent component. Every time again I fail to find some docs and figure it out by trial and error.</p>
+<h2><a href="#props-vs-children" id="props-vs-children"></a>Props vs. Children</h2>
+<p>In React <strong>everything</strong> passed to a component is called <code>props</code>. Children passed to components are passed as <code>props.children</code>. In Reagent things are a bit different and Reagent’s hiccup syntax doesn’t explicitly separate the two:</p>
+<pre><code class="language-clojure">;; configuration and one child
+[popup {:style :alert} [delete-confirmation]]
+;; two children
+[popup [alert-icon] [delete-confirmation]]
+</code></pre>
+<pre><code class="language-xml">&lt;Popup style=&quot;alert&quot;&gt;&lt;DeleteConfirmation&gt;&lt;/Popup&gt;
+</code></pre>
+<p>In React it is well-defined where you can access the <code>style</code> parameter (<code>props.style</code>) and how you can access the passed children (<code>props.children</code>).</p>
+<p>In Reagent things are a bit different: you have a function definition which takes a number of arguments which you can just refer to in the same way you can refer to any other function parameter. This makes thinking in functions a lot easier but also overshadows some of the underlying React behaviour.</p>
+<p>In a lifecycle handler like <code>:component-did-update</code> accessing component arguments via the symbol they’ve been given in the functions argument vector doesn’t work:</p>
+<p>The moment you define components that are not simple render functions (remember those <a href="https://github.com/Day8/re-frame/wiki/Creating-Reagent-Components">Form-2 and Form-3</a> components?) all updates will pass their arguments to the components render function.</p>
+<p>The moment you render a component that has been created via <code>reagent.core/create-class</code> all updates will pass their arguments to the <code>:reagent-render</code> function, potentially triggering a re-render. The function that returned the result of <code>create-class</code> is only ever called once at the time of mounting the component — your top-level <code>defn</code> returns a component instead of being a render function itself. This is also <a href="https://github.com/Day8/re-frame/wiki/Creating-Reagent-Components#form-2--a-function-returning-a-function">why you need to repeat the arguments in the <code>:reagent-render</code> arguments</a>.</p>
+<h2><a href="#props-in-lifecycle-handlers" id="props-in-lifecycle-handlers"></a>Props in Lifecycle Handlers</h2>
+<p>Now how do we get access to these props in a lifecycle handler? The quick answer is, we use <code>reagent.core/props</code> — obvious, huh?</p>
+<p>One peculiarity about the <code>props</code> function is that it expects the <code>props</code> data to be the first argument to your function. Also it <strong>has to be a map</strong> (if it’s not <code>props</code> returns <code>nil</code>).</p>
+<p>If the first argument to your component is not a map all arguments are interpreted as children and can be retrieved via <code>reagent.core/children</code>.</p>
+<p>So now we have the props for the current render, how do we access the previous ones? All previously passed arguments are passed to the lifecycle handler. Not as you might think though.</p>
+<p>If you have a component that has a signature like this:</p>
+<pre><code class="language-clojure">(defn my-comp [my-props more] …)
+</code></pre>
+<p>You can access it’s previously passed arguments like this:</p>
+<pre><code class="language-clojure">:component-did-update (fn [comp [_ prev-props prev-more]] …))
+</code></pre>
+<p><code>comp</code> is a reference to the current component. The second argument which is being destructured here contains what we’re looking for. As far as I understood the first item is the component's constructor. The rest are the previously rendered inputs (again in React they’re all <code>props</code>, in Reagent they’re <code>props</code> and <code>children</code>).</p>
+<p>As you can see you can inspect all previous arguments to a component. The way you access them differs from the default React lifecycle method signatures so hopefully this post helps to clear up some confusion about this stuff. :)</p>
+<aside>Thanks to Jonas Enlund for reading a draft of this post and to Mike Thompson for his excellent Re-frame/Reagent docs.</aside>
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, May 2016</div></article></div></div></body></html>

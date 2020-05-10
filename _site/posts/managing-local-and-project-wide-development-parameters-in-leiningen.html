@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Managing Local and Project-wide Development Parameters in Leiningen — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/managing-local-and-project-wide-development-parameters-in-leiningen.html" title="Permalink: Managing Local and Project-wide Development Parameters in Leiningen">June 2015</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Managing Local and Project-wide Development Parameters in Leiningen</h1><section class="mkdwn lh-copy"><p>Little tip. Long headline.</p>
+<p>In any project there are often settings that are specific to the context the project is run in (think of an <code>environment</code> parameter) and then there are parameters that are specifc to the developer/workstation they're run on. This is a guide to separate these two things nicely in Leiningen-based Clojure projects.</p>
+<p>So you have a project setup that uses <a href="https://github.com/weavejester/environ">environ</a> to determine the context the project is run in (<code>development</code> vs. <code>production</code>).</p>
+<pre><code class="language-clojure">; in project.clj:
+(defproject your-app &quot;0.1.0-SNAPSHOT&quot;
+  ; ...
+  :profiles {:dev {:env {:environment &quot;development&quot;}}})
+</code></pre>
+<p>Now you also want to use environment variables (or anything else thats supported by environ) to store AWS credentials to access Amazon S3. You don't want to commit these credentials into version control, therefore you can't add them to <code>project.clj</code>. The way to go is to create a file <code>profiles.clj</code> in your project to store workstation specific information. Naively this could look something like this</p>
+<pre><code class="language-clojure">{:dev {:env {:aws-access-key &quot;abc&quot;
+             :aws-secret-key &quot;xyz&quot;
+             :s3-bucket &quot;mybucket&quot;}}}
+</code></pre>
+<p>If you run your project with this <code>profiles.clj</code> you will be able to access your AWS credentials. You might also notice that <code>(environ/env :environment)</code> is nil. <strong>That wasn't intended.</strong></p>
+<p>The problem here is that Leiningen will override keys in profiles defined in <code>project.clj</code> if <strong>the same profile</strong> has also been defined in <code>profiles.clj</code>.  To recursively merge Leiningen profiles combine them like so:</p>
+<pre><code class="language-clojure">;; in project.clj:
+(defproject your-app &quot;0.1.0-SNAPSHOT&quot;
+  ;; ...
+  :profiles {:dev [:project/dev :local/dev]
+             :project/dev {:env {:environment &quot;development&quot;}}})
+
+;; in profiles.clj
+{:local/dev {:env {:secret-key &quot;xyz&quot;}}}
+</code></pre>
+<p>Now both, <code>:envrionment</code> and <code>:secret-key</code> should be defined when you retrieve them using environ.</p>
+<p><em>This is largely inspired by James Reeves' <a href="https://github.com/weavejester/duct">duct</a> Leiningen template.</em></p>
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, June 2015</div></article></div></div></body></html>

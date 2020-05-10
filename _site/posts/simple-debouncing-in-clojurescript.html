@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Simple Debouncing in ClojureScript — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/simple-debouncing-in-clojurescript.html" title="Permalink: Simple Debouncing in ClojureScript">April 2017</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Simple Debouncing in ClojureScript</h1><section class="mkdwn lh-copy"><p>This is a short post on a problem that eventually occurs in any Javascript app: debouncing. While there are various approaches to this problem I want to focus on one that relies on nothing else than the <a href="https://developers.google.com/closure/library/">Closure Library</a>.</p>
+<h2><a href="#why-debounce" id="why-debounce"></a>Why Debounce</h2>
+<p>Debouncing is a technique to limit the rate of an action. Usually this rate is specified as an interval in which the action may be executed at most once. If execution of the action is requested multiple times in one interval it is important that the most recently supplied arguments are used when eventually executing the action.</p>
+<p>(If you only care about the rate limiting and using the latest arguments isn't a requirement that's called throttling.)</p>
+<p>Use cases for debouncing are plentiful. Auto-saving something the user is typing, fetching completions or triggering server side validations are some examples that come to mind.</p>
+<h2><a href="#closure-library-facilities" id="closure-library-facilities"></a>Closure Library Facilities</h2>
+<p>I've long been a fan of the Closure Library that comes with ClojureScript.  Many common problems are solved in elegant and efficient ways, <a href="https://google.github.io/closure-library/">the documentation</a> gives a good overview of what's in the box and the code and tests are highly readable.</p>
+<p>For the problem of debouncing Closure provides a construct <a href="https://google.github.io/closure-library/api/goog.async.Debouncer.html">goog.async.Debouncer</a> that allows you to debounce arbitrary functions. A short, very basic example in Javascript:</p>
+<pre><code class="language-js">var debouncer = new goog.async.Debouncer(function(x) {alert(x)}, 500);
+debouncer.fire(&quot;Hello World!&quot;)
+</code></pre>
+<p>This will create an alert saying &quot;Hello World!&quot; 500ms after the <code>fire()</code> function has been called. Now let's translate this to ClojureScript and generalize it slightly. In the end we want to be able to debounce any function.</p>
+<pre><code class="language-clojure">(ns app.debounce
+  (:import [goog.async Debouncer]))
+
+(defn save-input! [input]
+  (js/console.log &quot;Saving input&quot; input))
+
+(defn debounce [f interval]
+  (let [dbnc (Debouncer. f interval)]
+    ;; We use apply here to support functions of various arities
+    (fn [&amp; args] (.apply (.-fire dbnc) dbnc (to-array args)))))
+
+;; note how we use def instead of defn
+(def save-input-debounced!
+  (debounce save-input! 1000))
+</code></pre>
+<p>What the <code>debounce</code> function does is basically returning a new function wrapped in a <code>goog.async.Debouncer</code>. When and how you create those debounced functions is up to you. You can create them at application startup using a simple <code>def</code> (as in the example) or you might also dynamically create them as part of your component/application lifecycle. (If you create them dynamically you might want to learn about <code>goog.Disposable</code>.)</p>
+<p>There's one caveat with our <code>debounce</code> implementation above you should also be aware of: because we use Javascript's <code>apply</code> here we don't get any warnings if we end up calling the function with the wrong number of arguments. I'm sure this could be improved with a macro but that's not part of this article.</p>
+<p>Also small disclaimer on the code: I mostly tested it with <a href="https://github.com/anmonteiro/lumo">Lumo</a> in a REPL but I'm confident that it will work fine in a browser too.</p>
+<h2><a href="#debounce-away" id="debounce-away"></a>Debounce Away</h2>
+<p>I hope this helps and shows that there's much useful stuff to be found in Closure Library. To this day it's a treasure trove that has rarely dissappointed me. Sometimes things are a bit confusing (I still don't understand <code>goog.i18n</code>) but there are many truly simple gems to be found. <em>Maybe I should do a post about my favorites some day...</em></p>
+<p>The <a href="https://google.github.io/closure-library">documentation site</a> has a search feature and a tree view of all the namespaces of the library; use it next time when you're about to add yet another Javascript dependency to your project.</p>
+<p>Also not a big surprise I guess but all of the Closure Library's code is Closure Compiler compatible just like your ClojureScript code. This means any functions, constants etc. that are never used will be removed by the compiler's Dead Code Elimination feature. Yeah!</p>
+<p><strong>Update 2017-05-12</strong> — Multiple people have noted that there also is a function <a href="https://google.github.io/closure-library/api/goog.functions.html#debounce"><code>goog.functions.debounce</code></a>. For many basic cases this might result in simpler, more concise code.</p>
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, April 2017</div></article></div></div></body></html>

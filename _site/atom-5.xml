@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Martin Klepsch</title><subtitle>Martin Klepsch's blog</subtitle><generator uri="https://perun.io/" version="0.4.2-SNAPSHOT">Perun</generator><link href="https://www.martinklepsch.org/" type="text/html"></link><link href="https://www.martinklepsch.org/atom-5.xml" rel="self"></link><link href="https://www.martinklepsch.org/atom.xml" rel="first"></link><link href="https://www.martinklepsch.org/atom-5.xml" rel="last"></link><link href="https://www.martinklepsch.org/atom-4.xml" rel="previous"></link><updated>2019-09-09T14:42:49Z</updated><id>https://www.martinklepsch.org/</id><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author><entry><id>urn:uuid:9b66924e-12c5-4f70-bfcc-c2b732defb0d</id><title>Paris And Back</title><link href="https://www.martinklepsch.org/posts/paris-and-back.html" type="text/html" title="Paris And Back" rel="alternate"></link><published>2012-05-21T00:00:00Z</published><updated>2012-05-21T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/paris-and-back.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Paris And Back — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/paris-and-back.html" title="Permalink: Paris And Back"&gt;May 2012&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Paris And Back&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;After being back home from Paris where I stayed the last two weeks I have a fun story to share. It's not about something great that happened in Paris but about something that started the evening before my departure.&lt;/p&gt;
+&lt;p&gt;After meeting with a friend there we got home at 2am and set up the alarm to 4:35am to get up in time, get some work done and get to the airport sometime around 6.20am. When I opened my eyes I immediately noticed that there was no alarm ringing. That made me jump for the alarm clock. It was 7.15am. I started to hate myself. I even asked my friend to pinch me so that this nightmare ends.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This was the second flight for me ever and I missed it.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;We went to the trainstation then and asked about a train. 125€ and an 8 hours trainride. Since that was a nighttrain we decided to go to the airport and check out if there are some cheap flights which I could book — &lt;em&gt;last minute&lt;/em&gt;. There was a flight. It was not cheap with a 182€ pricetag though. Given the fact that I payed 100€ for the original flights I was completely pissed. After a couple of minutes I decided to take the flight for 182€ and we even made a little fun about what it costs to sleep in. Nevertheless I still hated myself for not being able to get up in time.&lt;/p&gt;
+&lt;p&gt;Now this is already a story worth telling but it had to come better.&lt;/p&gt;
+&lt;p&gt;When waiting to board the plane things got delayed because the plane was struck by lightning and the ground crew had to do extra technical checks. After some time they announced that they found another plane and that boarding will start in 30 minutes.&lt;/p&gt;
+&lt;p&gt;I decided to walk around a little and when I came back the flight assistant was asking some people sitting on the ground something I could not understand. So I asked one french girl who was sitting there what she asked. And here it comes. She asked if you would take a later flight in exchange for 250€. When I heard that I immediately ran to the flight assistant and told her: &lt;em&gt;&amp;quot;I'm in!&amp;quot;&lt;/em&gt; and so I got 250€.&lt;/p&gt;
+&lt;p&gt;As a small bonus we even got a voucher for a restaurant at the airport where I another french girl and one american guy spent our 2 hours extra waiting time eating some good meat and french fries.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I felt so incredibly lucky.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Before we got to the airport I told my friend:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Oh, and that happens to me. Usually I am so lucky.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, May 2012&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:2c16f352-042b-4c2d-b294-d9d3f34ba0f4</id><title>A Friend Is Looking For A Summer Internship</title><link href="https://www.martinklepsch.org/posts/a-friend-is-looking-for-a-summer-internship.html" type="text/html" title="A Friend Is Looking For A Summer Internship" rel="alternate"></link><published>2012-05-07T00:00:00Z</published><updated>2012-05-07T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/a-friend-is-looking-for-a-summer-internship.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;A Friend Is Looking For A Summer Internship — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/a-friend-is-looking-for-a-summer-internship.html" title="Permalink: A Friend Is Looking For A Summer Internship"&gt;May 2012&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;A Friend Is Looking For A Summer Internship&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;This summer a friend of mine is visiting Berlin for around 6 weeks by end of June. I encouraged him to work somewhere to get an impression of working in technology companies during that time.&lt;/p&gt;
+&lt;p&gt;He is still quite young but eager to learn more than most other people I know.  He's 17 from Krakow in Poland where he'll attend at &lt;a href="http://www.agh.edu.pl/en"&gt;AGH University of Science and Technology&lt;/a&gt; studying Computer Science by October next year. He speaks German on a nearly native level (he got into several final rounds of nationwide language contests) and also English. Beside that he also reached the maximum score at &lt;a href="http://en.wikipedia.org/wiki/Mathematical_Kangaroo"&gt;Mathematical Kangaroo&lt;/a&gt; and won several other math olympiades.&lt;/p&gt;
+&lt;p&gt;From a technical point of view he is mostly comfortable with Python and C++. He did not work a lot in any special area of software development so he might be unexperienced with the special limitations or technologies that are used in one area. He has some experience with web technologies (including Django) though.&lt;/p&gt;
+&lt;p&gt;If you'd like to get in touch and to get to know some great new talent just send me a short note and I will introduce you gladly.&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, May 2012&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:31835991-b050-4b17-b56d-c2fcbb06dbb7</id><title>Kandan Team Chat</title><link href="https://www.martinklepsch.org/posts/kandan-team-chat.html" type="text/html" title="Kandan Team Chat" rel="alternate"></link><published>2012-05-03T00:00:00Z</published><updated>2012-05-03T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/kandan-team-chat.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Kandan Team Chat — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/kandan-team-chat.html" title="Permalink: Kandan Team Chat"&gt;May 2012&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Kandan Team Chat&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;I just discovered &lt;a href="http://kandan.me"&gt;Kandan&lt;/a&gt; which seems to be a great opensource alternative to &lt;a href="http://campfirenow.com/"&gt;Campfire&lt;/a&gt; (a web-based team chat application). The interface is pretty similar and the developers probably borrowed a few of the interface ideas behind campfire.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/small-kandan-preview.png" alt="Kandan Screenshot" /&gt;&lt;/p&gt;
+&lt;p&gt;Some time ago there was also &lt;a href="https://grove.io/"&gt;Grove.io&lt;/a&gt; which advertises itself as &amp;quot;hosted IRC&amp;quot;. The web interface they provide also provides some of Campfires more pupular features such as image embedding. Unfortunately they went into a paid-only model which makes it less attractive to many people.&lt;/p&gt;
+&lt;p&gt;Hopefully Kandan evolves into something bigger and team chat in companies is no longer limited to just Campfire or worse Skype.&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, May 2012&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:e5058531-a427-4791-8146-ae2f24e6973b</id><title>Startups, This Is How Design Works</title><link href="https://www.martinklepsch.org/posts/startups-this-is-how-design-works.html" type="text/html" title="Startups, This Is How Design Works" rel="alternate"></link><published>2012-03-08T00:00:00Z</published><updated>2012-03-08T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/startups-this-is-how-design-works.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Startups, This Is How Design Works — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/startups-this-is-how-design-works.html" title="Permalink: Startups, This Is How Design Works"&gt;March 2012&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Startups, This Is How Design Works&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;blockquote&gt;
+&lt;p&gt;Companies like Apple are making design impossible for startups to ignore. Startups like Path, Airbnb, Square, and Massive Health have design at the core of their business, and they're doing phenomenal work. But what is ‘design’ actually? Is it a logo? A Wordpress theme? An innovative UI?&lt;/p&gt;
+&lt;p&gt;It’s so much more than that. It’s a state of mind. It’s an approach to a problem. It’s how you’re going to kick your competitor’s ass. This handy guide will help you understand design and provide resources to help you find awesome design talent. &lt;cite&gt;Wells Riley: &lt;a href="http://startupsthisishowdesignworks.com"&gt;Startups, This Is How Design Works&lt;/a&gt;&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;Startups, This Is How Design Works&lt;/em&gt; is an excellent read for every designer and those who want to be one. It builds up around a definition of good design by Dieter Rams, an early consumer product designer at Braun which inspired Apple in many of their fundamental design choices.&lt;/p&gt;
+&lt;p&gt;The web is definitly missing more high quality resources like this. It just takes people to much time to realize that design is not about photoshop brushes.&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, March 2012&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:58f62d22-8347-41b0-a368-81ee4b1771f1</id><title>Entypo Icon Set</title><link href="https://www.martinklepsch.org/posts/entypo-icon-set.html" type="text/html" title="Entypo Icon Set" rel="alternate"></link><published>2012-03-08T00:00:00Z</published><updated>2012-03-08T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/entypo-icon-set.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Entypo Icon Set — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/entypo-icon-set.html" title="Permalink: Entypo Icon Set"&gt;March 2012&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Entypo Icon Set&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;Daniel Bruce:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Entypo is a set of 100+ carefully crafted pictograms available as an OpenType font, vector EPS and web font. All released for free under the Creative Commons license CC BY-SA.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;There is not much more to add. Entypo covers many common icon use cases and the fact that it ships with an OpenType font makes it even smoother to use. I use a few icons here and there on this site and mainly prefer this icon set for its cleanness and simplicity which allows you to easily integrate it into most designs.&lt;/p&gt;
+&lt;p&gt;&lt;strike&gt;Below you can see some of my favorites from the set. The cool thing about having it as a font is also that you can change colors very easy.&lt;/strike&gt; Deprecated the demo.&lt;/p&gt;
+&lt;p&gt;For a complete listing including a character map &lt;a href="http://bistro.convergencecms.co/entypo"&gt;check this out&lt;/a&gt;. Be sure to follow &lt;a href="http://twitter.com/danielbruce_"&gt;Daniel on Twitter&lt;/a&gt; for more icon awesomeness.&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, March 2012&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:0af93d8a-9216-4b83-857e-b9bb4f7127d9</id><title>Hosting A Static Site On Amazon S3</title><link href="https://www.martinklepsch.org/posts/hosting-a-static-site-on-s3.html" type="text/html" title="Hosting A Static Site On Amazon S3" rel="alternate"></link><published>2012-02-20T00:00:00Z</published><updated>2012-02-20T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/hosting-a-static-site-on-s3.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Hosting A Static Site On Amazon S3 — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/hosting-a-static-site-on-s3.html" title="Permalink: Hosting A Static Site On Amazon S3"&gt;February 2012&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Hosting A Static Site On Amazon S3&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;h2&gt;&lt;a href="#preface" id="preface"&gt;&lt;/a&gt;Preface&lt;/h2&gt;
+&lt;p&gt;Hosting a static site is preferred by many developers because it gives you a maximum of control at a minimum of maintenance. While there are other tools available &lt;a href="https://github.com/mojombo/jekyll"&gt;Jekyll&lt;/a&gt; became something like a reference implementation, especially under Ruby developers. Since Jekyll's creator, Tom Preston Werner, also founded Github it is not surprising that Github is providing a service to autogenerate and host your static site as soon as you push it.&lt;/p&gt;
+&lt;p&gt;Now, that sounds like perfect all around. It is. As long as you are not using custom generators or converters with Jekyll everything is good. If you do however you'll quickly notice that Github &lt;a href="https://github.com/mojombo/jekyll/issues/325"&gt;disabled custom Ruby code&lt;/a&gt; to keep everything secure.&lt;/p&gt;
+&lt;aside&gt;&lt;p&gt;
+There are still ways to host your static site with Github but using these would mean
+losing nearly all the benefits from hosting at Github (eg. Autogeneration).&lt;/p&gt;&lt;/aside&gt;
+&lt;p&gt;Since the requirements for hosting a static site are nearly non-existent you can easily move it onto any Server.&lt;/p&gt;
+&lt;p&gt;I decided for Amazon S3 because it's widely used, reliable and cheap.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#static-site-generators" id="static-site-generators"&gt;&lt;/a&gt;Static Site Generators&lt;/h2&gt;
+&lt;p&gt;While there are &lt;a href="http://nanoc.stoneship.org/" title="Nanoc"&gt;quite&lt;/a&gt; &lt;a href="http://middlemanapp.com" title="Middleman"&gt;a&lt;/a&gt; &lt;a href="https://www.ruby-toolbox.com/categories/static_website_generation" title="Ruby-Toolbox Listing"&gt;lot&lt;/a&gt;. Jekyll is used by most people. When I chose Jekyll it was mostly because of it's active community and the fact that it is developed and used heavily by Github. Before I settled on Jekyll I gave nanoc a try. I don't exactly remember why I ditched nanoc but in the end Jekyll feels lighter and I also prefer Liquid Markup over ERB Syntax.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#setting-up-amazon-s3" id="setting-up-amazon-s3"&gt;&lt;/a&gt;Setting Up Amazon S3&lt;/h2&gt;
+&lt;p&gt;Comparing Github's free hosting with Amazon S3 is somewhat unfair since you got to pay for S3 storage and bandwith. Doing the math however you'll quickly notice that the price for hosting your static site on S3 is low. With a complete page size of 100M and traffic of 10G you would not pay more than 2$.&lt;/p&gt;
+&lt;p&gt;After creating a new bucket in your S3 instance there are only a few steps you need to do in order to have a proper static site hosted by S3.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt; When creating your bucket make sure that it has the same name as the domain name you want to use for your static site (ex. &lt;a href="www.martinklepsch.org"&gt;www.martinklepsch.org&lt;/a&gt;). This domain has to have some subdomain.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt; Enable S3's website feature by enabling it in the properties pane of your bucket.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img alt='Website settings in the bucket propertie pane' src='/images/website-settings-s3.png'&gt;
+&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Step 2:&lt;/strong&gt; Set a bucket policy that basically allows everyone to view the contents of your bucket.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;Version&amp;quot;:&amp;quot;2008-10-17&amp;quot;,
+  &amp;quot;Statement&amp;quot;:[{
+    &amp;quot;Sid&amp;quot;:&amp;quot;PublicReadForGetBucketObjects&amp;quot;,
+    &amp;quot;Effect&amp;quot;:&amp;quot;Allow&amp;quot;,
+    &amp;quot;Principal&amp;quot;: {
+      &amp;quot;AWS&amp;quot;: &amp;quot;*&amp;quot;
+    },
+    &amp;quot;Action&amp;quot;:[&amp;quot;s3:GetObject&amp;quot;],
+    &amp;quot;Resource&amp;quot;:[&amp;quot;arn:aws:s3:::www.REPLACE-THIS.org/*&amp;quot;]
+  }]
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- &lt;script src="https://gist.github.com/martinklepsch/4991741.js"&gt;&lt;/script&gt; --&gt;
+&lt;p&gt;&lt;strong&gt;Step 3:&lt;/strong&gt; Upload your static website to S3. You can either do that manually by using the AWS Management Console or you can automate the process by writing some small programm. There are S3 libraries for many programming languages. I built a &lt;a href="https://github.com/martinklepsch/martinklepsch.org/blob/master/Rakefile" title="Rakefile on Github"&gt;small rake task&lt;/a&gt; that does the job.&lt;/p&gt;
+&lt;p&gt;If you are experiencing problems with the setup of S3 I recommend the official &lt;a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/WebsiteHosting.html" title="AWS Static Website Hosting Documentation"&gt;AWS documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#naked-domain-name-fowarding" id="naked-domain-name-fowarding"&gt;&lt;/a&gt;Naked Domain Name Fowarding&lt;/h2&gt;
+&lt;p&gt;DNS does not allow to set the whats apparently called &amp;quot;zone apex&amp;quot; (&lt;code&gt;&amp;quot;example.com&amp;quot;&lt;/code&gt;) to be a CNAME for another domain like &lt;code&gt;www.example.com.s3-website-us-east-1.amazonaws.com&lt;/code&gt;. Therefore you need to redirect all requests going to your domain without &lt;code&gt;www&lt;/code&gt; to you domain with &lt;code&gt;www&lt;/code&gt; (&lt;code&gt;example.com&lt;/code&gt; to &lt;code&gt;www.example.com&lt;/code&gt;). &lt;a href="https://forums.aws.amazon.com/thread.jspa?threadID=55995" title="A thread in AWS forums with good information about the issue"&gt;Read more.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can either do this by using your domain registrars control panel or by using a service like &lt;a href="http://wwwizer.com/naked-domain-redirect"&gt;wwwizer&lt;/a&gt;. I did it with &lt;a href="http://gandi.net"&gt;Gandi&lt;/a&gt;'s control panel and it works fine.&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, February 2012&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:6ff5c174-6f89-4449-9a6c-2315bedaed33</id><title>Exim4 Fix Wrongly Decoded Mail Subject</title><link href="https://www.martinklepsch.org/posts/fix-broken-decoding-of-mail-subjects-in-exim.html" type="text/html" title="Exim4 Fix Wrongly Decoded Mail Subject" rel="alternate"></link><published>2012-01-28T00:00:00Z</published><updated>2012-01-28T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/fix-broken-decoding-of-mail-subjects-in-exim.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Exim4 Fix Wrongly Decoded Mail Subject — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/fix-broken-decoding-of-mail-subjects-in-exim.html" title="Permalink: Exim4 Fix Wrongly Decoded Mail Subject"&gt;January 2012&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Exim4 Fix Wrongly Decoded Mail Subject&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;If you are using &lt;a href="http://www.exim.org/"&gt;Exim&lt;/a&gt; to transfer mails generated by internal software you probably often get mails with a really weird looking subject that starts with something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;=?utf-8?Q?=5BPersonalverwaltung_=2D_Fehler_=23=31=37=38=5D_...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This problem arises when some system sends an email with &lt;strong&gt;more than 76 characters in the subject line&lt;/strong&gt; (usually people don't do that).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;While there is no limit to the length of a multiple-line header field, each line of a header field that contains one or more encoded-word's is limited to 76 characters.&lt;/p&gt;
+&lt;p&gt;The length restrictions are included both to ease interoperability through internetwork mail gateways, and to impose a limit on the amount of lookahead a header parser must employ (while looking for a final ?= delimiter) before it can decide whether a token is an &amp;quot;encoded-word&amp;quot; or something else.&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;Excerpt from &lt;a href="http://www.ietf.org/rfc/rfc2047.txt"&gt;RFC2047&lt;/a&gt;&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;&lt;a href="#fix-it" id="fix-it"&gt;&lt;/a&gt;Fix It&lt;/h2&gt;
+&lt;p&gt;You can remove the length checking by adding the following to the main section of your &lt;code&gt;/etc/exim4/exim4.conf&lt;/code&gt;. The main section usually ends with the first &lt;code&gt;begin&lt;/code&gt; in that file.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;check_rfc2047_length = false
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For further reference I recommend the official &lt;a href="http://www.exim.org/exim-html-current/doc/html/spec_html/ch14.html"&gt;Exim documentation&lt;/a&gt;&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, January 2012&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry></feed>

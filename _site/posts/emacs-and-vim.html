@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Emacs & Vim — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/emacs-and-vim.html" title="Permalink: Emacs &amp; Vim">July 2014</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Emacs & Vim</h1><section class="mkdwn lh-copy"><p>After using Vim for more than four years my recent contacts with Lisp encouraged me to take another look at Emacs. I used to make jokes about Emacs just as Emacs users about Vim but actually it seems to be a pretty decent piece of software.</p>
+<p>Being a Vim user in the Clojure community sometimes feels weird. You are happy with Vim. Running Clojure code with right from the editor works well these days. Still you wonder why all those people you consider smart seem to be so committed to Emacs. So I decided to try it once again.</p>
+<h2><a href="#keybindings" id="keybindings"></a>Keybindings</h2>
+<p>Let's start with a slight rant: I completely do not understand how anyone can use Emacs' default keybindings.  Being a Vim user I obviously have a thing for mode-based editing but Emacs' keybindings are beyond my understanding. Some simple movement commands to illustrate this:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Emacs</th>
+      <th>Vim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Move cursor down one line</td>
+      <td><code>Ctrl-n</code></td>
+      <td><code>j</code></td>
+    </tr>
+    <tr>
+      <td>Move cursor up one line</td>
+      <td><code>Ctrl-p</code></td>
+      <td><code>k</code></td>
+    </tr>
+    <tr>
+      <td>Move cursor left one character</td>
+      <td><code>Ctrl-b</code></td>
+      <td><code>h</code></td>
+    </tr>
+    <tr>
+      <td>Move cursor right one character</td>
+      <td><code>Ctrl-f</code></td>
+      <td><code>l</code></td>
+    </tr>
+  </tbody>
+</table>
+<p>These are the commands recommended in the Emacs tutorial (which you open with <code>Ctrl-h t</code>). They are mnemonic, what makes them easy to learn--but is that really the most important factor to consider for commands you will use hundreds of times a day? I don't think so. I tried to convince myself that it might be worth to get used to Emacs' default keybindings but after some time I gave up and installed <code>evil-mode</code>.</p>
+<h2><a href="#mode-based-editing-with-evil-mode" id="mode-based-editing-with-evil-mode"></a>Mode-based Editing with Evil Mode</h2>
+<p>In my memory <code>evil-mode</code> sucked. I was delightfully surprised that it doesn't (anymore?). Evil brings well-done mode based editing to Emacs. As you continue to evolve your Emacs configuration you will most likely install additional packages that bring weird Emacs-style keybindings with them. Since you now have a mode-based editor you can use shorter, easier to remember keybindings to call functions provided by these packages. A useful helper that fits a sweet spot in my Vim-brain is <code>evil-leader</code> which allows you to setup <code>&lt;leader&gt;</code> based keybindings, just like you can do it in Vim:</p>
+<pre><code>(evil-leader/set-leader &quot;,&quot;)
+(evil-leader/set-key
+  &quot;,&quot; 'projectile-find-file)
+</code></pre>
+<p>With this I can open a small panel that finds files in my project in a fuzzy way (think Ctrl-p for Vim) hitting <code>,</code> two times instead of <code>Ctrl-c p f</code>.</p>
+<h2><a href="#batteries-included" id="batteries-included"></a>Batteries Included</h2>
+<p>What I really enjoyed with Emacs was the fact that a package manager comes right with it. After adding a community maintained package repository to your configuration you have access to some 2000 packages covering Git integration, syntax and spell checking, interactive execution of Clojure code and more. This has been added in a the last major update (<code>v24</code>) after being a community project for some years.</p>
+<h2><a href="#conclusion" id="conclusion"></a>Conclusion</h2>
+<p>Vim's lack of support for async execution of code has always bugged me and although there are some projects to change this I can't see it being properly fixed at least until NeoVim becomes the go-to Vim implementation. Emacs allows me to kick off commands and do other things until they return. In addition to that it nicely embeds Vim's most notable idea, mode-based editing, very well, allowing me to productively edit text while having a solid base to extend and to interactively write programs.</p>
+<p>If you are interested in seeing how all that comes together in my Emacs configuration you can find it <a href="https://github.com/martinklepsch/dotfiles/blob/master/emacs.d/init.el">on Github</a>.</p>
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, July 2014</div></article></div></div></body></html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Running a Clojure Uberjar inside Docker — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/running-a-clojure-uberjar-inside-docker.html" title="Permalink: Running a Clojure Uberjar inside Docker">September 2014</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Running a Clojure Uberjar inside Docker</h1><section class="mkdwn lh-copy"><p>For a sideproject I wanted to deploy a Clojure uberjar on a remote server using Docker. I imagined that to be fairly straight foward but there are some caveats you need to be aware of.</p>
+<p>Naively my first attempt looked somewhat like this:</p>
+<pre><code>FROM dockerfile/java
+ADD https://example.com/app-standalone.jar /
+EXPOSE 8080
+ENTRYPOINT [ &quot;java&quot;, &quot;-verbose&quot;, &quot;-jar&quot;, &quot;/app-standalone.jar&quot; ]
+</code></pre>
+<p>I expected this to work. But it didn't. Instead it just printed the following:</p>
+<pre><code>[Opened /usr/lib/jvm/java-7-oracle/jre/lib/rt.jar]
+# this can vary depending on what JRE you're using
+</code></pre>
+<p>And that has only been printed because I added <code>-verbose</code> when starting the jar. So if you're not running the jar verbosely it'll fail without any output. Took me quite some time to figure that out.</p>
+<p>As it turns out the <code>dockerfile/java</code> image contains a <code>WORKDIR</code> command that somehow breaks my <code>java</code> invocation, even though it is using absolute paths everywhere.</p>
+<h2><a href="#what-worked-for-me" id="what-worked-for-me"></a>What worked for me</h2>
+<p>I ended up splitting the procedure into two files in a way that allowed me to always get the most recent jar when starting the docker container.</p>
+<p>The <code>Dockerfile</code> basically just adds a small script to the container that downloads and starts a jar it downloads from somewhere (S3 in my case).</p>
+<pre><code>FROM dockerfile/java
+ADD fetch-and-run.sh /
+EXPOSE 42042
+EXPOSE 3000
+CMD [&quot;/bin/sh&quot;, &quot;/fetch-and-run.sh&quot;]
+</code></pre>
+<p>And here is <code>fetch-and-run.sh</code>:</p>
+<pre><code>#! /bin/sh
+wget https://s3.amazonaws.com/example/yo-standalone.jar -O /yo-standalone.jar;
+java -verbose -jar /yo-standalone.jar
+</code></pre>
+<p>Now when you build a new image from that Dockerfile it adds the <code>fetch-and-run.sh</code> script to the image's filesystem. Note that the jar is not part of the image but that it will be downloaded whenever a new container is being started from the image. That way a simple restart will always fetch the most recent version of the jar. In some scenarios it might become confusing to not have precise deployment tracking but in my case it turned out much more convenient than going through the process of destroying the container, deleting the image, creating a new image and starting up a new container.</p>
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, September 2014</div></article></div></div></body></html>

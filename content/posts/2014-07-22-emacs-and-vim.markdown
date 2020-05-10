@@ -1,8 +1,9 @@
 ---
 layout: post
-date-published: 2014-07-22
+date-published: 2014-07-22T00:00:00Z
 title: Emacs & Vim
 uuid: 6d204755-b8a0-4c43-98b2-b592e22970b7
+permalink: /posts/emacs-and-vim.html
 ---
 
 After using Vim for more than four years my recent contacts with Lisp

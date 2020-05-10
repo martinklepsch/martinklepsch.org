@@ -1,0 +1,47 @@
+name: Build Site
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '8'
+    - run: sudo apt-get install -y patchutils
+    - name: Install boot
+      uses: DeLaGuardo/setup-clojure@master
+      with:
+        boot: 2.7.2
+    - name: Install babashka
+      run: |
+         curl -s https://raw.githubusercontent.com/borkdude/babashka/master/install -o install-bb
+         chmod +x install-bb
+         sudo ./install-bb
+         rm install-bb
+
+    - name: Fill in blanks
+      run: make update-frontmatter
+    - name: Commit updated content files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        ./stage-if-changed.sh content/
+        git diff --staged --exit-code || git commit -m "Update frontmatter"
+
+    - name: Build site
+      run: make site
+    - name: Commit updated _site files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        ./stage-if-changed.sh _site/
+        git diff --staged --exit-code || git commit -m "Update compiled _site"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: build-action
+        github_token: ${{ secrets.GITHUB_TOKEN }}

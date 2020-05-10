@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Using core.async and Transducers to upload files from the browser to S3 — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/using-coreasync-and-transducers-for-direct-s3-upload.html" title="Permalink: Using core.async and Transducers to upload files from the browser to S3">September 2014</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Using core.async and Transducers to upload files from the browser to S3</h1><section class="mkdwn lh-copy"><p>In a project I'm working on we needed to enable users to upload media content. In many scenarios it makes sense to upload to S3 directly from the browser instead of routing it through a server. If you're hosting on Heroku you need to do this anyways. After digging a bit into <a href="https://github.com/clojure/core.async"><code>core.async</code></a> this seemed like a neat little excuse to give Clojure's new transducers a go.</p>
+<h2><a href="#the-problem" id="the-problem"></a>The Problem</h2>
+<p>To upload files directly to S3 without any server in between you need to do a couple of things:</p>
+<ol>
+<li>Enable Cross-Origin Resource Sharing (CORS) on your bucket</li>
+<li>Provide special parameters in the request that authorize the upload</li>
+</ol>
+<p>Enabling CORS is fairly straightforward, just follow <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html">the documentation</a> provided by AWS. The aforementioned special parameters are based on your AWS credentials, the key you want to save the file to, it's content-type and <a href="http://aws.amazon.com/articles/1434/">a few other things</a>. Because you don't want to store your credentials in client-side code the parameters need to be computed on a server.</p>
+<p>We end up with the following procedure to upload a file to S3:</p>
+<ol>
+<li>Get a Javascript File object from the user</li>
+<li>Retrieve special parameters for post request from server</li>
+<li>Post <strong>directly from the browser</strong> to S3</li>
+</ol>
+<h2><a href="#server-side-code" id="server-side-code"></a>Server-side code</h2>
+<p>I won't go into detail here, but here's <a href="https://gist.github.com/martinklepsch/0c6b40f45a415046f0fe">some rough Clojure code</a> illustrating the construction of the special parameters and how they're sent to the client.</p>
+<h2><a href="#client-side-transducers-and-coreasync" id="client-side-transducers-and-coreasync"></a>Client-side: Transducers and core.async</h2>
+<p>As we see the process involves multiple asynchronous steps: <img src="/images/s3-direct.png" alt="" /></p>
+<p>To wrap all that up into a useful minimal API that hides all the complex back and forth happening until a file is uploaded core.async channels and transducers turned out very useful:</p>
+<pre><code>(defn s3-upload [report-chan]
+  (let [upload-files (map #(upload-file % report-chan))
+        upload-chan  (chan 10 upload-files)
+        sign-files   (map #(sign-file % upload-chan))
+        signing-chan (chan 10 sign-files)]
+
+    (go (while true
+          (let [[v ch] (alts! [signing-chan upload-chan])]
+            ; that's not really required but has been useful
+            (log v))))
+    signing-chan))
+</code></pre>
+<p>This function takes one channel as argument where it will <code>put!</code> the result of the S3 request. You can take a look at the <code>upload-file</code> and <code>sign-file</code> functions <a href="https://gist.github.com/martinklepsch/96e548d9595e111d70ce">in this gist</a>.</p>
+<p><strong>So what's happening here?</strong> We use a channel for each step of the process: <code>signing-chan</code> and <code>upload-chan</code>. Both of those channels have an associated transducer. In this case you can think best of a transducer as a function that's applied to each item in a channel on it's way through the channel. I initially trapped upon the fact that the transducing function is only applied when the element is being taken from the channel as well. Just putting things into a channel doesn't trigger the execution of the transducing function.</p>
+<p><code>signing-chan</code>'s transducer initiates the request to sign the File object that has been put into the channel. The second argument to the <code>sign-file</code> function is a channel where the AJAX callback will put it's result. Similary <code>upload-chan</code>'s transducer initiates the upload to S3 based on information that has been put into the channel. A callback will then put S3's response into the supplied <code>report-chan</code>.</p>
+<p>The last line returns the channel that can be used to initiate a new upload.</p>
+<h2><a href="#using-this" id="using-this"></a>Using this</h2>
+<p>Putting this into a library and opening it up for other people to use isn't overly complicated, the exposed API is actually very simple. Imagine an <a href="https://github.com/swannodette/om">Om</a> component <code>upload-form</code>:</p>
+<pre><code>(defn queue-file [e owner {:keys [upload-queue]}]
+  (put! upload-queue (first (array-seq (.. e -target -files)))))
+
+(defcomponent upload-form [text owner]
+  (init-state [_]
+    (let [rc (chan 10)]
+      {:upload-queue (s3-upload rc)
+       :report-chan rc}))
+  (did-mount [_]
+    (let [{:keys [report-chan]} (om/get-state owner)]
+      (go (while true (log (&lt;! report-chan))))))
+  (render-state [this state]
+    (dom/form
+     (dom/input {:type &quot;file&quot; :name &quot;file&quot;
+                 :on-change #(queue-file % owner state)} nil))))
+</code></pre>
+<p>I really like how simple this is. You put a file into a channel and whenever it's done you take the result from another channel. <code>s3-upload</code> could take additional options like logging functions or a custom URL to retrieve the special parameters required to authorize the request to S3.</p>
+<p>This has been the first time I've been doing something useful with core.async and, probably less surprisingly, the first time I played with transducers. I assume many things can be done better and I still need to look into some things like how to properly shut down the <code>go</code> blocks. <strong>Any feedback is welcome!</strong> <a href="https://twitter.com/martinklepsch">Tweet</a> or <a href="mailto://martinklepsch@googlemail.com">mail</a> me!</p>
+<p><strong>Thanks</strong> to Dave Liepmann who let me peek into some code he wrote that did similar things and to Kevin Downey (<em>hiredman</em>) who helped me understand core.async and transducers by answering my stupid questions in <code>#clojure</code> on Freenode.</p>
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, September 2014</div></article></div></div></body></html>

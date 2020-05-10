@@ -1,0 +1,640 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.highlight .hll {
+  background-color: #ffffcc; }
+
+.highlight .c {
+  color: #808080; }
+
+/* Comment */
+.highlight .err {
+  color: #F00000;
+  background-color: #F0A0A0; }
+
+/* Error */
+.highlight .k {
+  color: #008000;
+  font-weight: bold; }
+
+/* Keyword */
+.highlight .o {
+  color: #303030; }
+
+/* Operator */
+.highlight .cm {
+  color: #808080; }
+
+/* Comment.Multiline */
+.highlight .cp {
+  color: #507090; }
+
+/* Comment.Preproc */
+.highlight .c1 {
+  color: #808080; }
+
+/* Comment.Single */
+.highlight .cs {
+  color: #cc0000;
+  font-weight: bold; }
+
+/* Comment.Special */
+.highlight .gd {
+  color: #A00000; }
+
+/* Generic.Deleted */
+.highlight .ge {
+  font-style: italic; }
+
+/* Generic.Emph */
+.highlight .gr {
+  color: #FF0000; }
+
+/* Generic.Error */
+.highlight .gh {
+  color: #000080;
+  font-weight: bold; }
+
+/* Generic.Heading */
+.highlight .gi {
+  color: #00A000; }
+
+/* Generic.Inserted */
+.highlight .go {
+  color: #808080; }
+
+/* Generic.Output */
+.highlight .gp {
+  color: #c65d09;
+  font-weight: bold; }
+
+/* Generic.Prompt */
+.highlight .gs {
+  font-weight: bold; }
+
+/* Generic.Strong */
+.highlight .gu {
+  color: #800080;
+  font-weight: bold; }
+
+/* Generic.Subheading */
+.highlight .gt {
+  color: #0040D0; }
+
+/* Generic.Traceback */
+.highlight .kc {
+  color: #008000;
+  font-weight: bold; }
+
+/* Keyword.Constant */
+.highlight .kd {
+  color: #008000;
+  font-weight: bold; }
+
+/* Keyword.Declaration */
+.highlight .kn {
+  color: #008000;
+  font-weight: bold; }
+
+/* Keyword.Namespace */
+.highlight .kp {
+  color: #003080;
+  font-weight: bold; }
+
+/* Keyword.Pseudo */
+.highlight .kr {
+  color: #008000;
+  font-weight: bold; }
+
+/* Keyword.Reserved */
+.highlight .kt {
+  color: #303090;
+  font-weight: bold; }
+
+/* Keyword.Type */
+.highlight .m {
+  color: #6000E0;
+  font-weight: bold; }
+
+/* Literal.Number */
+.highlight .s {
+  background-color: #fff0f0; }
+
+/* Literal.String */
+.highlight .na {
+  color: #0000C0; }
+
+/* Name.Attribute */
+.highlight .nb {
+  color: #007020; }
+
+/* Name.Builtin */
+.highlight .nc {
+  color: #B00060;
+  font-weight: bold; }
+
+/* Name.Class */
+.highlight .no {
+  color: #003060;
+  font-weight: bold; }
+
+/* Name.Constant */
+.highlight .nd {
+  color: #505050;
+  font-weight: bold; }
+
+/* Name.Decorator */
+.highlight .ni {
+  color: #800000;
+  font-weight: bold; }
+
+/* Name.Entity */
+.highlight .ne {
+  color: #F00000;
+  font-weight: bold; }
+
+/* Name.Exception */
+.highlight .nf {
+  color: #0060B0;
+  font-weight: bold; }
+
+/* Name.Function */
+.highlight .nl {
+  color: #907000;
+  font-weight: bold; }
+
+/* Name.Label */
+.highlight .nn {
+  color: #0e84b5;
+  font-weight: bold; }
+
+/* Name.Namespace */
+.highlight .nt {
+  color: #007000; }
+
+/* Name.Tag */
+.highlight .nv {
+  color: #906030; }
+
+/* Name.Variable */
+.highlight .ow {
+  color: #000000;
+  font-weight: bold; }
+
+/* Operator.Word */
+.highlight .w {
+  color: #bbbbbb; }
+
+/* Text.Whitespace */
+.highlight .mf {
+  color: #6000E0;
+  font-weight: bold; }
+
+/* Literal.Number.Float */
+.highlight .mh {
+  color: #005080;
+  font-weight: bold; }
+
+/* Literal.Number.Hex */
+.highlight .mi {
+  color: #0000D0;
+  font-weight: bold; }
+
+/* Literal.Number.Integer */
+.highlight .mo {
+  color: #4000E0;
+  font-weight: bold; }
+
+/* Literal.Number.Oct */
+.highlight .sb {
+  background-color: #fff0f0; }
+
+/* Literal.String.Backtick */
+.highlight .sc {
+  color: #0040D0; }
+
+/* Literal.String.Char */
+.highlight .sd {
+  color: #D04020; }
+
+/* Literal.String.Doc */
+.highlight .s2 {
+  background-color: #fff0f0; }
+
+/* Literal.String.Double */
+.highlight .se {
+  color: #606060;
+  font-weight: bold;
+  background-color: #fff0f0; }
+
+/* Literal.String.Escape */
+.highlight .sh {
+  background-color: #fff0f0; }
+
+/* Literal.String.Heredoc */
+.highlight .si {
+  background-color: #e0e0e0; }
+
+/* Literal.String.Interpol */
+.highlight .sx {
+  color: #D02000;
+  background-color: #fff0f0; }
+
+/* Literal.String.Other */
+.highlight .sr {
+  color: #000000;
+  background-color: #fff0ff; }
+
+/* Literal.String.Regex */
+.highlight .s1 {
+  background-color: #fff0f0; }
+
+/* Literal.String.Single */
+.highlight .ss {
+  color: #A06000; }
+
+/* Literal.String.Symbol */
+.highlight .bp {
+  color: #007020; }
+
+/* Name.Builtin.Pseudo */
+.highlight .vc {
+  color: #306090; }
+
+/* Name.Variable.Class */
+.highlight .vg {
+  color: #d07000;
+  font-weight: bold; }
+
+/* Name.Variable.Global */
+.highlight .vi {
+  color: #3030B0; }
+
+/* Name.Variable.Instance */
+.highlight .il {
+  color: #0000D0;
+  font-weight: bold; }
+
+/* Literal.Number.Integer.Long */
+body {
+  font-family: 'Roboto Slab', serif;
+  font-size: 19px;
+  line-height: 2.1em;
+  text-rendering: optimizeLegibility;
+  color: #333333; }
+
+strong {
+  font-weight: bold; }
+
+em {
+  font-style: italic; }
+
+h1, blockquote, aside, .awesome {
+  font-family: 'Open Sans', sans-serif; }
+
+aside {
+  color: gray; }
+
+#pagination {
+  text-align: center; }
+  #pagination strong, #pagination span, #pagination a {
+    padding: 0 0.4em; }
+
+h1 {
+  font-weight: 300;
+  line-height: 1.2em;
+  font-size: 3em; }
+  h1 .icon {
+    font-size: 1.3em; }
+
+.date {
+  display: block;
+  font-size: 1rem;
+  color: grey; }
+
+h2 {
+  margin-top: 2em;
+  font-size: 1.2em;
+  font-weight: bold; }
+
+h3 {
+  margin-top: 1em;
+  font-weight: bold; }
+
+code {
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  color: #3D9970; }
+
+p > code {
+  padding: 0 0.3em; }
+
+.gist, pre code {
+  font-size: 0.8em; }
+  .gist table, pre code table {
+    margin: 0; }
+
+pre {
+  line-height: 1.2em; }
+
+blockquote p, .marked {
+  line-height: 1.9em;
+  background: #F4F6B2;
+  display: inline;
+  padding: 1px; }
+
+blockquote cite {
+  padding: 1em 10px 0 10px;
+  margin-bottom: -3em;
+  display: block;
+  text-align: right;
+  font-size: .825em; }
+  blockquote cite:before {
+    content: "\2014 \0020"; }
+
+div.footnotes {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.825em;
+  line-height: 1.6em; }
+
+sup {
+  vertical-align: super;
+  font-size: 0.8em;
+  line-height: 0;
+  padding-left: .2em; }
+  sup a {
+    border: none; }
+
+ol#archive {
+  list-style-type: none;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300; }
+  ol#archive li {
+    position: relative;
+    padding: 1em 0; }
+    ol#archive li a {
+      font-size: 3em;
+      line-height: 1.2em;
+      border: none; }
+  ol#archive .date {
+    position: absolute;
+    top: 2em;
+    width: 150px;
+    left: -180px;
+    text-align: right;
+    color: gray;
+    display: block; }
+    ol#archive .date:before {
+      width: 25%;
+      margin-left: 75%;
+      border-top: 1px solid #e6e6e6;
+      display: block;
+      content: "";
+      margin-bottom: 10px; }
+
+input {
+  margin: 1em;
+  padding: 1em;
+  border-radius: 3px;
+  border: 1px solid gray;
+  background: none;
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  transition: .2s; }
+  input:focus {
+    outline: none;
+    border-color: blue; }
+
+a {
+  color: #4d4d4d;
+  text-decoration: none;
+  border-bottom: 1px solid #cccccc;
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  transition: .2s; }
+  a:hover {
+    border-bottom: 1px solid #666666; }
+
+\::selection {
+  background: #e6e6e6;
+  color: black; }
+
+table {
+  margin: 2em 0 1em 0; }
+  table th {
+    font-weight: bold; }
+  table th, table td {
+    padding: 0.3em 1em; }
+  table tr {
+    border-bottom: 1px solid #cccccc; }
+  table tbody tr:last-child {
+    border-bottom: none; }
+
+article, #me, ol#archive {
+  margin: 0 auto;
+  max-width: 733px; }
+
+article {
+  padding: 2em 20px 4em; }
+  article section > p:nth-child(1) {
+    color: #1a1a1a;
+    padding-top: 1.5em;
+    font-size: 1.3em;
+    line-height: 1.7em; }
+  article section {
+    margin-bottom: 2em; }
+  article p > img {
+    width: 100%; }
+  article .article__signoff {
+    font-family: 'Open Sans', sans-serif; }
+    article .article__signoff:before {
+      content: "\2014 \0020"; }
+
+@media (max-width: 600px) {
+  article .post_content {
+    font-size: .9em;
+    line-height: 1.7em; }
+  section > p:nth-child(1) {
+    font-size: 1.1em; } }
+
+#me {
+  padding: 1em 20px 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300; }
+  #me .marked {
+    margin-right: .5em;
+    display: inline;
+    border: none; }
+  #me::after {
+    content: "";
+    display: block;
+    margin-top: 1em;
+    border-bottom: 1px solid #e6e6e6; }
+
+ol#archive {
+  padding: 2em 20px; }
+
+.wider, table {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2em 20px 1em 20px; }
+
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box; }
+
+#container {
+  margin-bottom: 100px; }
+
+section > p, ul, ol,
+aside, pre, blockquote {
+  padding: 1em 0 0.5em 0; }
+
+figure {
+  padding-left: 0;
+  padding-right: 0; }
+  figure img, figure figcaption {
+    display: block;
+    width: 100%;
+    margin: 0 auto; }
+  figure figcaption {
+    text-align: center;
+    padding: 0 0.4em;
+    font-family: 'Open Sans', sans-serif;
+    font-size: .725em;
+    line-height: 2em;
+    color: gray;
+    /* border: 1px solid lighten($dark, 60%) */
+    border-top: none; }
+  figure .bordered {
+    border: 1px solid #cccccc; }
+
+figure + figure {
+  padding-top: 2em; }
+
+ul {
+  list-style-type: circle; }
+
+ol {
+  list-style-type: decimal; }
+
+ol, ul {
+  padding: 1em 0 0 2em; }
+  ol li, ul li {
+    padding: 0 2em 0 0; }
+
+blockquote {
+  position: relative; }
+
+section.subscribe {
+  text-align: center; }
+  section.subscribe hr {
+    margin-bottom: 4em; }
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #e6e6e6;
+  margin: 1em 20%;
+  padding: 0; }
+
+.social {
+  display: none; }
+  .social iframe {
+    vertical-align: top; }
+  .social .fb-like, .social .twitter {
+    font-size: 1px;
+    display: inline-block; }
+  .social .fb_reset {
+    display: inline; }
+
+.ragged-icon {
+  float: left;
+  text-align: center;
+  margin: 0 0 0 -2em;
+  padding: 10px 0; }
+
+.responsive-embed {
+  margin: auto;
+  position: relative;
+  padding-bottom: 56%;
+  height: 0;
+  overflow: hidden; }
+
+.responsive-embed iframe,
+.responsive-embed object,
+.responsive-embed embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+.awesome {
+  margin-top: 2em;
+  text-align: center; }
+  .awesome a {
+    width: 2em;
+    height: 2em;
+    padding-top: 0.55em;
+    border-radius: 999px;
+    text-transform: uppercase;
+    background-color: #cccccc;
+    color: white; }
+    .awesome a:hover {
+      border: 1px solid #e6e6e6;
+      background: none;
+      text-decoration: none; }
+  .awesome input[type=text] {
+    margin-right: 0; }
+  .awesome input[type=submit]:hover {
+    cursor: pointer; }
+
+@font-face {
+  font-family: 'entypo';
+  src: url("../fonts/entypo.eot");
+  src: url("../fonts/entypo.eot?#iefix") format("embedded-opentype"), url("../fonts/entypo.woff") format("woff"), url("../fonts/entypo.ttf") format("truetype"), url("../fonts/entypo.svg#entypo") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+.icon {
+  font-family: 'entypo';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  font-size: 2.3em;
+  text-align: center;
+  line-height: 1em;
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  border: none; }
+  .icon:hover {
+    border: none; }

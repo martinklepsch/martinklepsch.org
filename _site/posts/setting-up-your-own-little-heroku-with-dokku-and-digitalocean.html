@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Heroku-like Deployment With Dokku And DigitalOcean — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/setting-up-your-own-little-heroku-with-dokku-and-digitalocean.html" title="Permalink: Heroku-like Deployment With Dokku And DigitalOcean">March 2014</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Heroku-like Deployment With Dokku And DigitalOcean</h1><section class="mkdwn lh-copy"><p>Over the weekend I sat down to play around with Docker/Dokku and was able to set up a small machine on DigitalOcean that basically offers Heroku-like deployment. It was surprisingly simple so here is some rough outline that should get you going.</p>
+<aside>This guide is slightly opinionated and things can be done differently.
+I decided to settle for the way thats closest to Heroku to keep things short.</aside>
+<h2><a href="#create-a-droplet-at-digitalocean" id="create-a-droplet-at-digitalocean"></a>Create a Droplet at Digitalocean</h2>
+<p>Go to <a href="https://www.digitalocean.com/?refcode=fb6eb9b8b286">DigitalOcean</a> and create a droplet (note the comments below the screenshots):</p>
+<figure>
+<img class='bordered' src='/images/hostname.png'>
+<figcaption>Make sure the hostname is a fully qualified domain name, as it will
+be the git remote you'll push to to deploy.</figcaption>
+</figure>
+<figure>
+<img class='bordered' src='/images/image.png'>
+<figcaption>When selecting the image, go to Applications and select the Dokku
+one.</figcaption>
+</figure>
+<p>There are some unresolved problems with Dokku on Ubuntu 13+ so if you are not just playing around you might want to setup Dokku manually.  After that you're ready to hit the create button and a droplet will be created within the next minute. The last bit of server-setup that’s required is Dokku’s.</p>
+<h2><a href="#setting-up-dokku" id="setting-up-dokku"></a>Setting up Dokku</h2>
+<p>To get to Dokku’s setup screen just steer your browser to the IP shown in the droplet’s detail view:</p>
+<figure>
+<img class='bordered' src='/images/droplet-ip.png'>
+</figure>
+<p>What you’ll see next is Dokku’s setup screen:</p>
+<figure>
+<img class='bordered' src='/images/dokku-setup.png'>
+<figcaption>Add an SSH key, tick the virtualhost checkbox, and make
+sure the hostname is correct.</figcaption>
+</figure>
+<h2><a href="#dns-setup" id="dns-setup"></a>DNS Setup</h2>
+<p>To get the hostname you chose earlier actually point to your machine running Dokku you need to add two A records to the zonefile of your domain. This strongly varies between domain/DNS providers so I can’t exactly say how it’d be done for yours. Whats important is that your provider supports wildcard entries. Also the value of an A record should be only the subdomain part of the hostname you set earlier, not the complete domain.</p>
+<pre><code>A       &lt;subdomain-of-hostname&gt;      &lt;droplet-ip&gt;
+A       *.&lt;subdomain-of-hostname&gt;    &lt;droplet-ip&gt;
+
+# in a zonefile it’d look like this:
+*.apps 10800 IN A 107.170.35.171
+apps 10800 IN A 107.170.35.171
+</code></pre>
+<h2><a href="#deploying" id="deploying"></a>Deploying</h2>
+<p>After you’ve waited three hours for DNS servers to propagate the changes you should be able to do something like the following:</p>
+<pre><code>git clone git@github.com:heroku/node-js-sample.git
+cd node-js-sample
+git remote add digital-ocean dokku@apps.example.com:nodeapp
+git push digital-ocean master
+</code></pre>
+<p>Now going to <code>nodeapp.&lt;dokku-hostname&gt;</code> should bring up “Hello World” from the app we just cloned and pushed.</p>
+<p>If you want to add have a custom domain point to your app you'll need to either push to a remote like <code>dokku@apps.example.com:example.com</code> or edit the nginx.conf that comes with Dokku’s nginx plugin.</p>
+<p>Thanks to Dokku’s <a href="https://github.com/progrium/buildstep">Buildstep</a> that utilizes Heroku’s opensource buildpacks you can now deploy almost every application you can deploy to Heroku to Dokku as well.</p>
+<p><strong>Have fun!</strong></p>
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, March 2014</div></article></div></div></body></html>

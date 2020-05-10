@@ -1,8 +1,9 @@
 ---
 layout: post
-date-published: 2012-12-17
+date-published: 2012-12-17T00:00:00Z
 title: Git Information in Fish Shell&rsquo;s Prompt
 uuid: 83080c01-c898-4e8e-9996-97f8d60d3a4a
+permalink: /posts/git-prompt-for-fish-shell.html
 ---
 After toying around with [Zsh](http://zsh.org) for a while I stumbled upon Fish
 or more precisely [Ridiculous Fish](http://ridiculousfish.com/shell)

@@ -1,10 +1,11 @@
 ---
 layout: post
 categories: linked
-date-published: 2012-06-28
+date-published: 2012-06-28T00:00:00Z
 resource: http://www.12factor.net/
 title: The Twelve Factor App
 uuid: 36e26c80-51ab-4350-b714-f5083763d86a
+permalink: /posts/twelve-factor-app.html
 ---
 Around December 2011 the awesome crowd around Heroku released a [now open-source
 document](https://github.com/adamwiggins/12factor) that describes 12 factors that

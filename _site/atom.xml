@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Martin Klepsch</title><subtitle>Martin Klepsch's blog</subtitle><generator uri="https://perun.io/" version="0.4.2-SNAPSHOT">Perun</generator><link href="https://www.martinklepsch.org/" type="text/html"></link><link href="https://www.martinklepsch.org/atom.xml" rel="self"></link><link href="https://www.martinklepsch.org/atom.xml" rel="first"></link><link href="https://www.martinklepsch.org/atom-5.xml" rel="last"></link><link href="https://www.martinklepsch.org/atom-2.xml" rel="next"></link><updated>2019-09-09T14:42:49Z</updated><id>https://www.martinklepsch.org/</id><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author><entry><id>urn:uuid:3e616db0-a417-4bc4-93d0-b2a24256ab86</id><title>Working with Firebase Documents in ClojureScript</title><link href="https://www.martinklepsch.org/posts/using-cljs-bean-to-wrap-firebase-documents.html" type="text/html" title="Working with Firebase Documents in ClojureScript" rel="alternate"></link><published>2019-09-09T00:00:00Z</published><updated>2019-09-09T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/using-cljs-bean-to-wrap-firebase-documents.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Working with Firebase Documents in ClojureScript — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/using-cljs-bean-to-wrap-firebase-documents.html" title="Permalink: Working with Firebase Documents in ClojureScript"&gt;September 2019&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Working with Firebase Documents in ClojureScript&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;In a project &lt;a href="https://icebreaker.video"&gt;I’m currently working on&lt;/a&gt; we’re making use of Google's &lt;a href="https://firebase.google.com"&gt;Firebase&lt;/a&gt; to store domain data and run cloud functions.&lt;/p&gt;
+&lt;p&gt;In Firestore, which is Firebase’s database offering, every document is essentially a Javascript object. While interop in ClojureScript is pretty good we ended up converting the raw data of these documents to ClojureScript data structures using &lt;code&gt;js-&amp;gt;clj&lt;/code&gt;. This also meant we’d need to convert them back to JS objects before writing them to Firestore.&lt;/p&gt;
+&lt;p&gt;Because IDs are technically not part of the document the project adopted a pattern of representing documents as tuples:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;[id (js-&amp;gt;clj firestore-data)]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This works but isn’t particularly extensible. What if we also wanted to retain the “Firestore Reference” specifying a documents location inside the database? (Firestore stores data in a tree-like structure.)&lt;/p&gt;
+&lt;p&gt;It also leads to some funky gymnastics when working with collections of documents:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;(sort-by (comp :join_dt second) list-of-document-tuples)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Could be worse... but also could be better.&lt;/p&gt;
+&lt;p&gt;This blogpost will compare various approaches approach to address the problems above using &lt;a href="https://github.com/mfikes/cljs-bean"&gt;cljs-bean&lt;/a&gt;, basic ClojureScript data structures, custom protocols and &lt;code&gt;:extend-via-metadata&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#cljs-bean" id="cljs-bean"&gt;&lt;/a&gt;cljs-bean&lt;/h2&gt;
+&lt;p&gt;With the recent release of &lt;a href="https://github.com/mfikes/cljs-bean"&gt;cljs-bean&lt;/a&gt; we have an interesting alternative to &lt;code&gt;js-&amp;gt;clj&lt;/code&gt;. Instead of eagerly walking the structure and converting all values to their ClojureScript counterparts (i.e. persistent data structures) the original object is wrapped in a thin layer that allows us to use it as if it were a ClojureScript-native data structure:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;(require '[cljs-bean.core :as cljs-bean])
+
+(-&amp;gt; (cljs-bean/bean #js {&amp;quot;some_data&amp;quot; 1, :b 2})
+    (get :some_data)) ; =&amp;gt; 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Given a Firestore &lt;a href="https://firebase.google.com/docs/reference/js/firebase.firestore.QueryDocumentSnapshot"&gt;QueryDocumentSnapshot&lt;/a&gt; we can make the JS object representing the data easily accessible from ClojureScript:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;(-&amp;gt; (cljs-bean/-&amp;gt;clj (.data query-document-snapshot))
+    (get :some_field))
+
+;; (cljs-bean/-&amp;gt;clj data) is roughly the same as
+;; (cljs-bean/bean data :recursive true)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The bean is immutable and can be used in client side app-state as if it is one of ClojureScript’s persistent data structures.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Caveat:&lt;/strong&gt; Updating a bean using &lt;code&gt;assoc&lt;/code&gt; or similar will create a copy of the object (Copy-on-Write). This is less performant and more GC intensive than with persistent data structures. Given that the data is usually quite small and that the document representations in our app state mostly aren’t written to directly this is probably ok (&lt;a href="https://github.com/mfikes/cljs-bean/issues/72"&gt;cljs-bean #72&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Whenever we want to use the raw object to update data in Firestore we can simply call &lt;code&gt;-&amp;gt;js&lt;/code&gt; on the bean. Conveniently this will fall back to &lt;code&gt;clj-&amp;gt;js&lt;/code&gt; when called on ClojureScript data structures.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;(.set some-ref (cljs-bean/-&amp;gt;js our-bean))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Arguably the differences to using plain &lt;code&gt;clj-&amp;gt;js&lt;/code&gt; aren’t monumental but working with a database representing data as JS objects it is nice to retain those original objects.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#integrating-firestore-metadata" id="integrating-firestore-metadata"&gt;&lt;/a&gt;Integrating Firestore Metadata&lt;/h2&gt;
+&lt;p&gt;Now we got beans. But they still don’t contain the document ID or reference. In most places we don’t care about a documents ID or reference. So how could we enable the code below while retaining ID and reference?&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;(sort-by :join_dt participants)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s compare the various options we have.&lt;/p&gt;
+&lt;h3&gt;&lt;a href="#tuples-and-nesting" id="tuples-and-nesting"&gt;&lt;/a&gt;Tuples and Nesting&lt;/h3&gt;
+&lt;p&gt;I already described the tuple-based approach above. Another, similar, approach achieves the same by nesting the data in another map. Both fall short on the requirement to make document fields directly accessible.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;;; structure
+{:id &amp;quot;some-id&amp;quot;, :ref &amp;quot;/events/some-id&amp;quot;, :data document-data}
+;; usage (including gymnastics)
+(sort-by (comp :join_dt :data) participants)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I’m not too fond of either approach since they both expose a specific implementation detail, that the actual document data is nested, at the call site. In a way my critique of this approach is similar to why &lt;a href="https://youtu.be/Sjb6y19YIWg"&gt;Eric Normand advocated for getters in his IN/Clojure ’19 talk&lt;/a&gt; — as far as I understand anyways.&lt;/p&gt;
+&lt;h3&gt;&lt;a href="#addition-of-a-special-key" id="addition-of-a-special-key"&gt;&lt;/a&gt;Addition of a Special Key&lt;/h3&gt;
+&lt;p&gt;Another approach could be to add metadata directly to the document data.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;(defn doc [query-doc-snapshot]
+  (-&amp;gt; (cljs-bean/-&amp;gt;clj (.data query-doc-snapshot))
+      (assoc ::meta {:id (.-id query-doc-snapshot
+                     :ref (.-ref query-doc-snapshot})))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is reasonable and makes document fields directly accessible. However it also requires us to separate document fields and metadata before passing the data to any function writing to Firestore.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;;; before writing we need to remove ::meta
+(.set some-ref (cljs-bean/-&amp;gt;js (dissoc document-data ::meta))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I think this is a reasonable solution that improves upon some of the issues with the tuple and nesting approach. I realize that this isn’t a huge change but this inversion of how things are nested does give us that direct field access that the nesting approach did not.&lt;/p&gt;
+&lt;h3&gt;&lt;a href="#protocols-and-" id="protocols-and-"&gt;&lt;/a&gt;Protocols and &lt;code&gt;:extend-via-metadata&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;An approach I’ve found particularly interesting to play with makes use of a protocol that can be implemented via metadata, as enabled by the new &lt;code&gt;:extend-via-metadata&lt;/code&gt; option. This capability was added in &lt;a href="https://clojure.org/reference/protocols#_extend_via_metadata"&gt;Clojure 1.10&lt;/a&gt; and subsequently added to ClojureScript with the &lt;a href="https://clojurescript.org/news/2019-01-31-release"&gt;1.10.516 release&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;(defprotocol IFirestoreDocument
+  :extend-via-metadata true
+  (id [_] &amp;quot;Return the ID (string) of this document&amp;quot;)
+  (ref [_] &amp;quot;Return the Firestore Reference object&amp;quot;))
+
+(defn doc [query-doc-snapshot]
+  (with-meta
+    (cljs-bean/-&amp;gt;clj (.data query-doc-snapshot))
+    {`id (fn [_] (.-id query-doc-snapshot))
+     `ref (fn [_] (.-ref query-doc-snapshot))}))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Using &lt;code&gt;with-meta&lt;/code&gt; we extend a specific instance of a bean to implement the &lt;code&gt;IFirestoreDocument&lt;/code&gt; protocol. This allows direct access to document properties while retaining important metadata:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;(:name participant) ; =&amp;gt; &amp;quot;Martin&amp;quot;
+(firebase/id participant) ; =&amp;gt; &amp;quot;some-firebase-id&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At call sites we use a well-defined API (defined by the protocol) instead of reaching into nested maps whose structure may need to change as our program evolves. This arguably could also be achieved with plain functions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sidenote:&lt;/strong&gt; A previous iteration of this used &lt;code&gt;specify!&lt;/code&gt;. Specify modifies the bean instance however, meaning that whenever we’d update a bean the protocol implementation got lost. In contrast metadata is carried over across updates.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#summary" id="summary"&gt;&lt;/a&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Using &lt;a href="https://github.com/mfikes/cljs-bean"&gt;cljs-bean&lt;/a&gt; we’ve enabled idiomatic property access for JS data structures without walking the entire document and converting it to a persistent data structure. We also retain the original Javascript object making it easy to use for Firestore API calls.&lt;/p&gt;
+&lt;p&gt;We’ve compared different ways of attaching additional metadata to those documents using compound structures as well as  the new and shiny &lt;code&gt;:extend-via-metadata&lt;/code&gt;. Using it we’ve extended instances of beans to support a custom protocol allowing open ended extension without hindering the ergonomics of direct property access.&lt;/p&gt;
+&lt;p&gt;While I really enjoyed figuring out how to extend beans using &lt;code&gt;:extend-via-metadata&lt;/code&gt; it turned out that any approach storing data in “unusual places” (i.e. metadata) causes notable complexity when also wanting to serialize the data.&lt;/p&gt;
+&lt;p&gt;Serializing metadata is something that &lt;a href="https://gist.github.com/mfikes/3a160a1504debd31e5771736256ca022"&gt;has been added to Transit quite some time ago&lt;/a&gt; but compared to the plug and play serialization we get when working with plain maps it did not seem worth it. Even if set up properly the protocol implementations, which are functions, are impossible to serialize.&lt;/p&gt;
+&lt;p&gt;Ultimately we ended up with plain beans and storing metadata under a well known key that is removed before writing the data to Firestore again:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clj"&gt;(defn doc [query-doc-snapshot]
+  (-&amp;gt; (cljs-bean/-&amp;gt;clj (.data query-doc-snapshot))
+      (assoc ::meta {:id (.-id query-doc-snapshot)
+                     :ref (.-ref query-doc-snapshot)})))
+
+(defn id [doc]
+  (-&amp;gt; doc ::meta :id))
+
+(defn ref [doc]
+  (-&amp;gt; doc ::meta :ref))
+
+(defn data [doc]
+  (cljs-bean/-&amp;gt;js (dissoc doc ::meta)))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you're using Firebase or comparable systems, I'd be curious to &lt;a href="https://clojureverse.org/t/working-with-firebase-documents-in-clojurescript/4813"&gt;hear if you do something similar on ClojureVerse&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Thanks to Matt Huebert and Mike Fikes for their feedback &amp;amp; ideas.&lt;/em&gt;&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, September 2019&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:b728ab75-373e-46b5-ba68-b01d5918cd70</id><title>4 Small Steps Towards Awesome Clojure Docstrings</title><link href="https://www.martinklepsch.org/posts/writing-awesome-docstrings.html" type="text/html" title="4 Small Steps Towards Awesome Clojure Docstrings" rel="alternate"></link><published>2019-01-28T00:00:00Z</published><updated>2019-01-28T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/writing-awesome-docstrings.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;4 Small Steps Towards Awesome Clojure Docstrings — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/writing-awesome-docstrings.html" title="Permalink: 4 Small Steps Towards Awesome Clojure Docstrings"&gt;January 2019&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;4 Small Steps Towards Awesome Clojure Docstrings&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;Through my work on &lt;a href="https://cljdoc.org"&gt;cljdoc&lt;/a&gt; I spent a lot of time looking at documentation and implementing code to render documentation. This made me more aware of the various facilities in Clojure documentation generators (codox, cljdoc, ...) and I would like to use this post to share that awareness with the wider Clojure community.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#1-backtick-quote-function-arguments-special-keywords" id="1-backtick-quote-function-arguments-special-keywords"&gt;&lt;/a&gt;1. Backtick-Quote Function Arguments &amp;amp; Special Keywords&lt;/h2&gt;
+&lt;p&gt;Whenever referring to an argument or special keywords, quote them using Markdown style `backticks`. This makes them stand out more when reading the docstring, making it easier to visually parse and skim. Emacs also nicely highlights this (possibly others too).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(defn conj!
+  [coll x]
+  &amp;quot;Adds `x` to the transient collection, and return `coll`. The 'addition'
+   may happen at different 'places' depending on the concrete type.&amp;quot;
+  ,,,)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;a href="#2-link-to-other-functions-using-wikilink-syntax" id="2-link-to-other-functions-using-wikilink-syntax"&gt;&lt;/a&gt;2. Link To Other Functions Using [[Wikilink]] Syntax&lt;/h2&gt;
+&lt;p&gt;Functions call each other and sometimes it can be useful to link to other functions. In Codox and cljdoc you can do this by wrapping the var name in wikilink-style double brackets:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(defn unlisten!
+  &amp;quot;Removes registered listener from connection. See also [[listen!]].&amp;quot;
+  [conn key]
+  (swap! (:listeners (meta conn)) dissoc key))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Featured here: &lt;a href="https://cljdoc.org/d/datascript/datascript/0.17.1/api/datascript.core#unlisten!"&gt;&lt;code&gt;datascript.core/unlisten!&lt;/code&gt;&lt;/a&gt;. To link to vars in other namespaces, fully qualify the symbol in the brackets, e.g. &lt;code&gt;[[datascript.core/listen!]]&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#3-include-small-examples" id="3-include-small-examples"&gt;&lt;/a&gt;3. Include Small Examples&lt;/h2&gt;
+&lt;p&gt;On cljdoc all docstrings are interpreted as Markdown. With Codox this can be achived with a small configuration tweak. This means you have access to all the text formatting facilities that Markdown provides including code blocks. Code blocks can be fantastic when trying to show how a function is used in a bigger context, as very nicely shown in the &lt;a href="https://cljdoc.org/d/keechma/toolbox/0.1.23/api/keechma.toolbox.dataloader.controller#register"&gt;Keechma Toolbox documentation&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://cljdoc.org/d/keechma/toolbox/0.1.23/api/keechma.toolbox.dataloader.controller#register"&gt;&lt;img src="/images/keechma-register.png" alt="keechma register" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See &lt;a href="https://github.com/keechma/keechma-toolbox/blob/176c96a7f8b97a7d67f0d54d1351c23db052d71c/src/cljs/keechma/toolbox/dataloader/controller.cljs#L71-L85"&gt;the source&lt;/a&gt; of this majestic docstring.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#4-use-tables-to-describe-complex-options-maps" id="4-use-tables-to-describe-complex-options-maps"&gt;&lt;/a&gt;4. Use Tables To Describe Complex Options Maps&lt;/h2&gt;
+&lt;p&gt;cljdoc's Markdown implementation supports tables as well. Those can be very useful when having a function that receives a map of options, like &lt;a href="https://cljdoc.org/d/metosin/reitit-core/0.2.13/api/reitit.core#router"&gt;&lt;code&gt;reitit.core/router&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://cljdoc.org/d/metosin/reitit-core/0.2.13/api/reitit.core#router"&gt;&lt;img src="/images/reitit-router.png" alt="reitit core router" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See &lt;a href="https://github.com/metosin/reitit/blob/0.2.13/modules/reitit-core/src/reitit/core.cljc#L417"&gt;the source&lt;/a&gt; of this beautiful docstring.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#closing" id="closing"&gt;&lt;/a&gt;Closing&lt;/h2&gt;
+&lt;p&gt;These trivial to implement improvements can make your docstrings 1000x times nicer to read (scientific studies have shown). Also they will just look plain awesome on &lt;a href="https://cljdoc.org"&gt;cljdoc&lt;/a&gt;. Check out some examplary docstring work done by Nikita Prokopov here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://cljdoc.org/d/rum/rum/0.11.3/api/rum.core"&gt;Rum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://cljdoc.org/d/datascript/datascript/0.17.1/api/datascript.core"&gt;Datascript&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And &lt;strong&gt;please tell me&lt;/strong&gt; about other projects with exceptional documentation or even more ways to make docstrings awesome.&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, January 2019&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:229c2b5e-1cdd-4904-9387-8c0491dc1382</id><title>Sustainable Open Source: Current Efforts</title><link href="https://www.martinklepsch.org/posts/sustainable-open-source-current-efforts.html" type="text/html" title="Sustainable Open Source: Current Efforts" rel="alternate"></link><published>2018-01-19T00:00:00Z</published><updated>2018-01-19T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/sustainable-open-source-current-efforts.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Sustainable Open Source: Current Efforts — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/sustainable-open-source-current-efforts.html" title="Permalink: Sustainable Open Source: Current Efforts"&gt;January 2018&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Sustainable Open Source: Current Efforts&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;The recent appearance of &lt;a href="http://clojuriststogether.org/"&gt;Clojurists Together&lt;/a&gt;, friends working on &lt;a href="https://openbounty.status.im/"&gt;OpenBounty&lt;/a&gt;, as well as recently finding a lot of energy to work on a documentation platform for the Clojure ecosystem stirred some thoughts about sustainable OpenSource.&lt;/p&gt;
+&lt;p&gt;Let's say one thing right out of the gate: sustainable OpenSource isn't really a goal on it's own. What the community (users as well as maintainers) strives for is reliability and well-maintained ecosystem components. Businesses and individuals alike depend on those properties — not the fact that work done to achieve them is sustainable. That said I don't see any ways to achieve those without sustainability.&lt;/p&gt;
+&lt;h3&gt;&lt;a href="#current-efforts" id="current-efforts"&gt;&lt;/a&gt;Current Efforts&lt;/h3&gt;
+&lt;p&gt;There are various platforms trying to improve sustainability of open source efforts that have continued momentum. Many of them with their own ideas how the situation can be improved.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://opencollective.com"&gt;&lt;strong&gt;OpenCollective&lt;/strong&gt;&lt;/a&gt; collects payments from individuals and companies and stores funds for organizations. People may then &amp;quot;invoice&amp;quot; the organization. This can be for stickers and labor time alike.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://openbounty.status.im/"&gt;&lt;strong&gt;OpenBounty&lt;/strong&gt;&lt;/a&gt; is a bounty platform used with cryptocurrencies. Contributors may work on specific issues and get paid a bounty which has been defined in advance.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://clojuriststogether.org/"&gt;&lt;strong&gt;Clojurists Together&lt;/strong&gt;&lt;/a&gt; collects money from companies and community members to fund open source projects benefitting the overall Clojure ecosystem. People may apply with a project they want to work on and get funding (depending on overall availability) for a duration of three months.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All platforms take care of collecting money and have mechanisms for redistributing it. With OpenCollective a community will need to agree on processes to request and distribute funds. Clojurists Together collects money in similar ways to OpenCollective but has a predefined process for how funds are allocated.&lt;/p&gt;
+&lt;p&gt;Projects like webpack &lt;a href="https://opencollective.com/webpack/expenses"&gt;have embraced&lt;/a&gt; OpenCollective with people getting reimbursed for expenses but also regular labor invoices for time worked on the project.&lt;/p&gt;
+&lt;p&gt;OpenBounty also provides some of these processes by assigning bounties to specific tasks. OpenBounty is used in &lt;a href="https://status.im/"&gt;Status.im&lt;/a&gt;'s development process and while I don't believe bounties are the answer to everything I'm excited to watch this space in the future.&lt;/p&gt;
+&lt;!-- Interesting to note about OpenBounty: it is
+developed by a blockchain startup ([Status.im](https://status.im/)) to ramp
+up their development efforts and incentivize more people to contribute to the
+project **[TODO relevant?]**. --&gt;
+&lt;h3&gt;&lt;a href="#sustainable-incentives" id="sustainable-incentives"&gt;&lt;/a&gt;Sustainable Incentives&lt;/h3&gt;
+&lt;p&gt;Contributing to OpenSource is about incentives. As far as I can judge these often are&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;fun &amp;amp; community,&lt;/li&gt;
+&lt;li&gt;fixing a problem one encountered,&lt;/li&gt;
+&lt;li&gt;recognition &amp;amp; better job opportunities.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Nothing is wrong with this list but they are not sustainable on their own. Just working for the fuzzy feeling of giving back to a community doesn't pay your bills. As soon as you can no longer afford to work for the fun of it the stability and momentum of projects you contributed to will suffer.&lt;/p&gt;
+&lt;!-- Meaning, those incentives may encourage the --&gt;
+&lt;!-- properties discussed in the introduction (well-maintained etc) for some --&gt;
+&lt;!-- duration of time but not in a sustainable (~long-term) way. --&gt;
+&lt;!-- There's one notable (and rare?) exception I can think of: people getting
+hired with a clause to spend time on an OpenSource project. **[TODO maybe not
+as important]** --&gt;
+&lt;!-- There are some things — or rather two kinds of participants — that need to be given to guarantee stable and well-maintained open source projects: --&gt;
+&lt;p&gt;I believe there are two kinds of participants required to achieve reliability, stability and so on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;There need to be some people contributing on a regular basis. They provide overall direction, deal with reported issues and incoming contributions. Often projects refer to this as &amp;quot;core&amp;quot;. In my experience stability of an open source project suffers with fluctuations in the set of &amp;quot;core&amp;quot; people working on it.&lt;/li&gt;
+&lt;li&gt;There need to be occasional/new contributors. Life will happen (kids, work, etc.) to regular contributors causing a natural decline. New contributors discovering they enjoy working on the project can fill up those gaps.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In my opinion the incentives listed above are not sufficient — especially for long-term regular contributors. If work is unpaid it will eventually become stressful to juggle with other responsibilities and people will be forced to step back. New contributors are just as important and I believe there are improvements to be done there as well but ultimately nothing works without a &amp;quot;core&amp;quot; set of people.&lt;/p&gt;
+&lt;p&gt;I have some further thoughts on how such incentives could be structured which I will explore in a later blog post.&lt;/p&gt;
+&lt;!-- Now that we have an idea of what's required we can think about ways to fulfill those requirements. --&gt;
+&lt;!-- ---
+
+THOUGHT: Too strong incentives to contribute to existing projects could hinder innovation? Hidden part of graph we should be aware of/consider.
+
+---
+
+THOUGHT: Stability and reliability are among the most important aspects of open source projects. Any system should optimize towards ongoing contribution while also maintaining an inflow of new people so other people may retreat to other adventures.
+
+---
+
+Let's start with bounties as they are probably more controversial than other models. I believe bounties can excel at achieving the following goals:
+
+- Getting new people to contribute to a project
+- Encouraging outsiders to familiarize themselves with a project (think of security)
+
+Bounties fall short when the aim is to create stability and continuous unguided contributions. --&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, January 2018&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:443e70e4-c49d-4391-ac18-bf478b8e2955</id><title>Maven Snapshots</title><link href="https://www.martinklepsch.org/posts/maven-snapshots.html" type="text/html" title="Maven Snapshots" rel="alternate"></link><published>2017-06-04T00:00:00Z</published><updated>2017-06-04T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/maven-snapshots.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Maven Snapshots — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/maven-snapshots.html" title="Permalink: Maven Snapshots"&gt;June 2017&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Maven Snapshots&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;h2&gt;&lt;a href="#or-how-to-use-maven-snapshots-without-setting-your-hair-on-fire" id="or-how-to-use-maven-snapshots-without-setting-your-hair-on-fire"&gt;&lt;/a&gt;Or: How to use Maven snapshots without setting your hair on fire.&lt;/h2&gt;
+&lt;p&gt;Ever depended on a Clojure library with a version that ended in &lt;code&gt;-SNAPSHOT&lt;/code&gt;? That's what's called a Maven snapshot.&lt;/p&gt;
+&lt;p&gt;Maven snapshots are a handy tool to provide pre-release builds to those who are interested. In contrast to proper releases a SNAPSHOT release can be &amp;quot;updated&amp;quot;. And that's where the trouble comes in.&lt;/p&gt;
+&lt;p&gt;Let's say you depend on a snapshot because it contains a fix you recently contributed to your favorite open source project. A week later another fix is added and released under the same &lt;code&gt;0.1.0-SNAPSHOT&lt;/code&gt; version.&lt;/p&gt;
+&lt;p&gt;Now it turns out that second fix contained a minor bug. No big deal, it's a pre-release after all. The problem with all this however is that you (Maven) will automatically use the new SNAPSHOT, no action required. A dependency you use in your project &lt;strong&gt;changes without you being aware&lt;/strong&gt; of it. Suddenly stuff breaks. You wonder what happened. Did you change anything? No? Frustration ensues.&lt;/p&gt;
+&lt;p&gt;Because of this for a long time I thought SNAPSHOTS are evil and instead of using them library authors should release development builds with a qualifier like &lt;code&gt;0.1.0-alpha1&lt;/code&gt;. I still think this is a good practice and try to adhere to it myself as much as possible.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#in-the-meantime-there-is-another-way-to-safely-depend-on-maven-snapshots-though" id="in-the-meantime-there-is-another-way-to-safely-depend-on-maven-snapshots-though"&gt;&lt;/a&gt;In the meantime there is another way to safely depend on Maven snapshots though.&lt;/h2&gt;
+&lt;p&gt;Whenever you push a SNAPSHOT version to a Maven repository (like Clojars) it does not actually overwrite the previously uploaded jar but creates a separate jar with a version like this: &lt;code&gt;0.1.0-20170301.173959-4&lt;/code&gt;. Once the upload is complete it merely changes the SNAPSHOT version to point to that release. All previous releases are still available (by default Maven repos only keep the latest SNAPSHOT version but Clojars keeps them all).&lt;/p&gt;
+&lt;p&gt;This means instead of depending on a &lt;strong&gt;mutable&lt;/strong&gt; version you can now depend on an &lt;strong&gt;immutable&lt;/strong&gt; version. Oh do we love immutability.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[group-id/project-id &amp;quot;0.1.0-20170301.173959-4&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finding these version identifiers isn't the easiest thing but basically:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;you go to the page of a jar on Clojars, e.g. &lt;a href="https://clojars.org/adzerk/boot-cljs/"&gt;adzerk/boot-cljs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;in the sidebar that lists recent versions, click &amp;quot;Show All Versions&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://clojars.org/adzerk/boot-cljs/versions"&gt;versions page&lt;/a&gt; you can find a note at the bottom that leads you to the &lt;a href="https://repo.clojars.org/adzerk/boot-cljs/"&gt;Maven repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;if you click on a SNAPSHOT version there you get to a page that &lt;a href="https://repo.clojars.org/adzerk/boot-cljs/2.0.0-SNAPSHOT/"&gt;lists all the stable identifiers for that version&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To get to the Maven repo page directly you can also just put a &lt;code&gt;repo.&lt;/code&gt; subdomain in front of a given Clojars project url:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://clojars.org/adzerk/boot-cljs/
+https://repo.clojars.org/adzerk/boot-cljs/
+        ^^^^
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And they depend on SNAPSHOTs happily ever after.&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, June 2017&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:461f273b-8587-42ce-be1a-6efe22a78d2e</id><title>Requiring Closure Namespaces</title><link href="https://www.martinklepsch.org/posts/requiring-closure-namespaces.html" type="text/html" title="Requiring Closure Namespaces" rel="alternate"></link><published>2017-05-11T00:00:00Z</published><updated>2017-05-11T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/requiring-closure-namespaces.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Requiring Closure Namespaces — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/requiring-closure-namespaces.html" title="Permalink: Requiring Closure Namespaces"&gt;May 2017&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Requiring Closure Namespaces&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;Yet another post on properly using the &lt;a href="https://developers.google.com/closure/library/"&gt;Closure Library&lt;/a&gt; from within ClojureScript. This time we'll discuss how to require different namespaces from Closure and the edge-cases that may not be immediately intuitive.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#namespaces-constructors-constants" id="namespaces-constructors-constants"&gt;&lt;/a&gt;Namespaces, Constructors, Constants&lt;/h2&gt;
+&lt;p&gt;When requiring things from Closure you mostly deal with its namespaces. Most namespaces have functions defined in them, some also contain constructors or constants. Functions are camelCased. Constructors are Capitalized. Constants are ALL_CAPS. The line between namespaces and constructors gets a bit blurry sometimes as you'll see shortly.&lt;/p&gt;
+&lt;p&gt;Let's take &lt;code&gt;goog.Timer&lt;/code&gt; as an example. As per the previous paragraph you can infer that &lt;code&gt;Timer&lt;/code&gt; is a constructor. Just like in Clojure we use &lt;code&gt;:import&lt;/code&gt; to make constructors available:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(ns my.app
+  (:import [goog Timer]))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we may use the &lt;code&gt;Timer&lt;/code&gt; constructor as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(def our-timer (Timer. interval))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Great. We have a timer. Now we'll want to do something whenever it &amp;quot;ticks&amp;quot;. The &lt;code&gt;Timer&lt;/code&gt; instance emits events which we can listen to. Listening to events can be done with the function &lt;code&gt;goog.events.listen&lt;/code&gt;. As you can see, this function is not part of any class instance - it just exists in the &lt;code&gt;goog.events&lt;/code&gt; namespace. To make the &lt;code&gt;listen&lt;/code&gt; function accessible you need to require the namespace containing it. This is similar to how we require regular ClojureScript namespaces:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(ns my.app
+  (:require [goog.events :as events])
+  (:import [goog Timer]))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can refer to the function as &lt;code&gt;events/listen&lt;/code&gt; now. To listen to specific kinds of events we need to pass an event type to this function. Many Closure namespaces define constants that you can use to refer to those event types. Internally they're often just strings or numbers but this level of indirection shields you from some otherwise breaking changes to a namespace's implementation.&lt;/p&gt;
+&lt;p&gt;Looking at the &lt;a href="https://google.github.io/closure-library/api/goog.Timer.html"&gt;Timer&lt;/a&gt; docs you can find a constant &lt;code&gt;TICK&lt;/code&gt;. Now we required the constructor and are able to use that but the constructor itself does not allow us to access other parts of the namespace. So let's require the namespace.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(ns my.app
+  (:require [goog.events :as events]
+            [goog.Timer :as timer]) ; &amp;lt;-- new
+  (:import [goog Timer]))
+
+(def our-timer (Timer. interval))
+
+(events/listen our-timer timer/TICK (fn [e] (js/console.log e)))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Remember the blurry line mentioned earlier? We just required the &lt;code&gt;goog.Timer&lt;/code&gt; namespace both as a constructor and as a namespace. While this example works fine now, there are two more edge cases worth pointing out.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#deeper-property-access" id="deeper-property-access"&gt;&lt;/a&gt;Deeper Property Access&lt;/h2&gt;
+&lt;p&gt;Closure comes with a handy namespace for keyboard shortcuts, aptly named &lt;a href="https://google.github.io/closure-library/api/goog.ui.KeyboardShortcutHandler.html"&gt;&lt;code&gt;KeyboardShortcutHandler&lt;/code&gt;&lt;/a&gt;. As you can guess, &lt;code&gt;KeyboardShortcutHandler&lt;/code&gt; is a constructor that we can use via &lt;code&gt;:import&lt;/code&gt;. Since it emits events, the namespace also provides an enum of events that we can use to listen for specific ones. In contrast to the timer's &lt;code&gt;TICK&lt;/code&gt;, this enumeration is &amp;quot;wrapped&amp;quot; in &lt;code&gt;goog.ui.KeyBoardShortcutHandler.EventType&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;EventType&lt;/code&gt; property contains &lt;code&gt;SHORTCUT_PREFIX&lt;/code&gt; and &lt;code&gt;SHORTCUT_TRIGGERED&lt;/code&gt;. So far we've only imported the constructor. At this point you might try this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(:require [goog.ui.KeyBoardShortcutHandler.EventType :as event-types])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;But that won't work&lt;/strong&gt;. The &lt;code&gt;EventType&lt;/code&gt; is not a namespace but an enum provided by the &lt;code&gt;KeyboardShortcutHandler&lt;/code&gt; namespace. To access the enum you need to access it through the namespace providing it. In the end this will look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(:require [goog.ui.KeyBoardShortcutHandler :as shortcut])
+
+(events/listen a-shortcut-handler shortcut/EventType.SHORTCUT_TRIGGERED ,,,)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note how the slash always comes directly after the namespace alias.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#googstringformat" id="googstringformat"&gt;&lt;/a&gt;goog.string.format&lt;/h2&gt;
+&lt;p&gt;Last but not least another weird one. &lt;code&gt;goog.string.format&lt;/code&gt; is a namespace that &lt;a href="https://google.github.io/closure-library/api/goog.string.format.html"&gt;seems to&lt;/a&gt; contain a single function called &lt;code&gt;format&lt;/code&gt;. If you require the format namespace however, it turns out to contain no function of that name:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(:require [goog.string.format :as format])
+
+(format/format ,,,) ; TypeError: goog.string.format.format is not a function
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now in cases like this it often helps to look at &lt;a href="https://github.com/google/closure-library/blob/master/closure/goog/string/stringformat.js"&gt;the source code&lt;/a&gt; directly. Usually Closure Library code is very readable. The format function is defined as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;goog.string.format = function(formatString, var_args) {
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see it's defined as a property of &lt;code&gt;goog.string&lt;/code&gt;, so we can access it via &lt;code&gt;goog.string/format&lt;/code&gt; (or an alias you might have chosen when requiring &lt;code&gt;goog.string&lt;/code&gt;).  In that sense &lt;code&gt;goog.string.format&lt;/code&gt; is not a real namespace but rather something you require for its side effects — in this case the definition of another function in &lt;code&gt;goog.string&lt;/code&gt;. I have no idea why they chose to split things up in that way. ¯\&lt;em&gt;(ツ)&lt;/em&gt;/¯&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#for-reference" id="for-reference"&gt;&lt;/a&gt;For Reference&lt;/h2&gt;
+&lt;p&gt;I scratched my head many times about one or the other aspect of this and usually ended up looking at old code. Next time I'll look at the handy list below 🙂&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Require Google Closure &lt;strong&gt;namespaces&lt;/strong&gt; just as you'd require ClojureScript namespaces
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(:require [goog.events :as events])&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;base &lt;code&gt;goog&lt;/code&gt; namespace&lt;/strong&gt; is autmatically required as if you'd have &lt;code&gt;[goog :as goog]&lt;/code&gt; in your list of required namespaces.
+&lt;ul&gt;
+&lt;li&gt;This implies that you can refer to &lt;code&gt;goog.DEBUG&lt;/code&gt; as &lt;code&gt;goog/DEBUG&lt;/code&gt;. Never refer to &lt;code&gt;goog&lt;/code&gt; through the global Javascript namespace as in &lt;code&gt;js/goog.DEBUG&lt;/code&gt;. (&lt;a href="https://dev.clojure.org/jira/browse/CLJS-2023"&gt;CLJS-2023&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Require &lt;strong&gt;constructors&lt;/strong&gt; using one of the two forms. In either case you may use &lt;code&gt;Timer.&lt;/code&gt; to construct new objects.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(:import [goog Timer])&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(:import goog.Timer)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;There's an outstanding ticket about &lt;a href="https://dev.clojure.org/jira/browse/CLJS-1734"&gt;imports with the same name shadowing each other&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Only access &lt;strong&gt;non-constructor parts&lt;/strong&gt; of a namespace through a namespace that has been &lt;code&gt;:require&lt;/code&gt;d&lt;/li&gt;
+&lt;li&gt;Always use slash after the namespace alias, use dot for deeper property access.&lt;/li&gt;
+&lt;li&gt;Requiring &lt;code&gt;goog.string.format&lt;/code&gt; will define a function &lt;code&gt;format&lt;/code&gt; in the &lt;code&gt;goog.string&lt;/code&gt; namespace.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href="#enjoy" id="enjoy"&gt;&lt;/a&gt;Enjoy&lt;/h2&gt;
+&lt;p&gt;For many of the things described here there are alternative ways to do them. We still build on Javascript after all. The ones I've chosen here are the ones that seem most idiomatic from a Clojurescript perspective.&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href="https://twitter.com/pesterhazy"&gt;Paulus Esterhazy&lt;/a&gt; and &lt;a href="https://twitter.com/anmonteiro90"&gt;António Monteiro&lt;/a&gt; for proof-reading this post and offering their suggestions.&lt;/p&gt;
+&lt;p&gt;If you feel like reading more about utilizing the Closure Library and compiler in ClojureScript I have a few more posts on those:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/posts/simple-debouncing-in-clojurescript.html"&gt;Simple Debouncing in ClojureScript&lt;/a&gt;, showing how to build a simple debouncing mechanism with the facilities provided by the Closure Library.&lt;/li&gt;
+&lt;li&gt;&lt;a href="/posts/parameterizing-clojurescript-builds.html"&gt;Parameterizing ClojureScript Builds&lt;/a&gt;, outlining ways to modify ClojureScript builds using the Closure compiler's ability to customize constants at compile-time.&lt;/li&gt;
+&lt;li&gt;&lt;a href="/posts/just-in-time-script-loading-with-react-and-clojuresript.html"&gt;Just-in-Time Script Loading&lt;/a&gt;, describing how to load 3rd party scripts like Stripe using React components and Closure's script loader.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, May 2017&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:271f273e-8587-42ce-be1a-6efe22a78d2e</id><title>Simple Debouncing in ClojureScript</title><link href="https://www.martinklepsch.org/posts/simple-debouncing-in-clojurescript.html" type="text/html" title="Simple Debouncing in ClojureScript" rel="alternate"></link><published>2017-04-16T00:00:00Z</published><updated>2017-04-16T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/simple-debouncing-in-clojurescript.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Simple Debouncing in ClojureScript — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/simple-debouncing-in-clojurescript.html" title="Permalink: Simple Debouncing in ClojureScript"&gt;April 2017&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Simple Debouncing in ClojureScript&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;This is a short post on a problem that eventually occurs in any Javascript app: debouncing. While there are various approaches to this problem I want to focus on one that relies on nothing else than the &lt;a href="https://developers.google.com/closure/library/"&gt;Closure Library&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#why-debounce" id="why-debounce"&gt;&lt;/a&gt;Why Debounce&lt;/h2&gt;
+&lt;p&gt;Debouncing is a technique to limit the rate of an action. Usually this rate is specified as an interval in which the action may be executed at most once. If execution of the action is requested multiple times in one interval it is important that the most recently supplied arguments are used when eventually executing the action.&lt;/p&gt;
+&lt;p&gt;(If you only care about the rate limiting and using the latest arguments isn't a requirement that's called throttling.)&lt;/p&gt;
+&lt;p&gt;Use cases for debouncing are plentiful. Auto-saving something the user is typing, fetching completions or triggering server side validations are some examples that come to mind.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#closure-library-facilities" id="closure-library-facilities"&gt;&lt;/a&gt;Closure Library Facilities&lt;/h2&gt;
+&lt;p&gt;I've long been a fan of the Closure Library that comes with ClojureScript.  Many common problems are solved in elegant and efficient ways, &lt;a href="https://google.github.io/closure-library/"&gt;the documentation&lt;/a&gt; gives a good overview of what's in the box and the code and tests are highly readable.&lt;/p&gt;
+&lt;p&gt;For the problem of debouncing Closure provides a construct &lt;a href="https://google.github.io/closure-library/api/goog.async.Debouncer.html"&gt;goog.async.Debouncer&lt;/a&gt; that allows you to debounce arbitrary functions. A short, very basic example in Javascript:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-js"&gt;var debouncer = new goog.async.Debouncer(function(x) {alert(x)}, 500);
+debouncer.fire(&amp;quot;Hello World!&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will create an alert saying &amp;quot;Hello World!&amp;quot; 500ms after the &lt;code&gt;fire()&lt;/code&gt; function has been called. Now let's translate this to ClojureScript and generalize it slightly. In the end we want to be able to debounce any function.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clojure"&gt;(ns app.debounce
+  (:import [goog.async Debouncer]))
+
+(defn save-input! [input]
+  (js/console.log &amp;quot;Saving input&amp;quot; input))
+
+(defn debounce [f interval]
+  (let [dbnc (Debouncer. f interval)]
+    ;; We use apply here to support functions of various arities
+    (fn [&amp;amp; args] (.apply (.-fire dbnc) dbnc (to-array args)))))
+
+;; note how we use def instead of defn
+(def save-input-debounced!
+  (debounce save-input! 1000))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What the &lt;code&gt;debounce&lt;/code&gt; function does is basically returning a new function wrapped in a &lt;code&gt;goog.async.Debouncer&lt;/code&gt;. When and how you create those debounced functions is up to you. You can create them at application startup using a simple &lt;code&gt;def&lt;/code&gt; (as in the example) or you might also dynamically create them as part of your component/application lifecycle. (If you create them dynamically you might want to learn about &lt;code&gt;goog.Disposable&lt;/code&gt;.)&lt;/p&gt;
+&lt;p&gt;There's one caveat with our &lt;code&gt;debounce&lt;/code&gt; implementation above you should also be aware of: because we use Javascript's &lt;code&gt;apply&lt;/code&gt; here we don't get any warnings if we end up calling the function with the wrong number of arguments. I'm sure this could be improved with a macro but that's not part of this article.&lt;/p&gt;
+&lt;p&gt;Also small disclaimer on the code: I mostly tested it with &lt;a href="https://github.com/anmonteiro/lumo"&gt;Lumo&lt;/a&gt; in a REPL but I'm confident that it will work fine in a browser too.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#debounce-away" id="debounce-away"&gt;&lt;/a&gt;Debounce Away&lt;/h2&gt;
+&lt;p&gt;I hope this helps and shows that there's much useful stuff to be found in Closure Library. To this day it's a treasure trove that has rarely dissappointed me. Sometimes things are a bit confusing (I still don't understand &lt;code&gt;goog.i18n&lt;/code&gt;) but there are many truly simple gems to be found. &lt;em&gt;Maybe I should do a post about my favorites some day...&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://google.github.io/closure-library"&gt;documentation site&lt;/a&gt; has a search feature and a tree view of all the namespaces of the library; use it next time when you're about to add yet another Javascript dependency to your project.&lt;/p&gt;
+&lt;p&gt;Also not a big surprise I guess but all of the Closure Library's code is Closure Compiler compatible just like your ClojureScript code. This means any functions, constants etc. that are never used will be removed by the compiler's Dead Code Elimination feature. Yeah!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update 2017-05-12&lt;/strong&gt; — Multiple people have noted that there also is a function &lt;a href="https://google.github.io/closure-library/api/goog.functions.html#debounce"&gt;&lt;code&gt;goog.functions.debounce&lt;/code&gt;&lt;/a&gt;. For many basic cases this might result in simpler, more concise code.&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, April 2017&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:a658e901-04ec-4ff4-a2d5-c8c72231e3e7</id><title>Making Remote Work</title><link href="https://www.martinklepsch.org/posts/making-remote-work.html" type="text/html" title="Making Remote Work" rel="alternate"></link><published>2017-03-25T00:00:00Z</published><updated>2017-03-25T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/making-remote-work.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Making Remote Work — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/making-remote-work.html" title="Permalink: Making Remote Work"&gt;March 2017&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Making Remote Work&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;I've been working remotely for a bit over a year now. Most projects went pretty well. Some not so much. I've worked with fully distributed teams and as a satellite worker with on-site teams. I'm not an expert—but I've learned some things.&lt;/p&gt;
+&lt;p&gt;What follows are some basic ideas to make remote teams work. I hope these help companies and remote workers set things up for success.&lt;/p&gt;
+&lt;h3&gt;&lt;a href="#focus-on-self-sufficiency" id="focus-on-self-sufficiency"&gt;&lt;/a&gt;Focus on Self Sufficiency&lt;/h3&gt;
+&lt;p&gt;In an office you walk up to somebody (read: interrupt their work) and discuss stuff. In a remote environment you may need to schedule, then wait, then deal with connectivity issues, then have a discussion. Sometimes the waiting part alone can take the better part of a day.&lt;/p&gt;
+&lt;p&gt;Synchronous communication, including chat, is great and necessary but the more your work routine relies on it, the more you might unknowingly slow everyone down.&lt;/p&gt;
+&lt;p&gt;With that in mind, start thinking of communication as a cost factor. Being slowed down costs time, momentum and motivation. These are the things you usually want to preserve at all cost. And that's where self-sufficiency comes in.&lt;/p&gt;
+&lt;p&gt;Being self sufficient in work means knowing what to do in order to advance the project and having the means to execute. The easiest way to make people understand what is worth working on is making them understand the business. Sometimes more specific goals will also do the job. But generally the broader the better.&lt;/p&gt;
+&lt;p&gt;Once everyone is able to develop ideas based on their understanding of the business all that is missing is The Feedback Loop™. Feedback is often a critical part of UI design but that does not mean it isn't applicable to other domains. Enable your team to see the impact of their work. Define relevant metrics and measure, measure, measure, graph, graph, graph. Share and celebrate accomplishments.&lt;/p&gt;
+&lt;h3&gt;&lt;a href="#document-with-rigour" id="document-with-rigour"&gt;&lt;/a&gt;Document With Rigour&lt;/h3&gt;
+&lt;p&gt;Again, communication has a cost. It's fun and important too. You want to spend that valuable face-time with your colleagues chatting about last weekends hike or that tricky problem you're banging your head against. You don't want to spend it figuring out how to run migrations or update your environment so that things work again with those latest changes.&lt;/p&gt;
+&lt;p&gt;Have a &lt;code&gt;README&lt;/code&gt;. Make sure to add a table of contents. This is reference material, not an essay. Maybe try Asciidoc if Markdown feels too restrictive. Ensure that pull requests are reviewed with documentation changes in mind. With GitHub's pull request templates it's easy to remind team members to update documentation.&lt;/p&gt;
+&lt;p&gt;That hike last week was nice by the way:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/hike.jpg" alt="" /&gt;&lt;/p&gt;
+&lt;div class="pa2 tc f3 blue"&gt;·  ·  ·&lt;/div&gt;
+&lt;p&gt;I realize the up-front cost of making someone understand the intricacies of a business might be higher than just telling them to &amp;quot;do this&amp;quot;. There may be smaller projects where deep understanding is not necessary. It seems reasonable to think that everyone does a better job if they do understand the business though.&lt;/p&gt;
+&lt;p&gt;Now all these suggestions are probably applicable to any team, not only remote ones. However they are of particular importance for remote teams.&lt;/p&gt;
+&lt;p class="f6 ba br2 b--blue pa3 mt4"&gt;Distributed teams face special challenges. &lt;a href="https://goo.gl/forms/BTteLFXQFopWOXxt1"&gt;I would love to hear yours&lt;/a&gt; and see if there might be something that could be built to help.&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, March 2017&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:21eecbc4-1be6-4930-89ae-9c36c69e0a16</id><title>Just-in-Time Script Loading With React And ClojureScript</title><link href="https://www.martinklepsch.org/posts/just-in-time-script-loading-with-react-and-clojuresript.html" type="text/html" title="Just-in-Time Script Loading With React And ClojureScript" rel="alternate"></link><published>2016-11-25T00:00:00Z</published><updated>2016-11-25T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/just-in-time-script-loading-with-react-and-clojuresript.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Just-in-Time Script Loading With React And ClojureScript — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/just-in-time-script-loading-with-react-and-clojuresript.html" title="Permalink: Just-in-Time Script Loading With React And ClojureScript"&gt;November 2016&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Just-in-Time Script Loading With React And ClojureScript&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;In the last projects I've been working on I've come accross the situation that I needed to load some external script (Stripe, Google Maps, ...) at a certain point and then do something with the features exposed by this newly imported library. Some times you might be able to circumvent loading a library at runtime by bundling it with your main application but even then you might want to consider splitting it into a separate module and loading it when it's actually needed.&lt;/p&gt;
+&lt;p&gt;We won't talk about module splitting and loading in this blog post though and instead focus on loading things like Stripe and Google Maps that just can't be bundled with your application.&lt;/p&gt;
+&lt;p&gt;The easy way to load these would be using a simple script tag:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-html"&gt;&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;https://js.stripe.com/v2/&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With this approach however you load the script for every user even though they may never, or already went through, your payment flow. A better way would be to load it when the user actually wants to pay you. I've heard fast loading apps make that more likely as well ;) Also you might say that these scripts could be cached, but even if they are: you still pay for the parsing and execution time.&lt;/p&gt;
+&lt;p&gt;So how can we go about that? What follows is one pattern that I think is fairly simple and elegant and also a nice use of React's lifecycle features and higher-order components:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clojure"&gt;(ns your-app.lib.reagent
+  (:require [reagent.core :as reagent]
+            [goog.net.jsloader :as jsl]))
+
+(defn filter-loaded [scripts]
+  (reduce (fn [acc [loaded? src]]
+            (if (loaded?) acc (conj acc src)))
+          []
+          scripts))
+
+(defn js-loader
+  &amp;quot;Load a supplied list of Javascript files and render a component
+   during loading and another component as soon as every script is
+   loaded.
+
+   Arg map: {:scripts {loaded-test-fn src}
+             :loading component
+             :loaded component}&amp;quot;
+  [{:keys [scripts loading loaded]}]
+  (let [loaded? (reagent/atom false)]
+    (reagent/create-class
+     {:component-did-mount (fn [_]
+                             (let [not-loaded (clj-&amp;gt;js (filter-loaded scripts))]
+                               (.then (jsl/loadMany not-loaded)
+                                      #(do (js/console.info &amp;quot;Loaded:&amp;quot; not-loaded)
+                                           (reset! loaded? true)))))
+      :reagent-render (fn [{:keys [scripts loading loaded]}]
+                        (if @loaded? loaded loading))})))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And here's how you can use it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clojure"&gt;;; payment-form can expect `js/Stripe` to be defined
+[js-loader {:scripts {#(exists? js/Stripe) &amp;quot;https://js.stripe.com/v2/&amp;quot;}
+            :loading [:div &amp;quot;Loading...&amp;quot;]
+            :loaded [payment-form]}]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So, what can we take away from this besides the specific snippets above?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Higher order components can be very useful to hide away side effects needed for your views to function&lt;/li&gt;
+&lt;li&gt;They also are perfectly reusable&lt;/li&gt;
+&lt;li&gt;You can of course also use higher order components to pass things into child components, we don't do that here but if you create some stateful object this may come in handy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hope this is helpful — let me know if you have any thoughts or suggestions :)&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, November 2016&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:bdabdf1d-742c-468f-89bb-032986a9d99f</id><title>Props, Children &amp; Component Lifecycle in Reagent</title><link href="https://www.martinklepsch.org/posts/props-children-and-component-lifecycle-in-reagent.html" type="text/html" title="Props, Children &amp; Component Lifecycle in Reagent" rel="alternate"></link><published>2016-05-19T00:00:00Z</published><updated>2016-05-19T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/props-children-and-component-lifecycle-in-reagent.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Props, Children &amp; Component Lifecycle in Reagent — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/props-children-and-component-lifecycle-in-reagent.html" title="Permalink: Props, Children &amp;amp; Component Lifecycle in Reagent"&gt;May 2016&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Props, Children &amp; Component Lifecycle in Reagent&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;Every now and then I come across the situation that I need to compare previous and next props passed to a Reagent component. Every time again I fail to find some docs and figure it out by trial and error.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#props-vs-children" id="props-vs-children"&gt;&lt;/a&gt;Props vs. Children&lt;/h2&gt;
+&lt;p&gt;In React &lt;strong&gt;everything&lt;/strong&gt; passed to a component is called &lt;code&gt;props&lt;/code&gt;. Children passed to components are passed as &lt;code&gt;props.children&lt;/code&gt;. In Reagent things are a bit different and Reagent’s hiccup syntax doesn’t explicitly separate the two:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clojure"&gt;;; configuration and one child
+[popup {:style :alert} [delete-confirmation]]
+;; two children
+[popup [alert-icon] [delete-confirmation]]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="language-xml"&gt;&amp;lt;Popup style=&amp;quot;alert&amp;quot;&amp;gt;&amp;lt;DeleteConfirmation&amp;gt;&amp;lt;/Popup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In React it is well-defined where you can access the &lt;code&gt;style&lt;/code&gt; parameter (&lt;code&gt;props.style&lt;/code&gt;) and how you can access the passed children (&lt;code&gt;props.children&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;In Reagent things are a bit different: you have a function definition which takes a number of arguments which you can just refer to in the same way you can refer to any other function parameter. This makes thinking in functions a lot easier but also overshadows some of the underlying React behaviour.&lt;/p&gt;
+&lt;p&gt;In a lifecycle handler like &lt;code&gt;:component-did-update&lt;/code&gt; accessing component arguments via the symbol they’ve been given in the functions argument vector doesn’t work:&lt;/p&gt;
+&lt;p&gt;The moment you define components that are not simple render functions (remember those &lt;a href="https://github.com/Day8/re-frame/wiki/Creating-Reagent-Components"&gt;Form-2 and Form-3&lt;/a&gt; components?) all updates will pass their arguments to the components render function.&lt;/p&gt;
+&lt;p&gt;The moment you render a component that has been created via &lt;code&gt;reagent.core/create-class&lt;/code&gt; all updates will pass their arguments to the &lt;code&gt;:reagent-render&lt;/code&gt; function, potentially triggering a re-render. The function that returned the result of &lt;code&gt;create-class&lt;/code&gt; is only ever called once at the time of mounting the component — your top-level &lt;code&gt;defn&lt;/code&gt; returns a component instead of being a render function itself. This is also &lt;a href="https://github.com/Day8/re-frame/wiki/Creating-Reagent-Components#form-2--a-function-returning-a-function"&gt;why you need to repeat the arguments in the &lt;code&gt;:reagent-render&lt;/code&gt; arguments&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="#props-in-lifecycle-handlers" id="props-in-lifecycle-handlers"&gt;&lt;/a&gt;Props in Lifecycle Handlers&lt;/h2&gt;
+&lt;p&gt;Now how do we get access to these props in a lifecycle handler? The quick answer is, we use &lt;code&gt;reagent.core/props&lt;/code&gt; — obvious, huh?&lt;/p&gt;
+&lt;p&gt;One peculiarity about the &lt;code&gt;props&lt;/code&gt; function is that it expects the &lt;code&gt;props&lt;/code&gt; data to be the first argument to your function. Also it &lt;strong&gt;has to be a map&lt;/strong&gt; (if it’s not &lt;code&gt;props&lt;/code&gt; returns &lt;code&gt;nil&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;If the first argument to your component is not a map all arguments are interpreted as children and can be retrieved via &lt;code&gt;reagent.core/children&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So now we have the props for the current render, how do we access the previous ones? All previously passed arguments are passed to the lifecycle handler. Not as you might think though.&lt;/p&gt;
+&lt;p&gt;If you have a component that has a signature like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clojure"&gt;(defn my-comp [my-props more] …)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can access it’s previously passed arguments like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-clojure"&gt;:component-did-update (fn [comp [_ prev-props prev-more]] …))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;comp&lt;/code&gt; is a reference to the current component. The second argument which is being destructured here contains what we’re looking for. As far as I understood the first item is the component's constructor. The rest are the previously rendered inputs (again in React they’re all &lt;code&gt;props&lt;/code&gt;, in Reagent they’re &lt;code&gt;props&lt;/code&gt; and &lt;code&gt;children&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;As you can see you can inspect all previous arguments to a component. The way you access them differs from the default React lifecycle method signatures so hopefully this post helps to clear up some confusion about this stuff. :)&lt;/p&gt;
+&lt;aside&gt;Thanks to Jonas Enlund for reading a draft of this post and to Mike Thompson for his excellent Re-frame/Reagent docs.&lt;/aside&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, May 2016&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:e2aa0cae-c4ce-42c0-9052-f1b001e51c0e</id><title>Om/Next Reading List</title><link href="https://www.martinklepsch.org/posts/om-next-reading-list.html" type="text/html" title="Om/Next Reading List" rel="alternate"></link><published>2015-11-03T00:00:00Z</published><updated>2015-11-03T00:00:00Z</updated><content type="html" xml:base="https://www.martinklepsch.org/posts/om-next-reading-list.html">&lt;!DOCTYPE html&gt;
+&lt;html itemtype="http://schema.org/Blog" lang="en"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"&gt;&lt;meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"&gt;&lt;meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"&gt;&lt;meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"&gt;&lt;meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"&gt;&lt;title&gt;Om/Next Reading List — Martin Klepsch&lt;/title&gt;&lt;link href="images/favicon.ico" rel="shortcut icon"&gt;&lt;link href="humans.txt" rel="author"&gt;&lt;link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"&gt;&lt;script type="text/javascript"&gt;var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();&lt;/script&gt;&lt;/head&gt;&lt;body class="system-sans-serif dark-gray"&gt;&lt;div class="mh3"&gt;&lt;div class="mw7 center mb6"&gt;&lt;article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"&gt;&lt;div class="f6 db normal mw6 center"&gt;&lt;a class="link" href="/posts/om-next-reading-list.html" title="Permalink: Om/Next Reading List"&gt;November 2015&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="/" title="Home"&gt;Home&lt;/a&gt;&lt;span class="ph2"&gt;/&lt;/span&gt;&lt;a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter"&gt;@martinklepsch&lt;/a&gt;&lt;/div&gt;&lt;h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center"&gt;Om/Next Reading List&lt;/h1&gt;&lt;section class="mkdwn lh-copy"&gt;&lt;p&gt;A small dump of things I read to learn more about Om/Next. Most of these I stumbled upon while lurking in #om on the &lt;a href="http://clojurians.net/"&gt;Clojurians Slack&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href="#thinking-in-relay" id="thinking-in-relay"&gt;&lt;/a&gt;&lt;a href="https://facebook.github.io/relay/docs/thinking-in-relay.html"&gt;Thinking in Relay&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;This is Facebook's high level overview for Relay. It explains the reasoning for colocating queries and how data masking allows developers to write components that are not coupled to their location in the UI tree.&lt;/p&gt;
+&lt;h3&gt;&lt;a href="#omnext-quick-start" id="omnext-quick-start"&gt;&lt;/a&gt;&lt;a href="https://github.com/omcljs/om/wiki/Quick-Start-%28om.next%29"&gt;Om/Next Quick Start&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;This is the official Om/Next quick start tutorial. It guides you through building a basic application with Om/Next and introduces the basic API for queries and mutations. After reading this you should have a rough idea what's being talked about in the next two reads.&lt;/p&gt;
+&lt;h3&gt;&lt;a href="#omnext-the-reconciler" id="omnext-the-reconciler"&gt;&lt;/a&gt;&lt;a href="https://medium.com/@kovasb/om-next-the-reconciler-af26f02a6fb4"&gt;Om/Next The Reconciler&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Kovas Boguta who previously gave an Om/Next workshop with David Nolen wrote this introduction to the Om/Next reconciler. It covers the architectural role of the reconciler managing application state and communicating it to components. The reconciler also acts as an indexer of all components and, using their queries to build a depdency graph, knows when to update which components.&lt;/p&gt;
+&lt;h3&gt;&lt;a href="#omnext-overview" id="omnext-overview"&gt;&lt;/a&gt;&lt;a href="https://github.com/awkay/om/wiki/Om-Next-Overview"&gt;Om/Next Overview&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Written by Tony Kay this overview covers many practical aspects of writing queries and mutations. Before it goes into the nitty gritty details howvever there is another short &lt;em&gt;Problem → Solution&lt;/em&gt; section that nicely describes the concepts in Relay and Om/Next in prose.&lt;/p&gt;
+&lt;p&gt;Now put all those links into Instapaper/Pocket &amp;amp; enjoy reading!&lt;/p&gt;
+&lt;/section&gt;&lt;div class="mv4 em-before mw6 center"&gt;&lt;a class="link" href="https://twitter.com/martinklepsch"&gt;@martinklepsch&lt;/a&gt;, November 2015&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry></feed>
