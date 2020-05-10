@@ -16,8 +16,9 @@
                     (println op s3-key)))}))
 
 (let [sync-results (sync!)
-      inv-paths (->> (mapcat sync-results [:uploaded :updated :deleted])
-                     (mapv #(str "/" %)))]
+      inv-paths (or ["*"]
+                    (->> (mapcat sync-results [:uploaded :updated :deleted])
+                         (mapv #(str "/" %))))]
   (when (seq inv-paths)
     (binding [*out* *err*]
       (println "Invalidating" inv-paths)
