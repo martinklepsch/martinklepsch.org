@@ -44,6 +44,8 @@
      [:meta {:itemprop "author" :name "author" :content "Martin Klepsch (martinklepsch@googlemail.com)"}]
      [:meta {:name "keywords" :itemprop "keywords" :content "blog, clojure, development, clojurescript, heroku, amazon s3, aws"}]
      [:meta {:name "description" :itemprop "description" :content desc}]
+     (when (:permalink opts)
+       [:link {:rel "canonical" :href (with-base-url (:permalink opts))}])
      [:title (if title (str title " — Martin Klepsch") "Martin Klepsch")]
      ;; OpenGraph
      [:meta {:property "og:title" :content (:title opts)}]
