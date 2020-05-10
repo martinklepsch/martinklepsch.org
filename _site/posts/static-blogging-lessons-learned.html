@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Static Blogging, Some Lessons Learned — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/static-blogging-lessons-learned.html" title="Permalink: Static Blogging, Some Lessons Learned">May 2020</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Static Blogging, Some Lessons Learned</h1><section class="mkdwn lh-copy"><p>I've been running this blog for more than eight years now. Over these years it went through multiple rewrites, occasionally satisfying my urge to play with new toys. Now I'm in the middle of the next rewrite and I'm realizing some things that I'd love to have done from the start.</p>
+<h3><a href="#uuids-for-every-post" id="uuids-for-every-post"></a>UUIDs For Every Post</h3>
+<p>Eventually the time will come where you want a unique identifier for a piece of content. Maybe it is to feed it into another system, maybe it is an ID for RSS feeds. No matter what it is it never hurts to have some identifiers for your content. I am now putting UUIDs into the frontmatter (YAML) section of every Markdown file I add.</p>
+<h3><a href="#static-permalinks" id="static-permalinks"></a>Static Permalinks</h3>
+<p>Some static site generators will define the permalink of a post by running code over some of the post's information like the title, slug, date, etc. I have found that a permalink should be permanent and thus there is no point in defining it in code. Just put the entire link into your post's metadata and whatever site generator you end up switching to, you'll know where that piece of content should be available in the end.</p>
+<p>This means that maybe sometimes my URL schema isn't perfectly consistent but at the same time it also means I don't have to deal with redirects that would need to be configured in some external system system (e.g. websever/S3/Cloudfront).</p>
+<p>Because I don't want to type out a UUID and permalink everytime I create a new post I created a little GitHub action that adds these fields to posts that don't already have it.</p>
+<h3><a href="#commit-everything" id="commit-everything"></a>Commit Everything</h3>
+<p>Committing generated files is one of these things that intuitively sounds wrong but my blog went through so many design iterations and changes and I would love to be able to just go back through those for a good trip down memory lane. In theory the source code is still there but in reality I'm rarely in the mood to get some code working again that I used to use five years ago.</p>
+<p>I'm now commiting all files that you can see here in the <code>_site</code> directory of the repository backing this blog.</p>
+<h3><a href="#automation" id="automation"></a>Automation</h3>
+<p>I didn't intend to touch on this but one thing that I'm leaning into a lot for this rewrite is automating all kinds of things. As I write this post on <a href="https://prose.io">prose.io</a> the frontmatter only has a title. As soon as I commit it an action will run to add <code>uuid</code>, <code>permalink</code>, <code>date-published</code>. This being easy to setup is a somewhat recent development, I guess last time around this wouldn't have been as easy as it is now. But it is exciting to me because it means I can just focus on writing and don't have to switch to a terminal to run <code>lumo -e '(random-uuid)'</code> or a deploy script.</p>
+<p>This post is the first one that is being published using this automated setup so wish me luck as I hit the save &amp; commit button.</p>
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, May 2020</div></article></div></div></body></html>
