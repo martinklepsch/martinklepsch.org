@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>4 Small Steps Towards Awesome Clojure Docstrings — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/writing-awesome-docstrings.html" title="Permalink: 4 Small Steps Towards Awesome Clojure Docstrings">January 2019</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">4 Small Steps Towards Awesome Clojure Docstrings</h1><section class="mkdwn lh-copy"><p>Through my work on <a href="https://cljdoc.org">cljdoc</a> I spent a lot of time looking at documentation and implementing code to render documentation. This made me more aware of the various facilities in Clojure documentation generators (codox, cljdoc, ...) and I would like to use this post to share that awareness with the wider Clojure community.</p>
+<h2><a href="#1-backtick-quote-function-arguments-special-keywords" id="1-backtick-quote-function-arguments-special-keywords"></a>1. Backtick-Quote Function Arguments &amp; Special Keywords</h2>
+<p>Whenever referring to an argument or special keywords, quote them using Markdown style `backticks`. This makes them stand out more when reading the docstring, making it easier to visually parse and skim. Emacs also nicely highlights this (possibly others too).</p>
+<pre><code>(defn conj!
+  [coll x]
+  &quot;Adds `x` to the transient collection, and return `coll`. The 'addition'
+   may happen at different 'places' depending on the concrete type.&quot;
+  ,,,)
+</code></pre>
+<h2><a href="#2-link-to-other-functions-using-wikilink-syntax" id="2-link-to-other-functions-using-wikilink-syntax"></a>2. Link To Other Functions Using [[Wikilink]] Syntax</h2>
+<p>Functions call each other and sometimes it can be useful to link to other functions. In Codox and cljdoc you can do this by wrapping the var name in wikilink-style double brackets:</p>
+<pre><code>(defn unlisten!
+  &quot;Removes registered listener from connection. See also [[listen!]].&quot;
+  [conn key]
+  (swap! (:listeners (meta conn)) dissoc key))
+</code></pre>
+<p>Featured here: <a href="https://cljdoc.org/d/datascript/datascript/0.17.1/api/datascript.core#unlisten!"><code>datascript.core/unlisten!</code></a>. To link to vars in other namespaces, fully qualify the symbol in the brackets, e.g. <code>[[datascript.core/listen!]]</code>.</p>
+<h2><a href="#3-include-small-examples" id="3-include-small-examples"></a>3. Include Small Examples</h2>
+<p>On cljdoc all docstrings are interpreted as Markdown. With Codox this can be achived with a small configuration tweak. This means you have access to all the text formatting facilities that Markdown provides including code blocks. Code blocks can be fantastic when trying to show how a function is used in a bigger context, as very nicely shown in the <a href="https://cljdoc.org/d/keechma/toolbox/0.1.23/api/keechma.toolbox.dataloader.controller#register">Keechma Toolbox documentation</a>:</p>
+<p><a href="https://cljdoc.org/d/keechma/toolbox/0.1.23/api/keechma.toolbox.dataloader.controller#register"><img src="/images/keechma-register.png" alt="keechma register" /></a></p>
+<p>See <a href="https://github.com/keechma/keechma-toolbox/blob/176c96a7f8b97a7d67f0d54d1351c23db052d71c/src/cljs/keechma/toolbox/dataloader/controller.cljs#L71-L85">the source</a> of this majestic docstring.</p>
+<h2><a href="#4-use-tables-to-describe-complex-options-maps" id="4-use-tables-to-describe-complex-options-maps"></a>4. Use Tables To Describe Complex Options Maps</h2>
+<p>cljdoc's Markdown implementation supports tables as well. Those can be very useful when having a function that receives a map of options, like <a href="https://cljdoc.org/d/metosin/reitit-core/0.2.13/api/reitit.core#router"><code>reitit.core/router</code></a>:</p>
+<p><a href="https://cljdoc.org/d/metosin/reitit-core/0.2.13/api/reitit.core#router"><img src="/images/reitit-router.png" alt="reitit core router" /></a></p>
+<p>See <a href="https://github.com/metosin/reitit/blob/0.2.13/modules/reitit-core/src/reitit/core.cljc#L417">the source</a> of this beautiful docstring.</p>
+<h2><a href="#closing" id="closing"></a>Closing</h2>
+<p>These trivial to implement improvements can make your docstrings 1000x times nicer to read (scientific studies have shown). Also they will just look plain awesome on <a href="https://cljdoc.org">cljdoc</a>. Check out some examplary docstring work done by Nikita Prokopov here:</p>
+<ul>
+<li><a href="https://cljdoc.org/d/rum/rum/0.11.3/api/rum.core">Rum</a></li>
+<li><a href="https://cljdoc.org/d/datascript/datascript/0.17.1/api/datascript.core">Datascript</a></li>
+</ul>
+<p>And <strong>please tell me</strong> about other projects with exceptional documentation or even more ways to make docstrings awesome.</p>
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, January 2019</div></article></div></div></body></html>

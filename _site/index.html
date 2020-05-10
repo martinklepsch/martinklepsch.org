@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/using-cljs-bean-to-wrap-firebase-documents.html" title="Permalink: Working with Firebase Documents in ClojureScript">Latest Post</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Working with Firebase Documents in ClojureScript</h1><section class="mkdwn lh-copy"><p>In a project <a href="https://icebreaker.video">I’m currently working on</a> we’re making use of Google's <a href="https://firebase.google.com">Firebase</a> to store domain data and run cloud functions.</p>
+<p>In Firestore, which is Firebase’s database offering, every document is essentially a Javascript object. While interop in ClojureScript is pretty good we ended up converting the raw data of these documents to ClojureScript data structures using <code>js-&gt;clj</code>. This also meant we’d need to convert them back to JS objects before writing them to Firestore.</p>
+<p>Because IDs are technically not part of the document the project adopted a pattern of representing documents as tuples:</p>
+<pre><code class="language-clj">[id (js-&gt;clj firestore-data)]
+</code></pre>
+<p>This works but isn’t particularly extensible. What if we also wanted to retain the “Firestore Reference” specifying a documents location inside the database? (Firestore stores data in a tree-like structure.)</p>
+<p>It also leads to some funky gymnastics when working with collections of documents:</p>
+<pre><code class="language-clj">(sort-by (comp :join_dt second) list-of-document-tuples)
+</code></pre>
+<p>Could be worse... but also could be better.</p>
+<p>This blogpost will compare various approaches approach to address the problems above using <a href="https://github.com/mfikes/cljs-bean">cljs-bean</a>, basic ClojureScript data structures, custom protocols and <code>:extend-via-metadata</code>.</p>
+<h2><a href="#cljs-bean" id="cljs-bean"></a>cljs-bean</h2>
+<p>With the recent release of <a href="https://github.com/mfikes/cljs-bean">cljs-bean</a> we have an interesting alternative to <code>js-&gt;clj</code>. Instead of eagerly walking the structure and converting all values to their ClojureScript counterparts (i.e. persistent data structures) the original object is wrapped in a thin layer that allows us to use it as if it were a ClojureScript-native data structure:</p>
+<pre><code class="language-clj">(require '[cljs-bean.core :as cljs-bean])
+
+(-&gt; (cljs-bean/bean #js {&quot;some_data&quot; 1, :b 2})
+    (get :some_data)) ; =&gt; 1
+</code></pre>
+<p>Given a Firestore <a href="https://firebase.google.com/docs/reference/js/firebase.firestore.QueryDocumentSnapshot">QueryDocumentSnapshot</a> we can make the JS object representing the data easily accessible from ClojureScript:</p>
+<pre><code class="language-clj">(-&gt; (cljs-bean/-&gt;clj (.data query-document-snapshot))
+    (get :some_field))
+
+;; (cljs-bean/-&gt;clj data) is roughly the same as
+;; (cljs-bean/bean data :recursive true)
+</code></pre>
+<p>The bean is immutable and can be used in client side app-state as if it is one of ClojureScript’s persistent data structures.</p>
+<p><strong>Caveat:</strong> Updating a bean using <code>assoc</code> or similar will create a copy of the object (Copy-on-Write). This is less performant and more GC intensive than with persistent data structures. Given that the data is usually quite small and that the document representations in our app state mostly aren’t written to directly this is probably ok (<a href="https://github.com/mfikes/cljs-bean/issues/72">cljs-bean #72</a>).</p>
+<p>Whenever we want to use the raw object to update data in Firestore we can simply call <code>-&gt;js</code> on the bean. Conveniently this will fall back to <code>clj-&gt;js</code> when called on ClojureScript data structures.</p>
+<pre><code class="language-clj">(.set some-ref (cljs-bean/-&gt;js our-bean))
+</code></pre>
+<p>Arguably the differences to using plain <code>clj-&gt;js</code> aren’t monumental but working with a database representing data as JS objects it is nice to retain those original objects.</p>
+<h2><a href="#integrating-firestore-metadata" id="integrating-firestore-metadata"></a>Integrating Firestore Metadata</h2>
+<p>Now we got beans. But they still don’t contain the document ID or reference. In most places we don’t care about a documents ID or reference. So how could we enable the code below while retaining ID and reference?</p>
+<pre><code class="language-clj">(sort-by :join_dt participants)
+</code></pre>
+<p>Let’s compare the various options we have.</p>
+<h3><a href="#tuples-and-nesting" id="tuples-and-nesting"></a>Tuples and Nesting</h3>
+<p>I already described the tuple-based approach above. Another, similar, approach achieves the same by nesting the data in another map. Both fall short on the requirement to make document fields directly accessible.</p>
+<pre><code class="language-clj">;; structure
+{:id &quot;some-id&quot;, :ref &quot;/events/some-id&quot;, :data document-data}
+;; usage (including gymnastics)
+(sort-by (comp :join_dt :data) participants)
+</code></pre>
+<p>I’m not too fond of either approach since they both expose a specific implementation detail, that the actual document data is nested, at the call site. In a way my critique of this approach is similar to why <a href="https://youtu.be/Sjb6y19YIWg">Eric Normand advocated for getters in his IN/Clojure ’19 talk</a> — as far as I understand anyways.</p>
+<h3><a href="#addition-of-a-special-key" id="addition-of-a-special-key"></a>Addition of a Special Key</h3>
+<p>Another approach could be to add metadata directly to the document data.</p>
+<pre><code class="language-clj">(defn doc [query-doc-snapshot]
+  (-&gt; (cljs-bean/-&gt;clj (.data query-doc-snapshot))
+      (assoc ::meta {:id (.-id query-doc-snapshot
+                     :ref (.-ref query-doc-snapshot})))
+</code></pre>
+<p>This is reasonable and makes document fields directly accessible. However it also requires us to separate document fields and metadata before passing the data to any function writing to Firestore.</p>
+<pre><code class="language-clj">;; before writing we need to remove ::meta
+(.set some-ref (cljs-bean/-&gt;js (dissoc document-data ::meta))
+</code></pre>
+<p>I think this is a reasonable solution that improves upon some of the issues with the tuple and nesting approach. I realize that this isn’t a huge change but this inversion of how things are nested does give us that direct field access that the nesting approach did not.</p>
+<h3><a href="#protocols-and-" id="protocols-and-"></a>Protocols and <code>:extend-via-metadata</code></h3>
+<p>An approach I’ve found particularly interesting to play with makes use of a protocol that can be implemented via metadata, as enabled by the new <code>:extend-via-metadata</code> option. This capability was added in <a href="https://clojure.org/reference/protocols#_extend_via_metadata">Clojure 1.10</a> and subsequently added to ClojureScript with the <a href="https://clojurescript.org/news/2019-01-31-release">1.10.516 release</a>:</p>
+<pre><code class="language-clj">(defprotocol IFirestoreDocument
+  :extend-via-metadata true
+  (id [_] &quot;Return the ID (string) of this document&quot;)
+  (ref [_] &quot;Return the Firestore Reference object&quot;))
+
+(defn doc [query-doc-snapshot]
+  (with-meta
+    (cljs-bean/-&gt;clj (.data query-doc-snapshot))
+    {`id (fn [_] (.-id query-doc-snapshot))
+     `ref (fn [_] (.-ref query-doc-snapshot))}))
+</code></pre>
+<p>Using <code>with-meta</code> we extend a specific instance of a bean to implement the <code>IFirestoreDocument</code> protocol. This allows direct access to document properties while retaining important metadata:</p>
+<pre><code class="language-clj">(:name participant) ; =&gt; &quot;Martin&quot;
+(firebase/id participant) ; =&gt; &quot;some-firebase-id&quot;
+</code></pre>
+<p>At call sites we use a well-defined API (defined by the protocol) instead of reaching into nested maps whose structure may need to change as our program evolves. This arguably could also be achieved with plain functions.</p>
+<p><strong>Sidenote:</strong> A previous iteration of this used <code>specify!</code>. Specify modifies the bean instance however, meaning that whenever we’d update a bean the protocol implementation got lost. In contrast metadata is carried over across updates.</p>
+<h2><a href="#summary" id="summary"></a>Summary</h2>
+<p>Using <a href="https://github.com/mfikes/cljs-bean">cljs-bean</a> we’ve enabled idiomatic property access for JS data structures without walking the entire document and converting it to a persistent data structure. We also retain the original Javascript object making it easy to use for Firestore API calls.</p>
+<p>We’ve compared different ways of attaching additional metadata to those documents using compound structures as well as  the new and shiny <code>:extend-via-metadata</code>. Using it we’ve extended instances of beans to support a custom protocol allowing open ended extension without hindering the ergonomics of direct property access.</p>
+<p>While I really enjoyed figuring out how to extend beans using <code>:extend-via-metadata</code> it turned out that any approach storing data in “unusual places” (i.e. metadata) causes notable complexity when also wanting to serialize the data.</p>
+<p>Serializing metadata is something that <a href="https://gist.github.com/mfikes/3a160a1504debd31e5771736256ca022">has been added to Transit quite some time ago</a> but compared to the plug and play serialization we get when working with plain maps it did not seem worth it. Even if set up properly the protocol implementations, which are functions, are impossible to serialize.</p>
+<p>Ultimately we ended up with plain beans and storing metadata under a well known key that is removed before writing the data to Firestore again:</p>
+<pre><code class="language-clj">(defn doc [query-doc-snapshot]
+  (-&gt; (cljs-bean/-&gt;clj (.data query-doc-snapshot))
+      (assoc ::meta {:id (.-id query-doc-snapshot)
+                     :ref (.-ref query-doc-snapshot)})))
+
+(defn id [doc]
+  (-&gt; doc ::meta :id))
+
+(defn ref [doc]
+  (-&gt; doc ::meta :ref))
+
+(defn data [doc]
+  (cljs-bean/-&gt;js (dissoc doc ::meta)))
+</code></pre>
+<p>If you're using Firebase or comparable systems, I'd be curious to <a href="https://clojureverse.org/t/working-with-firebase-documents-in-clojurescript/4813">hear if you do something similar on ClojureVerse</a>.</p>
+<p><em>Thanks to Matt Huebert and Mike Fikes for their feedback &amp; ideas.</em></p>
+</section></article><div class="mv6 mw6 center"><section class="lh-copy"><h3 class="mb0">Other Posts</h3><div class="bb bw1 b--silver w2 mv4"></div><ol class="list pa0"><li class="mb3"><a class="f4 link mr2" href="/posts/writing-awesome-docstrings.html">4 Small Steps Towards Awesome Clojure Docstrings</a><span class="db dib-ns f6">January 2019</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/sustainable-open-source-current-efforts.html">Sustainable Open Source: Current Efforts</a><span class="db dib-ns f6">January 2018</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/maven-snapshots.html">Maven Snapshots</a><span class="db dib-ns f6">June 2017</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/requiring-closure-namespaces.html">Requiring Closure Namespaces</a><span class="db dib-ns f6">May 2017</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/simple-debouncing-in-clojurescript.html">Simple Debouncing in ClojureScript</a><span class="db dib-ns f6">April 2017</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/making-remote-work.html">Making Remote Work</a><span class="db dib-ns f6">March 2017</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/just-in-time-script-loading-with-react-and-clojuresript.html">Just-in-Time Script Loading With React And ClojureScript</a><span class="db dib-ns f6">November 2016</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/props-children-and-component-lifecycle-in-reagent.html">Props, Children & Component Lifecycle in Reagent</a><span class="db dib-ns f6">May 2016</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/om-next-reading-list.html">Om/Next Reading List</a><span class="db dib-ns f6">November 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/parameterizing-clojurescript-builds.html">Parameterizing ClojureScript Builds</a><span class="db dib-ns f6">August 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/clojurebridge-berlin.html">ClojureBridge Berlin</a><span class="db dib-ns f6">July 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/managing-local-and-project-wide-development-parameters-in-leiningen.html">Managing Local and Project-wide Development Parameters in Leiningen</a><span class="db dib-ns f6">June 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/formal-methods-at-amazon.html">Formal Methods at Amazon</a><span class="db dib-ns f6">April 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/lisp-keymap.html">(lisp keymap)</a><span class="db dib-ns f6">February 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/cljsjs-use-javascript-libraries-in-clojurescript.html">CLJSJS - Use Javascript Libraries in Clojurescript With Ease</a><span class="db dib-ns f6">January 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html">Why Boot is Relevant For The Clojure Ecosystem</a><span class="db dib-ns f6">November 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/s3-beam-direct-upload-to-s3-with-clojure-and-clojurescript.html">S3-Beam — Direct Upload to S3 with Clojure & Clojurescript</a><span class="db dib-ns f6">October 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/patalyze-an-experiment-exploring-patent-data.html">Patalyze &mdash; An Experiment Exploring Publicly Available Patent Data</a><span class="db dib-ns f6">October 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/running-a-clojure-uberjar-inside-docker.html">Running a Clojure Uberjar inside Docker</a><span class="db dib-ns f6">September 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/using-coreasync-and-transducers-for-direct-s3-upload.html">Using core.async and Transducers to upload files from the browser to S3</a><span class="db dib-ns f6">September 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/emacs-and-vim.html">Emacs & Vim</a><span class="db dib-ns f6">July 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/setting-up-your-own-little-heroku-with-dokku-and-digitalocean.html">Heroku-like Deployment With Dokku And DigitalOcean</a><span class="db dib-ns f6">March 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/woodworking-masterclasses.html">Woodworking Masterclasses</a><span class="db dib-ns f6">February 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/early-adopters-and-inverted-social-proof.html">Early Adopters And Inverted Social Proof</a><span class="db dib-ns f6">February 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/living-small.html">Living Small</a><span class="db dib-ns f6">February 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/telegram.html">Sending You a Telegram</a><span class="db dib-ns f6">January 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/running-a-marathon-or-not.html">Running a Marathon, Or Not</a><span class="db dib-ns f6">January 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/code-simplicity-review.html">Code Simplicity</a><span class="db dib-ns f6">January 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/what-do-we-need-to-know.html">What do we need to know?</a><span class="db dib-ns f6">December 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/sculleys-disease.html">Sculley's Disease</a><span class="db dib-ns f6">December 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/a-resurrection-post.html">A Resurrection Post</a><span class="db dib-ns f6">December 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/a-trip-to-the-us.html">A Trip To The US</a><span class="db dib-ns f6">September 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/analytics-data.html">Analytics Data</a><span class="db dib-ns f6">April 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/asynchronous-communication.html">Asynchronous Communication</a><span class="db dib-ns f6">April 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/from-zero-to-marathon-in-six-months.html">From Zero to Marathon in Six Monthts</a><span class="db dib-ns f6">March 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/git-prompt-for-fish-shell.html">Git Information in Fish Shell&rsquo;s Prompt</a><span class="db dib-ns f6">December 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/when-we-build-stuff.html">When We Build Stuff</a><span class="db dib-ns f6">August 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/models-operations-views-and-events.html">Models, Operations, Views and Events</a><span class="db dib-ns f6">July 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/twelve-factor-app.html">The Twelve Factor App</a><span class="db dib-ns f6">June 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/paris-and-back.html">Paris And Back</a><span class="db dib-ns f6">May 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/a-friend-is-looking-for-a-summer-internship.html">A Friend Is Looking For A Summer Internship</a><span class="db dib-ns f6">May 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/kandan-team-chat.html">Kandan Team Chat</a><span class="db dib-ns f6">May 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/entypo-icon-set.html">Entypo Icon Set</a><span class="db dib-ns f6">March 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/startups-this-is-how-design-works.html">Startups, This Is How Design Works</a><span class="db dib-ns f6">March 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/hosting-a-static-site-on-s3.html">Hosting A Static Site On Amazon S3</a><span class="db dib-ns f6">February 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/fix-broken-decoding-of-mail-subjects-in-exim.html">Exim4 Fix Wrongly Decoded Mail Subject</a><span class="db dib-ns f6">January 2012</span></li></ol></section></div></div></div></body></html>

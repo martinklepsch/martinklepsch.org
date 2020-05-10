@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Git Information in Fish Shell&rsquo;s Prompt — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/git-prompt-for-fish-shell.html" title="Permalink: Git Information in Fish Shell&amp;rsquo;s Prompt">December 2012</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Git Information in Fish Shell&rsquo;s Prompt</h1><section class="mkdwn lh-copy"><p>After toying around with <a href="http://zsh.org">Zsh</a> for a while I stumbled upon Fish or more precisely <a href="http://ridiculousfish.com/shell">Ridiculous Fish</a> which is a fork of the original <a href="http://fishshell.com/">Fish Shell</a>.</p>
+<p>Since Fish does not have a configuration framework like <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a> you have to setup your prompt with additional Git information yourself. I consider this an advantage though as you can't just take a bunch of configuration files from somewhere without having an idea what they actually do.</p>
+<p>It took me a while to find <a href="https://github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_git_prompt.fish">this part</a> of the Fish source code which documents this functionality quite well. An example which you can put into <code>~/.config/fish/config.fish</code> follows below:</p>
+<pre><code>set normal (set_color normal)
+set magenta (set_color magenta)
+set yellow (set_color yellow)
+set green (set_color green)
+set red (set_color red)
+set gray (set_color -o black)
+
+# Fish git prompt
+set __fish_git_prompt_showdirtystate 'yes'
+set __fish_git_prompt_showstashstate 'yes'
+set __fish_git_prompt_showuntrackedfiles 'yes'
+set __fish_git_prompt_showupstream 'yes'
+set __fish_git_prompt_color_branch yellow
+set __fish_git_prompt_color_upstream_ahead green
+set __fish_git_prompt_color_upstream_behind red
+
+# Status Chars
+set __fish_git_prompt_char_dirtystate '⚡'
+set __fish_git_prompt_char_stagedstate '→'
+set __fish_git_prompt_char_untrackedfiles '☡'
+set __fish_git_prompt_char_stashstate '↩'
+set __fish_git_prompt_char_upstream_ahead '+'
+set __fish_git_prompt_char_upstream_behind '-'
+
+
+function fish_prompt
+  set last_status $status
+
+  set_color $fish_color_cwd
+  printf '%s' (prompt_pwd)
+  set_color normal
+
+  printf '%s ' (__fish_git_prompt)
+
+  set_color normal
+end
+</code></pre>
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, December 2012</div></article></div></div></body></html>

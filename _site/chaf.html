@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Chaf, better Chat. — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mt5 mw6 center"><div class="mt4 f6"><a class="link" href="/">Hi, I'm Martin. </a><span>Say Hi on Twitter: <a class="link" href="https://twitter.com/martinklepsch" target="_blank">@martinklepsch</a></span></div></div><article class="mb6"><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Chaf, better Chat.</h1><section class="mkdwn lh-copy"><p>«Chaf» is a chat application with first-class threading.</p>
+<h2><a href="#why-bring-threading-to-chat" id="why-bring-threading-to-chat"></a>Why bring threading to chat?</h2>
+<p>Traditionally chat applications follow a very simple model. There are two crucial things in each of them: a collection of messages (often called &quot;room&quot; or &quot;channel&quot;) people can add to and messages themselves. It's an obvious analogy for someone in the 80s inventing a chat system. There are several issues however that should make us reconsider these fundamental concepts:</p>
+<ul>
+<li>Following up after absence is a tedious task. Users have to mentally keep notes on who was talking to each other in the worst case with multiple other intertwined and time-offset conversations.</li>
+<li>Tracing a discussion back in the history of a room provides many similar challenges.</li>
+<li>Knowledge that is being shared in chat applications is essentially ephemeral unless someone takes the time to transfer it somewhere else.</li>
+<li>In general a lot of information is shared and decisions are made in a place that serves well for instantaneous communication but only provides very unstructured data for uses beyond the very moment of conversation.</li>
+</ul>
+<p>Threading can be overwhelming and complex leading to poor user experience but I think that should not prevent further exploration of the general concept.</p>
+<h2><a href="#general-idea" id="general-idea"></a>General Idea</h2>
+<p>There is a global thread (the <strong>Room</strong>) where you can either send a message or create a new thread by explicitly replying to a specific message. The latter is called <em>branching</em>.</p>
+<h3><a href="#threads" id="threads"></a>Threads</h3>
+<p>A thread contains messages. In all threads except the <strong>Room</strong> the first message can be edited and those threads can also be concluded. Concluding will also close the thread i.e. new messages can no longer be posted.</p>
+<p><strong>Concluding</strong> of threads is a good way to summarize a discussion or consolidate knowledge for later reference. This is especially useful to get a quick overview when only a preview of a thread is rendered. To make sure the conclusion has enough context the first message of a thread has to be edited before the thread can be concluded.</p>
+<aside>Scepticism about whether people will actually "conclude" things
+is very valid.  This is a feature that needs to be integrated in very
+natural ways probably varying depending on size of thread and
+more.</aside>
+<h3><a href="#branching" id="branching"></a>Branching</h3>
+<p>In any thread you can branch (by replying) from a specific message and create a new thread.  This will nest your reply under the original message and display a <a href="#thread-previews">Thread Preview</a>). The thread preview shows recent messages and a conclusion if available.</p>
+<p>As messages in a chat room are usually a reaction to another message this would cause a new thread for almost every message and make everything very confusing so the UI needs to be intelligent about when provide affordances for branching and when not.</p>
+<p><strong>Potential rule of thumb for branching</strong>: Should (not can) a conclusion on its own be made based on that message?  This could be easily integrated into the reply UI.</p>
+<h3><a href="#thread-previews" id="thread-previews"></a>Thread Previews</h3>
+<p>Thread previews give insight into an ongoing conversation or present the result of a concluded thread. They serve as a way to get insight into conversations that just branched from the current thread while not overwhelming.</p>
+<figure>
+<img src='/images/threads.png'>
+</figure>
+<p>If a thread hasn't been concluded the three most recent messages and a reply field is included in the preview. For concluded threads the last two messages and the conclusion are shown.</p>
+<h3><a href="#columns" id="columns"></a>Columns</h3>
+<p>As branching a thread is natural in Chaf the interface has to support taking part in multiple conversations at once. A multi column layout suits this situation well as chat is usually taller than wide.</p>
+<figure>
+<img src='/images/multi-column.png'>
+</figure>
+<p>Clicking on a thread preview will open a column right to the column the preview is shown in. As activity in an unfocused thread happens it will be marked as unread. The order of columns is then defined by the time they have been unread. The global thread (the <strong>Room</strong>) is always in the leftmost column.</p>
+<h2><a href="#other-interesting-things-to-explore" id="other-interesting-things-to-explore"></a>Other interesting things to explore</h2>
+<ul>
+<li>Since there is a clear hierarchical structure it is very easy to grant access to sub-trees of the main tree (originating from the <strong>Room</strong>)</li>
+<li>Many chat bot scenarios could benefit from more structured information</li>
+<li><em>and some more I forgot about</em></li>
+</ul>
+</section></article></div></body></html>

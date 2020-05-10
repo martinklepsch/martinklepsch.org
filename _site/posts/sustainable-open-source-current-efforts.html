@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Sustainable Open Source: Current Efforts — Martin Klepsch</title><link href="images/favicon.ico" rel="shortcut icon"><link href="humans.txt" rel="author"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/sustainable-open-source-current-efforts.html" title="Permalink: Sustainable Open Source: Current Efforts">January 2018</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f1-ns f2 fw1 w-80-ns lh-title mw6 center">Sustainable Open Source: Current Efforts</h1><section class="mkdwn lh-copy"><p>The recent appearance of <a href="http://clojuriststogether.org/">Clojurists Together</a>, friends working on <a href="https://openbounty.status.im/">OpenBounty</a>, as well as recently finding a lot of energy to work on a documentation platform for the Clojure ecosystem stirred some thoughts about sustainable OpenSource.</p>
+<p>Let's say one thing right out of the gate: sustainable OpenSource isn't really a goal on it's own. What the community (users as well as maintainers) strives for is reliability and well-maintained ecosystem components. Businesses and individuals alike depend on those properties — not the fact that work done to achieve them is sustainable. That said I don't see any ways to achieve those without sustainability.</p>
+<h3><a href="#current-efforts" id="current-efforts"></a>Current Efforts</h3>
+<p>There are various platforms trying to improve sustainability of open source efforts that have continued momentum. Many of them with their own ideas how the situation can be improved.</p>
+<ul>
+<li>
+<p><a href="https://opencollective.com"><strong>OpenCollective</strong></a> collects payments from individuals and companies and stores funds for organizations. People may then &quot;invoice&quot; the organization. This can be for stickers and labor time alike.</p>
+</li>
+<li>
+<p><a href="https://openbounty.status.im/"><strong>OpenBounty</strong></a> is a bounty platform used with cryptocurrencies. Contributors may work on specific issues and get paid a bounty which has been defined in advance.</p>
+</li>
+<li>
+<p><a href="https://clojuriststogether.org/"><strong>Clojurists Together</strong></a> collects money from companies and community members to fund open source projects benefitting the overall Clojure ecosystem. People may apply with a project they want to work on and get funding (depending on overall availability) for a duration of three months.</p>
+</li>
+</ul>
+<p>All platforms take care of collecting money and have mechanisms for redistributing it. With OpenCollective a community will need to agree on processes to request and distribute funds. Clojurists Together collects money in similar ways to OpenCollective but has a predefined process for how funds are allocated.</p>
+<p>Projects like webpack <a href="https://opencollective.com/webpack/expenses">have embraced</a> OpenCollective with people getting reimbursed for expenses but also regular labor invoices for time worked on the project.</p>
+<p>OpenBounty also provides some of these processes by assigning bounties to specific tasks. OpenBounty is used in <a href="https://status.im/">Status.im</a>'s development process and while I don't believe bounties are the answer to everything I'm excited to watch this space in the future.</p>
+<!-- Interesting to note about OpenBounty: it is
+developed by a blockchain startup ([Status.im](https://status.im/)) to ramp
+up their development efforts and incentivize more people to contribute to the
+project **[TODO relevant?]**. -->
+<h3><a href="#sustainable-incentives" id="sustainable-incentives"></a>Sustainable Incentives</h3>
+<p>Contributing to OpenSource is about incentives. As far as I can judge these often are</p>
+<ul>
+<li>fun &amp; community,</li>
+<li>fixing a problem one encountered,</li>
+<li>recognition &amp; better job opportunities.</li>
+</ul>
+<p>Nothing is wrong with this list but they are not sustainable on their own. Just working for the fuzzy feeling of giving back to a community doesn't pay your bills. As soon as you can no longer afford to work for the fun of it the stability and momentum of projects you contributed to will suffer.</p>
+<!-- Meaning, those incentives may encourage the -->
+<!-- properties discussed in the introduction (well-maintained etc) for some -->
+<!-- duration of time but not in a sustainable (~long-term) way. -->
+<!-- There's one notable (and rare?) exception I can think of: people getting
+hired with a clause to spend time on an OpenSource project. **[TODO maybe not
+as important]** -->
+<!-- There are some things — or rather two kinds of participants — that need to be given to guarantee stable and well-maintained open source projects: -->
+<p>I believe there are two kinds of participants required to achieve reliability, stability and so on:</p>
+<ul>
+<li>There need to be some people contributing on a regular basis. They provide overall direction, deal with reported issues and incoming contributions. Often projects refer to this as &quot;core&quot;. In my experience stability of an open source project suffers with fluctuations in the set of &quot;core&quot; people working on it.</li>
+<li>There need to be occasional/new contributors. Life will happen (kids, work, etc.) to regular contributors causing a natural decline. New contributors discovering they enjoy working on the project can fill up those gaps.</li>
+</ul>
+<p>In my opinion the incentives listed above are not sufficient — especially for long-term regular contributors. If work is unpaid it will eventually become stressful to juggle with other responsibilities and people will be forced to step back. New contributors are just as important and I believe there are improvements to be done there as well but ultimately nothing works without a &quot;core&quot; set of people.</p>
+<p>I have some further thoughts on how such incentives could be structured which I will explore in a later blog post.</p>
+<!-- Now that we have an idea of what's required we can think about ways to fulfill those requirements. -->
+<!-- ---
+
+THOUGHT: Too strong incentives to contribute to existing projects could hinder innovation? Hidden part of graph we should be aware of/consider.
+
+---
+
+THOUGHT: Stability and reliability are among the most important aspects of open source projects. Any system should optimize towards ongoing contribution while also maintaining an inflow of new people so other people may retreat to other adventures.
+
+---
+
+Let's start with bounties as they are probably more controversial than other models. I believe bounties can excel at achieving the following goals:
+
+- Getting new people to contribute to a project
+- Encouraging outsiders to familiarize themselves with a project (think of security)
+
+Bounties fall short when the aim is to create stability and continuous unguided contributions. -->
+</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, January 2018</div></article></div></div></body></html>
