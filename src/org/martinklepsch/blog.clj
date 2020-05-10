@@ -54,11 +54,18 @@
       (util/fail "Rendering %s failed:\n" (:slug post))
       (throw e))))
 
+(defn prose-edit-link [p]
+  [:a.white
+   {:target "_blank"
+    :href (str "https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/" p)}
+   "edit on prose.io"])
+
 (defn signed-post [post opts]
   (conj (render-post post opts)
         [:div.mv4.em-before.mw6.center
-         [:a.link {:href +twitter-uri+} "@martinklepsch"]
-         ", " (date-fmt (:date-published post))]))
+         [:a.link {:href +twitter-uri+} "@martinklepsch"] ", "
+         (date-fmt (:date-published post)) " "
+         (prose-edit-link (:original-path post))]))
 
 (defn posts-list [title entries]
   [:section.lh-copy
