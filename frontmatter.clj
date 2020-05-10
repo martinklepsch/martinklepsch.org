@@ -37,6 +37,11 @@
   (let [[_ yml content] (str/split (slurp f) yaml-head 3)]
     [yml content]))
 
+(def selfies
+  (->> (file-seq (io/file "resources/public/images/selfies/"))
+       (filter #(.isFile %))
+       (map #(str/replace % #"^resources/public/" "/"))))
+
 (defn update-frontmatter! [f]
   (let [[yml content] (file-contents f)
         frontmatter (yaml/parse-string yml)
@@ -47,6 +52,9 @@
 
                   (nil? (:uuid frontmatter))
                   (assoc :uuid (str (UUID/randomUUID)))
+
+                  (nil? (:og-image frontmatter))
+                  (assoc :og-image (rand-nth selfies))
 
                   (nil? (:permalink frontmatter))
                   (assoc :permalink (permalink-fn f)))]
