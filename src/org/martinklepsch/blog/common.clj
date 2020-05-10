@@ -2,6 +2,10 @@
   (:require [hiccup.page :as hp]
             [hiccup.core :as hiccup]))
 
+(defn with-base-url [s]
+  (assert (.startsWith s "/") s)
+  (str "https://martinklepsch.org" s))
+
 (defn google-analytics []
   [:script {:type "text/javascript"}
    "var _gaq = _gaq || [];
@@ -37,8 +41,8 @@
      [:meta {:property "og:title" :content (:title opts)}]
      [:meta {:property "og:type" :content "article"}]
      [:meta {:property "og:description" :content desc}]
-     [:meta {:property "og:url" :content (str "http://martinklepsch.org" (:permalink opts))}]
-     [:meta {:property "og:image" :content (str "http://martinklepsch.org" (:og-image opts))}]
+     [:meta {:property "og:url" :content (some-> opts :permalink with-base-url)}]
+     [:meta {:property "og:image" :content (some-> opts :og-image with-base-url)}]
      [:meta {:property "og:site_name" :content "martinklepsch.org"}]
      ;; Misc
      [:link {:rel "shortcut icon" :href "/images/favicon.ico"}]
