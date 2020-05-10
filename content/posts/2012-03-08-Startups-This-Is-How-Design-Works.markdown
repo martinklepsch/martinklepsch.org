@@ -1,7 +1,7 @@
 ---
 layout: post
 category: linked
-date-published: 2012-03-08T00:00:00Z
+date-published: 2012-03-08T10:00:00Z
 resource: http://www.startupsthisishowdesignworks.com/
 title: Startups, This Is How Design Works
 uuid: e5058531-a427-4791-8146-ae2f24e6973b
