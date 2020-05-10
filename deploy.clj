@@ -16,12 +16,10 @@
                     (println op s3-key)))}))
 
 (let [sync-results (sync!)
-      inv-paths (or ["*"]
-                    (->> (mapcat sync-results [:uploaded :updated :deleted])
-                         (mapv #(str "/" %))))]
+      cf-id (System/getenv "CLOUDFRONT_ID")
+      inv-paths (->> (mapcat sync-results [:uploaded :updated :deleted])
+                     (mapv #(str "/" %)))]
   (when (seq inv-paths)
-    (binding [*out* *err*]
-      (println "Invalidating" inv-paths)
-      (println "Invalidation result:"
-               (s3/cloudfront-invalidate! creds (System/getenv "CLOUDFRONT_ID") inv-paths))))
+    (assert cf-id "CLOUDFRONT_ID not set")
+    (s3/cloudfront-invalidate! creds cf-id inv-paths))
   (prn (assoc sync-results :unchanged :hidden)))
