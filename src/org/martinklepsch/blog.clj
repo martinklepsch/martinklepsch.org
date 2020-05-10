@@ -141,21 +141,3 @@
    [:article.mb6
     [:h1.f1-ns.f2.fw1.w-80-ns.lh-title.mw6.center (:title entry)]
     [:section.mkdwn.lh-copy (:content entry)]]))
-
-(defn daily-ui-page [{:keys [entries] :as stuff}]
-  (base
-   {}
-   [:link {:rel "stylesheet" :href "/tachyons.css"}]
-   (let [grouped (group-by #(first (re-seq #"\d{3}" (:short-filename %))) entries)]
-     (for [[day images] (reverse (sort-by first grouped))]
-       [:div
-        [:span.db.pa4
-         {:id day}
-         (str "Daily UI #" day)
-         [:a.fr {:target "_blank" :href +twitter-uri+} "@martinklepsch"]]
-        [:div.dt
-         (map (fn [{f :filename}]
-                (let [uri (str "/daily-ui/" f)]
-                  [:a.dtc.bn.v-top.pr4 {:href uri}
-                   [:img {:src uri}]]))
-              images)]]))))
