@@ -31,7 +31,7 @@
   (subs (.format java.time.format.DateTimeFormatter/ISO_INSTANT (.toInstant d)) 0 10))
 
 (def yaml-head
-  #"---\r?\n")
+  #"---\h*\r?\n")
 
 (defn file-contents [f]
   (let [[_ yml content] (str/split (slurp f) yaml-head 3)]
@@ -44,6 +44,7 @@
 
 (defn update-frontmatter! [f]
   (let [[yml content] (file-contents f)
+        _ (prn :yml yml)
         frontmatter (yaml/parse-string yml)
         updated (cond-> frontmatter
                   (and (nil? (:date-published frontmatter))
