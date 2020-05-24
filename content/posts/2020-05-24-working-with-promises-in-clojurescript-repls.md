@@ -10,7 +10,7 @@ permalink: /posts/working-with-promises-in-clojurescript-repls.html
 
     (.then (js/fetch "https://jsonip.com/") prn)
     
-This will use `prn` to print the value of the resolved promise. Sometimes you don't just want to print things though, the real power of a REPL lies in reusing values and successively building up just the shape of data you need. 
+This will use `prn` to print the value of the resolved promise. Sometimes you don't just want to print things though, the real power of a REPL lies in reusing values and successively building up just the shape of data you need.
 
 One nice trick I learned from Sean Grove years ago is that you can just use `def`. This isn't something you'd do in production code but it's zero-ceremony and very handy to capture values.
 
@@ -34,7 +34,7 @@ What I came up with is a function I just named `t` which can be used like this:
     (let [s (atom {})]
       (defn t
         ([kw] (get @s kw))
-        ([p kw] (p/then p (fn [r] (swap! s assoc kw r) r)))))
+        ([p kw] (.then p (fn [r] (swap! s assoc kw r) r)))))
         
     (-> (js/fetch "https://jsonip.com/")
         (t :jsonip))
