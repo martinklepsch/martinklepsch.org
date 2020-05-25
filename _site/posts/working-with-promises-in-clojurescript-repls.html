@@ -25,7 +25,7 @@
 (.then (js/fetch &quot;https://jsonip.com/&quot;) #(reset! s %))
 </code></pre>
 <h3><a href="#ergonomics" id="ergonomics"></a>Ergonomics</h3>
-<p>Now that we now how we can access the resulting value of a promise, let's make it convenient. For convenience I basically want two things:</p>
+<p>Now that we know how we can access the resulting value of a promise, let's make it convenient. For convenience I basically want two things:</p>
 <ul>
 <li>Make it easy to wrap any promise-returning form to capture it's return value</li>
 <li>Make it easy to access the return values of multiple promises</li>
@@ -34,13 +34,13 @@
 <pre><code>(let [s (atom {})]
   (defn t
     ([kw] (get @s kw))
-    ([p kw] (p/then p (fn [r] (swap! s assoc kw r) r)))))
+    ([p kw] (.then p (fn [r] (swap! s assoc kw r) r)))))
     
 (-&gt; (js/fetch &quot;https://jsonip.com/&quot;)
     (t :jsonip))
 </code></pre>
 <p>When <code>t</code> receives two arguments it will consider the first argument a promise storing the resulting value in an atom under the key provided as the second argument, <code>:jsonip</code> in this case.</p>
 <p>This API is particularly nice when you consider that most editor integrations provide the ability to evaluate the form around your cursor. If I place my cursor within <code>(t :jsonip)</code> and evaluate this form I can look at the value the promise returned without changing any of the code. I can also just continue chaining with <code>then</code> since <code>t</code> returns the original promise.</p>
-<p>Another nice feature is that I can reuse the values for future REPL evaluations by referring to them using forms like <code>(t :jsonip)</code></p>
+<p>Another nice feature is that I can reuse the values for future REPL evaluations by referring to them using forms like <code>(t :jsonip)</code>.</p>
 <p>Obviously <strong>this is just one way</strong> but I liked how that simple 4 line function made working with promises in a REPL a lot more enjoyable.</p>
 </section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, May 2020 <a class="white" href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2020-05-24-working-with-promises-in-clojurescript-repls.md" target="_blank">edit on prose.io</a></div></article></div></div></body></html>
