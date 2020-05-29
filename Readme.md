@@ -7,8 +7,8 @@ defined as functions returning hiccup in `src/org/martinklepsch/blog.clj`.
 ### Dependencies
 
 - `filterdiff` from [patchutils](http://cyberelk.net/tim/software/patchutils/)
-- `bb` from [babashka](https://github.com/borkdude/babashka)
-- `bootleg` from [bootleg](https://github.com/retrogradeorbit/bootleg)
+- `bb` 0.0.99+ from [babashka](https://github.com/borkdude/babashka)
+- `bootleg` 0.1.9+ from [bootleg](https://github.com/retrogradeorbit/bootleg)
 - `boot` from [boot-clj](https://github.com/boot-clj/boot)
 
 ### Common workflows
