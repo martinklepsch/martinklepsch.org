@@ -1,8 +1,6 @@
-(require '[babashka.pods :as pods])
-(pods/load-pod "bootleg")
-
 (ns mkl.frontmatter
-  (:require [clojure.string :as str]
+  (:require [mkl.pods]
+            [clojure.string :as str]
             [clojure.java.io :as io]
             [clj-yaml.core :as yaml]
             [pod.retrogradeorbit.bootleg.glob :as glob])
