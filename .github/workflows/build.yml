@@ -27,6 +27,11 @@ jobs:
          chmod +x install-bb
          sudo ./install-bb
          rm install-bb
+    - name: Install bootleg
+      run: |
+         curl -LO https://github.com/retrogradeorbit/bootleg/releases/download/v0.1.9/bootleg-0.1.9-linux-amd64.tgz
+         tar xvf bootleg-0.1.9-linux-amd64.tgz
+         mv bootleg ~/bin
 
     - name: Fill in blanks
       run: make update-frontmatter
