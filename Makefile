@@ -2,9 +2,7 @@ SHELL = /bin/bash -o pipefail
 .PHONY: update-frontmatter site
 
 update-frontmatter:
-	# bootleg -d -e '(glob "content/posts/*.markdown")' | bb -I --stream frontmatter.clj
-	ls content/posts/*.markdown | bb -i frontmatter.clj
-	ls content/posts/*.md | bb -i frontmatter.clj
+	bb -cp src -m mkl.frontmatter
 
 site:
 	boot build-to-site-dir

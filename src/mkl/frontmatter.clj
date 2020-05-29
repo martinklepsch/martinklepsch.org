@@ -51,9 +51,7 @@
 
 (defn update-frontmatter! [f]
   (let [[yml content] (file-contents f)
-        _ (prn :yml yml)
         frontmatter (yaml/parse-string yml)
-        _ (prn frontmatter)
         updated (cond-> frontmatter
                   (and (nil? (:date-published frontmatter))
                        (not (:draft frontmatter)))
@@ -87,9 +85,7 @@
     (into (glob/glob "content/posts/*.markdown")
           (glob/glob "content/posts/*.md"))))
 
-(def -main []
+(defn -main []
   (doseq [f post-files]
     (println f)
-    #_(update-frontmatter! (io/file f)))
-  (System/exit 0)
-  )
+    (update-frontmatter! (io/file f))))
