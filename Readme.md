@@ -52,3 +52,4 @@ boot build deploy
 - [ ] https://pushover.net for visibility
 - [ ] There could be a hidden edit button leading to prose.io
 - [ ] A preprocessing step could turn raw links to YouTube or twitter into more useful embeds/views
+- [ ] revisit blockquote styling https://www.martinklepsch.org/posts/living-small.html
