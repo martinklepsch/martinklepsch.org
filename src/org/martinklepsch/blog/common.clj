@@ -1,7 +1,5 @@
 (ns org.martinklepsch.blog.common
-  (:require [hiccup.page :as hp]
-            [hiccup.core :as hiccup]
-            [clojure.string :as string]))
+  (:require [clojure.string :as string]))
 
 (defn with-base-url [s]
   (assert (.startsWith s "/") s)
