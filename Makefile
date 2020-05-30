@@ -1,7 +1,7 @@
 SHELL = /bin/bash -o pipefail
 .PHONY: update-frontmatter site
 
-repl-server:
+repl:
 	bb-nrepl -cp bb-src
 
 update-frontmatter:
