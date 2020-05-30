@@ -36,7 +36,7 @@
       ;; [:span.ph2 "/"]
       ;; [:a.link {:href "/archive.html" :title "View all posts"} "Older Posts"]
       ]
-     [:h1.f1-ns.f2.fw1.w-80-ns.lh-title.mw6.center
+     [:h1.f3.fw5.w-80-ns.lh-title.mw6.center.mv4
       (if (:resource post)
         (:title post) ; TODO add linkthing here
         ;; {{ post.title }} <a class="icon" href="{{ post.resource}}" alt="Link to external resource" target="blank">&#10150;</a>
