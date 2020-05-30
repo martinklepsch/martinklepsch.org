@@ -47,6 +47,10 @@
        (filter #(.isFile %))
        (map #(str/replace % #"^resources/public/" "/"))))
 
+(defn get-frontmatter [f]
+  (let [[yml _] (file-contents f)]
+    (yaml/parse-string yml)))
+
 (defn update-frontmatter! [f]
   (let [[yml content] (file-contents f)
         frontmatter (yaml/parse-string yml)
