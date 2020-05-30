@@ -4925,6 +4925,9 @@ code, .code {
   .v-btm-l {
     vertical-align: bottom; } }
 
+body {
+  font-size: 17px; }
+
 .link {
   color: #357edd; }
 
