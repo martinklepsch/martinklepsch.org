@@ -42,14 +42,15 @@ boot build deploy
 - [x] github action to build site and commit it
 - [x] commit generated site to Git repo
 - [x] github action to add uuid
-- [ ] Randomly Chosen portraits as small opengraph Image
-- [ ] Integrate snippet of text into opengraph view
+- [x] Randomly Chosen portraits as small opengraph Image
+- [x] Integrate snippet of text into opengraph view
 - [ ] Unstyled archive page
 - [x] Put permalinks into metadata to make it final
 - [x] Don’t do redirects, just maintain URLs of old posts
 - [x] GitHub action to add permalink if missing
 - [ ] Drafts are published at their UUID location with metadata to not be indexed
 - [ ] https://pushover.net for visibility
-- [ ] There could be a hidden edit button leading to prose.io
+- [x] There could be a hidden edit button leading to prose.io
 - [ ] A preprocessing step could turn raw links to YouTube or twitter into more useful embeds/views
+- [ ] Preprocessing step could replace add combinations of tachyons classes to matching nodes
 - [ ] revisit blockquote styling https://www.martinklepsch.org/posts/living-small.html
