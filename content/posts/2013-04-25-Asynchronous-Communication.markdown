@@ -79,8 +79,3 @@ communication.
 * [How Github Works Asynchronous](http://zachholman.com/posts/how-github-works-asynchronous/) by Zach Holman
 * [Stripes Culture](http://blog.alexmaccaw.com/stripes-culture) by Alex MacCaw
 * [How Stripe Builds Software](http://blog.alexmaccaw.com/stripes-culture) with Greg Brockmann
-
---<br>
-If you liked this post you should probably follow me on twitter:
-[@martinklepsch](http://twitter.com/martinklepsch)<br>
-Feedback? Comments? Thoughts? [Email me.](mailto://martinklepsch@googlemail.com)
