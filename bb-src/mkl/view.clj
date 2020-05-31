@@ -30,10 +30,11 @@
   (str (subs s 0 (min length (count s))) "..."))
 
 (defn head
-  [{:keys [title] :as opts}]
-  (let [title (or title "Home")
-        img   (:og-image opts)
-        desc (or (:description opts)
+  [{:keys [frontmatter] :as opts}]
+  (let [title (:title frontmatter)
+        img   (some-> frontmatter :og-image with-base-url)
+        permalink (some-> frontmatter :permalink with-base-url)
+        desc (or (:description frontmatter)
                  (some-> (:content opts)
                          (string/replace #"<.*?>" "")
                          (string/replace #"\n" " ")
@@ -47,15 +48,14 @@
      [:meta {:itemprop "author" :name "author" :content "Martin Klepsch (martinklepsch@googlemail.com)"}]
      [:meta {:name "keywords" :itemprop "keywords" :content "blog, clojure, development, clojurescript, heroku, amazon s3, aws"}]
      [:meta {:name "description" :itemprop "description" :content desc}]
-     (when (:permalink opts)
-       [:link {:rel "canonical" :href (with-base-url (:permalink opts))}])
+     (when permalink [:link {:rel "canonical" :href permalink}])
      [:title (if title (str title " — Martin Klepsch") "Martin Klepsch")]
      ;; OpenGraph
      [:meta {:property "og:title" :content title}]
      [:meta {:property "og:type" :content "article"}]
      [:meta {:property "og:description" :content desc}]
-     [:meta {:property "og:url" :content (some-> opts :permalink with-base-url)}]
-     (when img [:meta {:property "og:image" :content (with-base-url img)}])
+     (when permalink [:meta {:property "og:url" :content permalink}])
+     (when img [:meta {:property "og:image" :content img}])
      [:meta {:property "og:site_name" :content "martinklepsch.org"}]
      ;; Twitter
      [:meta {:name "twitter:card" :content "summary"}]
@@ -63,7 +63,7 @@
      [:meta {:name "twitter:creator" :content "@martinklepsch"}]
      [:meta {:name "twitter:title" :content title}]
      [:meta {:name "twitter:description" :content desc}]
-     (when img [:meta {:name "twitter:image" :content (with-base-url img)}])
+     (when img [:meta {:name "twitter:image" :content img}])
      ;; Misc
      [:link {:rel "shortcut icon" :href "/images/favicon.ico"}]
      [:link {:rel "alternate" :type "application/atom+xml" :title "Sitewide Atom Feed" :href "/atom.xml"}]
@@ -88,7 +88,6 @@
 (defn render-post [{fm :frontmatter :as post} opts]
   (try
     [:article.mt5 {:itemprop "blogPost" :itemscope "" :itemtype "http://schema.org/BlogPosting"}
-     (println (keys fm))
      [:div.f6.db.normal.mw6.center
       [:a.link {:href (:permalink fm) :title (str "Permalink: " (:title fm))}
        (if (:permalink-page? opts)
@@ -116,6 +115,19 @@
       (println "Rendering %s failed:\n" (:slug post))
       (throw e))))
 
+(defn prose-edit-link [p]
+  [:a.white
+   {:target "_blank"
+    :href (str "https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/" p)}
+   "edit on prose.io"])
+
+(defn signed-post [post opts]
+  (conj (render-post post opts)
+        [:div.mv4.em-before.mw6.center
+         [:a.link {:href +twitter-uri+} "@martinklepsch"] ", "
+         (date-fmt (:date-published post)) " "
+         (prose-edit-link (:original-path post))]))
+
 (defn posts-list [title entries]
   [:section.lh-copy
    (when title [:h3.mb0 title])
@@ -137,6 +149,12 @@
      (render-post (first entries) {})
      [:div.mv6.mw6.center
       (posts-list "Other Posts" (->> entries rest (sort-by :date-published) reverse))]]))
+
+(defn post-page [{:keys [entry]}]
+  (base
+   entry
+   [:div.mw7.center.mb6
+    (signed-post entry {:permalink-page? true})]))
 
 (comment
   (spit "index.new.html"
