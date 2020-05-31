@@ -157,6 +157,30 @@
     [:div.mw7.center.mb6
      (signed-post post {:permalink-page? true})]))
 
+;; Rendering API
+;; Goals
+;; - Make it easy to re-render individual files
+
+(defn spit-hiccup-to-out [permalink hiccup]
+  (let [out-dir "_site"
+        out-file (io/file (str out-dir permalink))]
+    (println "Spitting" permalink)
+    (spit out-file (utils/convert-to hiccup :html))))
+
+(defn render
+  [{:keys [type post all-posts] :as render-spec}]
+  (case type
+    :post (spit-hiccup-to-out (-> post :frontmatter :permalink) (post-page render-spec))
+    :index (spit-hiccup-to-out "/index.html" (index-page all-posts))))
+
+(defn render-all []
+  (let [posts (map posts/read-post posts/post-files)]
+    (->> posts
+         (map (fn to-render-spec [post]
+                {:type :post :post post :all-posts posts}))
+         (into [{:type :index :all-posts posts}])
+         (map render))))
+
 (comment
   (spit "index.new.html"
         (-> (index-page {:entries [mkl.posts/test-post]})
