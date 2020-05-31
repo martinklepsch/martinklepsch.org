@@ -36,9 +36,7 @@
         img   (some-> frontmatter :og-image with-base-url)
         permalink (some-> frontmatter :permalink with-base-url)
         desc (or (:description frontmatter)
-                 (some-> (:content opts)
-                         (string/replace #"<.*?>" "")
-                         (string/replace #"\n" " ")
+                 (some-> (->> opts :content flatten (filter string?) (take 10) (string/join ""))
                          (string/trim)
                          (truncate 190))
                  "Personal Website and Blog of Martin Klepsch")]
@@ -120,7 +118,7 @@
 (defn prose-edit-link [p]
   [:a.white
    {:target "_blank"
-    :href (str "https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/" p)}
+    :href (str "https://prose.io/#martinklepsch/martinklepsch.org/edit/master/" p)}
    "edit on prose.io"])
 
 (defn signed-post [post opts]
@@ -128,7 +126,7 @@
         [:div.mv4.em-before.mw6.center
          [:a.link {:href +twitter-uri+} "@martinklepsch"] ", "
          (date-fmt (:date-published post)) " "
-         (prose-edit-link (:original-path post))]))
+         (prose-edit-link (:file post))]))
 
 (defn posts-list [title entries]
   [:section.lh-copy
