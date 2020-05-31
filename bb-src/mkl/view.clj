@@ -182,6 +182,9 @@
          (into [{:type :index :all-posts posts}])
          (map render))))
 
+(defn -main []
+  (render-all))
+
 (comment
   (spit "index.new.html"
         (-> (index-page {:entries [mkl.posts/test-post]})
