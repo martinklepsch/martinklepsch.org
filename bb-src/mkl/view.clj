@@ -31,7 +31,7 @@
 
 (defn head
   [{:keys [frontmatter] :as opts}]
-  (let [title (:title frontmatter)
+  (let [title (or (:title frontmatter) "Martin Klepsch")
         img   (some-> frontmatter :og-image with-base-url)
         permalink (some-> frontmatter :permalink with-base-url)
         desc (or (:description frontmatter)
@@ -41,6 +41,7 @@
                          (string/trim)
                          (truncate 190))
                  "Personal Website and Blog of Martin Klepsch")]
+    (assert permalink)
     [:head
      [:meta {:charset "utf-8"}]
      [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
@@ -49,7 +50,7 @@
      [:meta {:name "keywords" :itemprop "keywords" :content "blog, clojure, development, clojurescript, heroku, amazon s3, aws"}]
      [:meta {:name "description" :itemprop "description" :content desc}]
      (when permalink [:link {:rel "canonical" :href permalink}])
-     [:title (if title (str title " — Martin Klepsch") "Martin Klepsch")]
+     [:title title]
      ;; OpenGraph
      [:meta {:property "og:title" :content title}]
      [:meta {:property "og:type" :content "article"}]
@@ -137,24 +138,24 @@
      (for [post entries]
        [:li.mb3
         [:a.f4.link.mr2
-         {:href (:permalink post)}
-         (:title post)]
-        [:span.db.dib-ns.f6 (date-fmt (:date-published post))]]))])
+         {:href (-> post :frontmatter :permalink)}
+         (-> post :frontmatter :title)]
+        [:span.db.dib-ns.f6 (date-fmt (:date-published (:frontmatter post)))]]))])
 
-(defn index-page [{:keys [entries]}]
+(defn index-page [posts]
   (base
-    {:permalink "/index.html"
-     :og-image "/images/selfies/1.jpg"}
+    {:frontmatter {:permalink "/index.html"
+                   :og-image "/images/selfies/1.jpg"}}
     [:div.mw7.center
-     (render-post (first entries) {})
+     (render-post (last posts) {})
      [:div.mv6.mw6.center
-      (posts-list "Other Posts" (->> entries rest (sort-by :date-published) reverse))]]))
+      (posts-list "Other Posts" (->> posts rest (sort-by :date-published) reverse))]]))
 
-(defn post-page [{:keys [entry]}]
+(defn post-page [{:keys [post]}]
   (base
-   entry
-   [:div.mw7.center.mb6
-    (signed-post entry {:permalink-page? true})]))
+    post
+    [:div.mw7.center.mb6
+     (signed-post post {:permalink-page? true})]))
 
 (comment
   (spit "index.new.html"
