@@ -1,8 +1,9 @@
 (ns mkl.view
   (:require [mkl.pods]
+            [mkl.posts :as posts]
+            [clojure.java.io :as io]
             [clojure.string :as string]
-            [pod.retrogradeorbit.bootleg.utils :as utils]
-            [mkl.posts]))
+            [pod.retrogradeorbit.bootleg.utils :as utils]))
 
 (defn with-base-url [s]
   (assert (.startsWith s "/") s)
