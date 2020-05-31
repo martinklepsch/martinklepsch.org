@@ -8,3 +8,4 @@ update-frontmatter:
 
 site:
 	boot build-to-site-dir
+	npx prettier --write _site/**.html
