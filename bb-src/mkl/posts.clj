@@ -16,7 +16,6 @@
   {:file file
    :frontmatter (fm/get-frontmatter file)
    :source (slurp file)
-
    ;; :content to be compatible with view code
    :content (-> file fm/file-contents second (markdown/markdown :data))})
 
@@ -25,6 +24,10 @@
 
 (defn -main []
   (read-post (first post-files)))
+
+;; TODO registry
+;; maintain a list of posts in memory
+;; when files change reread the post data for the post with the same :file key
 
 (comment
   (read-post (first post-files))
