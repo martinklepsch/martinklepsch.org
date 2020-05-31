@@ -35,8 +35,6 @@ intuitive to me is that software is, after all, for humans. If we want
 to make great software for everyone then it can only be made by all of
 us and not by one priviliged monoculture.
 
-<!-- It's the typical *solve-your-own-problem* startup talk with a twist. -->
-
 ### ClojureBridge Berlin
 
 ClojureBridge workshops consist of one evening installing required

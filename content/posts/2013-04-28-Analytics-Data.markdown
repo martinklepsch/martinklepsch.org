@@ -30,11 +30,3 @@ While I'm usually a fan of outsourcing certain complex things (i.e. hosting)
 I feel like this is one of the rare occasions where people should think twice.
 Unfortunately I'm not aware of good alternatives.
 If you are please [tweet me](http://twitter.com/martinklepsch).
-
-<!--
-<aside>
-Remember when the
-<a href="http://edu.mkrecny.com/thoughts/how-i-fired-myself">worst thing you could possibly do</a>
-was to delete the 'user' column in your MySQL database?
-Maybe now analytics data is gaining similar importance.
-</aside>-->

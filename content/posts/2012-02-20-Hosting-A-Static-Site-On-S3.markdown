@@ -78,8 +78,6 @@ have some subdomain.
       }]
     }
 
-<!-- <script src="https://gist.github.com/martinklepsch/4991741.js"></script> -->
-
 **Step 3:** Upload your static website to S3. You can either do that manually by using the
 AWS Management Console or you can automate the process by writing some small programm. There
 are S3 libraries for many programming languages.

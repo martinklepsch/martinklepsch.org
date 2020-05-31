@@ -55,11 +55,6 @@ to specific tasks. OpenBounty is used in
 don't believe bounties are the answer to everything I'm excited to
 watch this space in the future.
 
-<!-- Interesting to note about OpenBounty: it is
-developed by a blockchain startup ([Status.im](https://status.im/)) to ramp
-up their development efforts and incentivize more people to contribute to the
-project **[TODO relevant?]**. -->
-
 ### Sustainable Incentives
 
 Contributing to OpenSource is about incentives. As far as I can judge these often are
@@ -74,15 +69,6 @@ doesn't pay your bills.
 As soon as you can no longer afford to work for the fun of it the stability
 and momentum of projects you contributed to will suffer.
 
-<!-- Meaning, those incentives may encourage the -->
-<!-- properties discussed in the introduction (well-maintained etc) for some -->
-<!-- duration of time but not in a sustainable (~long-term) way. -->
-
-<!-- There's one notable (and rare?) exception I can think of: people getting
-hired with a clause to spend time on an OpenSource project. **[TODO maybe not
-as important]** -->
-
-<!-- There are some things — or rather two kinds of participants — that need to be given to guarantee stable and well-maintained open source projects: -->
 I believe there are two kinds of participants required to achieve reliability, stability and so on:
 
 - There need to be some people contributing on a regular basis. They provide
@@ -103,22 +89,3 @@ well but ultimately nothing works without a "core" set of people.
 
 I have some further thoughts on how such incentives could be
 structured which I will explore in a later blog post.
-
-<!-- Now that we have an idea of what's required we can think about ways to fulfill those requirements. -->
-
-<!-- ---
-
-THOUGHT: Too strong incentives to contribute to existing projects could hinder innovation? Hidden part of graph we should be aware of/consider.
-
----
-
-THOUGHT: Stability and reliability are among the most important aspects of open source projects. Any system should optimize towards ongoing contribution while also maintaining an inflow of new people so other people may retreat to other adventures.
-
----
-
-Let's start with bounties as they are probably more controversial than other models. I believe bounties can excel at achieving the following goals:
-
-- Getting new people to contribute to a project
-- Encouraging outsiders to familiarize themselves with a project (think of security)
-
-Bounties fall short when the aim is to create stability and continuous unguided contributions. -->
