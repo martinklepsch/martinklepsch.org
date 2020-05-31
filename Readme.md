@@ -54,3 +54,4 @@ boot build deploy
 - [ ] A preprocessing step could turn raw links to YouTube or twitter into more useful embeds/views
 - [ ] Preprocessing step could replace add combinations of tachyons classes to matching nodes
 - [ ] revisit blockquote styling https://www.martinklepsch.org/posts/living-small.html
+- [ ] make headings bold
