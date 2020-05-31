@@ -1,40 +1,210 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Boot is a build system for Clojure projects. It roughly competes in the same area as Leiningen but Boot&apos;s new version brings some interesting features to the table that make it an alternativ..." itemprop="description" name="description"><link href="https://martinklepsch.org/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html" rel="canonical"><title>Why Boot is Relevant For The Clojure Ecosystem — Martin Klepsch</title><meta content="Why Boot is Relevant For The Clojure Ecosystem" property="og:title"><meta content="article" property="og:type"><meta content="Boot is a build system for Clojure projects. It roughly competes in the same area as Leiningen but Boot&apos;s new version brings some interesting features to the table that make it an alternativ..." property="og:description"><meta content="https://martinklepsch.org/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html" property="og:url"><meta content="https://martinklepsch.org/images/selfies/1.jpg" property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta content="Why Boot is Relevant For The Clojure Ecosystem" name="twitter:title"><meta content="Boot is a build system for Clojure projects. It roughly competes in the same area as Leiningen but Boot&apos;s new version brings some interesting features to the table that make it an alternativ..." name="twitter:description"><meta content="https://martinklepsch.org/images/selfies/1.jpg" name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3138561-8']);
-    _gaq.push(['_setDomainName', 'martinklepsch.org']);
-    _gaq.push(['_trackPageview']);
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="Boot is a build system for Clojure projects. It roughly competes in the same area as Leiningen but Boot's new version brings some interesting features to the table that make it an alternativ..."
+      itemprop="description"
+      name="description"
+    />
+    <link
+      href="https://martinklepsch.org/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html"
+      rel="canonical"
+    />
+    <title>
+      Why Boot is Relevant For The Clojure Ecosystem — Martin Klepsch
+    </title>
+    <meta
+      content="Why Boot is Relevant For The Clojure Ecosystem"
+      property="og:title"
+    />
+    <meta content="article" property="og:type" />
+    <meta
+      content="Boot is a build system for Clojure projects. It roughly competes in the same area as Leiningen but Boot's new version brings some interesting features to the table that make it an alternativ..."
+      property="og:description"
+    />
+    <meta
+      content="https://martinklepsch.org/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html"
+      property="og:url"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/1.jpg"
+      property="og:image"
+    />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta
+      content="Why Boot is Relevant For The Clojure Ecosystem"
+      name="twitter:title"
+    />
+    <meta
+      content="Boot is a build system for Clojure projects. It roughly competes in the same area as Leiningen but Boot's new version brings some interesting features to the table that make it an alternativ..."
+      name="twitter:description"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/1.jpg"
+      name="twitter:image"
+    />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
 
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
 
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-    : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html" title="Permalink: Why Boot is Relevant For The Clojure Ecosystem">November 2014</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">Why Boot is Relevant For The Clojure Ecosystem</h1><section class="mkdwn lh-copy"><p>Boot is a build system for Clojure projects. It roughly competes in the same area as Leiningen but Boot's new version brings some interesting features to the table that make it an alternative worth assessing.</p>
-<aside>
-If you don't know what Boot is I recommend reading this post by one of Boot's authors first:
-<a href="http://adzerk.com/blog/2014/11/clojurescript-builds-rebooted/">Clojurescript Builds, Rebooted</a>.
-</aside>
-<h2><a href="#compose-build-steps" id="compose-build-steps"></a>Compose Build Steps</h2>
-<p>If you've used Leiningen for more than packaging jars and uberjars you likely came across plugins like <code>lein-cljsbuild</code> or <code>lein-garden</code>, both compile your stuff into a target format (i.e. JS, CSS). Now if you want to run both of these tasks at the same time — which you probably want during development — you have two options: either you open two terminals and start them separately or you fall back to something like below that you run in a <code>dev</code> profile (this is how it's done in <a href="https://github.com/plexus/chestnut">Chestnut</a>):</p>
-<pre><code class="language-clojure">(defn start-garden []
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="system-sans-serif dark-gray">
+    <div class="mh3">
+      <div class="mw7 center mb6">
+        <article
+          class="mt5"
+          itemprop="blogPost"
+          itemscope=""
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <div class="f6 db normal mw6 center">
+            <a
+              class="link"
+              href="/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html"
+              title="Permalink: Why Boot is Relevant For The Clojure Ecosystem"
+              >November 2014</a
+            ><span class="ph2">/</span
+            ><a class="link" href="/" title="Home">Home</a
+            ><span class="ph2">/</span
+            ><a
+              class="link"
+              href="https://twitter.com/martinklepsch"
+              title="@martinklepsch on Twitter"
+              >@martinklepsch</a
+            >
+          </div>
+          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+            Why Boot is Relevant For The Clojure Ecosystem
+          </h1>
+          <section class="mkdwn lh-copy">
+            <p>
+              Boot is a build system for Clojure projects. It roughly competes
+              in the same area as Leiningen but Boot's new version brings some
+              interesting features to the table that make it an alternative
+              worth assessing.
+            </p>
+            <aside>
+              If you don't know what Boot is I recommend reading this post by
+              one of Boot's authors first:
+              <a
+                href="http://adzerk.com/blog/2014/11/clojurescript-builds-rebooted/"
+                >Clojurescript Builds, Rebooted</a
+              >.
+            </aside>
+            <h2>
+              <a href="#compose-build-steps" id="compose-build-steps"></a
+              >Compose Build Steps
+            </h2>
+            <p>
+              If you've used Leiningen for more than packaging jars and uberjars
+              you likely came across plugins like <code>lein-cljsbuild</code> or
+              <code>lein-garden</code>, both compile your stuff into a target
+              format (i.e. JS, CSS). Now if you want to run both of these tasks
+              at the same time — which you probably want during development —
+              you have two options: either you open two terminals and start them
+              separately or you fall back to something like below that you run
+              in a <code>dev</code> profile (this is how it's done in
+              <a href="https://github.com/plexus/chestnut">Chestnut</a>):
+            </p>
+            <pre><code class="language-clojure">(defn start-garden []
 (future
   (print &quot;Starting Garden.\n&quot;)
   (lein/-main [&quot;garden&quot; &quot;auto&quot;])))
 </code></pre>
-<p>Now there are issues with both of these options in my opinion. Opening two terminals to initiate your development environment is just not very user friendly and putting code related to building the project into your codebase is boilerplate that unnecessarily can cause trouble by getting outdated.</p>
-<p>What Boot allows developers to do is to write small composable tasks. These work somewhat similar to stateful transducers and ring middleware in that you can just combine them with regular function composition.</p>
-<h3><a href="#a-quick-example" id="a-quick-example"></a>A Quick Example</h3>
-<p>Playing around with Boot, I tried to write a task. To test this task in an actual project I needed to install it into my local repository (in Leiningen: <code>lein install</code>).  Knowing that I'd need to reinstall the task constantly as I change it I was looking for something like Leiningen's Checkouts so I don't have to re-install after every change.</p>
-<p>Turns out Boot can solve this problem in a very different way that illustrates the composing mechanism nicely. Boot defines a bunch of <a href="https://github.com/boot-clj/boot/blob/master/boot/core/src/boot/task/built_in.clj">built-in tasks</a> that help with packaging and installing a jar: <code>pom</code>, <code>add-src</code>, <code>jar</code> &amp; <code>install</code>.</p>
-<p>We could call all of these these on the command line as follows:</p>
-<pre><code>boot pom add-src jar install
+            <p>
+              Now there are issues with both of these options in my opinion.
+              Opening two terminals to initiate your development environment is
+              just not very user friendly and putting code related to building
+              the project into your codebase is boilerplate that unnecessarily
+              can cause trouble by getting outdated.
+            </p>
+            <p>
+              What Boot allows developers to do is to write small composable
+              tasks. These work somewhat similar to stateful transducers and
+              ring middleware in that you can just combine them with regular
+              function composition.
+            </p>
+            <h3>
+              <a href="#a-quick-example" id="a-quick-example"></a>A Quick
+              Example
+            </h3>
+            <p>
+              Playing around with Boot, I tried to write a task. To test this
+              task in an actual project I needed to install it into my local
+              repository (in Leiningen: <code>lein install</code>). Knowing that
+              I'd need to reinstall the task constantly as I change it I was
+              looking for something like Leiningen's Checkouts so I don't have
+              to re-install after every change.
+            </p>
+            <p>
+              Turns out Boot can solve this problem in a very different way that
+              illustrates the composing mechanism nicely. Boot defines a bunch
+              of
+              <a
+                href="https://github.com/boot-clj/boot/blob/master/boot/core/src/boot/task/built_in.clj"
+                >built-in tasks</a
+              >
+              that help with packaging and installing a jar: <code>pom</code>,
+              <code>add-src</code>, <code>jar</code> &amp; <code>install</code>.
+            </p>
+            <p>
+              We could call all of these these on the command line as follows:
+            </p>
+            <pre><code>boot pom add-src jar install
 </code></pre>
-<p>Because we're lazy we'll define it as a task in our project's <code>build.boot</code> file. (Command-line task and their arguments are symmetric to their Clojure counterparts.)</p>
-<pre><code class="language-clojure">(require '[boot.core          :refer [deftask]]
+            <p>
+              Because we're lazy we'll define it as a task in our project's
+              <code>build.boot</code> file. (Command-line task and their
+              arguments are symmetric to their Clojure counterparts.)
+            </p>
+            <pre><code class="language-clojure">(require '[boot.core          :refer [deftask]]
             '[boot.task.built-in :refer [pom add-src jar install]])
 
 (deftask build-jar
@@ -42,19 +212,107 @@ If you don't know what Boot is I recommend reading this post by one of Boot's au
   []
   (comp (pom) (add-src) (jar) (install)))
 </code></pre>
-<p>Now <code>boot build-jar</code> is roughly equivalent to <code>lein install</code>. To have any changes directly reflected on our classpath we can just compose our newly written <code>build-jar</code> task with another task from the repertoire of built-in tasks: <code>watch</code>. The <code>watch</code>-task observes the file system for changes and initiates a new build cycle when they occur:</p>
-<pre><code>boot watch build-jar
+            <p>
+              Now <code>boot build-jar</code> is roughly equivalent to
+              <code>lein install</code>. To have any changes directly reflected
+              on our classpath we can just compose our newly written
+              <code>build-jar</code> task with another task from the repertoire
+              of built-in tasks: <code>watch</code>. The <code>watch</code>-task
+              observes the file system for changes and initiates a new build
+              cycle when they occur:
+            </p>
+            <pre><code>boot watch build-jar
 </code></pre>
-<p>With that command we just composed our already composed task with another task. <strong>Look at that cohesion!</strong></p>
-<aside>I'm not familiar enough with Leiningen Checkouts to say with
-confidence if this is identical behavior but for the majority of cases it'll
-probably work.</aside>
-<h2><a href="#there-are-side-effects-everwhere" id="there-are-side-effects-everwhere"></a>There Are Side-Effects Everwhere!</h2>
-<p>Is one concern that has been raised about Boot. Leiningen is beautifully declarative. It's one immutable map that describes your whole project. Boot on the other hand looks a bit different.  A usual boot file might contain a bunch of side-effectful functions and in general it's much more a program than it is data.</p>
-<p>I understand that this might seem like a step back at first sight, in fact I looked at it with confusion as well. There are some problems with Leiningen though that are probably hard to work out in Leiningen's declarative manner (think back to <a href="https://github.com/technomancy/leiningen/issues/1752">running multiple <code>lein X auto</code> commands</a>.</p>
-<p>Looking at Boot's code it becomes apparent that the authors spent a great deal of time on isolating the side effects that might occur in various build steps. I recommend reading the <a href="https://news.ycombinator.com/item?id=8553189">comments on this Hacker News thread</a> for more information on that.</p>
-<h2><a href="#when-to-use-boot-when-to-use-leiningen" id="when-to-use-boot-when-to-use-leiningen"></a>When To Use Boot, When To Use Leiningen</h2>
-<p>Boot is a build tool. That said it's task composition features only get to shine when multiple build steps are involved. If you're developing a library I'm really not going to try to convince you to switch to Boot.  Leiningen works great for that and is, I'd assume, more stable than Boot.</p>
-<p>If you however develop an application that requires various build steps (like Clojurescript, Garden, live reloading, browser-repl) you should totally check out Boot. There are tasks for all of the above mentioned: <a href="https://github.com/adzerk/boot-cljs">Clojurescript</a>, <a href="https://github.com/adzerk/boot-cljs-repl">Clojurescript REPL</a>, <a href="https://github.com/martinklepsch/boot-garden">Garden</a>, <a href="https://github.com/adzerk/boot-reload">live reloading</a>. I wrote the Garden task and writing tasks is not hard once you have a basic understanding of Boot.</p>
-<p>If you need help or have questions join the <a href="http://webchat.freenode.net/?channels=hoplon">#hoplon channel on freenode IRC</a>. I'll try to help and if I can't Alan or Micha, the authors of Boot, probably can.</p>
-</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, November 2014 <a class="white" href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2014-11-06-why-boot-is-relevant-for-the-clojure-ecosystem.markdown" target="_blank">edit on prose.io</a></div></article></div></div></body></html>
+            <p>
+              With that command we just composed our already composed task with
+              another task. <strong>Look at that cohesion!</strong>
+            </p>
+            <aside>
+              I'm not familiar enough with Leiningen Checkouts to say with
+              confidence if this is identical behavior but for the majority of
+              cases it'll probably work.
+            </aside>
+            <h2>
+              <a
+                href="#there-are-side-effects-everwhere"
+                id="there-are-side-effects-everwhere"
+              ></a
+              >There Are Side-Effects Everwhere!
+            </h2>
+            <p>
+              Is one concern that has been raised about Boot. Leiningen is
+              beautifully declarative. It's one immutable map that describes
+              your whole project. Boot on the other hand looks a bit different.
+              A usual boot file might contain a bunch of side-effectful
+              functions and in general it's much more a program than it is data.
+            </p>
+            <p>
+              I understand that this might seem like a step back at first sight,
+              in fact I looked at it with confusion as well. There are some
+              problems with Leiningen though that are probably hard to work out
+              in Leiningen's declarative manner (think back to
+              <a href="https://github.com/technomancy/leiningen/issues/1752"
+                >running multiple <code>lein X auto</code> commands</a
+              >.
+            </p>
+            <p>
+              Looking at Boot's code it becomes apparent that the authors spent
+              a great deal of time on isolating the side effects that might
+              occur in various build steps. I recommend reading the
+              <a href="https://news.ycombinator.com/item?id=8553189"
+                >comments on this Hacker News thread</a
+              >
+              for more information on that.
+            </p>
+            <h2>
+              <a
+                href="#when-to-use-boot-when-to-use-leiningen"
+                id="when-to-use-boot-when-to-use-leiningen"
+              ></a
+              >When To Use Boot, When To Use Leiningen
+            </h2>
+            <p>
+              Boot is a build tool. That said it's task composition features
+              only get to shine when multiple build steps are involved. If
+              you're developing a library I'm really not going to try to
+              convince you to switch to Boot. Leiningen works great for that and
+              is, I'd assume, more stable than Boot.
+            </p>
+            <p>
+              If you however develop an application that requires various build
+              steps (like Clojurescript, Garden, live reloading, browser-repl)
+              you should totally check out Boot. There are tasks for all of the
+              above mentioned:
+              <a href="https://github.com/adzerk/boot-cljs">Clojurescript</a>,
+              <a href="https://github.com/adzerk/boot-cljs-repl"
+                >Clojurescript REPL</a
+              >,
+              <a href="https://github.com/martinklepsch/boot-garden">Garden</a>,
+              <a href="https://github.com/adzerk/boot-reload">live reloading</a
+              >. I wrote the Garden task and writing tasks is not hard once you
+              have a basic understanding of Boot.
+            </p>
+            <p>
+              If you need help or have questions join the
+              <a href="http://webchat.freenode.net/?channels=hoplon"
+                >#hoplon channel on freenode IRC</a
+              >. I'll try to help and if I can't Alan or Micha, the authors of
+              Boot, probably can.
+            </p>
+          </section>
+          <div class="mv4 em-before mw6 center">
+            <a class="link" href="https://twitter.com/martinklepsch"
+              >@martinklepsch</a
+            >, November 2014
+            <a
+              class="white"
+              href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2014-11-06-why-boot-is-relevant-for-the-clojure-ecosystem.markdown"
+              target="_blank"
+              >edit on prose.io</a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

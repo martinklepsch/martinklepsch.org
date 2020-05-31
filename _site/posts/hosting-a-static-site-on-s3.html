@@ -1,38 +1,215 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Preface Hosting a static site is preferred by many developers because it gives you a maximum of control at a minimum of maintenance. While there are other tools available Jekyll became somet..." itemprop="description" name="description"><link href="https://martinklepsch.org/posts/hosting-a-static-site-on-s3.html" rel="canonical"><title>Hosting A Static Site On Amazon S3 — Martin Klepsch</title><meta content="Hosting A Static Site On Amazon S3" property="og:title"><meta content="article" property="og:type"><meta content="Preface Hosting a static site is preferred by many developers because it gives you a maximum of control at a minimum of maintenance. While there are other tools available Jekyll became somet..." property="og:description"><meta content="https://martinklepsch.org/posts/hosting-a-static-site-on-s3.html" property="og:url"><meta content="https://martinklepsch.org/images/selfies/3.jpg" property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta content="Hosting A Static Site On Amazon S3" name="twitter:title"><meta content="Preface Hosting a static site is preferred by many developers because it gives you a maximum of control at a minimum of maintenance. While there are other tools available Jekyll became somet..." name="twitter:description"><meta content="https://martinklepsch.org/images/selfies/3.jpg" name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3138561-8']);
-    _gaq.push(['_setDomainName', 'martinklepsch.org']);
-    _gaq.push(['_trackPageview']);
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="Preface Hosting a static site is preferred by many developers because it gives you a maximum of control at a minimum of maintenance. While there are other tools available Jekyll became somet..."
+      itemprop="description"
+      name="description"
+    />
+    <link
+      href="https://martinklepsch.org/posts/hosting-a-static-site-on-s3.html"
+      rel="canonical"
+    />
+    <title>Hosting A Static Site On Amazon S3 — Martin Klepsch</title>
+    <meta content="Hosting A Static Site On Amazon S3" property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="Preface Hosting a static site is preferred by many developers because it gives you a maximum of control at a minimum of maintenance. While there are other tools available Jekyll became somet..."
+      property="og:description"
+    />
+    <meta
+      content="https://martinklepsch.org/posts/hosting-a-static-site-on-s3.html"
+      property="og:url"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      property="og:image"
+    />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta content="Hosting A Static Site On Amazon S3" name="twitter:title" />
+    <meta
+      content="Preface Hosting a static site is preferred by many developers because it gives you a maximum of control at a minimum of maintenance. While there are other tools available Jekyll became somet..."
+      name="twitter:description"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      name="twitter:image"
+    />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
 
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
 
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-    : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/hosting-a-static-site-on-s3.html" title="Permalink: Hosting A Static Site On Amazon S3">February 2012</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">Hosting A Static Site On Amazon S3</h1><section class="mkdwn lh-copy"><h2><a href="#preface" id="preface"></a>Preface</h2>
-<p>Hosting a static site is preferred by many developers because it gives you a maximum of control at a minimum of maintenance. While there are other tools available <a href="https://github.com/mojombo/jekyll">Jekyll</a> became something like a reference implementation, especially under Ruby developers. Since Jekyll's creator, Tom Preston Werner, also founded Github it is not surprising that Github is providing a service to autogenerate and host your static site as soon as you push it.</p>
-<p>Now, that sounds like perfect all around. It is. As long as you are not using custom generators or converters with Jekyll everything is good. If you do however you'll quickly notice that Github <a href="https://github.com/mojombo/jekyll/issues/325">disabled custom Ruby code</a> to keep everything secure.</p>
-<aside><p>
-There are still ways to host your static site with Github but using these would mean
-losing nearly all the benefits from hosting at Github (eg. Autogeneration).</p></aside>
-<p>Since the requirements for hosting a static site are nearly non-existent you can easily move it onto any Server.</p>
-<p>I decided for Amazon S3 because it's widely used, reliable and cheap.</p>
-<h2><a href="#static-site-generators" id="static-site-generators"></a>Static Site Generators</h2>
-<p>While there are <a href="http://nanoc.stoneship.org/" title="Nanoc">quite</a> <a href="http://middlemanapp.com" title="Middleman">a</a> <a href="https://www.ruby-toolbox.com/categories/static_website_generation" title="Ruby-Toolbox Listing">lot</a>. Jekyll is used by most people. When I chose Jekyll it was mostly because of it's active community and the fact that it is developed and used heavily by Github. Before I settled on Jekyll I gave nanoc a try. I don't exactly remember why I ditched nanoc but in the end Jekyll feels lighter and I also prefer Liquid Markup over ERB Syntax.</p>
-<h2><a href="#setting-up-amazon-s3" id="setting-up-amazon-s3"></a>Setting Up Amazon S3</h2>
-<p>Comparing Github's free hosting with Amazon S3 is somewhat unfair since you got to pay for S3 storage and bandwith. Doing the math however you'll quickly notice that the price for hosting your static site on S3 is low. With a complete page size of 100M and traffic of 10G you would not pay more than 2$.</p>
-<p>After creating a new bucket in your S3 instance there are only a few steps you need to do in order to have a proper static site hosted by S3.</p>
-<p><strong>Important:</strong> When creating your bucket make sure that it has the same name as the domain name you want to use for your static site (ex. <a href="www.martinklepsch.org">www.martinklepsch.org</a>). This domain has to have some subdomain.</p>
-<p><strong>Step 1:</strong> Enable S3's website feature by enabling it in the properties pane of your bucket.</p>
-<figure>
-<img alt='Website settings in the bucket propertie pane' src='/images/website-settings-s3.png'>
-</figure>
-<p><strong>Step 2:</strong> Set a bucket policy that basically allows everyone to view the contents of your bucket.</p>
-<pre><code>{
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="system-sans-serif dark-gray">
+    <div class="mh3">
+      <div class="mw7 center mb6">
+        <article
+          class="mt5"
+          itemprop="blogPost"
+          itemscope=""
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <div class="f6 db normal mw6 center">
+            <a
+              class="link"
+              href="/posts/hosting-a-static-site-on-s3.html"
+              title="Permalink: Hosting A Static Site On Amazon S3"
+              >February 2012</a
+            ><span class="ph2">/</span
+            ><a class="link" href="/" title="Home">Home</a
+            ><span class="ph2">/</span
+            ><a
+              class="link"
+              href="https://twitter.com/martinklepsch"
+              title="@martinklepsch on Twitter"
+              >@martinklepsch</a
+            >
+          </div>
+          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+            Hosting A Static Site On Amazon S3
+          </h1>
+          <section class="mkdwn lh-copy">
+            <h2><a href="#preface" id="preface"></a>Preface</h2>
+            <p>
+              Hosting a static site is preferred by many developers because it
+              gives you a maximum of control at a minimum of maintenance. While
+              there are other tools available
+              <a href="https://github.com/mojombo/jekyll">Jekyll</a> became
+              something like a reference implementation, especially under Ruby
+              developers. Since Jekyll's creator, Tom Preston Werner, also
+              founded Github it is not surprising that Github is providing a
+              service to autogenerate and host your static site as soon as you
+              push it.
+            </p>
+            <p>
+              Now, that sounds like perfect all around. It is. As long as you
+              are not using custom generators or converters with Jekyll
+              everything is good. If you do however you'll quickly notice that
+              Github
+              <a href="https://github.com/mojombo/jekyll/issues/325"
+                >disabled custom Ruby code</a
+              >
+              to keep everything secure.
+            </p>
+            <aside>
+              <p>
+                There are still ways to host your static site with Github but
+                using these would mean losing nearly all the benefits from
+                hosting at Github (eg. Autogeneration).
+              </p>
+            </aside>
+            <p>
+              Since the requirements for hosting a static site are nearly
+              non-existent you can easily move it onto any Server.
+            </p>
+            <p>
+              I decided for Amazon S3 because it's widely used, reliable and
+              cheap.
+            </p>
+            <h2>
+              <a href="#static-site-generators" id="static-site-generators"></a
+              >Static Site Generators
+            </h2>
+            <p>
+              While there are
+              <a href="http://nanoc.stoneship.org/" title="Nanoc">quite</a>
+              <a href="http://middlemanapp.com" title="Middleman">a</a>
+              <a
+                href="https://www.ruby-toolbox.com/categories/static_website_generation"
+                title="Ruby-Toolbox Listing"
+                >lot</a
+              >. Jekyll is used by most people. When I chose Jekyll it was
+              mostly because of it's active community and the fact that it is
+              developed and used heavily by Github. Before I settled on Jekyll I
+              gave nanoc a try. I don't exactly remember why I ditched nanoc but
+              in the end Jekyll feels lighter and I also prefer Liquid Markup
+              over ERB Syntax.
+            </p>
+            <h2>
+              <a href="#setting-up-amazon-s3" id="setting-up-amazon-s3"></a
+              >Setting Up Amazon S3
+            </h2>
+            <p>
+              Comparing Github's free hosting with Amazon S3 is somewhat unfair
+              since you got to pay for S3 storage and bandwith. Doing the math
+              however you'll quickly notice that the price for hosting your
+              static site on S3 is low. With a complete page size of 100M and
+              traffic of 10G you would not pay more than 2$.
+            </p>
+            <p>
+              After creating a new bucket in your S3 instance there are only a
+              few steps you need to do in order to have a proper static site
+              hosted by S3.
+            </p>
+            <p>
+              <strong>Important:</strong> When creating your bucket make sure
+              that it has the same name as the domain name you want to use for
+              your static site (ex.
+              <a href="www.martinklepsch.org">www.martinklepsch.org</a>). This
+              domain has to have some subdomain.
+            </p>
+            <p>
+              <strong>Step 1:</strong> Enable S3's website feature by enabling
+              it in the properties pane of your bucket.
+            </p>
+            <figure>
+              <img
+                alt="Website settings in the bucket propertie pane"
+                src="/images/website-settings-s3.png"
+              />
+            </figure>
+            <p>
+              <strong>Step 2:</strong> Set a bucket policy that basically allows
+              everyone to view the contents of your bucket.
+            </p>
+            <pre><code>{
   &quot;Version&quot;:&quot;2008-10-17&quot;,
   &quot;Statement&quot;:[{
     &quot;Sid&quot;:&quot;PublicReadForGetBucketObjects&quot;,
@@ -45,10 +222,71 @@ losing nearly all the benefits from hosting at Github (eg. Autogeneration).</p><
   }]
 }
 </code></pre>
-<!-- <script src="https://gist.github.com/martinklepsch/4991741.js"></script> -->
-<p><strong>Step 3:</strong> Upload your static website to S3. You can either do that manually by using the AWS Management Console or you can automate the process by writing some small programm. There are S3 libraries for many programming languages. I built a <a href="https://github.com/martinklepsch/martinklepsch.org/blob/master/Rakefile" title="Rakefile on Github">small rake task</a> that does the job.</p>
-<p>If you are experiencing problems with the setup of S3 I recommend the official <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/WebsiteHosting.html" title="AWS Static Website Hosting Documentation">AWS documentation</a>.</p>
-<h2><a href="#naked-domain-name-fowarding" id="naked-domain-name-fowarding"></a>Naked Domain Name Fowarding</h2>
-<p>DNS does not allow to set the whats apparently called &quot;zone apex&quot; (<code>&quot;example.com&quot;</code>) to be a CNAME for another domain like <code>www.example.com.s3-website-us-east-1.amazonaws.com</code>. Therefore you need to redirect all requests going to your domain without <code>www</code> to you domain with <code>www</code> (<code>example.com</code> to <code>www.example.com</code>). <a href="https://forums.aws.amazon.com/thread.jspa?threadID=55995" title="A thread in AWS forums with good information about the issue">Read more.</a></p>
-<p>You can either do this by using your domain registrars control panel or by using a service like <a href="http://wwwizer.com/naked-domain-redirect">wwwizer</a>. I did it with <a href="http://gandi.net">Gandi</a>'s control panel and it works fine.</p>
-</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, February 2012 <a class="white" href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2012-02-20-Hosting-A-Static-Site-On-S3.markdown" target="_blank">edit on prose.io</a></div></article></div></div></body></html>
+            <!-- <script src="https://gist.github.com/martinklepsch/4991741.js"></script> -->
+            <p>
+              <strong>Step 3:</strong> Upload your static website to S3. You can
+              either do that manually by using the AWS Management Console or you
+              can automate the process by writing some small programm. There are
+              S3 libraries for many programming languages. I built a
+              <a
+                href="https://github.com/martinklepsch/martinklepsch.org/blob/master/Rakefile"
+                title="Rakefile on Github"
+                >small rake task</a
+              >
+              that does the job.
+            </p>
+            <p>
+              If you are experiencing problems with the setup of S3 I recommend
+              the official
+              <a
+                href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/WebsiteHosting.html"
+                title="AWS Static Website Hosting Documentation"
+                >AWS documentation</a
+              >.
+            </p>
+            <h2>
+              <a
+                href="#naked-domain-name-fowarding"
+                id="naked-domain-name-fowarding"
+              ></a
+              >Naked Domain Name Fowarding
+            </h2>
+            <p>
+              DNS does not allow to set the whats apparently called &quot;zone
+              apex&quot; (<code>&quot;example.com&quot;</code>) to be a CNAME
+              for another domain like
+              <code>www.example.com.s3-website-us-east-1.amazonaws.com</code>.
+              Therefore you need to redirect all requests going to your domain
+              without <code>www</code> to you domain with
+              <code>www</code> (<code>example.com</code> to
+              <code>www.example.com</code>).
+              <a
+                href="https://forums.aws.amazon.com/thread.jspa?threadID=55995"
+                title="A thread in AWS forums with good information about the issue"
+                >Read more.</a
+              >
+            </p>
+            <p>
+              You can either do this by using your domain registrars control
+              panel or by using a service like
+              <a href="http://wwwizer.com/naked-domain-redirect">wwwizer</a>. I
+              did it with <a href="http://gandi.net">Gandi</a>'s control panel
+              and it works fine.
+            </p>
+          </section>
+          <div class="mv4 em-before mw6 center">
+            <a class="link" href="https://twitter.com/martinklepsch"
+              >@martinklepsch</a
+            >, February 2012
+            <a
+              class="white"
+              href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2012-02-20-Hosting-A-Static-Site-On-S3.markdown"
+              target="_blank"
+              >edit on prose.io</a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

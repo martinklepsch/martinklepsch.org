@@ -1,36 +1,193 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Yet another post on properly using the Closure Library from within ClojureScript. This time we&apos;ll discuss how to require different namespaces from Closure and the edge-cases that may not be ..." itemprop="description" name="description"><link href="https://martinklepsch.org/posts/requiring-closure-namespaces.html" rel="canonical"><title>Requiring Closure Namespaces — Martin Klepsch</title><meta content="Requiring Closure Namespaces" property="og:title"><meta content="article" property="og:type"><meta content="Yet another post on properly using the Closure Library from within ClojureScript. This time we&apos;ll discuss how to require different namespaces from Closure and the edge-cases that may not be ..." property="og:description"><meta content="https://martinklepsch.org/posts/requiring-closure-namespaces.html" property="og:url"><meta content="https://martinklepsch.org/images/selfies/3.jpg" property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta content="Requiring Closure Namespaces" name="twitter:title"><meta content="Yet another post on properly using the Closure Library from within ClojureScript. This time we&apos;ll discuss how to require different namespaces from Closure and the edge-cases that may not be ..." name="twitter:description"><meta content="https://martinklepsch.org/images/selfies/3.jpg" name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3138561-8']);
-    _gaq.push(['_setDomainName', 'martinklepsch.org']);
-    _gaq.push(['_trackPageview']);
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="Yet another post on properly using the Closure Library from within ClojureScript. This time we'll discuss how to require different namespaces from Closure and the edge-cases that may not be ..."
+      itemprop="description"
+      name="description"
+    />
+    <link
+      href="https://martinklepsch.org/posts/requiring-closure-namespaces.html"
+      rel="canonical"
+    />
+    <title>Requiring Closure Namespaces — Martin Klepsch</title>
+    <meta content="Requiring Closure Namespaces" property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="Yet another post on properly using the Closure Library from within ClojureScript. This time we'll discuss how to require different namespaces from Closure and the edge-cases that may not be ..."
+      property="og:description"
+    />
+    <meta
+      content="https://martinklepsch.org/posts/requiring-closure-namespaces.html"
+      property="og:url"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      property="og:image"
+    />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta content="Requiring Closure Namespaces" name="twitter:title" />
+    <meta
+      content="Yet another post on properly using the Closure Library from within ClojureScript. This time we'll discuss how to require different namespaces from Closure and the edge-cases that may not be ..."
+      name="twitter:description"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      name="twitter:image"
+    />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
 
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
 
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-    : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/requiring-closure-namespaces.html" title="Permalink: Requiring Closure Namespaces">May 2017</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">Requiring Closure Namespaces</h1><section class="mkdwn lh-copy"><p>Yet another post on properly using the <a href="https://developers.google.com/closure/library/">Closure Library</a> from within ClojureScript. This time we'll discuss how to require different namespaces from Closure and the edge-cases that may not be immediately intuitive.</p>
-<h2><a href="#namespaces-constructors-constants" id="namespaces-constructors-constants"></a>Namespaces, Constructors, Constants</h2>
-<p>When requiring things from Closure you mostly deal with its namespaces. Most namespaces have functions defined in them, some also contain constructors or constants. Functions are camelCased. Constructors are Capitalized. Constants are ALL_CAPS. The line between namespaces and constructors gets a bit blurry sometimes as you'll see shortly.</p>
-<p>Let's take <code>goog.Timer</code> as an example. As per the previous paragraph you can infer that <code>Timer</code> is a constructor. Just like in Clojure we use <code>:import</code> to make constructors available:</p>
-<pre><code>(ns my.app
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="system-sans-serif dark-gray">
+    <div class="mh3">
+      <div class="mw7 center mb6">
+        <article
+          class="mt5"
+          itemprop="blogPost"
+          itemscope=""
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <div class="f6 db normal mw6 center">
+            <a
+              class="link"
+              href="/posts/requiring-closure-namespaces.html"
+              title="Permalink: Requiring Closure Namespaces"
+              >May 2017</a
+            ><span class="ph2">/</span
+            ><a class="link" href="/" title="Home">Home</a
+            ><span class="ph2">/</span
+            ><a
+              class="link"
+              href="https://twitter.com/martinklepsch"
+              title="@martinklepsch on Twitter"
+              >@martinklepsch</a
+            >
+          </div>
+          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+            Requiring Closure Namespaces
+          </h1>
+          <section class="mkdwn lh-copy">
+            <p>
+              Yet another post on properly using the
+              <a href="https://developers.google.com/closure/library/"
+                >Closure Library</a
+              >
+              from within ClojureScript. This time we'll discuss how to require
+              different namespaces from Closure and the edge-cases that may not
+              be immediately intuitive.
+            </p>
+            <h2>
+              <a
+                href="#namespaces-constructors-constants"
+                id="namespaces-constructors-constants"
+              ></a
+              >Namespaces, Constructors, Constants
+            </h2>
+            <p>
+              When requiring things from Closure you mostly deal with its
+              namespaces. Most namespaces have functions defined in them, some
+              also contain constructors or constants. Functions are camelCased.
+              Constructors are Capitalized. Constants are ALL_CAPS. The line
+              between namespaces and constructors gets a bit blurry sometimes as
+              you'll see shortly.
+            </p>
+            <p>
+              Let's take <code>goog.Timer</code> as an example. As per the
+              previous paragraph you can infer that <code>Timer</code> is a
+              constructor. Just like in Clojure we use <code>:import</code> to
+              make constructors available:
+            </p>
+            <pre><code>(ns my.app
   (:import [goog Timer]))
 </code></pre>
-<p>Now we may use the <code>Timer</code> constructor as follows:</p>
-<pre><code>(def our-timer (Timer. interval))
+            <p>Now we may use the <code>Timer</code> constructor as follows:</p>
+            <pre><code>(def our-timer (Timer. interval))
 </code></pre>
-<p>Great. We have a timer. Now we'll want to do something whenever it &quot;ticks&quot;. The <code>Timer</code> instance emits events which we can listen to. Listening to events can be done with the function <code>goog.events.listen</code>. As you can see, this function is not part of any class instance - it just exists in the <code>goog.events</code> namespace. To make the <code>listen</code> function accessible you need to require the namespace containing it. This is similar to how we require regular ClojureScript namespaces:</p>
-<pre><code>(ns my.app
+            <p>
+              Great. We have a timer. Now we'll want to do something whenever it
+              &quot;ticks&quot;. The <code>Timer</code> instance emits events
+              which we can listen to. Listening to events can be done with the
+              function <code>goog.events.listen</code>. As you can see, this
+              function is not part of any class instance - it just exists in the
+              <code>goog.events</code> namespace. To make the
+              <code>listen</code> function accessible you need to require the
+              namespace containing it. This is similar to how we require regular
+              ClojureScript namespaces:
+            </p>
+            <pre><code>(ns my.app
   (:require [goog.events :as events])
   (:import [goog Timer]))
 </code></pre>
-<p>We can refer to the function as <code>events/listen</code> now. To listen to specific kinds of events we need to pass an event type to this function. Many Closure namespaces define constants that you can use to refer to those event types. Internally they're often just strings or numbers but this level of indirection shields you from some otherwise breaking changes to a namespace's implementation.</p>
-<p>Looking at the <a href="https://google.github.io/closure-library/api/goog.Timer.html">Timer</a> docs you can find a constant <code>TICK</code>. Now we required the constructor and are able to use that but the constructor itself does not allow us to access other parts of the namespace. So let's require the namespace.</p>
-<pre><code>(ns my.app
+            <p>
+              We can refer to the function as <code>events/listen</code> now. To
+              listen to specific kinds of events we need to pass an event type
+              to this function. Many Closure namespaces define constants that
+              you can use to refer to those event types. Internally they're
+              often just strings or numbers but this level of indirection
+              shields you from some otherwise breaking changes to a namespace's
+              implementation.
+            </p>
+            <p>
+              Looking at the
+              <a
+                href="https://google.github.io/closure-library/api/goog.Timer.html"
+                >Timer</a
+              >
+              docs you can find a constant <code>TICK</code>. Now we required
+              the constructor and are able to use that but the constructor
+              itself does not allow us to access other parts of the namespace.
+              So let's require the namespace.
+            </p>
+            <pre><code>(ns my.app
   (:require [goog.events :as events]
             [goog.Timer :as timer]) ; &lt;-- new
   (:import [goog Timer]))
@@ -39,59 +196,208 @@
 
 (events/listen our-timer timer/TICK (fn [e] (js/console.log e)))
 </code></pre>
-<p>Remember the blurry line mentioned earlier? We just required the <code>goog.Timer</code> namespace both as a constructor and as a namespace. While this example works fine now, there are two more edge cases worth pointing out.</p>
-<h2><a href="#deeper-property-access" id="deeper-property-access"></a>Deeper Property Access</h2>
-<p>Closure comes with a handy namespace for keyboard shortcuts, aptly named <a href="https://google.github.io/closure-library/api/goog.ui.KeyboardShortcutHandler.html"><code>KeyboardShortcutHandler</code></a>. As you can guess, <code>KeyboardShortcutHandler</code> is a constructor that we can use via <code>:import</code>. Since it emits events, the namespace also provides an enum of events that we can use to listen for specific ones. In contrast to the timer's <code>TICK</code>, this enumeration is &quot;wrapped&quot; in <code>goog.ui.KeyBoardShortcutHandler.EventType</code>.</p>
-<p>The <code>EventType</code> property contains <code>SHORTCUT_PREFIX</code> and <code>SHORTCUT_TRIGGERED</code>. So far we've only imported the constructor. At this point you might try this:</p>
-<pre><code>(:require [goog.ui.KeyBoardShortcutHandler.EventType :as event-types])
+            <p>
+              Remember the blurry line mentioned earlier? We just required the
+              <code>goog.Timer</code> namespace both as a constructor and as a
+              namespace. While this example works fine now, there are two more
+              edge cases worth pointing out.
+            </p>
+            <h2>
+              <a href="#deeper-property-access" id="deeper-property-access"></a
+              >Deeper Property Access
+            </h2>
+            <p>
+              Closure comes with a handy namespace for keyboard shortcuts, aptly
+              named
+              <a
+                href="https://google.github.io/closure-library/api/goog.ui.KeyboardShortcutHandler.html"
+                ><code>KeyboardShortcutHandler</code></a
+              >. As you can guess, <code>KeyboardShortcutHandler</code> is a
+              constructor that we can use via <code>:import</code>. Since it
+              emits events, the namespace also provides an enum of events that
+              we can use to listen for specific ones. In contrast to the timer's
+              <code>TICK</code>, this enumeration is &quot;wrapped&quot; in
+              <code>goog.ui.KeyBoardShortcutHandler.EventType</code>.
+            </p>
+            <p>
+              The <code>EventType</code> property contains
+              <code>SHORTCUT_PREFIX</code> and <code>SHORTCUT_TRIGGERED</code>.
+              So far we've only imported the constructor. At this point you
+              might try this:
+            </p>
+            <pre><code>(:require [goog.ui.KeyBoardShortcutHandler.EventType :as event-types])
 </code></pre>
-<p><strong>But that won't work</strong>. The <code>EventType</code> is not a namespace but an enum provided by the <code>KeyboardShortcutHandler</code> namespace. To access the enum you need to access it through the namespace providing it. In the end this will look like this:</p>
-<pre><code>(:require [goog.ui.KeyBoardShortcutHandler :as shortcut])
+            <p>
+              <strong>But that won't work</strong>. The
+              <code>EventType</code> is not a namespace but an enum provided by
+              the <code>KeyboardShortcutHandler</code> namespace. To access the
+              enum you need to access it through the namespace providing it. In
+              the end this will look like this:
+            </p>
+            <pre><code>(:require [goog.ui.KeyBoardShortcutHandler :as shortcut])
 
 (events/listen a-shortcut-handler shortcut/EventType.SHORTCUT_TRIGGERED ,,,)
 </code></pre>
-<p>Note how the slash always comes directly after the namespace alias.</p>
-<h2><a href="#googstringformat" id="googstringformat"></a>goog.string.format</h2>
-<p>Last but not least another weird one. <code>goog.string.format</code> is a namespace that <a href="https://google.github.io/closure-library/api/goog.string.format.html">seems to</a> contain a single function called <code>format</code>. If you require the format namespace however, it turns out to contain no function of that name:</p>
-<pre><code>(:require [goog.string.format :as format])
+            <p>
+              Note how the slash always comes directly after the namespace
+              alias.
+            </p>
+            <h2>
+              <a href="#googstringformat" id="googstringformat"></a
+              >goog.string.format
+            </h2>
+            <p>
+              Last but not least another weird one.
+              <code>goog.string.format</code> is a namespace that
+              <a
+                href="https://google.github.io/closure-library/api/goog.string.format.html"
+                >seems to</a
+              >
+              contain a single function called <code>format</code>. If you
+              require the format namespace however, it turns out to contain no
+              function of that name:
+            </p>
+            <pre><code>(:require [goog.string.format :as format])
 
 (format/format ,,,) ; TypeError: goog.string.format.format is not a function
 </code></pre>
-<p>Now in cases like this it often helps to look at <a href="https://github.com/google/closure-library/blob/master/closure/goog/string/stringformat.js">the source code</a> directly. Usually Closure Library code is very readable. The format function is defined as follows:</p>
-<pre><code>goog.string.format = function(formatString, var_args) {
+            <p>
+              Now in cases like this it often helps to look at
+              <a
+                href="https://github.com/google/closure-library/blob/master/closure/goog/string/stringformat.js"
+                >the source code</a
+              >
+              directly. Usually Closure Library code is very readable. The
+              format function is defined as follows:
+            </p>
+            <pre><code>goog.string.format = function(formatString, var_args) {
 </code></pre>
-<p>As you can see it's defined as a property of <code>goog.string</code>, so we can access it via <code>goog.string/format</code> (or an alias you might have chosen when requiring <code>goog.string</code>).  In that sense <code>goog.string.format</code> is not a real namespace but rather something you require for its side effects — in this case the definition of another function in <code>goog.string</code>. I have no idea why they chose to split things up in that way. ¯\<em>(ツ)</em>/¯</p>
-<h2><a href="#for-reference" id="for-reference"></a>For Reference</h2>
-<p>I scratched my head many times about one or the other aspect of this and usually ended up looking at old code. Next time I'll look at the handy list below 🙂</p>
-<ul>
-<li>Require Google Closure <strong>namespaces</strong> just as you'd require ClojureScript namespaces
-<ul>
-<li><code>(:require [goog.events :as events])</code></li>
-</ul>
-</li>
-<li>The <strong>base <code>goog</code> namespace</strong> is autmatically required as if you'd have <code>[goog :as goog]</code> in your list of required namespaces.
-<ul>
-<li>This implies that you can refer to <code>goog.DEBUG</code> as <code>goog/DEBUG</code>. Never refer to <code>goog</code> through the global Javascript namespace as in <code>js/goog.DEBUG</code>. (<a href="https://dev.clojure.org/jira/browse/CLJS-2023">CLJS-2023</a>)</li>
-</ul>
-</li>
-<li>Require <strong>constructors</strong> using one of the two forms. In either case you may use <code>Timer.</code> to construct new objects.
-<ul>
-<li><code>(:import [goog Timer])</code></li>
-<li><code>(:import goog.Timer)</code></li>
-<li>There's an outstanding ticket about <a href="https://dev.clojure.org/jira/browse/CLJS-1734">imports with the same name shadowing each other</a>.</li>
-</ul>
-</li>
-<li>Only access <strong>non-constructor parts</strong> of a namespace through a namespace that has been <code>:require</code>d</li>
-<li>Always use slash after the namespace alias, use dot for deeper property access.</li>
-<li>Requiring <code>goog.string.format</code> will define a function <code>format</code> in the <code>goog.string</code> namespace.</li>
-</ul>
-<h2><a href="#enjoy" id="enjoy"></a>Enjoy</h2>
-<p>For many of the things described here there are alternative ways to do them. We still build on Javascript after all. The ones I've chosen here are the ones that seem most idiomatic from a Clojurescript perspective.</p>
-<p>Thanks to <a href="https://twitter.com/pesterhazy">Paulus Esterhazy</a> and <a href="https://twitter.com/anmonteiro90">António Monteiro</a> for proof-reading this post and offering their suggestions.</p>
-<p>If you feel like reading more about utilizing the Closure Library and compiler in ClojureScript I have a few more posts on those:</p>
-<ul>
-<li><a href="/posts/simple-debouncing-in-clojurescript.html">Simple Debouncing in ClojureScript</a>, showing how to build a simple debouncing mechanism with the facilities provided by the Closure Library.</li>
-<li><a href="/posts/parameterizing-clojurescript-builds.html">Parameterizing ClojureScript Builds</a>, outlining ways to modify ClojureScript builds using the Closure compiler's ability to customize constants at compile-time.</li>
-<li><a href="/posts/just-in-time-script-loading-with-react-and-clojuresript.html">Just-in-Time Script Loading</a>, describing how to load 3rd party scripts like Stripe using React components and Closure's script loader.</li>
-</ul>
-</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, May 2017 <a class="white" href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2017-05-12-requiring-closure-namespaces.markdown" target="_blank">edit on prose.io</a></div></article></div></div></body></html>
+            <p>
+              As you can see it's defined as a property of
+              <code>goog.string</code>, so we can access it via
+              <code>goog.string/format</code> (or an alias you might have chosen
+              when requiring <code>goog.string</code>). In that sense
+              <code>goog.string.format</code> is not a real namespace but rather
+              something you require for its side effects — in this case the
+              definition of another function in <code>goog.string</code>. I have
+              no idea why they chose to split things up in that way.
+              ¯\<em>(ツ)</em>/¯
+            </p>
+            <h2>
+              <a href="#for-reference" id="for-reference"></a>For Reference
+            </h2>
+            <p>
+              I scratched my head many times about one or the other aspect of
+              this and usually ended up looking at old code. Next time I'll look
+              at the handy list below 🙂
+            </p>
+            <ul>
+              <li>
+                Require Google Closure <strong>namespaces</strong> just as you'd
+                require ClojureScript namespaces
+                <ul>
+                  <li><code>(:require [goog.events :as events])</code></li>
+                </ul>
+              </li>
+              <li>
+                The <strong>base <code>goog</code> namespace</strong> is
+                autmatically required as if you'd have
+                <code>[goog :as goog]</code> in your list of required
+                namespaces.
+                <ul>
+                  <li>
+                    This implies that you can refer to
+                    <code>goog.DEBUG</code> as <code>goog/DEBUG</code>. Never
+                    refer to <code>goog</code> through the global Javascript
+                    namespace as in <code>js/goog.DEBUG</code>. (<a
+                      href="https://dev.clojure.org/jira/browse/CLJS-2023"
+                      >CLJS-2023</a
+                    >)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Require <strong>constructors</strong> using one of the two
+                forms. In either case you may use <code>Timer.</code> to
+                construct new objects.
+                <ul>
+                  <li><code>(:import [goog Timer])</code></li>
+                  <li><code>(:import goog.Timer)</code></li>
+                  <li>
+                    There's an outstanding ticket about
+                    <a href="https://dev.clojure.org/jira/browse/CLJS-1734"
+                      >imports with the same name shadowing each other</a
+                    >.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Only access <strong>non-constructor parts</strong> of a
+                namespace through a namespace that has been
+                <code>:require</code>d
+              </li>
+              <li>
+                Always use slash after the namespace alias, use dot for deeper
+                property access.
+              </li>
+              <li>
+                Requiring <code>goog.string.format</code> will define a function
+                <code>format</code> in the <code>goog.string</code> namespace.
+              </li>
+            </ul>
+            <h2><a href="#enjoy" id="enjoy"></a>Enjoy</h2>
+            <p>
+              For many of the things described here there are alternative ways
+              to do them. We still build on Javascript after all. The ones I've
+              chosen here are the ones that seem most idiomatic from a
+              Clojurescript perspective.
+            </p>
+            <p>
+              Thanks to
+              <a href="https://twitter.com/pesterhazy">Paulus Esterhazy</a> and
+              <a href="https://twitter.com/anmonteiro90">António Monteiro</a>
+              for proof-reading this post and offering their suggestions.
+            </p>
+            <p>
+              If you feel like reading more about utilizing the Closure Library
+              and compiler in ClojureScript I have a few more posts on those:
+            </p>
+            <ul>
+              <li>
+                <a href="/posts/simple-debouncing-in-clojurescript.html"
+                  >Simple Debouncing in ClojureScript</a
+                >, showing how to build a simple debouncing mechanism with the
+                facilities provided by the Closure Library.
+              </li>
+              <li>
+                <a href="/posts/parameterizing-clojurescript-builds.html"
+                  >Parameterizing ClojureScript Builds</a
+                >, outlining ways to modify ClojureScript builds using the
+                Closure compiler's ability to customize constants at
+                compile-time.
+              </li>
+              <li>
+                <a
+                  href="/posts/just-in-time-script-loading-with-react-and-clojuresript.html"
+                  >Just-in-Time Script Loading</a
+                >, describing how to load 3rd party scripts like Stripe using
+                React components and Closure's script loader.
+              </li>
+            </ul>
+          </section>
+          <div class="mv4 em-before mw6 center">
+            <a class="link" href="https://twitter.com/martinklepsch"
+              >@martinklepsch</a
+            >, May 2017
+            <a
+              class="white"
+              href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2017-05-12-requiring-closure-namespaces.markdown"
+              target="_blank"
+              >edit on prose.io</a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

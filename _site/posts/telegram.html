@@ -1,30 +1,225 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Telegram is a new messenger built by Pavel and Nikolai Durov.  They previously founded vk.com, Europe&apos;s second largest social network after Facebook (especially popular in Russia). A Few Rea..." itemprop="description" name="description"><link href="https://martinklepsch.org/posts/telegram.html" rel="canonical"><title>Sending You a Telegram — Martin Klepsch</title><meta content="Sending You a Telegram" property="og:title"><meta content="article" property="og:type"><meta content="Telegram is a new messenger built by Pavel and Nikolai Durov.  They previously founded vk.com, Europe&apos;s second largest social network after Facebook (especially popular in Russia). A Few Rea..." property="og:description"><meta content="https://martinklepsch.org/posts/telegram.html" property="og:url"><meta content="https://martinklepsch.org/images/selfies/3.jpg" property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta content="Sending You a Telegram" name="twitter:title"><meta content="Telegram is a new messenger built by Pavel and Nikolai Durov.  They previously founded vk.com, Europe&apos;s second largest social network after Facebook (especially popular in Russia). A Few Rea..." name="twitter:description"><meta content="https://martinklepsch.org/images/selfies/3.jpg" name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3138561-8']);
-    _gaq.push(['_setDomainName', 'martinklepsch.org']);
-    _gaq.push(['_trackPageview']);
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="Telegram is a new messenger built by Pavel and Nikolai Durov.  They previously founded vk.com, Europe's second largest social network after Facebook (especially popular in Russia). A Few Rea..."
+      itemprop="description"
+      name="description"
+    />
+    <link
+      href="https://martinklepsch.org/posts/telegram.html"
+      rel="canonical"
+    />
+    <title>Sending You a Telegram — Martin Klepsch</title>
+    <meta content="Sending You a Telegram" property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="Telegram is a new messenger built by Pavel and Nikolai Durov.  They previously founded vk.com, Europe's second largest social network after Facebook (especially popular in Russia). A Few Rea..."
+      property="og:description"
+    />
+    <meta
+      content="https://martinklepsch.org/posts/telegram.html"
+      property="og:url"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      property="og:image"
+    />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta content="Sending You a Telegram" name="twitter:title" />
+    <meta
+      content="Telegram is a new messenger built by Pavel and Nikolai Durov.  They previously founded vk.com, Europe's second largest social network after Facebook (especially popular in Russia). A Few Rea..."
+      name="twitter:description"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      name="twitter:image"
+    />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
 
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
 
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-    : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/telegram.html" title="Permalink: Sending You a Telegram">January 2014</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">Sending You a Telegram</h1><section class="mkdwn lh-copy"><p><a href="https://telegram.org">Telegram</a> is a new messenger built by Pavel and Nikolai Durov.  They previously founded vk.com, Europe's second largest social network after Facebook (especially popular in Russia).</p>
-<h2><a href="#a-few-reasons-why-its-great" id="a-few-reasons-why-its-great"></a>A Few Reasons Why It's Great</h2>
-<ol>
-<li>Unlike most other messaging apps their <a href="https://telegram.org/source">clients (Android, iOS) source code and the underlying protocols are released with an open source license</a> (GPL v2)</li>
-<li>The founders note that they have no intention of <a href="https://telegram.org/faq#q-how-are-you-going-to-make-money-out-of-this">making money with Telegram</a> If they ever run out of money they want to finance it with donations and non-essential goodies.</li>
-<li>There is an <a href="https://core.telegram.org/api">API</a> that allows anyone to hook into Telegram and build clients, bots and additional tools.</li>
-<li>The open API has led to the creation of <a href="https://itunes.apple.com/de/app/messenger-for-telegram/id747648890">Mac</a>, <a href="http://tdesktop.com/">Windows</a> and various other clients (eg. <a href="https://github.com/vysheng/tg">commandline</a>) that allow you to use Telegram on multiple devices (with proper syncing).</li>
-<li>Groups can hold up to 200 users (compared to WhatsApp that allows you to create 50 groups à 50 participants max.)</li>
-<li>All communication in Telegram <a href="https://telegram.org/faq#security">is encrypted</a> and there is even an option to create “<a href="https://telegram.org/faq#secret-chats">secret chats</a>” that: won’t be stored on Telegram’s servers, can’t be fowarded and will delete themself after some time.</li>
-</ol>
-<p>Currently available for <a href="https://itunes.apple.com/us/app/telegram-messenger/id686449807">iOS</a>, <a href="https://play.google.com/store/apps/details?id=org.telegram.messenger">Android</a>, <a href="https://itunes.apple.com/de/app/messenger-for-telegram/id747648890">Mac</a> &amp; <a href="http://tdesktop.com">Windows</a> there is really no reason not to make the switch.</p>
-<p><strong>Send me a message how you like it:</strong> <a href="tel:+4917664718250">+49176 64718250</a>.<br />
-(It’s easy: just tap the number on your phone, save me as contact and I’ll appear in your Telegram contacts.)</p>
-<p><strong>Edit:</strong> Although it's not a completely decentralized service (as communication services should eventually be in the future) it seems to be a big step in the right direction.</p>
-</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, January 2014 <a class="white" href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2014-01-09-Telegram.markdown" target="_blank">edit on prose.io</a></div></article></div></div></body></html>
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="system-sans-serif dark-gray">
+    <div class="mh3">
+      <div class="mw7 center mb6">
+        <article
+          class="mt5"
+          itemprop="blogPost"
+          itemscope=""
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <div class="f6 db normal mw6 center">
+            <a
+              class="link"
+              href="/posts/telegram.html"
+              title="Permalink: Sending You a Telegram"
+              >January 2014</a
+            ><span class="ph2">/</span
+            ><a class="link" href="/" title="Home">Home</a
+            ><span class="ph2">/</span
+            ><a
+              class="link"
+              href="https://twitter.com/martinklepsch"
+              title="@martinklepsch on Twitter"
+              >@martinklepsch</a
+            >
+          </div>
+          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+            Sending You a Telegram
+          </h1>
+          <section class="mkdwn lh-copy">
+            <p>
+              <a href="https://telegram.org">Telegram</a> is a new messenger
+              built by Pavel and Nikolai Durov. They previously founded vk.com,
+              Europe's second largest social network after Facebook (especially
+              popular in Russia).
+            </p>
+            <h2>
+              <a
+                href="#a-few-reasons-why-its-great"
+                id="a-few-reasons-why-its-great"
+              ></a
+              >A Few Reasons Why It's Great
+            </h2>
+            <ol>
+              <li>
+                Unlike most other messaging apps their
+                <a href="https://telegram.org/source"
+                  >clients (Android, iOS) source code and the underlying
+                  protocols are released with an open source license</a
+                >
+                (GPL v2)
+              </li>
+              <li>
+                The founders note that they have no intention of
+                <a
+                  href="https://telegram.org/faq#q-how-are-you-going-to-make-money-out-of-this"
+                  >making money with Telegram</a
+                >
+                If they ever run out of money they want to finance it with
+                donations and non-essential goodies.
+              </li>
+              <li>
+                There is an <a href="https://core.telegram.org/api">API</a> that
+                allows anyone to hook into Telegram and build clients, bots and
+                additional tools.
+              </li>
+              <li>
+                The open API has led to the creation of
+                <a
+                  href="https://itunes.apple.com/de/app/messenger-for-telegram/id747648890"
+                  >Mac</a
+                >, <a href="http://tdesktop.com/">Windows</a> and various other
+                clients (eg.
+                <a href="https://github.com/vysheng/tg">commandline</a>) that
+                allow you to use Telegram on multiple devices (with proper
+                syncing).
+              </li>
+              <li>
+                Groups can hold up to 200 users (compared to WhatsApp that
+                allows you to create 50 groups à 50 participants max.)
+              </li>
+              <li>
+                All communication in Telegram
+                <a href="https://telegram.org/faq#security">is encrypted</a> and
+                there is even an option to create “<a
+                  href="https://telegram.org/faq#secret-chats"
+                  >secret chats</a
+                >” that: won’t be stored on Telegram’s servers, can’t be
+                fowarded and will delete themself after some time.
+              </li>
+            </ol>
+            <p>
+              Currently available for
+              <a
+                href="https://itunes.apple.com/us/app/telegram-messenger/id686449807"
+                >iOS</a
+              >,
+              <a
+                href="https://play.google.com/store/apps/details?id=org.telegram.messenger"
+                >Android</a
+              >,
+              <a
+                href="https://itunes.apple.com/de/app/messenger-for-telegram/id747648890"
+                >Mac</a
+              >
+              &amp; <a href="http://tdesktop.com">Windows</a> there is really no
+              reason not to make the switch.
+            </p>
+            <p>
+              <strong>Send me a message how you like it:</strong>
+              <a href="tel:+4917664718250">+49176 64718250</a>.<br />
+              (It’s easy: just tap the number on your phone, save me as contact
+              and I’ll appear in your Telegram contacts.)
+            </p>
+            <p>
+              <strong>Edit:</strong> Although it's not a completely
+              decentralized service (as communication services should eventually
+              be in the future) it seems to be a big step in the right
+              direction.
+            </p>
+          </section>
+          <div class="mv4 em-before mw6 center">
+            <a class="link" href="https://twitter.com/martinklepsch"
+              >@martinklepsch</a
+            >, January 2014
+            <a
+              class="white"
+              href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2014-01-09-Telegram.markdown"
+              target="_blank"
+              >edit on prose.io</a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

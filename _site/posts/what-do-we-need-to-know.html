@@ -1,26 +1,177 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="I go through periods of self-doubt about my qualifications as a web developer. I have a sense I’m not alone in this. Our field is by nature a generalists’ field, where expertise involves syn..." itemprop="description" name="description"><link href="https://martinklepsch.org/posts/what-do-we-need-to-know.html" rel="canonical"><title>What do we need to know? — Martin Klepsch</title><meta content="What do we need to know?" property="og:title"><meta content="article" property="og:type"><meta content="I go through periods of self-doubt about my qualifications as a web developer. I have a sense I’m not alone in this. Our field is by nature a generalists’ field, where expertise involves syn..." property="og:description"><meta content="https://martinklepsch.org/posts/what-do-we-need-to-know.html" property="og:url"><meta content="https://martinklepsch.org/images/selfies/3.jpg" property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta content="What do we need to know?" name="twitter:title"><meta content="I go through periods of self-doubt about my qualifications as a web developer. I have a sense I’m not alone in this. Our field is by nature a generalists’ field, where expertise involves syn..." name="twitter:description"><meta content="https://martinklepsch.org/images/selfies/3.jpg" name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3138561-8']);
-    _gaq.push(['_setDomainName', 'martinklepsch.org']);
-    _gaq.push(['_trackPageview']);
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="I go through periods of self-doubt about my qualifications as a web developer. I have a sense I’m not alone in this. Our field is by nature a generalists’ field, where expertise involves syn..."
+      itemprop="description"
+      name="description"
+    />
+    <link
+      href="https://martinklepsch.org/posts/what-do-we-need-to-know.html"
+      rel="canonical"
+    />
+    <title>What do we need to know? — Martin Klepsch</title>
+    <meta content="What do we need to know?" property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="I go through periods of self-doubt about my qualifications as a web developer. I have a sense I’m not alone in this. Our field is by nature a generalists’ field, where expertise involves syn..."
+      property="og:description"
+    />
+    <meta
+      content="https://martinklepsch.org/posts/what-do-we-need-to-know.html"
+      property="og:url"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      property="og:image"
+    />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta content="What do we need to know?" name="twitter:title" />
+    <meta
+      content="I go through periods of self-doubt about my qualifications as a web developer. I have a sense I’m not alone in this. Our field is by nature a generalists’ field, where expertise involves syn..."
+      name="twitter:description"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      name="twitter:image"
+    />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
 
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
 
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-    : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/what-do-we-need-to-know.html" title="Permalink: What do we need to know?">December 2013</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">What do we need to know?</h1><section class="mkdwn lh-copy"><blockquote>
-<p>I go through periods of self-doubt about my qualifications as a web developer. I have a sense I’m not alone in this. Our field is by nature a generalists’ field, where expertise involves synthesis of concepts and technologies, not complete mastery of a single, static topic. It’s hard to know how to tell if you’re good at your job.</p>
-</blockquote>
-<p>This post on A List Apart resonated with me a lot. <a href="https://twitter.com/lyzadanger">Liza Danger Gardner</a> describes a situation we all have been in: someone talks about that <em>new feature you never heard of</em> and you have no idea what they are talking about. Web development being a profession that develops so fast and in so many directions at the same time <strike>sometimes</strike> makes it hard to follow along.</p>
-<figure> <img src='/images/fear.gif' > </figure>
-<blockquote>
-<p>There’s no defined lesson plan or standardized test for the many branches of real-world applied web development, and the whole profession is a moving target. So if we can’t possibly know everything, all the time, what things do we need to know?</p>
-</blockquote>
-<p>She then attempts to answer this question by answering the opposite question “What do we not need to know?” which is fine but doesn't exactly provide you with a list of things that are <em>required</em>. Probably this list is hard to create but I'm curious what you would put on it. What are the high level concepts in web development everyone should know about? Is it “How the DOM works” or is it “What Prototypes are in Javascript” or is it ...?</p>
-<p>I'd love to hear what you think is “required knowledge” on Twitter (<a href="https://twitter.com/martinklepsch">@martinklepsch</a>) or elsewhere.</p>
-</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, December 2013 <a class="white" href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2013-12-05-What-Do-We-Need-To-Know.markdown" target="_blank">edit on prose.io</a></div></article></div></div></body></html>
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="system-sans-serif dark-gray">
+    <div class="mh3">
+      <div class="mw7 center mb6">
+        <article
+          class="mt5"
+          itemprop="blogPost"
+          itemscope=""
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <div class="f6 db normal mw6 center">
+            <a
+              class="link"
+              href="/posts/what-do-we-need-to-know.html"
+              title="Permalink: What do we need to know?"
+              >December 2013</a
+            ><span class="ph2">/</span
+            ><a class="link" href="/" title="Home">Home</a
+            ><span class="ph2">/</span
+            ><a
+              class="link"
+              href="https://twitter.com/martinklepsch"
+              title="@martinklepsch on Twitter"
+              >@martinklepsch</a
+            >
+          </div>
+          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+            What do we need to know?
+          </h1>
+          <section class="mkdwn lh-copy">
+            <blockquote>
+              <p>
+                I go through periods of self-doubt about my qualifications as a
+                web developer. I have a sense I’m not alone in this. Our field
+                is by nature a generalists’ field, where expertise involves
+                synthesis of concepts and technologies, not complete mastery of
+                a single, static topic. It’s hard to know how to tell if you’re
+                good at your job.
+              </p>
+            </blockquote>
+            <p>
+              This post on A List Apart resonated with me a lot.
+              <a href="https://twitter.com/lyzadanger">Liza Danger Gardner</a>
+              describes a situation we all have been in: someone talks about
+              that <em>new feature you never heard of</em> and you have no idea
+              what they are talking about. Web development being a profession
+              that develops so fast and in so many directions at the same time
+              <strike>sometimes</strike> makes it hard to follow along.
+            </p>
+            <figure><img src="/images/fear.gif" /></figure>
+            <blockquote>
+              <p>
+                There’s no defined lesson plan or standardized test for the many
+                branches of real-world applied web development, and the whole
+                profession is a moving target. So if we can’t possibly know
+                everything, all the time, what things do we need to know?
+              </p>
+            </blockquote>
+            <p>
+              She then attempts to answer this question by answering the
+              opposite question “What do we not need to know?” which is fine but
+              doesn't exactly provide you with a list of things that are
+              <em>required</em>. Probably this list is hard to create but I'm
+              curious what you would put on it. What are the high level concepts
+              in web development everyone should know about? Is it “How the DOM
+              works” or is it “What Prototypes are in Javascript” or is it ...?
+            </p>
+            <p>
+              I'd love to hear what you think is “required knowledge” on Twitter
+              (<a href="https://twitter.com/martinklepsch">@martinklepsch</a>)
+              or elsewhere.
+            </p>
+          </section>
+          <div class="mv4 em-before mw6 center">
+            <a class="link" href="https://twitter.com/martinklepsch"
+              >@martinklepsch</a
+            >, December 2013
+            <a
+              class="white"
+              href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2013-12-05-What-Do-We-Need-To-Know.markdown"
+              target="_blank"
+              >edit on prose.io</a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

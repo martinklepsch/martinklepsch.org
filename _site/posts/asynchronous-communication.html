@@ -1,47 +1,288 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Communication is a central part of working in teams. I believe having asynchronous communication channels and making heavy use of them can have great effects on productivity, transparency an..." itemprop="description" name="description"><link href="https://martinklepsch.org/posts/asynchronous-communication.html" rel="canonical"><title>Asynchronous Communication — Martin Klepsch</title><meta content="Asynchronous Communication" property="og:title"><meta content="article" property="og:type"><meta content="Communication is a central part of working in teams. I believe having asynchronous communication channels and making heavy use of them can have great effects on productivity, transparency an..." property="og:description"><meta content="https://martinklepsch.org/posts/asynchronous-communication.html" property="og:url"><meta content="https://martinklepsch.org/images/selfies/3.jpg" property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta content="Asynchronous Communication" name="twitter:title"><meta content="Communication is a central part of working in teams. I believe having asynchronous communication channels and making heavy use of them can have great effects on productivity, transparency an..." name="twitter:description"><meta content="https://martinklepsch.org/images/selfies/3.jpg" name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3138561-8']);
-    _gaq.push(['_setDomainName', 'martinklepsch.org']);
-    _gaq.push(['_trackPageview']);
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="Communication is a central part of working in teams. I believe having asynchronous communication channels and making heavy use of them can have great effects on productivity, transparency an..."
+      itemprop="description"
+      name="description"
+    />
+    <link
+      href="https://martinklepsch.org/posts/asynchronous-communication.html"
+      rel="canonical"
+    />
+    <title>Asynchronous Communication — Martin Klepsch</title>
+    <meta content="Asynchronous Communication" property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="Communication is a central part of working in teams. I believe having asynchronous communication channels and making heavy use of them can have great effects on productivity, transparency an..."
+      property="og:description"
+    />
+    <meta
+      content="https://martinklepsch.org/posts/asynchronous-communication.html"
+      property="og:url"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      property="og:image"
+    />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta content="Asynchronous Communication" name="twitter:title" />
+    <meta
+      content="Communication is a central part of working in teams. I believe having asynchronous communication channels and making heavy use of them can have great effects on productivity, transparency an..."
+      name="twitter:description"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      name="twitter:image"
+    />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
 
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
 
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-    : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/asynchronous-communication.html" title="Permalink: Asynchronous Communication">April 2013</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">Asynchronous Communication</h1><section class="mkdwn lh-copy"><p>Communication is a central part of working in teams. I believe having asynchronous communication channels and making heavy use of them can have great effects on productivity, transparency and therefore happiness and fun within teams. Here are a few reasons why.</p>
-<h2><a href="#interruptions" id="interruptions"></a>Interruptions</h2>
-<p>There are <a href="http://www.nytimes.com/2007/03/25/business/25multi.html">dozens of studies</a> about the consequences of being interrupted while performing demanding tasks. They usually suggest that it takes a human around 20 minutes to get back into the state they have been in prior to the interruption. As if this wouldn't be enough it also increases the chances of making mistakes.</p>
-<p>While a chatroom doesn't necessarily removes interruptions all at once it allows everyone to react to an interruption at will. If you really want no interruption for a certain period of time you can easily turn off all notifications. Not reacting to the waving hands of a coworker is quite a bit harder (and not very polite as well).</p>
-<h2><a href="#transparency" id="transparency"></a>Transparency</h2>
-<p>Transparency is a great thing. I strongly believe an absolutistic approach to transparency is the only way to go nowadays. Transparency helps to identify bad decisions early on and increases acceptance of decisions by keeping everyone in the loop. Companies like <a href="https://stripe.com/blog/email-transparency">Stripe</a> are doing an excellent job at advocating this approach. I could go into lengths about how important this is.</p>
-<p>Achieving this level of transparency with meetings and written reports is very time consuming if not impossible at all. Channeling most communication through asynchronous communication channels allows other people to passively follow along and saves a bunch of time that would otherwise have been spent in inefficient meetings.</p>
-<h2><a href="#written-communication" id="written-communication"></a>Written Communication</h2>
-<p>Think before you speak. That's what they say. Problem is that this is quite hard in a fast paced environment like meetings. Just taking 5 minutes to order your thoughts isn't something people usually do there. Instead they talk. Written communication forces you to get to the point in a way that everyone can follow and at the same time allows you to refine your own understanding of the problem.</p>
-<h2><a href="#tool-integration" id="tool-integration"></a>Tool Integration</h2>
-<p>Most of the team chat things you'll find provide integrations with your existing toolchain. It's easy to setup a bot that notifies you about breaking builds, new commits, errors on your platform or whatever else. Integrating this kind of information into your communication channels allows better collaboration on it and also increases visibility of what people are working on (= transparency).</p>
-<h2><a href="#logging" id="logging"></a>Logging</h2>
-<p>In my experience things are often discussed in passing and sometimes even decisions are made in these situations. A week later when you actually find the time to implement the things decided back then they seem stupid and you are not able to actually retrieve the reasoning behind them from the back of your head. Having in place the infrastructure to quickly discuss something without setting up a meeting is a great way to avoid this kind of decision making and also allows you to trace back past discussions if a decision is being questioned.</p>
-<h2><a href="#location-independent-productivity" id="location-independent-productivity"></a>Location-independent Productivity</h2>
-<p>Channeling most conversation through chat rooms makes team members less dependent on being geographically close to each other. (I'm not expanding on this as I think removing a dependency is always a good thing.)</p>
-<h2><a href="#closing-remarks-further-reading" id="closing-remarks-further-reading"></a>Closing Remarks &amp; Further Reading</h2>
-<p>I'm a strong believer when it comes to asynchronous communication and I hope this list provides a good overview about the main reasons why it's a good approach to internal communication.</p>
-<ul>
-<li><a href="http://zachholman.com/posts/chat/">Chat Trumps Meetings</a> by Zach Holman</li>
-<li><a href="http://zachholman.com/posts/how-github-works-asynchronous/">How Github Works Asynchronous</a> by Zach Holman</li>
-<li><a href="http://blog.alexmaccaw.com/stripes-culture">Stripes Culture</a> by Alex MacCaw</li>
-<li><a href="http://blog.alexmaccaw.com/stripes-culture">How Stripe Builds Software</a> with Greg Brockmann</li>
-</ul>
-<!-- ## A Note On Email
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="system-sans-serif dark-gray">
+    <div class="mh3">
+      <div class="mw7 center mb6">
+        <article
+          class="mt5"
+          itemprop="blogPost"
+          itemscope=""
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <div class="f6 db normal mw6 center">
+            <a
+              class="link"
+              href="/posts/asynchronous-communication.html"
+              title="Permalink: Asynchronous Communication"
+              >April 2013</a
+            ><span class="ph2">/</span
+            ><a class="link" href="/" title="Home">Home</a
+            ><span class="ph2">/</span
+            ><a
+              class="link"
+              href="https://twitter.com/martinklepsch"
+              title="@martinklepsch on Twitter"
+              >@martinklepsch</a
+            >
+          </div>
+          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+            Asynchronous Communication
+          </h1>
+          <section class="mkdwn lh-copy">
+            <p>
+              Communication is a central part of working in teams. I believe
+              having asynchronous communication channels and making heavy use of
+              them can have great effects on productivity, transparency and
+              therefore happiness and fun within teams. Here are a few reasons
+              why.
+            </p>
+            <h2>
+              <a href="#interruptions" id="interruptions"></a>Interruptions
+            </h2>
+            <p>
+              There are
+              <a href="http://www.nytimes.com/2007/03/25/business/25multi.html"
+                >dozens of studies</a
+              >
+              about the consequences of being interrupted while performing
+              demanding tasks. They usually suggest that it takes a human around
+              20 minutes to get back into the state they have been in prior to
+              the interruption. As if this wouldn't be enough it also increases
+              the chances of making mistakes.
+            </p>
+            <p>
+              While a chatroom doesn't necessarily removes interruptions all at
+              once it allows everyone to react to an interruption at will. If
+              you really want no interruption for a certain period of time you
+              can easily turn off all notifications. Not reacting to the waving
+              hands of a coworker is quite a bit harder (and not very polite as
+              well).
+            </p>
+            <h2><a href="#transparency" id="transparency"></a>Transparency</h2>
+            <p>
+              Transparency is a great thing. I strongly believe an absolutistic
+              approach to transparency is the only way to go nowadays.
+              Transparency helps to identify bad decisions early on and
+              increases acceptance of decisions by keeping everyone in the loop.
+              Companies like
+              <a href="https://stripe.com/blog/email-transparency">Stripe</a>
+              are doing an excellent job at advocating this approach. I could go
+              into lengths about how important this is.
+            </p>
+            <p>
+              Achieving this level of transparency with meetings and written
+              reports is very time consuming if not impossible at all.
+              Channeling most communication through asynchronous communication
+              channels allows other people to passively follow along and saves a
+              bunch of time that would otherwise have been spent in inefficient
+              meetings.
+            </p>
+            <h2>
+              <a href="#written-communication" id="written-communication"></a
+              >Written Communication
+            </h2>
+            <p>
+              Think before you speak. That's what they say. Problem is that this
+              is quite hard in a fast paced environment like meetings. Just
+              taking 5 minutes to order your thoughts isn't something people
+              usually do there. Instead they talk. Written communication forces
+              you to get to the point in a way that everyone can follow and at
+              the same time allows you to refine your own understanding of the
+              problem.
+            </p>
+            <h2>
+              <a href="#tool-integration" id="tool-integration"></a>Tool
+              Integration
+            </h2>
+            <p>
+              Most of the team chat things you'll find provide integrations with
+              your existing toolchain. It's easy to setup a bot that notifies
+              you about breaking builds, new commits, errors on your platform or
+              whatever else. Integrating this kind of information into your
+              communication channels allows better collaboration on it and also
+              increases visibility of what people are working on (=
+              transparency).
+            </p>
+            <h2><a href="#logging" id="logging"></a>Logging</h2>
+            <p>
+              In my experience things are often discussed in passing and
+              sometimes even decisions are made in these situations. A week
+              later when you actually find the time to implement the things
+              decided back then they seem stupid and you are not able to
+              actually retrieve the reasoning behind them from the back of your
+              head. Having in place the infrastructure to quickly discuss
+              something without setting up a meeting is a great way to avoid
+              this kind of decision making and also allows you to trace back
+              past discussions if a decision is being questioned.
+            </p>
+            <h2>
+              <a
+                href="#location-independent-productivity"
+                id="location-independent-productivity"
+              ></a
+              >Location-independent Productivity
+            </h2>
+            <p>
+              Channeling most conversation through chat rooms makes team members
+              less dependent on being geographically close to each other. (I'm
+              not expanding on this as I think removing a dependency is always a
+              good thing.)
+            </p>
+            <h2>
+              <a
+                href="#closing-remarks-further-reading"
+                id="closing-remarks-further-reading"
+              ></a
+              >Closing Remarks &amp; Further Reading
+            </h2>
+            <p>
+              I'm a strong believer when it comes to asynchronous communication
+              and I hope this list provides a good overview about the main
+              reasons why it's a good approach to internal communication.
+            </p>
+            <ul>
+              <li>
+                <a href="http://zachholman.com/posts/chat/"
+                  >Chat Trumps Meetings</a
+                >
+                by Zach Holman
+              </li>
+              <li>
+                <a
+                  href="http://zachholman.com/posts/how-github-works-asynchronous/"
+                  >How Github Works Asynchronous</a
+                >
+                by Zach Holman
+              </li>
+              <li>
+                <a href="http://blog.alexmaccaw.com/stripes-culture"
+                  >Stripes Culture</a
+                >
+                by Alex MacCaw
+              </li>
+              <li>
+                <a href="http://blog.alexmaccaw.com/stripes-culture"
+                  >How Stripe Builds Software</a
+                >
+                with Greg Brockmann
+              </li>
+            </ul>
+            <!-- ## A Note On Email
 
 Emails can also be used to achieve similar effects as
 [Stripe has demonstrated](https://stripe.com/blog/email-transparency)
 but in general it's probably harder as there is no restriction to who can send you
 emails and your inbox is quickly overflowing with things that are
 not part of internal communication.-->
-<p>--<br> If you liked this post you should probably follow me on twitter: <a href="http://twitter.com/martinklepsch">@martinklepsch</a><br> Feedback? Comments? Thoughts? <a href="mailto://martinklepsch@googlemail.com">Email me.</a></p>
-</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, April 2013 <a class="white" href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2013-04-25-Asynchronous-Communication.markdown" target="_blank">edit on prose.io</a></div></article></div></div></body></html>
+            <p>
+              --<br />
+              If you liked this post you should probably follow me on twitter:
+              <a href="http://twitter.com/martinklepsch">@martinklepsch</a
+              ><br />
+              Feedback? Comments? Thoughts?
+              <a href="mailto://martinklepsch@googlemail.com">Email me.</a>
+            </p>
+          </section>
+          <div class="mv4 em-before mw6 center">
+            <a class="link" href="https://twitter.com/martinklepsch"
+              >@martinklepsch</a
+            >, April 2013
+            <a
+              class="white"
+              href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2013-04-25-Asynchronous-Communication.markdown"
+              target="_blank"
+              >edit on prose.io</a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

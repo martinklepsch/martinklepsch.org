@@ -1,16 +1,404 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Personal Website and Blog of Martin Klepsch" itemprop="description" name="description"><title>Martin Klepsch</title><meta property="og:title"><meta content="article" property="og:type"><meta content="Personal Website and Blog of Martin Klepsch" property="og:description"><meta property="og:url"><meta property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta name="twitter:title"><meta content="Personal Website and Blog of Martin Klepsch" name="twitter:description"><meta name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3138561-8']);
-    _gaq.push(['_setDomainName', 'martinklepsch.org']);
-    _gaq.push(['_trackPageview']);
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="Personal Website and Blog of Martin Klepsch"
+      itemprop="description"
+      name="description"
+    />
+    <title>Martin Klepsch</title>
+    <meta property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="Personal Website and Blog of Martin Klepsch"
+      property="og:description"
+    />
+    <meta property="og:url" />
+    <meta property="og:image" />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta name="twitter:title" />
+    <meta
+      content="Personal Website and Blog of Martin Klepsch"
+      name="twitter:description"
+    />
+    <meta name="twitter:image" />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
 
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
 
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-    : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mt4 mw7 center"><a class="link" href="/">Hi, I'm Martin. </a><span>This is the archive.</span><section class="lh-copy"><h3 class="mb0">All Posts. Ever.</h3><div class="bb bw1 b--silver w2 mv4"></div><ol class="list pa0"><li class="mb3"><a class="f4 link mr2" href="/posts/working-with-promises-in-clojurescript-repls.html">Promises in a ClojureScript REPL</a><span class="db dib-ns f6">May 2020</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/cljdoc-supports-foreign-libs.html">Improved Support for Foreign Libs in cljdoc</a><span class="db dib-ns f6">May 2020</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/static-blogging-lessons-learned.html">Static Blogging, Some Lessons Learned</a><span class="db dib-ns f6">May 2020</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/using-cljs-bean-to-wrap-firebase-documents.html">Working with Firebase Documents in ClojureScript</a><span class="db dib-ns f6">September 2019</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/writing-awesome-docstrings.html">4 Small Steps Towards Awesome Clojure Docstrings</a><span class="db dib-ns f6">January 2019</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/sustainable-open-source-current-efforts.html">Sustainable Open Source: Current Efforts</a><span class="db dib-ns f6">January 2018</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/maven-snapshots.html">Maven Snapshots</a><span class="db dib-ns f6">June 2017</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/requiring-closure-namespaces.html">Requiring Closure Namespaces</a><span class="db dib-ns f6">May 2017</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/simple-debouncing-in-clojurescript.html">Simple Debouncing in ClojureScript</a><span class="db dib-ns f6">April 2017</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/making-remote-work.html">Making Remote Work</a><span class="db dib-ns f6">March 2017</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/just-in-time-script-loading-with-react-and-clojuresript.html">Just-in-Time Script Loading With React And ClojureScript</a><span class="db dib-ns f6">November 2016</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/props-children-and-component-lifecycle-in-reagent.html">Props, Children & Component Lifecycle in Reagent</a><span class="db dib-ns f6">May 2016</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/om-next-reading-list.html">Om/Next Reading List</a><span class="db dib-ns f6">November 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/parameterizing-clojurescript-builds.html">Parameterizing ClojureScript Builds</a><span class="db dib-ns f6">August 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/clojurebridge-berlin.html">ClojureBridge Berlin</a><span class="db dib-ns f6">July 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/managing-local-and-project-wide-development-parameters-in-leiningen.html">Managing Local and Project-wide Development Parameters in Leiningen</a><span class="db dib-ns f6">June 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/formal-methods-at-amazon.html">Formal Methods at Amazon</a><span class="db dib-ns f6">April 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/lisp-keymap.html">(lisp keymap)</a><span class="db dib-ns f6">February 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/cljsjs-use-javascript-libraries-in-clojurescript.html">CLJSJS - Use Javascript Libraries in Clojurescript With Ease</a><span class="db dib-ns f6">January 2015</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html">Why Boot is Relevant For The Clojure Ecosystem</a><span class="db dib-ns f6">November 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/s3-beam-direct-upload-to-s3-with-clojure-and-clojurescript.html">S3-Beam — Direct Upload to S3 with Clojure & Clojurescript</a><span class="db dib-ns f6">October 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/patalyze-an-experiment-exploring-patent-data.html">Patalyze &mdash; An Experiment Exploring Publicly Available Patent Data</a><span class="db dib-ns f6">October 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/running-a-clojure-uberjar-inside-docker.html">Running a Clojure Uberjar inside Docker</a><span class="db dib-ns f6">September 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/using-coreasync-and-transducers-for-direct-s3-upload.html">Using core.async and Transducers to upload files from the browser to S3</a><span class="db dib-ns f6">September 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/emacs-and-vim.html">Emacs & Vim</a><span class="db dib-ns f6">July 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/setting-up-your-own-little-heroku-with-dokku-and-digitalocean.html">Heroku-like Deployment With Dokku And DigitalOcean</a><span class="db dib-ns f6">March 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/woodworking-masterclasses.html">Woodworking Masterclasses</a><span class="db dib-ns f6">February 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/early-adopters-and-inverted-social-proof.html">Early Adopters And Inverted Social Proof</a><span class="db dib-ns f6">February 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/living-small.html">Living Small</a><span class="db dib-ns f6">February 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/telegram.html">Sending You a Telegram</a><span class="db dib-ns f6">January 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/running-a-marathon-or-not.html">Running a Marathon, Or Not</a><span class="db dib-ns f6">January 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/code-simplicity-review.html">Code Simplicity</a><span class="db dib-ns f6">January 2014</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/what-do-we-need-to-know.html">What do we need to know?</a><span class="db dib-ns f6">December 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/sculleys-disease.html">Sculley's Disease</a><span class="db dib-ns f6">December 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/a-resurrection-post.html">A Resurrection Post</a><span class="db dib-ns f6">December 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/a-trip-to-the-us.html">A Trip To The US</a><span class="db dib-ns f6">September 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/analytics-data.html">Analytics Data</a><span class="db dib-ns f6">April 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/asynchronous-communication.html">Asynchronous Communication</a><span class="db dib-ns f6">April 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/from-zero-to-marathon-in-six-months.html">From Zero to Marathon in Six Monthts</a><span class="db dib-ns f6">March 2013</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/git-prompt-for-fish-shell.html">Git Information in Fish Shell&rsquo;s Prompt</a><span class="db dib-ns f6">December 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/when-we-build-stuff.html">When We Build Stuff</a><span class="db dib-ns f6">August 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/models-operations-views-and-events.html">Models, Operations, Views and Events</a><span class="db dib-ns f6">July 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/twelve-factor-app.html">The Twelve Factor App</a><span class="db dib-ns f6">June 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/paris-and-back.html">Paris And Back</a><span class="db dib-ns f6">May 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/a-friend-is-looking-for-a-summer-internship.html">A Friend Is Looking For A Summer Internship</a><span class="db dib-ns f6">May 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/kandan-team-chat.html">Kandan Team Chat</a><span class="db dib-ns f6">May 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/entypo-icon-set.html">Entypo Icon Set</a><span class="db dib-ns f6">March 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/startups-this-is-how-design-works.html">Startups, This Is How Design Works</a><span class="db dib-ns f6">March 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/hosting-a-static-site-on-s3.html">Hosting A Static Site On Amazon S3</a><span class="db dib-ns f6">February 2012</span></li><li class="mb3"><a class="f4 link mr2" href="/posts/fix-broken-decoding-of-mail-subjects-in-exim.html">Exim4 Fix Wrongly Decoded Mail Subject</a><span class="db dib-ns f6">January 2012</span></li></ol></section></div></div></body></html>
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="system-sans-serif dark-gray">
+    <div class="mh3">
+      <div class="mt4 mw7 center">
+        <a class="link" href="/">Hi, I'm Martin. </a
+        ><span>This is the archive.</span>
+        <section class="lh-copy">
+          <h3 class="mb0">All Posts. Ever.</h3>
+          <div class="bb bw1 b--silver w2 mv4"></div>
+          <ol class="list pa0">
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/working-with-promises-in-clojurescript-repls.html"
+                >Promises in a ClojureScript REPL</a
+              ><span class="db dib-ns f6">May 2020</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/cljdoc-supports-foreign-libs.html"
+                >Improved Support for Foreign Libs in cljdoc</a
+              ><span class="db dib-ns f6">May 2020</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/static-blogging-lessons-learned.html"
+                >Static Blogging, Some Lessons Learned</a
+              ><span class="db dib-ns f6">May 2020</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/using-cljs-bean-to-wrap-firebase-documents.html"
+                >Working with Firebase Documents in ClojureScript</a
+              ><span class="db dib-ns f6">September 2019</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/writing-awesome-docstrings.html"
+                >4 Small Steps Towards Awesome Clojure Docstrings</a
+              ><span class="db dib-ns f6">January 2019</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/sustainable-open-source-current-efforts.html"
+                >Sustainable Open Source: Current Efforts</a
+              ><span class="db dib-ns f6">January 2018</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/maven-snapshots.html"
+                >Maven Snapshots</a
+              ><span class="db dib-ns f6">June 2017</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/requiring-closure-namespaces.html"
+                >Requiring Closure Namespaces</a
+              ><span class="db dib-ns f6">May 2017</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/simple-debouncing-in-clojurescript.html"
+                >Simple Debouncing in ClojureScript</a
+              ><span class="db dib-ns f6">April 2017</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/making-remote-work.html"
+                >Making Remote Work</a
+              ><span class="db dib-ns f6">March 2017</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/just-in-time-script-loading-with-react-and-clojuresript.html"
+                >Just-in-Time Script Loading With React And ClojureScript</a
+              ><span class="db dib-ns f6">November 2016</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/props-children-and-component-lifecycle-in-reagent.html"
+                >Props, Children & Component Lifecycle in Reagent</a
+              ><span class="db dib-ns f6">May 2016</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/om-next-reading-list.html"
+                >Om/Next Reading List</a
+              ><span class="db dib-ns f6">November 2015</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/parameterizing-clojurescript-builds.html"
+                >Parameterizing ClojureScript Builds</a
+              ><span class="db dib-ns f6">August 2015</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/clojurebridge-berlin.html"
+                >ClojureBridge Berlin</a
+              ><span class="db dib-ns f6">July 2015</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/managing-local-and-project-wide-development-parameters-in-leiningen.html"
+                >Managing Local and Project-wide Development Parameters in
+                Leiningen</a
+              ><span class="db dib-ns f6">June 2015</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/formal-methods-at-amazon.html"
+                >Formal Methods at Amazon</a
+              ><span class="db dib-ns f6">April 2015</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/lisp-keymap.html"
+                >(lisp keymap)</a
+              ><span class="db dib-ns f6">February 2015</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/cljsjs-use-javascript-libraries-in-clojurescript.html"
+                >CLJSJS - Use Javascript Libraries in Clojurescript With Ease</a
+              ><span class="db dib-ns f6">January 2015</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html"
+                >Why Boot is Relevant For The Clojure Ecosystem</a
+              ><span class="db dib-ns f6">November 2014</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/s3-beam-direct-upload-to-s3-with-clojure-and-clojurescript.html"
+                >S3-Beam — Direct Upload to S3 with Clojure & Clojurescript</a
+              ><span class="db dib-ns f6">October 2014</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/patalyze-an-experiment-exploring-patent-data.html"
+                >Patalyze &mdash; An Experiment Exploring Publicly Available
+                Patent Data</a
+              ><span class="db dib-ns f6">October 2014</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/running-a-clojure-uberjar-inside-docker.html"
+                >Running a Clojure Uberjar inside Docker</a
+              ><span class="db dib-ns f6">September 2014</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/using-coreasync-and-transducers-for-direct-s3-upload.html"
+                >Using core.async and Transducers to upload files from the
+                browser to S3</a
+              ><span class="db dib-ns f6">September 2014</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/emacs-and-vim.html"
+                >Emacs & Vim</a
+              ><span class="db dib-ns f6">July 2014</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/setting-up-your-own-little-heroku-with-dokku-and-digitalocean.html"
+                >Heroku-like Deployment With Dokku And DigitalOcean</a
+              ><span class="db dib-ns f6">March 2014</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/woodworking-masterclasses.html"
+                >Woodworking Masterclasses</a
+              ><span class="db dib-ns f6">February 2014</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/early-adopters-and-inverted-social-proof.html"
+                >Early Adopters And Inverted Social Proof</a
+              ><span class="db dib-ns f6">February 2014</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/living-small.html"
+                >Living Small</a
+              ><span class="db dib-ns f6">February 2014</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/telegram.html"
+                >Sending You a Telegram</a
+              ><span class="db dib-ns f6">January 2014</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/running-a-marathon-or-not.html"
+                >Running a Marathon, Or Not</a
+              ><span class="db dib-ns f6">January 2014</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/code-simplicity-review.html"
+                >Code Simplicity</a
+              ><span class="db dib-ns f6">January 2014</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/what-do-we-need-to-know.html"
+                >What do we need to know?</a
+              ><span class="db dib-ns f6">December 2013</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/sculleys-disease.html"
+                >Sculley's Disease</a
+              ><span class="db dib-ns f6">December 2013</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/a-resurrection-post.html"
+                >A Resurrection Post</a
+              ><span class="db dib-ns f6">December 2013</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/a-trip-to-the-us.html"
+                >A Trip To The US</a
+              ><span class="db dib-ns f6">September 2013</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/analytics-data.html"
+                >Analytics Data</a
+              ><span class="db dib-ns f6">April 2013</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/asynchronous-communication.html"
+                >Asynchronous Communication</a
+              ><span class="db dib-ns f6">April 2013</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/from-zero-to-marathon-in-six-months.html"
+                >From Zero to Marathon in Six Monthts</a
+              ><span class="db dib-ns f6">March 2013</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/git-prompt-for-fish-shell.html"
+                >Git Information in Fish Shell&rsquo;s Prompt</a
+              ><span class="db dib-ns f6">December 2012</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/when-we-build-stuff.html"
+                >When We Build Stuff</a
+              ><span class="db dib-ns f6">August 2012</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/models-operations-views-and-events.html"
+                >Models, Operations, Views and Events</a
+              ><span class="db dib-ns f6">July 2012</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/twelve-factor-app.html"
+                >The Twelve Factor App</a
+              ><span class="db dib-ns f6">June 2012</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/paris-and-back.html"
+                >Paris And Back</a
+              ><span class="db dib-ns f6">May 2012</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/a-friend-is-looking-for-a-summer-internship.html"
+                >A Friend Is Looking For A Summer Internship</a
+              ><span class="db dib-ns f6">May 2012</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/kandan-team-chat.html"
+                >Kandan Team Chat</a
+              ><span class="db dib-ns f6">May 2012</span>
+            </li>
+            <li class="mb3">
+              <a class="f4 link mr2" href="/posts/entypo-icon-set.html"
+                >Entypo Icon Set</a
+              ><span class="db dib-ns f6">March 2012</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/startups-this-is-how-design-works.html"
+                >Startups, This Is How Design Works</a
+              ><span class="db dib-ns f6">March 2012</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/hosting-a-static-site-on-s3.html"
+                >Hosting A Static Site On Amazon S3</a
+              ><span class="db dib-ns f6">February 2012</span>
+            </li>
+            <li class="mb3">
+              <a
+                class="f4 link mr2"
+                href="/posts/fix-broken-decoding-of-mail-subjects-in-exim.html"
+                >Exim4 Fix Wrongly Decoded Mail Subject</a
+              ><span class="db dib-ns f6">January 2012</span>
+            </li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,24 +1,177 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Just found this quote by Steve Jobs on 37signals’ blog. It&apos;s taken from The Lost Interview that was conducted shortly after Steve left Apple and founded NeXT. The question was: “What&apos;s impor..." itemprop="description" name="description"><link href="https://martinklepsch.org/posts/sculleys-disease.html" rel="canonical"><title>Sculley's Disease — Martin Klepsch</title><meta content="Sculley&apos;s Disease" property="og:title"><meta content="article" property="og:type"><meta content="Just found this quote by Steve Jobs on 37signals’ blog. It&apos;s taken from The Lost Interview that was conducted shortly after Steve left Apple and founded NeXT. The question was: “What&apos;s impor..." property="og:description"><meta content="https://martinklepsch.org/posts/sculleys-disease.html" property="og:url"><meta content="https://martinklepsch.org/images/selfies/3.jpg" property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta content="Sculley&apos;s Disease" name="twitter:title"><meta content="Just found this quote by Steve Jobs on 37signals’ blog. It&apos;s taken from The Lost Interview that was conducted shortly after Steve left Apple and founded NeXT. The question was: “What&apos;s impor..." name="twitter:description"><meta content="https://martinklepsch.org/images/selfies/3.jpg" name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3138561-8']);
-    _gaq.push(['_setDomainName', 'martinklepsch.org']);
-    _gaq.push(['_trackPageview']);
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="Just found this quote by Steve Jobs on 37signals’ blog. It's taken from The Lost Interview that was conducted shortly after Steve left Apple and founded NeXT. The question was: “What's impor..."
+      itemprop="description"
+      name="description"
+    />
+    <link
+      href="https://martinklepsch.org/posts/sculleys-disease.html"
+      rel="canonical"
+    />
+    <title>Sculley's Disease — Martin Klepsch</title>
+    <meta content="Sculley's Disease" property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="Just found this quote by Steve Jobs on 37signals’ blog. It's taken from The Lost Interview that was conducted shortly after Steve left Apple and founded NeXT. The question was: “What's impor..."
+      property="og:description"
+    />
+    <meta
+      content="https://martinklepsch.org/posts/sculleys-disease.html"
+      property="og:url"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      property="og:image"
+    />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta content="Sculley's Disease" name="twitter:title" />
+    <meta
+      content="Just found this quote by Steve Jobs on 37signals’ blog. It's taken from The Lost Interview that was conducted shortly after Steve left Apple and founded NeXT. The question was: “What's impor..."
+      name="twitter:description"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      name="twitter:image"
+    />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
 
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
 
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-    : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/sculleys-disease.html" title="Permalink: Sculley&apos;s Disease">December 2013</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">Sculley's Disease</h1><section class="mkdwn lh-copy"><p style='display:none'></p>
-<p>Just found this quote by Steve Jobs on 37signals’ blog. It's taken from <a href="http://www.youtube.com/watch?v=F4L26Jp_AT4&amp;list=TLMnOz1ppz1Sw">The Lost Interview</a> that was conducted shortly after Steve left Apple and founded NeXT. The question was: “What's important to you in the development of a product?”</p>
-<blockquote>
-<p>You know, one of the things that really hurt Apple was after I left John Sculley got a very serious disease. It’s the disease of thinking that a really great idea is 90% of the work. And if you just tell all these other people “here’s this great idea,” then of course they can go off and make it happen.</p>
-<p>And the problem with that is that there’s just a tremendous amount of craftsmanship in between a great idea and a great product. And as you evolve that great idea, it changes and grows. It never comes out like it starts because you learn a lot more as you get into the subtleties of it. And you also find there are tremendous tradeoffs that you have to make. There are just certain things you can’t make electrons do. There are certain things you can’t make plastic do. Or glass do. Or factories do. Or robots do.</p>
-<p>Designing a product is keeping five thousand things in your brain and fitting them all together in new and different ways to get what you want. And every day you discover something new that is a new problem or a new opportunity to fit these things together a little differently.</p>
-<p>And it’s that process that is the magic. <cite>Steve Jobs</cite></p>
-</blockquote>
-</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, December 2013 <a class="white" href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2013-12-03-Sculleys-Disease.markdown" target="_blank">edit on prose.io</a></div></article></div></div></body></html>
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="system-sans-serif dark-gray">
+    <div class="mh3">
+      <div class="mw7 center mb6">
+        <article
+          class="mt5"
+          itemprop="blogPost"
+          itemscope=""
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <div class="f6 db normal mw6 center">
+            <a
+              class="link"
+              href="/posts/sculleys-disease.html"
+              title="Permalink: Sculley's Disease"
+              >December 2013</a
+            ><span class="ph2">/</span
+            ><a class="link" href="/" title="Home">Home</a
+            ><span class="ph2">/</span
+            ><a
+              class="link"
+              href="https://twitter.com/martinklepsch"
+              title="@martinklepsch on Twitter"
+              >@martinklepsch</a
+            >
+          </div>
+          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+            Sculley's Disease
+          </h1>
+          <section class="mkdwn lh-copy">
+            <p style="display: none;"></p>
+            <p>
+              Just found this quote by Steve Jobs on 37signals’ blog. It's taken
+              from
+              <a
+                href="http://www.youtube.com/watch?v=F4L26Jp_AT4&amp;list=TLMnOz1ppz1Sw"
+                >The Lost Interview</a
+              >
+              that was conducted shortly after Steve left Apple and founded
+              NeXT. The question was: “What's important to you in the
+              development of a product?”
+            </p>
+            <blockquote>
+              <p>
+                You know, one of the things that really hurt Apple was after I
+                left John Sculley got a very serious disease. It’s the disease
+                of thinking that a really great idea is 90% of the work. And if
+                you just tell all these other people “here’s this great idea,”
+                then of course they can go off and make it happen.
+              </p>
+              <p>
+                And the problem with that is that there’s just a tremendous
+                amount of craftsmanship in between a great idea and a great
+                product. And as you evolve that great idea, it changes and
+                grows. It never comes out like it starts because you learn a lot
+                more as you get into the subtleties of it. And you also find
+                there are tremendous tradeoffs that you have to make. There are
+                just certain things you can’t make electrons do. There are
+                certain things you can’t make plastic do. Or glass do. Or
+                factories do. Or robots do.
+              </p>
+              <p>
+                Designing a product is keeping five thousand things in your
+                brain and fitting them all together in new and different ways to
+                get what you want. And every day you discover something new that
+                is a new problem or a new opportunity to fit these things
+                together a little differently.
+              </p>
+              <p>
+                And it’s that process that is the magic. <cite>Steve Jobs</cite>
+              </p>
+            </blockquote>
+          </section>
+          <div class="mv4 em-before mw6 center">
+            <a class="link" href="https://twitter.com/martinklepsch"
+              >@martinklepsch</a
+            >, December 2013
+            <a
+              class="white"
+              href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2013-12-03-Sculleys-Disease.markdown"
+              target="_blank"
+              >edit on prose.io</a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

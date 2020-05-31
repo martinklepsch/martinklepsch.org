@@ -1,33 +1,230 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="I&apos;ve been working remotely for a bit over a year now. Most projects went pretty well. Some not so much. I&apos;ve worked with fully distributed teams and as a satellite worker with on-site teams...." itemprop="description" name="description"><link href="https://martinklepsch.org/posts/making-remote-work.html" rel="canonical"><title>Making Remote Work — Martin Klepsch</title><meta content="Making Remote Work" property="og:title"><meta content="article" property="og:type"><meta content="I&apos;ve been working remotely for a bit over a year now. Most projects went pretty well. Some not so much. I&apos;ve worked with fully distributed teams and as a satellite worker with on-site teams...." property="og:description"><meta content="https://martinklepsch.org/posts/making-remote-work.html" property="og:url"><meta content="https://martinklepsch.org/images/selfies/2.jpg" property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta content="Making Remote Work" name="twitter:title"><meta content="I&apos;ve been working remotely for a bit over a year now. Most projects went pretty well. Some not so much. I&apos;ve worked with fully distributed teams and as a satellite worker with on-site teams...." name="twitter:description"><meta content="https://martinklepsch.org/images/selfies/2.jpg" name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3138561-8']);
-    _gaq.push(['_setDomainName', 'martinklepsch.org']);
-    _gaq.push(['_trackPageview']);
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="I've been working remotely for a bit over a year now. Most projects went pretty well. Some not so much. I've worked with fully distributed teams and as a satellite worker with on-site teams...."
+      itemprop="description"
+      name="description"
+    />
+    <link
+      href="https://martinklepsch.org/posts/making-remote-work.html"
+      rel="canonical"
+    />
+    <title>Making Remote Work — Martin Klepsch</title>
+    <meta content="Making Remote Work" property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="I've been working remotely for a bit over a year now. Most projects went pretty well. Some not so much. I've worked with fully distributed teams and as a satellite worker with on-site teams...."
+      property="og:description"
+    />
+    <meta
+      content="https://martinklepsch.org/posts/making-remote-work.html"
+      property="og:url"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/2.jpg"
+      property="og:image"
+    />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta content="Making Remote Work" name="twitter:title" />
+    <meta
+      content="I've been working remotely for a bit over a year now. Most projects went pretty well. Some not so much. I've worked with fully distributed teams and as a satellite worker with on-site teams...."
+      name="twitter:description"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/2.jpg"
+      name="twitter:image"
+    />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
 
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
 
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-    : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/making-remote-work.html" title="Permalink: Making Remote Work">March 2017</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">Making Remote Work</h1><section class="mkdwn lh-copy"><p>I've been working remotely for a bit over a year now. Most projects went pretty well. Some not so much. I've worked with fully distributed teams and as a satellite worker with on-site teams. I'm not an expert—but I've learned some things.</p>
-<p>What follows are some basic ideas to make remote teams work. I hope these help companies and remote workers set things up for success.</p>
-<h3><a href="#focus-on-self-sufficiency" id="focus-on-self-sufficiency"></a>Focus on Self Sufficiency</h3>
-<p>In an office you walk up to somebody (read: interrupt their work) and discuss stuff. In a remote environment you may need to schedule, then wait, then deal with connectivity issues, then have a discussion. Sometimes the waiting part alone can take the better part of a day.</p>
-<p>Synchronous communication, including chat, is great and necessary but the more your work routine relies on it, the more you might unknowingly slow everyone down.</p>
-<p>With that in mind, start thinking of communication as a cost factor. Being slowed down costs time, momentum and motivation. These are the things you usually want to preserve at all cost. And that's where self-sufficiency comes in.</p>
-<p>Being self sufficient in work means knowing what to do in order to advance the project and having the means to execute. The easiest way to make people understand what is worth working on is making them understand the business. Sometimes more specific goals will also do the job. But generally the broader the better.</p>
-<p>Once everyone is able to develop ideas based on their understanding of the business all that is missing is The Feedback Loop™. Feedback is often a critical part of UI design but that does not mean it isn't applicable to other domains. Enable your team to see the impact of their work. Define relevant metrics and measure, measure, measure, graph, graph, graph. Share and celebrate accomplishments.</p>
-<h3><a href="#document-with-rigour" id="document-with-rigour"></a>Document With Rigour</h3>
-<p>Again, communication has a cost. It's fun and important too. You want to spend that valuable face-time with your colleagues chatting about last weekends hike or that tricky problem you're banging your head against. You don't want to spend it figuring out how to run migrations or update your environment so that things work again with those latest changes.</p>
-<p>Have a <code>README</code>. Make sure to add a table of contents. This is reference material, not an essay. Maybe try Asciidoc if Markdown feels too restrictive. Ensure that pull requests are reviewed with documentation changes in mind. With GitHub's pull request templates it's easy to remind team members to update documentation.</p>
-<p>That hike last week was nice by the way:</p>
-<p><img src="/images/hike.jpg" alt="" /></p>
-<div class="pa2 tc f3 blue">·  ·  ·</div>
-<p>I realize the up-front cost of making someone understand the intricacies of a business might be higher than just telling them to &quot;do this&quot;. There may be smaller projects where deep understanding is not necessary. It seems reasonable to think that everyone does a better job if they do understand the business though.</p>
-<p>Now all these suggestions are probably applicable to any team, not only remote ones. However they are of particular importance for remote teams.</p>
-<p class="f6 ba br2 b--blue pa3 mt4">Distributed teams face special challenges. <a href="https://goo.gl/forms/BTteLFXQFopWOXxt1">I would love to hear yours</a> and see if there might be something that could be built to help.</p>
-</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, March 2017 <a class="white" href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2017-03-25-making-remote-work.markdown" target="_blank">edit on prose.io</a></div></article></div></div></body></html>
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="system-sans-serif dark-gray">
+    <div class="mh3">
+      <div class="mw7 center mb6">
+        <article
+          class="mt5"
+          itemprop="blogPost"
+          itemscope=""
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <div class="f6 db normal mw6 center">
+            <a
+              class="link"
+              href="/posts/making-remote-work.html"
+              title="Permalink: Making Remote Work"
+              >March 2017</a
+            ><span class="ph2">/</span
+            ><a class="link" href="/" title="Home">Home</a
+            ><span class="ph2">/</span
+            ><a
+              class="link"
+              href="https://twitter.com/martinklepsch"
+              title="@martinklepsch on Twitter"
+              >@martinklepsch</a
+            >
+          </div>
+          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+            Making Remote Work
+          </h1>
+          <section class="mkdwn lh-copy">
+            <p>
+              I've been working remotely for a bit over a year now. Most
+              projects went pretty well. Some not so much. I've worked with
+              fully distributed teams and as a satellite worker with on-site
+              teams. I'm not an expert—but I've learned some things.
+            </p>
+            <p>
+              What follows are some basic ideas to make remote teams work. I
+              hope these help companies and remote workers set things up for
+              success.
+            </p>
+            <h3>
+              <a
+                href="#focus-on-self-sufficiency"
+                id="focus-on-self-sufficiency"
+              ></a
+              >Focus on Self Sufficiency
+            </h3>
+            <p>
+              In an office you walk up to somebody (read: interrupt their work)
+              and discuss stuff. In a remote environment you may need to
+              schedule, then wait, then deal with connectivity issues, then have
+              a discussion. Sometimes the waiting part alone can take the better
+              part of a day.
+            </p>
+            <p>
+              Synchronous communication, including chat, is great and necessary
+              but the more your work routine relies on it, the more you might
+              unknowingly slow everyone down.
+            </p>
+            <p>
+              With that in mind, start thinking of communication as a cost
+              factor. Being slowed down costs time, momentum and motivation.
+              These are the things you usually want to preserve at all cost. And
+              that's where self-sufficiency comes in.
+            </p>
+            <p>
+              Being self sufficient in work means knowing what to do in order to
+              advance the project and having the means to execute. The easiest
+              way to make people understand what is worth working on is making
+              them understand the business. Sometimes more specific goals will
+              also do the job. But generally the broader the better.
+            </p>
+            <p>
+              Once everyone is able to develop ideas based on their
+              understanding of the business all that is missing is The Feedback
+              Loop™. Feedback is often a critical part of UI design but that
+              does not mean it isn't applicable to other domains. Enable your
+              team to see the impact of their work. Define relevant metrics and
+              measure, measure, measure, graph, graph, graph. Share and
+              celebrate accomplishments.
+            </p>
+            <h3>
+              <a href="#document-with-rigour" id="document-with-rigour"></a
+              >Document With Rigour
+            </h3>
+            <p>
+              Again, communication has a cost. It's fun and important too. You
+              want to spend that valuable face-time with your colleagues
+              chatting about last weekends hike or that tricky problem you're
+              banging your head against. You don't want to spend it figuring out
+              how to run migrations or update your environment so that things
+              work again with those latest changes.
+            </p>
+            <p>
+              Have a <code>README</code>. Make sure to add a table of contents.
+              This is reference material, not an essay. Maybe try Asciidoc if
+              Markdown feels too restrictive. Ensure that pull requests are
+              reviewed with documentation changes in mind. With GitHub's pull
+              request templates it's easy to remind team members to update
+              documentation.
+            </p>
+            <p>That hike last week was nice by the way:</p>
+            <p><img src="/images/hike.jpg" alt="" /></p>
+            <div class="pa2 tc f3 blue">· · ·</div>
+            <p>
+              I realize the up-front cost of making someone understand the
+              intricacies of a business might be higher than just telling them
+              to &quot;do this&quot;. There may be smaller projects where deep
+              understanding is not necessary. It seems reasonable to think that
+              everyone does a better job if they do understand the business
+              though.
+            </p>
+            <p>
+              Now all these suggestions are probably applicable to any team, not
+              only remote ones. However they are of particular importance for
+              remote teams.
+            </p>
+            <p class="f6 ba br2 b--blue pa3 mt4">
+              Distributed teams face special challenges.
+              <a href="https://goo.gl/forms/BTteLFXQFopWOXxt1"
+                >I would love to hear yours</a
+              >
+              and see if there might be something that could be built to help.
+            </p>
+          </section>
+          <div class="mv4 em-before mw6 center">
+            <a class="link" href="https://twitter.com/martinklepsch"
+              >@martinklepsch</a
+            >, March 2017
+            <a
+              class="white"
+              href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2017-03-25-making-remote-work.markdown"
+              target="_blank"
+              >edit on prose.io</a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

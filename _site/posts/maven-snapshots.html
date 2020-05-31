@@ -1,40 +1,240 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Or: How to use Maven snapshots without setting your hair on fire. Ever depended on a Clojure library with a version that ended in -SNAPSHOT? That&apos;s what&apos;s called a Maven snapshot. Maven snap..." itemprop="description" name="description"><link href="https://martinklepsch.org/posts/maven-snapshots.html" rel="canonical"><title>Maven Snapshots — Martin Klepsch</title><meta content="Maven Snapshots" property="og:title"><meta content="article" property="og:type"><meta content="Or: How to use Maven snapshots without setting your hair on fire. Ever depended on a Clojure library with a version that ended in -SNAPSHOT? That&apos;s what&apos;s called a Maven snapshot. Maven snap..." property="og:description"><meta content="https://martinklepsch.org/posts/maven-snapshots.html" property="og:url"><meta content="https://martinklepsch.org/images/selfies/3.jpg" property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta content="Maven Snapshots" name="twitter:title"><meta content="Or: How to use Maven snapshots without setting your hair on fire. Ever depended on a Clojure library with a version that ended in -SNAPSHOT? That&apos;s what&apos;s called a Maven snapshot. Maven snap..." name="twitter:description"><meta content="https://martinklepsch.org/images/selfies/3.jpg" name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3138561-8']);
-    _gaq.push(['_setDomainName', 'martinklepsch.org']);
-    _gaq.push(['_trackPageview']);
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="Or: How to use Maven snapshots without setting your hair on fire. Ever depended on a Clojure library with a version that ended in -SNAPSHOT? That's what's called a Maven snapshot. Maven snap..."
+      itemprop="description"
+      name="description"
+    />
+    <link
+      href="https://martinklepsch.org/posts/maven-snapshots.html"
+      rel="canonical"
+    />
+    <title>Maven Snapshots — Martin Klepsch</title>
+    <meta content="Maven Snapshots" property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="Or: How to use Maven snapshots without setting your hair on fire. Ever depended on a Clojure library with a version that ended in -SNAPSHOT? That's what's called a Maven snapshot. Maven snap..."
+      property="og:description"
+    />
+    <meta
+      content="https://martinklepsch.org/posts/maven-snapshots.html"
+      property="og:url"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      property="og:image"
+    />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta content="Maven Snapshots" name="twitter:title" />
+    <meta
+      content="Or: How to use Maven snapshots without setting your hair on fire. Ever depended on a Clojure library with a version that ended in -SNAPSHOT? That's what's called a Maven snapshot. Maven snap..."
+      name="twitter:description"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      name="twitter:image"
+    />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
 
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
 
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-    : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    })();</script></head><body class="system-sans-serif dark-gray"><div class="mh3"><div class="mw7 center mb6"><article class="mt5" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting"><div class="f6 db normal mw6 center"><a class="link" href="/posts/maven-snapshots.html" title="Permalink: Maven Snapshots">June 2017</a><span class="ph2">/</span><a class="link" href="/" title="Home">Home</a><span class="ph2">/</span><a class="link" href="https://twitter.com/martinklepsch" title="@martinklepsch on Twitter">@martinklepsch</a></div><h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">Maven Snapshots</h1><section class="mkdwn lh-copy"><h2><a href="#or-how-to-use-maven-snapshots-without-setting-your-hair-on-fire" id="or-how-to-use-maven-snapshots-without-setting-your-hair-on-fire"></a>Or: How to use Maven snapshots without setting your hair on fire.</h2>
-<p>Ever depended on a Clojure library with a version that ended in <code>-SNAPSHOT</code>? That's what's called a Maven snapshot.</p>
-<p>Maven snapshots are a handy tool to provide pre-release builds to those who are interested. In contrast to proper releases a SNAPSHOT release can be &quot;updated&quot;. And that's where the trouble comes in.</p>
-<p>Let's say you depend on a snapshot because it contains a fix you recently contributed to your favorite open source project. A week later another fix is added and released under the same <code>0.1.0-SNAPSHOT</code> version.</p>
-<p>Now it turns out that second fix contained a minor bug. No big deal, it's a pre-release after all. The problem with all this however is that you (Maven) will automatically use the new SNAPSHOT, no action required. A dependency you use in your project <strong>changes without you being aware</strong> of it. Suddenly stuff breaks. You wonder what happened. Did you change anything? No? Frustration ensues.</p>
-<p>Because of this for a long time I thought SNAPSHOTS are evil and instead of using them library authors should release development builds with a qualifier like <code>0.1.0-alpha1</code>. I still think this is a good practice and try to adhere to it myself as much as possible.</p>
-<h2><a href="#in-the-meantime-there-is-another-way-to-safely-depend-on-maven-snapshots-though" id="in-the-meantime-there-is-another-way-to-safely-depend-on-maven-snapshots-though"></a>In the meantime there is another way to safely depend on Maven snapshots though.</h2>
-<p>Whenever you push a SNAPSHOT version to a Maven repository (like Clojars) it does not actually overwrite the previously uploaded jar but creates a separate jar with a version like this: <code>0.1.0-20170301.173959-4</code>. Once the upload is complete it merely changes the SNAPSHOT version to point to that release. All previous releases are still available (by default Maven repos only keep the latest SNAPSHOT version but Clojars keeps them all).</p>
-<p>This means instead of depending on a <strong>mutable</strong> version you can now depend on an <strong>immutable</strong> version. Oh do we love immutability.</p>
-<pre><code>[group-id/project-id &quot;0.1.0-20170301.173959-4&quot;]
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="system-sans-serif dark-gray">
+    <div class="mh3">
+      <div class="mw7 center mb6">
+        <article
+          class="mt5"
+          itemprop="blogPost"
+          itemscope=""
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <div class="f6 db normal mw6 center">
+            <a
+              class="link"
+              href="/posts/maven-snapshots.html"
+              title="Permalink: Maven Snapshots"
+              >June 2017</a
+            ><span class="ph2">/</span
+            ><a class="link" href="/" title="Home">Home</a
+            ><span class="ph2">/</span
+            ><a
+              class="link"
+              href="https://twitter.com/martinklepsch"
+              title="@martinklepsch on Twitter"
+              >@martinklepsch</a
+            >
+          </div>
+          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+            Maven Snapshots
+          </h1>
+          <section class="mkdwn lh-copy">
+            <h2>
+              <a
+                href="#or-how-to-use-maven-snapshots-without-setting-your-hair-on-fire"
+                id="or-how-to-use-maven-snapshots-without-setting-your-hair-on-fire"
+              ></a
+              >Or: How to use Maven snapshots without setting your hair on fire.
+            </h2>
+            <p>
+              Ever depended on a Clojure library with a version that ended in
+              <code>-SNAPSHOT</code>? That's what's called a Maven snapshot.
+            </p>
+            <p>
+              Maven snapshots are a handy tool to provide pre-release builds to
+              those who are interested. In contrast to proper releases a
+              SNAPSHOT release can be &quot;updated&quot;. And that's where the
+              trouble comes in.
+            </p>
+            <p>
+              Let's say you depend on a snapshot because it contains a fix you
+              recently contributed to your favorite open source project. A week
+              later another fix is added and released under the same
+              <code>0.1.0-SNAPSHOT</code> version.
+            </p>
+            <p>
+              Now it turns out that second fix contained a minor bug. No big
+              deal, it's a pre-release after all. The problem with all this
+              however is that you (Maven) will automatically use the new
+              SNAPSHOT, no action required. A dependency you use in your project
+              <strong>changes without you being aware</strong> of it. Suddenly
+              stuff breaks. You wonder what happened. Did you change anything?
+              No? Frustration ensues.
+            </p>
+            <p>
+              Because of this for a long time I thought SNAPSHOTS are evil and
+              instead of using them library authors should release development
+              builds with a qualifier like <code>0.1.0-alpha1</code>. I still
+              think this is a good practice and try to adhere to it myself as
+              much as possible.
+            </p>
+            <h2>
+              <a
+                href="#in-the-meantime-there-is-another-way-to-safely-depend-on-maven-snapshots-though"
+                id="in-the-meantime-there-is-another-way-to-safely-depend-on-maven-snapshots-though"
+              ></a
+              >In the meantime there is another way to safely depend on Maven
+              snapshots though.
+            </h2>
+            <p>
+              Whenever you push a SNAPSHOT version to a Maven repository (like
+              Clojars) it does not actually overwrite the previously uploaded
+              jar but creates a separate jar with a version like this:
+              <code>0.1.0-20170301.173959-4</code>. Once the upload is complete
+              it merely changes the SNAPSHOT version to point to that release.
+              All previous releases are still available (by default Maven repos
+              only keep the latest SNAPSHOT version but Clojars keeps them all).
+            </p>
+            <p>
+              This means instead of depending on a
+              <strong>mutable</strong> version you can now depend on an
+              <strong>immutable</strong> version. Oh do we love immutability.
+            </p>
+            <pre><code>[group-id/project-id &quot;0.1.0-20170301.173959-4&quot;]
 </code></pre>
-<p>Finding these version identifiers isn't the easiest thing but basically:</p>
-<ol>
-<li>you go to the page of a jar on Clojars, e.g. <a href="https://clojars.org/adzerk/boot-cljs/">adzerk/boot-cljs</a></li>
-<li>in the sidebar that lists recent versions, click &quot;Show All Versions&quot;</li>
-<li><a href="https://clojars.org/adzerk/boot-cljs/versions">versions page</a> you can find a note at the bottom that leads you to the <a href="https://repo.clojars.org/adzerk/boot-cljs/">Maven repository</a></li>
-<li>if you click on a SNAPSHOT version there you get to a page that <a href="https://repo.clojars.org/adzerk/boot-cljs/2.0.0-SNAPSHOT/">lists all the stable identifiers for that version</a></li>
-</ol>
-<p>To get to the Maven repo page directly you can also just put a <code>repo.</code> subdomain in front of a given Clojars project url:</p>
-<pre><code>https://clojars.org/adzerk/boot-cljs/
+            <p>
+              Finding these version identifiers isn't the easiest thing but
+              basically:
+            </p>
+            <ol>
+              <li>
+                you go to the page of a jar on Clojars, e.g.
+                <a href="https://clojars.org/adzerk/boot-cljs/"
+                  >adzerk/boot-cljs</a
+                >
+              </li>
+              <li>
+                in the sidebar that lists recent versions, click &quot;Show All
+                Versions&quot;
+              </li>
+              <li>
+                <a href="https://clojars.org/adzerk/boot-cljs/versions"
+                  >versions page</a
+                >
+                you can find a note at the bottom that leads you to the
+                <a href="https://repo.clojars.org/adzerk/boot-cljs/"
+                  >Maven repository</a
+                >
+              </li>
+              <li>
+                if you click on a SNAPSHOT version there you get to a page that
+                <a
+                  href="https://repo.clojars.org/adzerk/boot-cljs/2.0.0-SNAPSHOT/"
+                  >lists all the stable identifiers for that version</a
+                >
+              </li>
+            </ol>
+            <p>
+              To get to the Maven repo page directly you can also just put a
+              <code>repo.</code> subdomain in front of a given Clojars project
+              url:
+            </p>
+            <pre><code>https://clojars.org/adzerk/boot-cljs/
 https://repo.clojars.org/adzerk/boot-cljs/
         ^^^^
 </code></pre>
-<p>And they depend on SNAPSHOTs happily ever after.</p>
-</section><div class="mv4 em-before mw6 center"><a class="link" href="https://twitter.com/martinklepsch">@martinklepsch</a>, June 2017 <a class="white" href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2017-06-04-maven-snapshots.markdown" target="_blank">edit on prose.io</a></div></article></div></div></body></html>
+            <p>And they depend on SNAPSHOTs happily ever after.</p>
+          </section>
+          <div class="mv4 em-before mw6 center">
+            <a class="link" href="https://twitter.com/martinklepsch"
+              >@martinklepsch</a
+            >, June 2017
+            <a
+              class="white"
+              href="https://prose.io/#martinklepsch/martinklepsch.org/edit/master/content/posts/2017-06-04-maven-snapshots.markdown"
+              target="_blank"
+              >edit on prose.io</a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>
