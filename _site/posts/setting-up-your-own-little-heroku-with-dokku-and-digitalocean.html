@@ -130,18 +130,14 @@
               offers Heroku-like deployment. It was surprisingly simple so here
               is some rough outline that should get you going.
             </p>
+            <p></p>
             <aside>
               This guide is slightly opinionated and things can be done
               differently. I decided to settle for the way thats closest to
               Heroku to keep things short.
             </aside>
-            <h2>
-              <a
-                href="#create-a-droplet-at-digitalocean"
-                id="create-a-droplet-at-digitalocean"
-              ></a
-              >Create a Droplet at Digitalocean
-            </h2>
+            <p></p>
+            <h2>Create a Droplet at Digitalocean</h2>
             <p>
               Go to
               <a href="https://www.digitalocean.com/?refcode=fb6eb9b8b286"
@@ -149,6 +145,7 @@
               >
               and create a droplet (note the comments below the screenshots):
             </p>
+            <p></p>
             <figure>
               <img class="bordered" src="/images/hostname.png" />
               <figcaption>
@@ -156,6 +153,8 @@
                 will be the git remote you'll push to to deploy.
               </figcaption>
             </figure>
+            <p></p>
+            <p></p>
             <figure>
               <img class="bordered" src="/images/image.png" />
               <figcaption>
@@ -163,6 +162,7 @@
                 Dokku one.
               </figcaption>
             </figure>
+            <p></p>
             <p>
               There are some unresolved problems with Dokku on Ubuntu 13+ so if
               you are not just playing around you might want to setup Dokku
@@ -170,18 +170,18 @@
               droplet will be created within the next minute. The last bit of
               server-setup that’s required is Dokku’s.
             </p>
-            <h2>
-              <a href="#setting-up-dokku" id="setting-up-dokku"></a>Setting up
-              Dokku
-            </h2>
+            <h2>Setting up Dokku</h2>
             <p>
               To get to Dokku’s setup screen just steer your browser to the IP
               shown in the droplet’s detail view:
             </p>
+            <p></p>
             <figure>
               <img class="bordered" src="/images/droplet-ip.png" />
             </figure>
+            <p></p>
             <p>What you’ll see next is Dokku’s setup screen:</p>
+            <p></p>
             <figure>
               <img class="bordered" src="/images/dokku-setup.png" />
               <figcaption>
@@ -189,7 +189,8 @@
                 hostname is correct.
               </figcaption>
             </figure>
-            <h2><a href="#dns-setup" id="dns-setup"></a>DNS Setup</h2>
+            <p></p>
+            <h2>DNS Setup</h2>
             <p>
               To get the hostname you chose earlier actually point to your
               machine running Dokku you need to add two A records to the
@@ -200,13 +201,11 @@
               hostname you set earlier, not the complete domain.
             </p>
             <pre><code>A       &lt;subdomain-of-hostname&gt;      &lt;droplet-ip&gt;
-A       *.&lt;subdomain-of-hostname&gt;    &lt;droplet-ip&gt;
-
-# in a zonefile it’d look like this:
+A       *.&lt;subdomain-of-hostname&gt;    &lt;droplet-ip&gt;</code></pre>
+            <pre><code># in a zonefile it’d look like this:
 *.apps 10800 IN A 107.170.35.171
-apps 10800 IN A 107.170.35.171
-</code></pre>
-            <h2><a href="#deploying" id="deploying"></a>Deploying</h2>
+apps 10800 IN A 107.170.35.171</code></pre>
+            <h2>Deploying</h2>
             <p>
               After you’ve waited three hours for DNS servers to propagate the
               changes you should be able to do something like the following:
@@ -214,8 +213,7 @@ apps 10800 IN A 107.170.35.171
             <pre><code>git clone git@github.com:heroku/node-js-sample.git
 cd node-js-sample
 git remote add digital-ocean dokku@apps.example.com:nodeapp
-git push digital-ocean master
-</code></pre>
+git push digital-ocean master</code></pre>
             <p>
               Now going to <code>nodeapp.&lt;dokku-hostname&gt;</code> should
               bring up “Hello World” from the app we just cloned and pushed.

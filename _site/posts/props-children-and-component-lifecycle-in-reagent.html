@@ -130,10 +130,7 @@
               Every time again I fail to find some docs and figure it out by
               trial and error.
             </p>
-            <h2>
-              <a href="#props-vs-children" id="props-vs-children"></a>Props vs.
-              Children
-            </h2>
+            <h2>Props vs. Children</h2>
             <p>
               In React <strong>everything</strong> passed to a component is
               called <code>props</code>. Children passed to components are
@@ -141,12 +138,12 @@
               different and Reagent’s hiccup syntax doesn’t explicitly separate
               the two:
             </p>
-            <pre><code class="language-clojure">;; configuration and one child
+            <pre><code class="clojure">;; configuration and one child
 [popup {:style :alert} [delete-confirmation]]
 ;; two children
 [popup [alert-icon] [delete-confirmation]]
 </code></pre>
-            <pre><code class="language-xml">&lt;Popup style=&quot;alert&quot;&gt;&lt;DeleteConfirmation&gt;&lt;/Popup&gt;
+            <pre><code class="xml">&lt;Popup style=&quot;alert&quot;&gt;&lt;DeleteConfirmation&gt;&lt;/Popup&gt;
 </code></pre>
             <p>
               In React it is well-defined where you can access the
@@ -191,13 +188,7 @@
                 <code>:reagent-render</code> arguments</a
               >.
             </p>
-            <h2>
-              <a
-                href="#props-in-lifecycle-handlers"
-                id="props-in-lifecycle-handlers"
-              ></a
-              >Props in Lifecycle Handlers
-            </h2>
+            <h2>Props in Lifecycle Handlers</h2>
             <p>
               Now how do we get access to these props in a lifecycle handler?
               The quick answer is, we use <code>reagent.core/props</code> —
@@ -220,10 +211,10 @@
               the lifecycle handler. Not as you might think though.
             </p>
             <p>If you have a component that has a signature like this:</p>
-            <pre><code class="language-clojure">(defn my-comp [my-props more] …)
+            <pre><code class="clojure">(defn my-comp [my-props more] …)
 </code></pre>
             <p>You can access it’s previously passed arguments like this:</p>
-            <pre><code class="language-clojure">:component-did-update (fn [comp [_ prev-props prev-more]] …))
+            <pre><code class="clojure">:component-did-update (fn [comp [_ prev-props prev-more]] …))
 </code></pre>
             <p>
               <code>comp</code> is a reference to the current component. The
@@ -239,10 +230,12 @@
               lifecycle method signatures so hopefully this post helps to clear
               up some confusion about this stuff. :)
             </p>
+            <p></p>
             <aside>
               Thanks to Jonas Enlund for reading a draft of this post and to
               Mike Thompson for his excellent Re-frame/Reagent docs.
             </aside>
+            <p></p>
           </section>
           <div class="mv4 em-before mw6 center">
             <a class="link" href="https://twitter.com/martinklepsch"

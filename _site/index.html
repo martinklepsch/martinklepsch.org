@@ -112,11 +112,11 @@
               <a href="https://twitter.com/roman01la">Roman</a> wrote a nice
               post on working inside ClojureScript REPLs, also touching on
               <a
-                href="https://gist.github.com/roman01la/b939e4f2341fc2f931e34a941aba4e15#repl--asynchrony"
+                href="https://gist.github.com/roman01la/b939e4f2341fc2f931e34a941aba4e15#repl–asynchrony"
                 >how to deal with promises</a
               >. If you're unfamiliar, the problem is that in Javascript many
               operations return promises and unlike in Clojure you cannot block
-              until the promise is resolved. Instead you <em>have to</em> handle
+              until the promise is resolved. Instead you <i>have to</i> handle
               the resulting value asynchronously. So if you for instance use
               <code>fetch</code> that could look something like this:
             </p>
@@ -141,8 +141,8 @@
               could also use an <code>atom</code> to store the return value.
             </p>
             <pre><code>(def s (atom nil))
-            <h3><a href="#ergonomics" id="ergonomics"></a>Ergonomics</h3>
 (.then (js/fetch &quot;https://jsonip.com/&quot;) #(reset! s %))</code></pre>
+            <h3>Ergonomics</h3>
             <p>
               Now that we know how we can access the resulting value of a
               promise, let's make it convenient. For convenience I basically
@@ -161,6 +161,7 @@
               What I came up with is a function I just named
               <code>t</code> which can be used like this:
             </p>
+            <br />
             <pre><code>(let [s (atom {})]
   (defn t
     ([kw] (get @s kw))

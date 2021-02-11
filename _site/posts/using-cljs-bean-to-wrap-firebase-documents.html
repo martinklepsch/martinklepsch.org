@@ -143,7 +143,7 @@
               Because IDs are technically not part of the document the project
               adopted a pattern of representing documents as tuples:
             </p>
-            <pre><code class="language-clj">[id (js-&gt;clj firestore-data)]
+            <pre><code class="clj">[id (js-&gt;clj firestore-data)]
 </code></pre>
             <p>
               This works but isn’t particularly extensible. What if we also
@@ -155,7 +155,7 @@
               It also leads to some funky gymnastics when working with
               collections of documents:
             </p>
-            <pre><code class="language-clj">(sort-by (comp :join_dt second) list-of-document-tuples)
+            <pre><code class="clj">(sort-by (comp :join_dt second) list-of-document-tuples)
 </code></pre>
             <p>Could be worse... but also could be better.</p>
             <p>
@@ -165,7 +165,7 @@
               ClojureScript data structures, custom protocols and
               <code>:extend-via-metadata</code>.
             </p>
-            <h2><a href="#cljs-bean" id="cljs-bean"></a>cljs-bean</h2>
+            <h2>cljs-bean</h2>
             <p>
               With the recent release of
               <a href="https://github.com/mfikes/cljs-bean">cljs-bean</a> we
@@ -176,7 +176,7 @@
               allows us to use it as if it were a ClojureScript-native data
               structure:
             </p>
-            <pre><code class="language-clj">(require '[cljs-bean.core :as cljs-bean])
+            <pre><code class="clj">(require '[cljs-bean.core :as cljs-bean])
 
 (-&gt; (cljs-bean/bean #js {&quot;some_data&quot; 1, :b 2})
     (get :some_data)) ; =&gt; 1
@@ -190,7 +190,7 @@
               we can make the JS object representing the data easily accessible
               from ClojureScript:
             </p>
-            <pre><code class="language-clj">(-&gt; (cljs-bean/-&gt;clj (.data query-document-snapshot))
+            <pre><code class="clj">(-&gt; (cljs-bean/-&gt;clj (.data query-document-snapshot))
     (get :some_field))
 
 ;; (cljs-bean/-&gt;clj data) is roughly the same as
@@ -217,7 +217,7 @@
               this will fall back to <code>clj-&gt;js</code> when called on
               ClojureScript data structures.
             </p>
-            <pre><code class="language-clj">(.set some-ref (cljs-bean/-&gt;js our-bean))
+            <pre><code class="clj">(.set some-ref (cljs-bean/-&gt;js our-bean))
 </code></pre>
             <p>
               Arguably the differences to using plain
@@ -225,33 +225,24 @@
               database representing data as JS objects it is nice to retain
               those original objects.
             </p>
-            <h2>
-              <a
-                href="#integrating-firestore-metadata"
-                id="integrating-firestore-metadata"
-              ></a
-              >Integrating Firestore Metadata
-            </h2>
+            <h2>Integrating Firestore Metadata</h2>
             <p>
               Now we got beans. But they still don’t contain the document ID or
               reference. In most places we don’t care about a documents ID or
               reference. So how could we enable the code below while retaining
               ID and reference?
             </p>
-            <pre><code class="language-clj">(sort-by :join_dt participants)
+            <pre><code class="clj">(sort-by :join_dt participants)
 </code></pre>
             <p>Let’s compare the various options we have.</p>
-            <h3>
-              <a href="#tuples-and-nesting" id="tuples-and-nesting"></a>Tuples
-              and Nesting
-            </h3>
+            <h3>Tuples and Nesting</h3>
             <p>
               I already described the tuple-based approach above. Another,
               similar, approach achieves the same by nesting the data in another
               map. Both fall short on the requirement to make document fields
               directly accessible.
             </p>
-            <pre><code class="language-clj">;; structure
+            <pre><code class="clj">;; structure
 {:id &quot;some-id&quot;, :ref &quot;/events/some-id&quot;, :data document-data}
 ;; usage (including gymnastics)
 (sort-by (comp :join_dt :data) participants)
@@ -267,18 +258,12 @@
               >
               — as far as I understand anyways.
             </p>
-            <h3>
-              <a
-                href="#addition-of-a-special-key"
-                id="addition-of-a-special-key"
-              ></a
-              >Addition of a Special Key
-            </h3>
+            <h3>Addition of a Special Key</h3>
             <p>
               Another approach could be to add metadata directly to the document
               data.
             </p>
-            <pre><code class="language-clj">(defn doc [query-doc-snapshot]
+            <pre><code class="clj">(defn doc [query-doc-snapshot]
   (-&gt; (cljs-bean/-&gt;clj (.data query-doc-snapshot))
       (assoc ::meta {:id (.-id query-doc-snapshot
                      :ref (.-ref query-doc-snapshot})))
@@ -289,7 +274,7 @@
               metadata before passing the data to any function writing to
               Firestore.
             </p>
-            <pre><code class="language-clj">;; before writing we need to remove ::meta
+            <pre><code class="clj">;; before writing we need to remove ::meta
 (.set some-ref (cljs-bean/-&gt;js (dissoc document-data ::meta))
 </code></pre>
             <p>
@@ -299,10 +284,7 @@
               nested does give us that direct field access that the nesting
               approach did not.
             </p>
-            <h3>
-              <a href="#protocols-and-" id="protocols-and-"></a>Protocols and
-              <code>:extend-via-metadata</code>
-            </h3>
+            <h3>Protocols and <code>:extend-via-metadata</code></h3>
             <p>
               An approach I’ve found particularly interesting to play with makes
               use of a protocol that can be implemented via metadata, as enabled
@@ -317,7 +299,7 @@
                 >1.10.516 release</a
               >:
             </p>
-            <pre><code class="language-clj">(defprotocol IFirestoreDocument
+            <pre><code class="clj">(defprotocol IFirestoreDocument
   :extend-via-metadata true
   (id [_] &quot;Return the ID (string) of this document&quot;)
   (ref [_] &quot;Return the Firestore Reference object&quot;))
@@ -334,7 +316,7 @@
               This allows direct access to document properties while retaining
               important metadata:
             </p>
-            <pre><code class="language-clj">(:name participant) ; =&gt; &quot;Martin&quot;
+            <pre><code class="clj">(:name participant) ; =&gt; &quot;Martin&quot;
 (firebase/id participant) ; =&gt; &quot;some-firebase-id&quot;
 </code></pre>
             <p>
@@ -350,7 +332,7 @@
               implementation got lost. In contrast metadata is carried over
               across updates.
             </p>
-            <h2><a href="#summary" id="summary"></a>Summary</h2>
+            <h2>Summary</h2>
             <p>
               Using
               <a href="https://github.com/mfikes/cljs-bean">cljs-bean</a> we’ve
@@ -389,7 +371,7 @@
               a well known key that is removed before writing the data to
               Firestore again:
             </p>
-            <pre><code class="language-clj">(defn doc [query-doc-snapshot]
+            <pre><code class="clj">(defn doc [query-doc-snapshot]
   (-&gt; (cljs-bean/-&gt;clj (.data query-doc-snapshot))
       (assoc ::meta {:id (.-id query-doc-snapshot)
                      :ref (.-ref query-doc-snapshot)})))

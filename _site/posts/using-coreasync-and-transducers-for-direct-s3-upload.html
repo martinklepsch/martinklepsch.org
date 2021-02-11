@@ -138,7 +138,7 @@
               this seemed like a neat little excuse to give Clojure's new
               transducers a go.
             </p>
-            <h2><a href="#the-problem" id="the-problem"></a>The Problem</h2>
+            <h2>The Problem</h2>
             <p>
               To upload files directly to S3 without any server in between you
               need to do a couple of things:
@@ -173,10 +173,7 @@
               <li>Retrieve special parameters for post request from server</li>
               <li>Post <strong>directly from the browser</strong> to S3</li>
             </ol>
-            <h2>
-              <a href="#server-side-code" id="server-side-code"></a>Server-side
-              code
-            </h2>
+            <h2>Server-side code</h2>
             <p>
               I won't go into detail here, but here's
               <a
@@ -186,16 +183,10 @@
               illustrating the construction of the special parameters and how
               they're sent to the client.
             </p>
-            <h2>
-              <a
-                href="#client-side-transducers-and-coreasync"
-                id="client-side-transducers-and-coreasync"
-              ></a
-              >Client-side: Transducers and core.async
-            </h2>
+            <h2>Client-side: Transducers and core.async</h2>
             <p>
               As we see the process involves multiple asynchronous steps:
-              <img src="/images/s3-direct.png" alt="" />
+              <img alt="" src="/images/s3-direct.png" />
             </p>
             <p>
               To wrap all that up into a useful minimal API that hides all the
@@ -206,14 +197,12 @@
   (let [upload-files (map #(upload-file % report-chan))
         upload-chan  (chan 10 upload-files)
         sign-files   (map #(sign-file % upload-chan))
-        signing-chan (chan 10 sign-files)]
-
-    (go (while true
+        signing-chan (chan 10 sign-files)]</code></pre>
+            <pre><code>    (go (while true
           (let [[v ch] (alts! [signing-chan upload-chan])]
             ; that's not really required but has been useful
             (log v))))
-    signing-chan))
-</code></pre>
+    signing-chan))</code></pre>
             <p>
               This function takes one channel as argument where it will
               <code>put!</code> the result of the S3 request. You can take a
@@ -249,7 +238,7 @@
               The last line returns the channel that can be used to initiate a
               new upload.
             </p>
-            <h2><a href="#using-this" id="using-this"></a>Using this</h2>
+            <h2>Using this</h2>
             <p>
               Putting this into a library and opening it up for other people to
               use isn't overly complicated, the exposed API is actually very
@@ -258,9 +247,8 @@
               <code>upload-form</code>:
             </p>
             <pre><code>(defn queue-file [e owner {:keys [upload-queue]}]
-  (put! upload-queue (first (array-seq (.. e -target -files)))))
-
-(defcomponent upload-form [text owner]
+  (put! upload-queue (first (array-seq (.. e -target -files)))))</code></pre>
+            <pre><code>(defcomponent upload-form [text owner]
   (init-state [_]
     (let [rc (chan 10)]
       {:upload-queue (s3-upload rc)
@@ -271,8 +259,7 @@
   (render-state [this state]
     (dom/form
      (dom/input {:type &quot;file&quot; :name &quot;file&quot;
-                 :on-change #(queue-file % owner state)} nil))))
-</code></pre>
+                 :on-change #(queue-file % owner state)} nil))))</code></pre>
             <p>
               I really like how simple this is. You put a file into a channel
               and whenever it's done you take the result from another channel.

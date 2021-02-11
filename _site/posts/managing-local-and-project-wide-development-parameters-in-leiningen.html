@@ -142,7 +142,7 @@
               >
               vs. <code>production</code>).
             </p>
-            <pre><code class="language-clojure">; in project.clj:
+            <pre><code class="clojure">; in project.clj:
 (defproject your-app &quot;0.1.0-SNAPSHOT&quot;
   ; ...
   :profiles {:dev {:env {:environment &quot;development&quot;}}})
@@ -156,14 +156,14 @@
               your project to store workstation specific information. Naively
               this could look something like this
             </p>
-            <pre><code class="language-clojure">{:dev {:env {:aws-access-key &quot;abc&quot;
+            <pre><code class="clojure">{:dev {:env {:aws-access-key &quot;abc&quot;
              :aws-secret-key &quot;xyz&quot;
              :s3-bucket &quot;mybucket&quot;}}}
 </code></pre>
             <p>
               If you run your project with this <code>profiles.clj</code> you
               will be able to access your AWS credentials. You might also notice
-              that <code>(environ/env :environment)</code> is nil.
+              that `(environ/env :environment)` is nil.
               <strong>That wasn't intended.</strong>
             </p>
             <p>
@@ -173,7 +173,7 @@
               <code>profiles.clj</code>. To recursively merge Leiningen profiles
               combine them like so:
             </p>
-            <pre><code class="language-clojure">;; in project.clj:
+            <pre><code class="clojure">;; in project.clj:
 (defproject your-app &quot;0.1.0-SNAPSHOT&quot;
   ;; ...
   :profiles {:dev [:project/dev :local/dev]

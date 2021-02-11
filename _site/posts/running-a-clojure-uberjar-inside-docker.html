@@ -131,15 +131,13 @@
             <pre><code>FROM dockerfile/java
 ADD https://example.com/app-standalone.jar /
 EXPOSE 8080
-ENTRYPOINT [ &quot;java&quot;, &quot;-verbose&quot;, &quot;-jar&quot;, &quot;/app-standalone.jar&quot; ]
-</code></pre>
+ENTRYPOINT [ &quot;java&quot;, &quot;-verbose&quot;, &quot;-jar&quot;, &quot;/app-standalone.jar&quot; ]</code></pre>
             <p>
               I expected this to work. But it didn't. Instead it just printed
               the following:
             </p>
             <pre><code>[Opened /usr/lib/jvm/java-7-oracle/jre/lib/rt.jar]
-# this can vary depending on what JRE you're using
-</code></pre>
+# this can vary depending on what JRE you're using</code></pre>
             <p>
               And that has only been printed because I added
               <code>-verbose</code> when starting the jar. So if you're not
@@ -152,10 +150,7 @@ ENTRYPOINT [ &quot;java&quot;, &quot;-verbose&quot;, &quot;-jar&quot;, &quot;/ap
               <code>java</code> invocation, even though it is using absolute
               paths everywhere.
             </p>
-            <h2>
-              <a href="#what-worked-for-me" id="what-worked-for-me"></a>What
-              worked for me
-            </h2>
+            <h2>What worked for me</h2>
             <p>
               I ended up splitting the procedure into two files in a way that
               allowed me to always get the most recent jar when starting the
@@ -170,13 +165,11 @@ ENTRYPOINT [ &quot;java&quot;, &quot;-verbose&quot;, &quot;-jar&quot;, &quot;/ap
 ADD fetch-and-run.sh /
 EXPOSE 42042
 EXPOSE 3000
-CMD [&quot;/bin/sh&quot;, &quot;/fetch-and-run.sh&quot;]
-</code></pre>
+CMD [&quot;/bin/sh&quot;, &quot;/fetch-and-run.sh&quot;]</code></pre>
             <p>And here is <code>fetch-and-run.sh</code>:</p>
             <pre><code>#! /bin/sh
 wget https://s3.amazonaws.com/example/yo-standalone.jar -O /yo-standalone.jar;
-java -verbose -jar /yo-standalone.jar
-</code></pre>
+java -verbose -jar /yo-standalone.jar</code></pre>
             <p>
               Now when you build a new image from that Dockerfile it adds the
               <code>fetch-and-run.sh</code> script to the image's filesystem.

@@ -125,7 +125,7 @@
                 >Closure Library</a
               >.
             </p>
-            <h2><a href="#why-debounce" id="why-debounce"></a>Why Debounce</h2>
+            <h2>Why Debounce</h2>
             <p>
               Debouncing is a technique to limit the rate of an action. Usually
               this rate is specified as an interval in which the action may be
@@ -143,13 +143,7 @@
               user is typing, fetching completions or triggering server side
               validations are some examples that come to mind.
             </p>
-            <h2>
-              <a
-                href="#closure-library-facilities"
-                id="closure-library-facilities"
-              ></a
-              >Closure Library Facilities
-            </h2>
+            <h2>Closure Library Facilities</h2>
             <p>
               I've long been a fan of the Closure Library that comes with
               ClojureScript. Many common problems are solved in elegant and
@@ -169,7 +163,7 @@
               that allows you to debounce arbitrary functions. A short, very
               basic example in Javascript:
             </p>
-            <pre><code class="language-js">var debouncer = new goog.async.Debouncer(function(x) {alert(x)}, 500);
+            <pre><code class="js">var debouncer = new goog.async.Debouncer(function(x) {alert(x)}, 500);
 debouncer.fire(&quot;Hello World!&quot;)
 </code></pre>
             <p>
@@ -178,7 +172,7 @@ debouncer.fire(&quot;Hello World!&quot;)
               translate this to ClojureScript and generalize it slightly. In the
               end we want to be able to debounce any function.
             </p>
-            <pre><code class="language-clojure">(ns app.debounce
+            <pre><code class="clojure">(ns app.debounce
   (:import [goog.async Debouncer]))
 
 (defn save-input! [input]
@@ -216,9 +210,7 @@ debouncer.fire(&quot;Hello World!&quot;)
               <a href="https://github.com/anmonteiro/lumo">Lumo</a> in a REPL
               but I'm confident that it will work fine in a browser too.
             </p>
-            <h2>
-              <a href="#debounce-away" id="debounce-away"></a>Debounce Away
-            </h2>
+            <h2>Debounce Away</h2>
             <p>
               I hope this helps and shows that there's much useful stuff to be
               found in Closure Library. To this day it's a treasure trove that
