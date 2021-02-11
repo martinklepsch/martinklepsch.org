@@ -27,18 +27,31 @@
     s.parentNode.insertBefore(ga, s);
     })();"])
 
-(defn truncate [s length]
+(defn truncate [length s]
+  (when-not (seq s)
+    (throw (ex-info "truncate called with blank string" {})))
   (str (subs s 0 (min length (count s))) "..."))
+
+(defn content->desc [content]
+  (some->> content
+           flatten
+           (filter string?)
+           (remove string/blank?)
+           (take 10)
+           (map string/trim)
+           (string/join " ")
+           (truncate 190)))
 
 (defn head
   [{:keys [frontmatter] :as opts}]
-  (let [title (or (:title frontmatter) "Martin Klepsch")
+  (let [title (if-let [t (:title frontmatter)]
+                (str t " — Martin Klepsch")
+                "Martin Klepsch")
+        title-social (or (:title frontmatter) "Martin Klepsch")
         img   (some-> frontmatter :og-image with-base-url)
         permalink (some-> frontmatter :permalink with-base-url)
         desc (or (:description frontmatter)
-                 (some-> (->> opts :content flatten (filter string?) (take 10) (string/join ""))
-                         (string/trim)
-                         (truncate 190))
+                 (content->desc (:content opts))
                  "Personal Website and Blog of Martin Klepsch")]
     (assert permalink)
     [:head
@@ -51,7 +64,7 @@
      (when permalink [:link {:rel "canonical" :href permalink}])
      [:title title]
      ;; OpenGraph
-     [:meta {:property "og:title" :content title}]
+     [:meta {:property "og:title" :content title-social}]
      [:meta {:property "og:type" :content "article"}]
      [:meta {:property "og:description" :content desc}]
      (when permalink [:meta {:property "og:url" :content permalink}])
@@ -61,7 +74,7 @@
      [:meta {:name "twitter:card" :content "summary"}]
      [:meta {:name "twitter:site" :content "@martinklepsch"}]
      [:meta {:name "twitter:creator" :content "@martinklepsch"}]
-     [:meta {:name "twitter:title" :content title}]
+     [:meta {:name "twitter:title" :content title-social}]
      [:meta {:name "twitter:description" :content desc}]
      (when img [:meta {:name "twitter:image" :content img}])
      ;; Misc
@@ -75,8 +88,12 @@
   "https://twitter.com/martinklepsch")
 
 (defn date-fmt [date]
-  "TODO fix date formatting"
-  #_(.format (java.text.SimpleDateFormat. "MMMM yyyy") date))
+  (if date
+    (str
+     (get ["January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December"] (.getMonth date))
+     " "
+     (+ 1900 (.getYear date)))
+    (println "date missing")))
 
 (defn base
   [opts & content]
@@ -125,7 +142,7 @@
   (conj (render-post post opts)
         [:div.mv4.em-before.mw6.center
          [:a.link {:href +twitter-uri+} "@martinklepsch"] ", "
-         (date-fmt (:date-published post)) " "
+         (date-fmt (:date-published (:frontmatter post))) " "
          (prose-edit-link (:file post))]))
 
 (defn posts-list [title entries]
@@ -148,7 +165,7 @@
     [:div.mw7.center
      (render-post (last posts) {})
      [:div.mv6.mw6.center
-      (posts-list "Other Posts" (->> posts rest (sort-by :date-published) reverse))]]))
+      (posts-list "Other Posts" (->> posts (sort-by (comp :date-published :frontmatter)) reverse rest))]]))
 
 (defn post-page [{:keys [post]}]
   (base
@@ -164,7 +181,7 @@
   (let [out-dir "_site"
         out-file (io/file (str out-dir permalink))]
     (println "Spitting" permalink)
-    (spit out-file (utils/convert-to hiccup :html))))
+    (spit out-file (str "<!DOCTYPE html>\n" (utils/as-html hiccup)))))
 
 (defn render
   [{:keys [type post all-posts] :as render-spec}]
