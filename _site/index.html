@@ -24,7 +24,7 @@
     />
     <link href="https://martinklepsch.org/index.html" rel="canonical" />
     <title>Martin Klepsch</title>
-    <meta property="og:title" />
+    <meta content="Martin Klepsch" property="og:title" />
     <meta content="article" property="og:type" />
     <meta
       content="Personal Website and Blog of Martin Klepsch"
@@ -39,7 +39,7 @@
     <meta content="summary" name="twitter:card" />
     <meta content="@martinklepsch" name="twitter:site" />
     <meta content="@martinklepsch" name="twitter:creator" />
-    <meta name="twitter:title" />
+    <meta content="Martin Klepsch" name="twitter:title" />
     <meta
       content="Personal Website and Blog of Martin Klepsch"
       name="twitter:description"
@@ -120,8 +120,7 @@
               the resulting value asynchronously. So if you for instance use
               <code>fetch</code> that could look something like this:
             </p>
-            <pre><code>(.then (js/fetch &quot;https://jsonip.com/&quot;) prn)
-</code></pre>
+            <pre><code>(.then (js/fetch &quot;https://jsonip.com/&quot;) prn)</code></pre>
             <p>
               This will use <code>prn</code> to print the value of the resolved
               promise. Sometimes you don't just want to print things though, the
@@ -134,8 +133,7 @@
               production code but it's zero-ceremony and very handy to capture
               values.
             </p>
-            <pre><code>(.then (js/fetch &quot;https://jsonip.com/&quot;) #(def -r %))
-</code></pre>
+            <pre><code>(.then (js/fetch &quot;https://jsonip.com/&quot;) #(def -r %))</code></pre>
             <p>
               After this you can evaluate the <code>-r</code> symbol in your
               REPL and it will give you the value of the
@@ -143,9 +141,8 @@
               could also use an <code>atom</code> to store the return value.
             </p>
             <pre><code>(def s (atom nil))
-(.then (js/fetch &quot;https://jsonip.com/&quot;) #(reset! s %))
-</code></pre>
             <h3><a href="#ergonomics" id="ergonomics"></a>Ergonomics</h3>
+(.then (js/fetch &quot;https://jsonip.com/&quot;) #(reset! s %))</code></pre>
             <p>
               Now that we know how we can access the resulting value of a
               promise, let's make it convenient. For convenience I basically
@@ -170,8 +167,7 @@
     ([p kw] (.then p (fn [r] (swap! s assoc kw r) r)))))
     
 (-&gt; (js/fetch &quot;https://jsonip.com/&quot;)
-    (t :jsonip))
-</code></pre>
+    (t :jsonip))</code></pre>
             <p>
               When <code>t</code> receives two arguments it will consider the
               first argument a promise storing the resulting value in an atom
