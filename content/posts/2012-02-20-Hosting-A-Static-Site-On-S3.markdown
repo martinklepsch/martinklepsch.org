@@ -81,13 +81,9 @@ have some subdomain.
 **Step 3:** Upload your static website to S3. You can either do that manually by using the
 AWS Management Console or you can automate the process by writing some small programm. There
 are S3 libraries for many programming languages.
-I built a [small rake
-task](https://github.com/martinklepsch/martinklepsch.org/blob/master/Rakefile
-"Rakefile on Github") that does the job.
+I built a [small rake task](https://github.com/martinklepsch/martinklepsch.org/blob/master/Rakefile "Rakefile on Github") that does the job.
 
-If you are experiencing problems with the setup of S3 I recommend the official [AWS
-documentation](http://docs.amazonwebservices.com/AmazonS3/latest/dev/WebsiteHosting.html
-"AWS Static Website Hosting Documentation").
+If you are experiencing problems with the setup of S3 I recommend the official [AWS documentation](http://docs.amazonwebservices.com/AmazonS3/latest/dev/WebsiteHosting.html "AWS Static Website Hosting Documentation").
 
 ## Naked Domain Name Fowarding
 
@@ -95,8 +91,7 @@ DNS does not allow to set the whats apparently called "zone apex" (`"example.com
 a CNAME for another domain like `www.example.com.s3-website-us-east-1.amazonaws.com`.
 Therefore you need to redirect all requests going to your domain without `www` to you
 domain with `www` (`example.com` to `www.example.com`).
-[Read more.](https://forums.aws.amazon.com/thread.jspa?threadID=55995
-"A thread in AWS forums with good information about the issue")
+[Read more.](https://forums.aws.amazon.com/thread.jspa?threadID=55995 "A thread in AWS forums with good information about the issue")
 
 You can either do this by using your domain registrars control panel or by using a service
 like [wwwizer](http://wwwizer.com/naked-domain-redirect). I did it with

@@ -13,8 +13,7 @@ mails with a really weird looking subject that starts with something like this:
     =?utf-8?Q?=5BPersonalverwaltung_=2D_Fehler_=23=31=37=38=5D_...
 
 
-This problem arises when some system sends an email with **more
-than 76 characters in the subject line** (usually people don't do that).
+This problem arises when some system sends an email with **more than 76 characters in the subject line** (usually people don't do that).
 
 > While there is no limit to the length of a multiple-line header field,
 > each line of a header field that contains one or more
