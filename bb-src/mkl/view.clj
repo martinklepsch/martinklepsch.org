@@ -157,16 +157,16 @@
          (-> post :frontmatter :title)]
         [:span.db.dib-ns.f6 (date-fmt (:date-published (:frontmatter post)))]]))])
 
-(defn index-page [posts]
+(defn index-page [{:keys [all-posts]}]
   (base
     {:frontmatter {:permalink "/index.html"
                    :og-image "/images/selfies/1.jpg"}}
     [:div.mw7.center
-     (render-post (last posts) {})
+     (render-post (last all-posts) {})
      [:div.mv6.mw6.center
-      (posts-list "Other Posts" (->> posts (sort-by (comp :date-published :frontmatter)) reverse rest))]]))
+      (posts-list "Other Posts" (rest all-posts))]]))
 
-(defn post-page [{:keys [post]}]
+(defn post-page [post]
   (base
     post
     [:div.mw7.center.mb6
@@ -183,18 +183,20 @@
     (spit out-file (str "<!DOCTYPE html>\n" (utils/as-html hiccup)))))
 
 (defn render
-  [{:keys [type post all-posts] :as render-spec}]
+  [{:keys [type] :as render-spec}]
   (case type
-    :post (spit-hiccup-to-out (-> post :frontmatter :permalink) (post-page render-spec))
-    :index (spit-hiccup-to-out "/index.html" (index-page all-posts))))
+    :post (post-page render-spec)
+    :index (index-page render-spec)))
 
 (defn render-all []
-  (let [posts (map posts/read-post posts/post-files)]
+  (let [posts (posts/sort-posts (map posts/read-post posts/post-files))]
     (->> posts
          (map (fn to-render-spec [post]
-                {:type :post :post post :all-posts posts}))
-         (into [{:type :index :all-posts posts}])
-         (map render))))
+                (assoc post :type :post)))
+         (into [{:type :index :all-posts posts :frontmatter {:permalink "/index.html"}}])
+         (map (fn [spec]
+                 (spit-hiccup-to-out (-> spec :frontmatter :permalink)
+                                     (render spec)))))))
 
 (defn -main []
   (render-all))
