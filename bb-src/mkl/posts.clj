@@ -1,6 +1,5 @@
 (ns mkl.posts
   (:require [mkl.pods]
-            [mkl.view]
             [mkl.frontmatter :as fm]
             [pod.retrogradeorbit.bootleg.utils :as utils]
             [pod.retrogradeorbit.bootleg.markdown :as markdown]
@@ -36,9 +35,4 @@
   (def file (first post-files))
   (-> file fm/file-contents second (markdown/markdown :data :html))
 
-  (utils/convert-to [:div [:span "xx"]] :html)
-  (-> (mkl.view/index-page {:entries [(read-post (first post-files))]})
-      (utils/convert-to :html)
-      ;; (spit "index.new.html")
-      )
   )
