@@ -3,7 +3,6 @@
             [mkl.view]
             [mkl.frontmatter :as fm]
             [pod.retrogradeorbit.bootleg.utils :as utils]
-            [pod.retrogradeorbit.bootleg.html :as html]
             [pod.retrogradeorbit.bootleg.markdown :as markdown]
             [pod.retrogradeorbit.bootleg.glob :as glob]))
 
@@ -18,6 +17,9 @@
    :source (slurp file)
    ;; :content to be compatible with view code
    :content (-> file fm/file-contents second (markdown/markdown :data))})
+
+(defn sort-posts [posts]
+  (->> posts (sort-by (comp :date-published :frontmatter)) reverse))
 
 (def test-post
   (read-post (first post-files)))
