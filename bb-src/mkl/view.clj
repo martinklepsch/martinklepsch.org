@@ -162,7 +162,7 @@
     {:frontmatter {:permalink "/index.html"
                    :og-image "/images/selfies/1.jpg"}}
     [:div.mw7.center
-     (render-post (last all-posts) {})
+     (render-post (first all-posts) {})
      [:div.mv6.mw6.center
       (posts-list "Other Posts" (rest all-posts))]]))
 
