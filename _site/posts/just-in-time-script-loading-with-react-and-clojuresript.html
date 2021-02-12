@@ -142,7 +142,7 @@
             <p>
               The easy way to load these would be using a simple script tag:
             </p>
-            <pre><code class="language-html">&lt;script type=&quot;text/javascript&quot; src=&quot;https://js.stripe.com/v2/&quot;&gt;&lt;/script&gt;
+            <pre><code class="html">&lt;script type=&quot;text/javascript&quot; src=&quot;https://js.stripe.com/v2/&quot;&gt;&lt;/script&gt;
 </code></pre>
             <p>
               With this approach however you load the script for every user even
@@ -158,7 +158,7 @@
               think is fairly simple and elegant and also a nice use of React's
               lifecycle features and higher-order components:
             </p>
-            <pre><code class="language-clojure">(ns your-app.lib.reagent
+            <pre><code class="clojure">(ns your-app.lib.reagent
   (:require [reagent.core :as reagent]
             [goog.net.jsloader :as jsl]))
 
@@ -188,7 +188,7 @@
                         (if @loaded? loaded loading))})))
 </code></pre>
             <p>And here's how you can use it:</p>
-            <pre><code class="language-clojure">;; payment-form can expect `js/Stripe` to be defined
+            <pre><code class="clojure">;; payment-form can expect `js/Stripe` to be defined
 [js-loader {:scripts {#(exists? js/Stripe) &quot;https://js.stripe.com/v2/&quot;}
             :loading [:div &quot;Loading...&quot;]
             :loaded [payment-form]}]

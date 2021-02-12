@@ -16,8 +16,7 @@ you have to setup your prompt with additional Git information yourself.
 I consider this an advantage though as you can't just take a bunch of configuration files
 from somewhere without having an idea what they actually do.
 
-It took me a while to find [this
-part](https://github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_git_prompt.fish) of the Fish source code
+It took me a while to find [this part](https://github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_git_prompt.fish) of the Fish source code
 which documents this functionality quite well. An example which you can put into
 `~/.config/fish/config.fish` follows below:
 

@@ -24,7 +24,7 @@
     />
     <link href="https://martinklepsch.org/index.html" rel="canonical" />
     <title>Martin Klepsch</title>
-    <meta property="og:title" />
+    <meta content="Martin Klepsch" property="og:title" />
     <meta content="article" property="og:type" />
     <meta
       content="Personal Website and Blog of Martin Klepsch"
@@ -39,7 +39,7 @@
     <meta content="summary" name="twitter:card" />
     <meta content="@martinklepsch" name="twitter:site" />
     <meta content="@martinklepsch" name="twitter:creator" />
-    <meta name="twitter:title" />
+    <meta content="Martin Klepsch" name="twitter:title" />
     <meta
       content="Personal Website and Blog of Martin Klepsch"
       name="twitter:description"
@@ -112,16 +112,15 @@
               <a href="https://twitter.com/roman01la">Roman</a> wrote a nice
               post on working inside ClojureScript REPLs, also touching on
               <a
-                href="https://gist.github.com/roman01la/b939e4f2341fc2f931e34a941aba4e15#repl--asynchrony"
+                href="https://gist.github.com/roman01la/b939e4f2341fc2f931e34a941aba4e15#repl–asynchrony"
                 >how to deal with promises</a
               >. If you're unfamiliar, the problem is that in Javascript many
               operations return promises and unlike in Clojure you cannot block
-              until the promise is resolved. Instead you <em>have to</em> handle
+              until the promise is resolved. Instead you <i>have to</i> handle
               the resulting value asynchronously. So if you for instance use
               <code>fetch</code> that could look something like this:
             </p>
-            <pre><code>(.then (js/fetch &quot;https://jsonip.com/&quot;) prn)
-</code></pre>
+            <pre><code>(.then (js/fetch &quot;https://jsonip.com/&quot;) prn)</code></pre>
             <p>
               This will use <code>prn</code> to print the value of the resolved
               promise. Sometimes you don't just want to print things though, the
@@ -134,8 +133,7 @@
               production code but it's zero-ceremony and very handy to capture
               values.
             </p>
-            <pre><code>(.then (js/fetch &quot;https://jsonip.com/&quot;) #(def -r %))
-</code></pre>
+            <pre><code>(.then (js/fetch &quot;https://jsonip.com/&quot;) #(def -r %))</code></pre>
             <p>
               After this you can evaluate the <code>-r</code> symbol in your
               REPL and it will give you the value of the
@@ -143,9 +141,8 @@
               could also use an <code>atom</code> to store the return value.
             </p>
             <pre><code>(def s (atom nil))
-(.then (js/fetch &quot;https://jsonip.com/&quot;) #(reset! s %))
-</code></pre>
-            <h3><a href="#ergonomics" id="ergonomics"></a>Ergonomics</h3>
+(.then (js/fetch &quot;https://jsonip.com/&quot;) #(reset! s %))</code></pre>
+            <h3>Ergonomics</h3>
             <p>
               Now that we know how we can access the resulting value of a
               promise, let's make it convenient. For convenience I basically
@@ -164,14 +161,14 @@
               What I came up with is a function I just named
               <code>t</code> which can be used like this:
             </p>
+            <br />
             <pre><code>(let [s (atom {})]
   (defn t
     ([kw] (get @s kw))
     ([p kw] (.then p (fn [r] (swap! s assoc kw r) r)))))
     
 (-&gt; (js/fetch &quot;https://jsonip.com/&quot;)
-    (t :jsonip))
-</code></pre>
+    (t :jsonip))</code></pre>
             <p>
               When <code>t</code> receives two arguments it will consider the
               first argument a promise storing the resulting value in an atom

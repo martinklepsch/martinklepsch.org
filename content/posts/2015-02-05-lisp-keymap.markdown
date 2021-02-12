@@ -14,7 +14,7 @@ to get to the app you want.
 It seemed like a good idea to use Capslock as a modifier key.
 This way I could be sure I wouldn't override any other keybindings.
 Figuring out how to do this I stumpled upon an excellent
-post by Steve Losh ["A Modern Space Cadet"][space-cadet]. It's
+post by Steve Losh ["A Modern Space Cadet"](http://stevelosh.com/blog/2012/10/a-modern-space-cadet/). It's
 described in detail how to set Capslock to `Hyper` - a fifth modifier
 key. I then created bindings like `Hyper + S` which will focus Safari
 etc. Exactly what I was looking for.
@@ -36,6 +36,3 @@ href="http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#shift-parentheses"
 X Instructions</a>.  (What's KeyRemap4MacBook in this post is now <a
 href="https://pqrs.org/osx/karabiner/index.html.en">Karabiner</a>.)
 </aside>
-
-[space-cadet]: http://stevelosh.com/blog/2012/10/a-modern-space-cadet/
-

@@ -138,15 +138,13 @@
               Let's walk through an example:
             </p>
             <pre><code>(ns your.app)
-(goog-define api-uri &quot;http://your.api.com&quot;)
-</code></pre>
+(goog-define api-uri &quot;http://your.api.com&quot;)</code></pre>
             <p>
               <code>goog-define</code> emits code that looks something like
               this:
             </p>
             <pre><code>/** @define {string} */
-goog.define(&quot;your.app.api_uri&quot;,&quot;http://your.api.com&quot;);
-</code></pre>
+goog.define(&quot;your.app.api_uri&quot;,&quot;http://your.api.com&quot;);</code></pre>
             <p>
               The <code>goog.define</code> function from Closure's standard
               library plus the JSDoc <code>@define</code> annotation tell the
@@ -155,8 +153,7 @@ goog.define(&quot;your.app.api_uri&quot;,&quot;http://your.api.com&quot;);
               pass the appropriate <code>:closure-defines</code> compiler
               option:
             </p>
-            <pre><code>:closure-defines {'your.app/api-uri &quot;http://your-dev.api.com&quot;}
-</code></pre>
+            <pre><code>:closure-defines {'your.app/api-uri &quot;http://your-dev.api.com&quot;}</code></pre>
             <p>
               <strong>Note:</strong> When using Leinigen quoting is implicit so
               there is no quote necessary before the symbol.
@@ -167,6 +164,7 @@ goog.define(&quot;your.app.api_uri&quot;,&quot;http://your.api.com&quot;);
               sure it matches the string in the <code>goog.define</code> call in
               your emitted Javascript (i.e. account for name mangling).
             </p>
+            <p></p>
             <aside>
               Prior to 1.7.48 you could annotate things with
               <code>@define</code> but without using
@@ -174,9 +172,8 @@ goog.define(&quot;your.app.api_uri&quot;,&quot;http://your.api.com&quot;);
               when using optimizations <code>:none</code> effectively making
               them much less useful.
             </aside>
-            <h3>
-              <a href="#under-the-hood" id="under-the-hood"></a>Under the hood
-            </h3>
+            <p></p>
+            <h3>Under the hood</h3>
             <p>
               When compiling with <code>:advanced</code> optimizations the
               Closure compiler will automatically replace all occurrences of

@@ -24,8 +24,7 @@ then in my old hometown.
 To stay motivated in the long term I decided it would be nice to set some goal to achieve
 and what else could that be beside running a marathon? There is not much coming to my mind.
 So starting today I'm training to run a marathon in about six months. I don't know which
-marathon yet unfortunately, especially since the [Berlin
-marathon](http://www.bmw-berlin-marathon.com/)&rsquo;s registration is closed already.
+marathon yet unfortunately, especially since the [Berlin marathon](http://www.bmw-berlin-marathon.com/)&rsquo;s registration is closed already.
 
 My training schedule isn&rsquo;t finished yet but for the first month I&rsquo;m planning to
 run at least [3 days a week](http://www.runmap.net/route/437129) at an average distance

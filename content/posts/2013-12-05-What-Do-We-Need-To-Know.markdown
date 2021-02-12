@@ -16,8 +16,8 @@ og-image: /images/selfies/3.jpg
 > you’re good at your job.
 
 This post on A List Apart resonated with me a lot. [Liza Danger Gardner](https://twitter.com/lyzadanger)
-describes a situation we all have been in: someone talks about that *new feature
-you never heard of* and you have no idea what they are talking about. Web
+describes a situation we all have been in: someone talks about that
+*new feature you never heard of* and you have no idea what they are talking about. Web
 development being a profession that develops so fast and in so many directions
 at the same time <strike>sometimes</strike> makes it hard to follow along.
 

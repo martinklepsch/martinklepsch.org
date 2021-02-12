@@ -116,7 +116,7 @@
             Hosting A Static Site On Amazon S3
           </h1>
           <section class="mkdwn lh-copy">
-            <h2><a href="#preface" id="preface"></a>Preface</h2>
+            <h2>Preface</h2>
             <p>
               Hosting a static site is preferred by many developers because it
               gives you a maximum of control at a minimum of maintenance. While
@@ -138,6 +138,7 @@
               >
               to keep everything secure.
             </p>
+            <p></p>
             <aside>
               <p>
                 There are still ways to host your static site with Github but
@@ -145,6 +146,7 @@
                 hosting at Github (eg. Autogeneration).
               </p>
             </aside>
+            <p></p>
             <p>
               Since the requirements for hosting a static site are nearly
               non-existent you can easily move it onto any Server.
@@ -153,10 +155,7 @@
               I decided for Amazon S3 because it's widely used, reliable and
               cheap.
             </p>
-            <h2>
-              <a href="#static-site-generators" id="static-site-generators"></a
-              >Static Site Generators
-            </h2>
+            <h2>Static Site Generators</h2>
             <p>
               While there are
               <a href="http://nanoc.stoneship.org/" title="Nanoc">quite</a>
@@ -172,10 +171,7 @@
               in the end Jekyll feels lighter and I also prefer Liquid Markup
               over ERB Syntax.
             </p>
-            <h2>
-              <a href="#setting-up-amazon-s3" id="setting-up-amazon-s3"></a
-              >Setting Up Amazon S3
-            </h2>
+            <h2>Setting Up Amazon S3</h2>
             <p>
               Comparing Github's free hosting with Amazon S3 is somewhat unfair
               since you got to pay for S3 storage and bandwith. Doing the math
@@ -191,20 +187,21 @@
             <p>
               <strong>Important:</strong> When creating your bucket make sure
               that it has the same name as the domain name you want to use for
-              your static site (ex.
-              <a href="www.martinklepsch.org">www.martinklepsch.org</a>). This
-              domain has to have some subdomain.
+              your static site (ex. www.martinklepsch.org). This domain has to
+              have some subdomain.
             </p>
             <p>
               <strong>Step 1:</strong> Enable S3's website feature by enabling
               it in the properties pane of your bucket.
             </p>
+            <p></p>
             <figure>
               <img
                 alt="Website settings in the bucket propertie pane"
                 src="/images/website-settings-s3.png"
               />
             </figure>
+            <p></p>
             <p>
               <strong>Step 2:</strong> Set a bucket policy that basically allows
               everyone to view the contents of your bucket.
@@ -220,9 +217,7 @@
     &quot;Action&quot;:[&quot;s3:GetObject&quot;],
     &quot;Resource&quot;:[&quot;arn:aws:s3:::www.REPLACE-THIS.org/*&quot;]
   }]
-}
-</code></pre>
-            <!-- <script src="https://gist.github.com/martinklepsch/4991741.js"></script> -->
+}</code></pre>
             <p>
               <strong>Step 3:</strong> Upload your static website to S3. You can
               either do that manually by using the AWS Management Console or you
@@ -244,13 +239,7 @@
                 >AWS documentation</a
               >.
             </p>
-            <h2>
-              <a
-                href="#naked-domain-name-fowarding"
-                id="naked-domain-name-fowarding"
-              ></a
-              >Naked Domain Name Fowarding
-            </h2>
+            <h2>Naked Domain Name Fowarding</h2>
             <p>
               DNS does not allow to set the whats apparently called &quot;zone
               apex&quot; (<code>&quot;example.com&quot;</code>) to be a CNAME

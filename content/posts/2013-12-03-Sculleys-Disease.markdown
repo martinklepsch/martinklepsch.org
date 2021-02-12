@@ -10,8 +10,8 @@ og-image: /images/selfies/3.jpg
 ---
 <p style='display:none'></p>
 
-Just found this quote by Steve Jobs on 37signals’ blog. It's taken from [The
-Lost Interview](http://www.youtube.com/watch?v=F4L26Jp_AT4&list=TLMnOz1ppz1Sw)
+Just found this quote by Steve Jobs on 37signals’ blog. It's taken from
+[The Lost Interview](http://www.youtube.com/watch?v=F4L26Jp_AT4&list=TLMnOz1ppz1Sw)
 that was conducted shortly after Steve left Apple and founded NeXT. The question
 was: “What's important to you in the development of a product?”
 
@@ -20,7 +20,7 @@ was: “What's important to you in the development of a product?”
 > a really great idea is 90% of the work. And if you just tell all these other
 > people “here’s this great idea,” then of course they can go off and make it
 > happen.
-
+>
 > And the problem with that is that there’s just a tremendous amount of
 > craftsmanship in between a great idea and a great product. And as you
 > evolve that great idea, it changes and grows. It never comes out like it
@@ -29,12 +29,12 @@ was: “What's important to you in the development of a product?”
 > make. There are just certain things you can’t make electrons do. There
 > are certain things you can’t make plastic do. Or glass do. Or factories
 > do. Or robots do.
-
+>
 > Designing a product is keeping five thousand things in your brain
 > and fitting them all together in new and different ways to get what
 > you want. And every day you discover something new that is a new
 > problem or a new opportunity to fit these things together a little
 > differently.
-
+>
 > And it’s that process that is the magic.
 > <cite>Steve Jobs</cite>

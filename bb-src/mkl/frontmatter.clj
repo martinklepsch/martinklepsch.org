@@ -1,6 +1,12 @@
-(import '(java.util UUID)
-        '(java.time Instant)
-        '(java.util Date))
+(ns mkl.frontmatter
+  (:require [mkl.pods]
+            [clojure.string :as str]
+            [clojure.java.io :as io]
+            [clj-yaml.core :as yaml]
+            [pod.retrogradeorbit.bootleg.glob :as glob])
+  (:import (java.util UUID)
+           (java.time Instant)
+           (java.util Date)))
 
 (defn slug [file]
   (let [path (.getPath file)
@@ -27,7 +33,6 @@
     (str "/" (slug file) ".html")))
 
 (defn day-str [d]
-  (println d)
   (subs (.format java.time.format.DateTimeFormatter/ISO_INSTANT (.toInstant d)) 0 10))
 
 (def yaml-head
@@ -42,9 +47,12 @@
        (filter #(.isFile %))
        (map #(str/replace % #"^resources/public/" "/"))))
 
+(defn get-frontmatter [f]
+  (let [[yml _] (file-contents f)]
+    (yaml/parse-string yml)))
+
 (defn update-frontmatter! [f]
   (let [[yml content] (file-contents f)
-        _ (prn :yml yml)
         frontmatter (yaml/parse-string yml)
         updated (cond-> frontmatter
                   (and (nil? (:date-published frontmatter))
@@ -74,6 +82,12 @@
   (update-frontmatter! f)
   )
 
-(doseq [f *input*]
-  (println f)
-  (update-frontmatter! (io/file f)))
+(def post-files
+  (shuffle
+    (into (glob/glob "content/posts/*.markdown")
+          (glob/glob "content/posts/*.md"))))
+
+(defn -main []
+  (doseq [f post-files]
+    (println f)
+    (update-frontmatter! (io/file f))))

@@ -46,8 +46,7 @@ To link to vars in other namespaces, fully qualify the symbol in the brackets, e
 On cljdoc all docstrings are interpreted as Markdown. With Codox this can be achived with a
 small configuration tweak. This means you have access to all the text formatting facilities
 that Markdown provides including code blocks. Code blocks can be fantastic when trying to show
-how a function is used in a bigger context, as very nicely shown in the [Keechma Toolbox
-documentation](https://cljdoc.org/d/keechma/toolbox/0.1.23/api/keechma.toolbox.dataloader.controller#register):
+how a function is used in a bigger context, as very nicely shown in the [Keechma Toolbox documentation](https://cljdoc.org/d/keechma/toolbox/0.1.23/api/keechma.toolbox.dataloader.controller#register):
 
 [![keechma register](/images/keechma-register.png)](https://cljdoc.org/d/keechma/toolbox/0.1.23/api/keechma.toolbox.dataloader.controller#register)
 

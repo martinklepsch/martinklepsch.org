@@ -8,8 +8,7 @@ uuid: 36e26c80-51ab-4350-b714-f5083763d86a
 permalink: /posts/twelve-factor-app.html
 og-image: /images/selfies/1.jpg
 ---
-Around December 2011 the awesome crowd around Heroku released a [now open-source
-document](https://github.com/adamwiggins/12factor) that describes 12 factors that
+Around December 2011 the awesome crowd around Heroku released a [now open-source document](https://github.com/adamwiggins/12factor) that describes 12 factors that
 build up a methodology of developing software-as-a-service products.
 
 The main goals of [those 12 rules](http://www.12factor.net/) are:

@@ -130,6 +130,7 @@
               interesting features to the table that make it an alternative
               worth assessing.
             </p>
+            <p></p>
             <aside>
               If you don't know what Boot is I recommend reading this post by
               one of Boot's authors first:
@@ -138,10 +139,8 @@
                 >Clojurescript Builds, Rebooted</a
               >.
             </aside>
-            <h2>
-              <a href="#compose-build-steps" id="compose-build-steps"></a
-              >Compose Build Steps
-            </h2>
+            <p></p>
+            <h2>Compose Build Steps</h2>
             <p>
               If you've used Leiningen for more than packaging jars and uberjars
               you likely came across plugins like <code>lein-cljsbuild</code> or
@@ -153,7 +152,7 @@
               in a <code>dev</code> profile (this is how it's done in
               <a href="https://github.com/plexus/chestnut">Chestnut</a>):
             </p>
-            <pre><code class="language-clojure">(defn start-garden []
+            <pre><code class="clojure">(defn start-garden []
 (future
   (print &quot;Starting Garden.\n&quot;)
   (lein/-main [&quot;garden&quot; &quot;auto&quot;])))
@@ -171,10 +170,7 @@
               ring middleware in that you can just combine them with regular
               function composition.
             </p>
-            <h3>
-              <a href="#a-quick-example" id="a-quick-example"></a>A Quick
-              Example
-            </h3>
+            <h3>A Quick Example</h3>
             <p>
               Playing around with Boot, I tried to write a task. To test this
               task in an actual project I needed to install it into my local
@@ -197,14 +193,13 @@
             <p>
               We could call all of these these on the command line as follows:
             </p>
-            <pre><code>boot pom add-src jar install
-</code></pre>
+            <pre><code>boot pom add-src jar install</code></pre>
             <p>
               Because we're lazy we'll define it as a task in our project's
               <code>build.boot</code> file. (Command-line task and their
               arguments are symmetric to their Clojure counterparts.)
             </p>
-            <pre><code class="language-clojure">(require '[boot.core          :refer [deftask]]
+            <pre><code class="clojure">(require '[boot.core          :refer [deftask]]
             '[boot.task.built-in :refer [pom add-src jar install]])
 
 (deftask build-jar
@@ -221,24 +216,19 @@
               observes the file system for changes and initiates a new build
               cycle when they occur:
             </p>
-            <pre><code>boot watch build-jar
-</code></pre>
+            <pre><code>boot watch build-jar</code></pre>
             <p>
               With that command we just composed our already composed task with
               another task. <strong>Look at that cohesion!</strong>
             </p>
+            <p></p>
             <aside>
               I'm not familiar enough with Leiningen Checkouts to say with
               confidence if this is identical behavior but for the majority of
               cases it'll probably work.
             </aside>
-            <h2>
-              <a
-                href="#there-are-side-effects-everwhere"
-                id="there-are-side-effects-everwhere"
-              ></a
-              >There Are Side-Effects Everwhere!
-            </h2>
+            <p></p>
+            <h2>There Are Side-Effects Everwhere!</h2>
             <p>
               Is one concern that has been raised about Boot. Leiningen is
               beautifully declarative. It's one immutable map that describes
@@ -264,13 +254,7 @@
               >
               for more information on that.
             </p>
-            <h2>
-              <a
-                href="#when-to-use-boot-when-to-use-leiningen"
-                id="when-to-use-boot-when-to-use-leiningen"
-              ></a
-              >When To Use Boot, When To Use Leiningen
-            </h2>
+            <h2>When To Use Boot, When To Use Leiningen</h2>
             <p>
               Boot is a build tool. That said it's task composition features
               only get to shine when multiple build steps are involved. If

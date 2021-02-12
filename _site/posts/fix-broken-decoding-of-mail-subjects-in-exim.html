@@ -128,8 +128,7 @@
               get mails with a really weird looking subject that starts with
               something like this:
             </p>
-            <pre><code>=?utf-8?Q?=5BPersonalverwaltung_=2D_Fehler_=23=31=37=38=5D_...
-</code></pre>
+            <pre><code>=?utf-8?Q?=5BPersonalverwaltung_=2D_Fehler_=23=31=37=38=5D_...</code></pre>
             <p>
               This problem arises when some system sends an email with
               <strong>more than 76 characters in the subject line</strong>
@@ -158,15 +157,14 @@
                 >
               </p>
             </blockquote>
-            <h2><a href="#fix-it" id="fix-it"></a>Fix It</h2>
+            <h2>Fix It</h2>
             <p>
               You can remove the length checking by adding the following to the
               main section of your <code>/etc/exim4/exim4.conf</code>. The main
               section usually ends with the first <code>begin</code> in that
               file.
             </p>
-            <pre><code>check_rfc2047_length = false
-</code></pre>
+            <pre><code>check_rfc2047_length = false</code></pre>
             <p>
               For further reference I recommend the official
               <a

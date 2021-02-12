@@ -10,15 +10,15 @@ published: true
 [Roman](https://twitter.com/roman01la) wrote a nice post on working inside ClojureScript REPLs, also touching on [how to deal with promises](https://gist.github.com/roman01la/b939e4f2341fc2f931e34a941aba4e15#repl--asynchrony). If you're unfamiliar, the problem is that in Javascript many operations return promises and unlike in Clojure you cannot block until the promise is resolved. Instead you _have to_ handle the resulting value asynchronously. So if you for instance use `fetch` that could look something like this:
 
     (.then (js/fetch "https://jsonip.com/") prn)
-    
+
 This will use `prn` to print the value of the resolved promise. Sometimes you don't just want to print things though, the real power of a REPL lies in reusing values and successively building up just the shape of data you need.
 
 One nice trick I learned from Sean Grove years ago is that you can just use `def`. This isn't something you'd do in production code but it's zero-ceremony and very handy to capture values.
 
     (.then (js/fetch "https://jsonip.com/") #(def -r %))
-    
+
 After this you can evaluate the `-r` symbol in your REPL and it will give you the value of the `fetch` promise. Alternatively to `def` we could also use an `atom` to store the return value.
-    
+
     (def s (atom nil))
     (.then (js/fetch "https://jsonip.com/") #(reset! s %))
 

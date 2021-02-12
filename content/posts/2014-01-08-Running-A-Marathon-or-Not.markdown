@@ -18,32 +18,14 @@ After that initial success though improvements got smaller and motivation
 tanked quickly. Also the marathon I wanted to run was already booked
 out apparently.
 
-<table>
-  <thead>
-    <tr>
-      <th>March</th>
-      <th>April</th>
-      <th>May</th>
-      <th>Juni</th>
-      <th>Juli</th>
-      <th>August</th>
-      <th>Septemper</th>
-      <th>October</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>60.3km</td>
-      <td>33.5km</td>
-      <td>18.3km</td>
-      <td>5.5km</td>
-      <td>5.1km</td>
-      <td>0.0km</td>
-      <td>20km</td>
-      <td>4.8km</td>
-    </tr>
-  </tbody>
-</table>
+- **March** 60.3km
+- **April** 33.5km
+- **May** 18.3km
+- **June** 5.5km
+- **July** 5.1km
+- **August** 0.0km
+- **September** 20km
+- **October** 4.8km
 
 From a friend who also inspired me to go running I heard about **Tough Mudder**.
 Since I already noticed my lack of a goal I almost immediately registered in the
@@ -62,28 +44,12 @@ After seeing the (surprisingly) fast improvements when training I was certain
 I could get ready for a 20km run in a month or less. So I decided to start
 training a month before the event on 19th October:
 
-<table>
-  <thead>
-    <tr>
-      <th>01.06 - 23.09</th>
-      <th>24.09</th>
-      <th>28.09</th>
-      <th>30.09</th>
-      <th>06.10</th>
-      <th>19.10</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0.0km</td>
-      <td>5.7km</td>
-      <td>9km</td>
-      <td>6.3km</td>
-      <td>4.8km</td>
-      <td>Tough Mudder</td>
-    </tr>
-  </tbody>
-</table>
+- **01.06 - 23.09** 0.0km
+- **24.09** 5.7km
+- **28.09** 9km
+- **30.09** 6.3km
+- **06.10** 4.8km
+- **19.10** Tough Mudder
 
 Somehow I wasn't quite persistent and stopped shortly after starting again.
 I guess mostly because it was such a pain to build up stamina **again**.

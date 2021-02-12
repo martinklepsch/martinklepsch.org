@@ -9,9 +9,8 @@ og-image: /images/selfies/2.jpg
 When O'Reilly promoted their cyber monday I somehow really got into a shopping
 spree.
 
-First book I finished now is [Code
-Simplicity](http://shop.oreilly.com/product/0636920022251.do) by [Max Kanat
-Alexander](http://max.kanat-alexander.com/).  The book doesn't hold on to the
+First book I finished now is [Code Simplicity](http://shop.oreilly.com/product/0636920022251.do) by
+[Max Kanat Alexander](http://max.kanat-alexander.com/). The book doesn't hold on to the
 scientific approach that the blurb promises but once I made my peace with that
 it became a good read.   
 Some of the things I liked most:

@@ -79,16 +79,3 @@ communication.
 * [How Github Works Asynchronous](http://zachholman.com/posts/how-github-works-asynchronous/) by Zach Holman
 * [Stripes Culture](http://blog.alexmaccaw.com/stripes-culture) by Alex MacCaw
 * [How Stripe Builds Software](http://blog.alexmaccaw.com/stripes-culture) with Greg Brockmann
-
-<!-- ## A Note On Email
-
-Emails can also be used to achieve similar effects as
-[Stripe has demonstrated](https://stripe.com/blog/email-transparency)
-but in general it's probably harder as there is no restriction to who can send you
-emails and your inbox is quickly overflowing with things that are
-not part of internal communication.-->
-
---<br>
-If you liked this post you should probably follow me on twitter:
-[@martinklepsch](http://twitter.com/martinklepsch)<br>
-Feedback? Comments? Thoughts? [Email me.](mailto://martinklepsch@googlemail.com)

@@ -1,11 +1,14 @@
 SHELL = /bin/bash -o pipefail
 .PHONY: update-frontmatter site
 
+repl:
+	bb-nrepl -cp bb-src
+
 update-frontmatter:
-	# bootleg -d -e '(glob "content/posts/*.markdown")' | bb -I --stream frontmatter.clj
-	ls content/posts/*.markdown | bb -i frontmatter.clj
-	ls content/posts/*.md | bb -i frontmatter.clj
+	bb -cp bb-src -m mkl.frontmatter
 
 site:
-	boot build-to-site-dir
-	npx prettier --write _site/**.html
+	bb -cp bb-src -m mkl.view
+	bb -cp bb-src -m mkl.atom
+	cp -r resources/public/* _site/
+	npx prettier --write _site/**.html _site/posts/*.html
