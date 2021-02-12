@@ -17,10 +17,6 @@ jobs:
       with:
         java-version: '8'
     - run: sudo apt-get install -y patchutils
-    - name: Install boot
-      uses: DeLaGuardo/setup-clojure@master
-      with:
-        boot: 2.7.2
     - name: Install babashka
       run: |
          curl -s https://raw.githubusercontent.com/borkdude/babashka/master/install -o install-bb
