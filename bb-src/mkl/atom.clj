@@ -19,6 +19,7 @@
 (defn post->atom-entry [post]
   (let [fm (-> post :frontmatter)
         url (str site-root (:permalink fm))]
+    (println "post->atom-entry" (:permalink fm))
     [:entry
      [:id (str "urn:uuid:" (:uuid fm))]
      [:title (:title fm)]
