@@ -87,7 +87,7 @@
 (def +twitter-uri+
   "https://twitter.com/martinklepsch")
 
-(defn date-fmt [date]
+(defn date-fmt [date] ;lol
   (if date
     (str
      (get ["January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December"] (.getMonth date))
@@ -113,8 +113,7 @@
       (when (:permalink-page? opts) [:span.ph2 "/"])
       (when (:permalink-page? opts) [:a.link {:href "/" :title "Home"} "Home"])
       [:span.ph2 "/"]
-      [:a.link {:href +twitter-uri+ :title "@martinklepsch on Twitter"} "@martinklepsch"]
-      ]
+      [:a.link {:href +twitter-uri+ :title "@martinklepsch on Twitter"} "@martinklepsch"]]
      [:h1.f3.fw5.w-80-ns.lh-title.mw6.center.mv4
       ;; TODO add linkthing here
       (if (:resource fm) (:title fm) (:title fm))]
