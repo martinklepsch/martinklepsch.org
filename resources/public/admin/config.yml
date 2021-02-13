@@ -3,6 +3,8 @@ backend:
   branch: master # Branch to update (optional; defaults to master)
 media_folder: "resources/public/images/uploads"
 public_folder: "/images/uploads"
+# REFERENCE DOCUMENTATION
+# https://www.netlifycms.org/docs/configuration-options/#collections
 collections:
   - name: "blog" # Used in routes, e.g., /admin/collections/blog
     label: "Blog" # Used in the UI
