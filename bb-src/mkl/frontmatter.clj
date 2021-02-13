@@ -59,7 +59,8 @@
                        (not (:draft frontmatter)))
                   (assoc :date-published (Date.))
 
-                  (nil? (:uuid frontmatter))
+                  (or (nil? (:uuid frontmatter))
+                      (str/blank? (:uuid frontmatter)))
                   (assoc :uuid (str (UUID/randomUUID)))
 
                   (nil? (:og-image frontmatter))
