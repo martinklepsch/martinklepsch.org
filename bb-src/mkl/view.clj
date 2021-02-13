@@ -82,6 +82,8 @@
      [:link {:rel "alternate" :type "application/atom+xml" :title "Sitewide Atom Feed" :href "/atom.xml"}]
      [:link {:type "text/css" :rel "stylesheet"
              :href "/stylesheets/martinklepschorg-v3.css"}]
+     (when (= "/index.html" permalink)
+       [:script {:src "https://identity.netlify.com/v1/netlify-identity-widget.js"}])
      (google-analytics)]))
 
 (def +twitter-uri+
@@ -164,7 +166,17 @@
     [:div.mw7.center
      (render-post (first all-posts) {})
      [:div.mv6.mw6.center
-      (posts-list "Other Posts" (rest all-posts))]]))
+      (posts-list "Other Posts" (rest all-posts))]]
+    [:script
+     "if (window.netlifyIdentity) {
+    window.netlifyIdentity.on(\"init\", user => {
+      if (!user) {
+        window.netlifyIdentity.on(\"login\", () => {
+          document.location.href = \"/admin/\";
+        });
+      }
+    });
+  }"]))
 
 (defn post-page [post]
   (base
