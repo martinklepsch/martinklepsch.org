@@ -3,6 +3,8 @@ backend:
   branch: master # Branch to update (optional; defaults to master)
 media_folder: "resources/public/images/uploads"
 public_folder: "/images/uploads"
+# REFERENCE DOCUMENTATION
+# https://www.netlifycms.org/docs/configuration-options/#collections
 collections:
   - name: "blog" # Used in routes, e.g., /admin/collections/blog
     label: "Blog" # Used in the UI
@@ -12,9 +14,10 @@ collections:
     sortable_fields: ['date-published', 'title']
     fields: # The fields for each document, usually in front matter
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date-published", widget: "datetime", format: "DD-MM-YYYYThh:mm:ssZ"}
-      - {label: "Featured Image", name: "og-image", widget: "image"}
+      # - {label: "Publish Date", name: "date-published", widget: "datetime", format: "DD-MM-YYYYThh:mm:ssZ"}
       - {label: "Permalink", name: "permalink", widget: "string"}
-      - {label: "UUID", name: "uuid", widget: "string"}
+      - {label: "Is this a draft?", name: "draft", widget: "boolean", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Featured Image", name: "og-image", widget: "image", required: false}
+      - {label: "UUID", name: "uuid", widget: "string", required: false}
 
