@@ -19,5 +19,5 @@ collections:
       - {label: "Is this a draft?", name: "draft", widget: "boolean", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Featured Image", name: "og-image", widget: "image", required: false}
-      - {label: "UUID", name: "uuid", widget: "string"}
+      - {label: "UUID", name: "uuid", widget: "string", required: false}
 
