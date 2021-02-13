@@ -91,7 +91,10 @@
           itemtype="http://schema.org/BlogPosting"
         >
           <div class="f6 db normal mw6 center">
-            <a class="link" href="/test.html" title="Permalink: test "
+            <a
+              class="link"
+              href="/posts/working-with-promises-in-clojurescript-repls.html"
+              title="Permalink: Promises in a ClojureScript REPL"
               >Latest Post</a
             ><span class="ph2">/</span
             ><a
@@ -101,21 +104,103 @@
               >@martinklepsch</a
             >
           </div>
-          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">test</h1>
-          <section class="mkdwn lh-copy"><p>bh</p></section>
+          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+            Promises in a ClojureScript REPL
+          </h1>
+          <section class="mkdwn lh-copy">
+            <p>
+              <a href="https://twitter.com/roman01la">Roman</a> wrote a nice
+              post on working inside ClojureScript REPLs, also touching on
+              <a
+                href="https://gist.github.com/roman01la/b939e4f2341fc2f931e34a941aba4e15#repl–asynchrony"
+                >how to deal with promises</a
+              >. If you're unfamiliar, the problem is that in Javascript many
+              operations return promises and unlike in Clojure you cannot block
+              until the promise is resolved. Instead you <i>have to</i> handle
+              the resulting value asynchronously. So if you for instance use
+              <code>fetch</code> that could look something like this:
+            </p>
+            <pre><code>(.then (js/fetch &quot;https://jsonip.com/&quot;) prn)</code></pre>
+            <p>
+              This will use <code>prn</code> to print the value of the resolved
+              promise. Sometimes you don't just want to print things though, the
+              real power of a REPL lies in reusing values and successively
+              building up just the shape of data you need.
+            </p>
+            <p>
+              One nice trick I learned from Sean Grove years ago is that you can
+              just use <code>def</code>. This isn't something you'd do in
+              production code but it's zero-ceremony and very handy to capture
+              values.
+            </p>
+            <pre><code>(.then (js/fetch &quot;https://jsonip.com/&quot;) #(def -r %))</code></pre>
+            <p>
+              After this you can evaluate the <code>-r</code> symbol in your
+              REPL and it will give you the value of the
+              <code>fetch</code> promise. Alternatively to <code>def</code> we
+              could also use an <code>atom</code> to store the return value.
+            </p>
+            <pre><code>(def s (atom nil))
+(.then (js/fetch &quot;https://jsonip.com/&quot;) #(reset! s %))</code></pre>
+            <h3>Ergonomics</h3>
+            <p>
+              Now that we know how we can access the resulting value of a
+              promise, let's make it convenient. For convenience I basically
+              want two things:
+            </p>
+            <ul>
+              <li>
+                Make it easy to wrap any promise-returning form to capture it's
+                return value
+              </li>
+              <li>
+                Make it easy to access the return values of multiple promises
+              </li>
+            </ul>
+            <p>
+              What I came up with is a function I just named
+              <code>t</code> which can be used like this:
+            </p>
+            <br />
+            <pre><code>(let [s (atom {})]
+  (defn t
+    ([kw] (get @s kw))
+    ([p kw] (.then p (fn [r] (swap! s assoc kw r) r)))))
+    
+(-&gt; (js/fetch &quot;https://jsonip.com/&quot;)
+    (t :jsonip))</code></pre>
+            <p>
+              When <code>t</code> receives two arguments it will consider the
+              first argument a promise storing the resulting value in an atom
+              under the key provided as the second argument,
+              <code>:jsonip</code> in this case.
+            </p>
+            <p>
+              This API is particularly nice when you consider that most editor
+              integrations provide the ability to evaluate the form around your
+              cursor. If I place my cursor within <code>(t :jsonip)</code> and
+              evaluate this form I can look at the value the promise returned
+              without changing any of the code. I can also just continue
+              chaining with <code>then</code> since <code>t</code> returns the
+              original promise.
+            </p>
+            <p>
+              Another nice feature is that I can reuse the values for future
+              REPL evaluations by referring to them using forms like
+              <code>(t :jsonip)</code>.
+            </p>
+            <p>
+              Obviously <strong>this is just one way</strong> but I liked how
+              that simple 4 line function made working with promises in a REPL a
+              lot more enjoyable.
+            </p>
+          </section>
         </article>
         <div class="mv6 mw6 center">
           <section class="lh-copy">
             <h3 class="mb0">Other Posts</h3>
             <div class="bb bw1 b--silver w2 mv4"></div>
             <ol class="list pa0">
-              <li class="mb3">
-                <a
-                  class="f4 link mr2"
-                  href="/posts/working-with-promises-in-clojurescript-repls.html"
-                  >Promises in a ClojureScript REPL</a
-                ><span class="db dib-ns f6">May 2020</span>
-              </li>
               <li class="mb3">
                 <a
                   class="f4 link mr2"
