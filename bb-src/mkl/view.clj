@@ -80,7 +80,8 @@
      ;; Misc
      [:link {:rel "shortcut icon" :href "/images/favicon.ico"}]
      [:link {:rel "alternate" :type "application/atom+xml" :title "Sitewide Atom Feed" :href "/atom.xml"}]
-     [:link {:type "text/css" :rel "stylesheet"
+     [:link {:type "text/css"
+             :rel "stylesheet"
              :href "/stylesheets/martinklepschorg-v3.css"}]
      (when (= "/index.html" permalink)
        [:script {:src "https://identity.netlify.com/v1/netlify-identity-widget.js"}])
@@ -130,7 +131,7 @@
      ;    [:p {:itemprop "description"} (:description post)]]
      ]
     (catch Exception e
-      (println "Rendering %s failed:\n" (:slug post))
+      (println "Rendering %s failed:\n" (:permalink fm))
       (throw e))))
 
 (defn prose-edit-link [p]
