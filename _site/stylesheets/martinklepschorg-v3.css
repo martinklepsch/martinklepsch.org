@@ -1,16 +1,29 @@
 body {
-  font-size: 17px;
-  font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif
-}
-
-:root {
-  --blue: #357edd;
+  --bg: white;
+  --text: #333333;
+  --link: #357edd;
   --code-bg: #f4f4f4;
 }
 
+body.onehundred {
+  --bg: #03142f;
+  --text: #f5e7ff;
+  --link: #f9cb58;
+  --code-bg: #f4f4f4;
+}
+
+html {
+  font-size: 19px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif
+}
 
 a[href] {
-  color: var(--blue);
+  color: var(--link);
   text-decoration: none;
 }
 
