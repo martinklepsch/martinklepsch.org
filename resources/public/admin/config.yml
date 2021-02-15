@@ -3,6 +3,7 @@ backend:
   branch: master # Branch to update (optional; defaults to master)
 media_folder: "resources/public/images/uploads"
 public_folder: "/images/uploads"
+site_url: https://martinklepsch.org
 # REFERENCE DOCUMENTATION
 # https://www.netlifycms.org/docs/configuration-options/#collections
 collections:
