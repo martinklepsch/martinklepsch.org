@@ -1,11 +1,11 @@
 ---
-layout: post
 FBimage: /images/dome-cropped.jpg
 date-published: 2014-02-05T00:00:00Z
 title: Living Small
 uuid: 24f91dd6-6b9e-4bca-9ae3-6f0a1465b4aa
 permalink: /posts/living-small.html
 og-image: /images/selfies/3.jpg
+type: post
 ---
 Living in a world where consumerism appears to be the predominant behaviour it seems more and more exciting to me to live a less materialistic lifestyle. What follows are some of the things that stimulated my thinking — maybe they do the same for you.
 

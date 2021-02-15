@@ -5,6 +5,7 @@ uuid: 7e85ecb2-3033-493b-81f5-8b27cef7574c
 og-image: /images/selfies/3.jpg
 permalink: /posts/working-with-promises-in-clojurescript-repls.html
 published: true
+type: post
 ---
 
 [Roman](https://twitter.com/roman01la) wrote a nice post on working inside ClojureScript REPLs, also touching on [how to deal with promises](https://gist.github.com/roman01la/b939e4f2341fc2f931e34a941aba4e15#repl--asynchrony). If you're unfamiliar, the problem is that in Javascript many operations return promises and unlike in Clojure you cannot block until the promise is resolved. Instead you _have to_ handle the resulting value asynchronously. So if you for instance use `fetch` that could look something like this:

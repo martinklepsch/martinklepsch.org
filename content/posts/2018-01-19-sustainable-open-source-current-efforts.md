@@ -1,10 +1,10 @@
 ---
-layout: post
 date-published: 2018-01-19T00:00:00Z
 title: 'Sustainable Open Source: Current Efforts'
 uuid: 229c2b5e-1cdd-4904-9387-8c0491dc1382
 permalink: /posts/sustainable-open-source-current-efforts.html
 og-image: /images/selfies/1.jpg
+type: post
 ---
 
 The recent appearance of [Clojurists Together](http://clojuriststogether.org/),

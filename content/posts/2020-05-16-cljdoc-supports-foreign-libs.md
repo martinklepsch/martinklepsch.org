@@ -4,6 +4,7 @@ date-published: 2020-05-16T11:16:36.824Z
 uuid: 8fb953cf-e43f-4482-9fb2-f5e641a59cdf
 og-image: /images/selfies/2.jpg
 permalink: /posts/cljdoc-supports-foreign-libs.html
+type: post
 ---
 
 Foreign libraries of ClojureScript libraries have always been a bit of an issue in cljdoc. With a namespace like the one below cljdoc would try to require `"react"` and then fail because `"react"` isn't a namespace it could find on the classpath. 

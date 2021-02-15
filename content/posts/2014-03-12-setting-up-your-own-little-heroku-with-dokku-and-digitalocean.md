@@ -1,10 +1,10 @@
 ---
-layout: post
 date-published: 2014-03-12T00:00:00Z
 title: Heroku-like Deployment With Dokku And DigitalOcean
 uuid: 2818d220-0d76-4797-b967-b6fa9e5018e0
 permalink: /posts/setting-up-your-own-little-heroku-with-dokku-and-digitalocean.html
 og-image: /images/selfies/2.jpg
+type: post
 ---
 Over the weekend I sat down to play around with Docker/Dokku and was able to
 set up a small machine on DigitalOcean that basically offers Heroku-like

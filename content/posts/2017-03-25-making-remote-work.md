@@ -1,10 +1,10 @@
 ---
-layout: post
 date-published: 2017-03-25T00:00:00Z
 title: Making Remote Work
 uuid: a658e901-04ec-4ff4-a2d5-c8c72231e3e7
 permalink: /posts/making-remote-work.html
 og-image: /images/selfies/2.jpg
+type: post
 ---
 
 I've been working remotely for a bit over a year now. Most projects went pretty well. Some not so much. I've worked with fully distributed teams and as a satellite worker with on-site teams. I'm not an expert—but I've learned some things.

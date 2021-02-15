@@ -1,10 +1,10 @@
 ---
-layout: post
 date-published: 2017-06-04T00:00:00Z
 title: Maven Snapshots
 uuid: 443e70e4-c49d-4391-ac18-bf478b8e2955
 permalink: /posts/maven-snapshots.html
 og-image: /images/selfies/3.jpg
+type: post
 ---
 
 ## Or: How to use Maven snapshots without setting your hair on fire.

@@ -1,11 +1,11 @@
 ---
-layout: post
 date-published: 2013-03-10T00:00:00Z
 FBimage: /images/flyknitbw.png
 title: From Zero to Marathon in Six Monthts
 uuid: 73abd373-1c0b-44d1-aed4-2e48a5abfc6f
 permalink: /posts/from-zero-to-marathon-in-six-months.html
 og-image: /images/selfies/1.jpg
+type: post
 ---
 
 After moving to Berlin I kind of failed to continue some regular sports activity.

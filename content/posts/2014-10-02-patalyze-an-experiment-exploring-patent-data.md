@@ -1,10 +1,10 @@
 ---
-layout: post
 date-published: 2014-10-02T00:00:00Z
 title: Patalyze &mdash; An Experiment Exploring Publicly Available Patent Data
 uuid: 15184838-af2e-4ea1-b9a5-57f1ed52cf77
 permalink: /posts/patalyze-an-experiment-exploring-patent-data.html
 og-image: /images/selfies/3.jpg
+type: post
 ---
 For a few months now I've been working on and off on a little
 "data-project" analyzing patents published by the US Patent &

@@ -1,10 +1,10 @@
 ---
-layout: post
 date-published: 2015-04-10T00:00:00Z
 title: Formal Methods at Amazon
 uuid: 915cc2e8-d190-4d54-b746-0e1c34dff835
 permalink: /posts/formal-methods-at-amazon.html
 og-image: /images/selfies/2.jpg
+type: post
 ---
 
 I saw this paper being mentioned again and again in my Twitter

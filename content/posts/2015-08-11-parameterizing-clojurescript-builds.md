@@ -1,10 +1,10 @@
 ---
-layout: post
 date-published: 2015-08-11T00:00:00Z
 title: Parameterizing ClojureScript Builds
 uuid: a658e901-04ec-4ff4-a2d5-c8c72221e3e7
 permalink: /posts/parameterizing-clojurescript-builds.html
 og-image: /images/selfies/2.jpg
+type: post
 ---
 Just like with most server side software we often want to make minor
 changes to the behaviour of the code depending on the environment it's

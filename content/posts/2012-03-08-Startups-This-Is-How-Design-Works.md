@@ -1,5 +1,4 @@
 ---
-layout: post
 category: linked
 date-published: 2012-03-08T10:00:00Z
 resource: http://www.startupsthisishowdesignworks.com/
@@ -7,6 +6,7 @@ title: Startups, This Is How Design Works
 uuid: e5058531-a427-4791-8146-ae2f24e6973b
 permalink: /posts/startups-this-is-how-design-works.html
 og-image: /images/selfies/1.jpg
+type: post
 ---
 
 > Companies like Apple are making design impossible for startups to ignore. Startups like Path,

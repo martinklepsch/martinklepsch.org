@@ -1,5 +1,4 @@
 ---
-layout: post
 tags: quotes
 date-published: 2013-12-03T00:00:00Z
 resource: http://37signals.com/svn/posts/3497-you-know-one-of-the-things-that-really-hurt
@@ -7,6 +6,7 @@ title: Sculley's Disease
 uuid: 117af064-eea6-4eff-aaa8-c18c35d97ad3
 permalink: /posts/sculleys-disease.html
 og-image: /images/selfies/3.jpg
+type: post
 ---
 <p style='display:none'></p>
 

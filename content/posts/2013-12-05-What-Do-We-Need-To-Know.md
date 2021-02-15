@@ -1,5 +1,4 @@
 ---
-layout: post
 tags: webdevelopment
 date-published: 2013-12-05T00:00:00Z
 resource: http://alistapart.com/column/never-heard-of-it
@@ -7,6 +6,7 @@ title: What do we need to know?
 uuid: 2bf0d1e8-11eb-4ee5-970e-cfb3ce6cdf59
 permalink: /posts/what-do-we-need-to-know.html
 og-image: /images/selfies/3.jpg
+type: post
 ---
 
 > I go through periods of self-doubt about my qualifications as a web developer.
