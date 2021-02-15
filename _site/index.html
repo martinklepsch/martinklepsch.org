@@ -56,6 +56,11 @@
       type="application/atom+xml"
     />
     <link
+      href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
       href="/stylesheets/martinklepschorg-v3.css"
       rel="stylesheet"
       type="text/css"
@@ -82,29 +87,27 @@
     </script>
   </head>
   <body class="system-sans-serif dark-gray">
-    <div class="mh3">
-      <div class="mw7 center">
+    <div class="mx1">
+      <div class="max-width-3 mx-auto">
         <article
-          class="mt5"
+          class="mt4"
           itemprop="blogPost"
           itemscope=""
           itemtype="http://schema.org/BlogPosting"
         >
-          <div class="f6 db normal mw6 center">
+          <div class="h4 db mx-auto max-width-2">
             <a
-              class="link"
               href="/posts/working-with-promises-in-clojurescript-repls.html"
               title="Permalink: Promises in a ClojureScript REPL"
               >Latest Post</a
-            ><span class="ph2">/</span
+            ><span class="px1">/</span
             ><a
-              class="link"
               href="https://twitter.com/martinklepsch"
               title="@martinklepsch on Twitter"
               >@martinklepsch</a
             >
           </div>
-          <h1 class="f3 fw5 w-80-ns lh-title mw6 center mv4">
+          <h1 class="h3 bold w-80-ns lh-title max-width-2 mx-auto my3">
             Promises in a ClojureScript REPL
           </h1>
           <section class="mkdwn lh-copy">
@@ -161,7 +164,6 @@
               What I came up with is a function I just named
               <code>t</code> which can be used like this:
             </p>
-            <br />
             <pre><code>(let [s (atom {})]
   (defn t
     ([kw] (get @s kw))
@@ -196,321 +198,304 @@
             </p>
           </section>
         </article>
-        <div class="mv6 mw6 center">
+        <div class="my4 max-width-2 mx-auto">
           <section class="lh-copy">
-            <h3 class="mb0">Other Posts</h3>
-            <div class="bb bw1 b--silver w2 mv4"></div>
-            <ol class="list pa0">
-              <li class="mb3">
+            <h3 class="mb2">Other Posts</h3>
+            <ol class="list-reset">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/cljdoc-supports-foreign-libs.html"
                   >Improved Support for Foreign Libs in cljdoc</a
-                ><span class="db dib-ns f6">May 2020</span>
+                ><span class="block h5">May 2020</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/static-blogging-lessons-learned.html"
                   >Static Blogging, Some Lessons Learned</a
-                ><span class="db dib-ns f6">May 2020</span>
+                ><span class="block h5">May 2020</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/using-cljs-bean-to-wrap-firebase-documents.html"
                   >Working with Firebase Documents in ClojureScript</a
-                ><span class="db dib-ns f6">September 2019</span>
+                ><span class="block h5">September 2019</span>
               </li>
-              <li class="mb3">
-                <a
-                  class="f4 link mr2"
-                  href="/posts/writing-awesome-docstrings.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/writing-awesome-docstrings.html"
                   >4 Small Steps Towards Awesome Clojure Docstrings</a
-                ><span class="db dib-ns f6">January 2019</span>
+                ><span class="block h5">January 2019</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/sustainable-open-source-current-efforts.html"
                   >Sustainable Open Source: Current Efforts</a
-                ><span class="db dib-ns f6">January 2018</span>
+                ><span class="block h5">January 2018</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/maven-snapshots.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/maven-snapshots.html"
                   >Maven Snapshots</a
-                ><span class="db dib-ns f6">June 2017</span>
+                ><span class="block h5">June 2017</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/requiring-closure-namespaces.html"
                   >Requiring Closure Namespaces</a
-                ><span class="db dib-ns f6">May 2017</span>
+                ><span class="block h5">May 2017</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/simple-debouncing-in-clojurescript.html"
                   >Simple Debouncing in ClojureScript</a
-                ><span class="db dib-ns f6">April 2017</span>
+                ><span class="block h5">April 2017</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/making-remote-work.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/making-remote-work.html"
                   >Making Remote Work</a
-                ><span class="db dib-ns f6">March 2017</span>
+                ><span class="block h5">March 2017</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/just-in-time-script-loading-with-react-and-clojuresript.html"
                   >Just-in-Time Script Loading With React And ClojureScript</a
-                ><span class="db dib-ns f6">November 2016</span>
+                ><span class="block h5">November 2016</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/props-children-and-component-lifecycle-in-reagent.html"
                   >Props, Children & Component Lifecycle in Reagent</a
-                ><span class="db dib-ns f6">May 2016</span>
+                ><span class="block h5">May 2016</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/om-next-reading-list.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/om-next-reading-list.html"
                   >Om/Next Reading List</a
-                ><span class="db dib-ns f6">November 2015</span>
+                ><span class="block h5">November 2015</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/parameterizing-clojurescript-builds.html"
                   >Parameterizing ClojureScript Builds</a
-                ><span class="db dib-ns f6">August 2015</span>
+                ><span class="block h5">August 2015</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/clojurebridge-berlin.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/clojurebridge-berlin.html"
                   >ClojureBridge Berlin</a
-                ><span class="db dib-ns f6">July 2015</span>
+                ><span class="block h5">July 2015</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/managing-local-and-project-wide-development-parameters-in-leiningen.html"
                   >Managing Local and Project-wide Development Parameters in
                   Leiningen</a
-                ><span class="db dib-ns f6">June 2015</span>
+                ><span class="block h5">June 2015</span>
               </li>
-              <li class="mb3">
-                <a
-                  class="f4 link mr2"
-                  href="/posts/formal-methods-at-amazon.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/formal-methods-at-amazon.html"
                   >Formal Methods at Amazon</a
-                ><span class="db dib-ns f6">April 2015</span>
+                ><span class="block h5">April 2015</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/lisp-keymap.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/lisp-keymap.html"
                   >(lisp keymap)</a
-                ><span class="db dib-ns f6">February 2015</span>
+                ><span class="block h5">February 2015</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/cljsjs-use-javascript-libraries-in-clojurescript.html"
                   >CLJSJS - Use Javascript Libraries in Clojurescript With
                   Ease</a
-                ><span class="db dib-ns f6">January 2015</span>
+                ><span class="block h5">January 2015</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html"
                   >Why Boot is Relevant For The Clojure Ecosystem</a
-                ><span class="db dib-ns f6">November 2014</span>
+                ><span class="block h5">November 2014</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/s3-beam-direct-upload-to-s3-with-clojure-and-clojurescript.html"
                   >S3-Beam — Direct Upload to S3 with Clojure & Clojurescript</a
-                ><span class="db dib-ns f6">October 2014</span>
+                ><span class="block h5">October 2014</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/patalyze-an-experiment-exploring-patent-data.html"
                   >Patalyze &mdash; An Experiment Exploring Publicly Available
                   Patent Data</a
-                ><span class="db dib-ns f6">October 2014</span>
+                ><span class="block h5">October 2014</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/running-a-clojure-uberjar-inside-docker.html"
                   >Running a Clojure Uberjar inside Docker</a
-                ><span class="db dib-ns f6">September 2014</span>
+                ><span class="block h5">September 2014</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/using-coreasync-and-transducers-for-direct-s3-upload.html"
                   >Using core.async and Transducers to upload files from the
                   browser to S3</a
-                ><span class="db dib-ns f6">September 2014</span>
+                ><span class="block h5">September 2014</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/emacs-and-vim.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/emacs-and-vim.html"
                   >Emacs & Vim</a
-                ><span class="db dib-ns f6">July 2014</span>
+                ><span class="block h5">July 2014</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/setting-up-your-own-little-heroku-with-dokku-and-digitalocean.html"
                   >Heroku-like Deployment With Dokku And DigitalOcean</a
-                ><span class="db dib-ns f6">March 2014</span>
+                ><span class="block h5">March 2014</span>
               </li>
-              <li class="mb3">
-                <a
-                  class="f4 link mr2"
-                  href="/posts/woodworking-masterclasses.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/woodworking-masterclasses.html"
                   >Woodworking Masterclasses</a
-                ><span class="db dib-ns f6">February 2014</span>
+                ><span class="block h5">February 2014</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/early-adopters-and-inverted-social-proof.html"
                   >Early Adopters And Inverted Social Proof</a
-                ><span class="db dib-ns f6">February 2014</span>
+                ><span class="block h5">February 2014</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/living-small.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/living-small.html"
                   >Living Small</a
-                ><span class="db dib-ns f6">February 2014</span>
+                ><span class="block h5">February 2014</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/telegram.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/telegram.html"
                   >Sending You a Telegram</a
-                ><span class="db dib-ns f6">January 2014</span>
+                ><span class="block h5">January 2014</span>
               </li>
-              <li class="mb3">
-                <a
-                  class="f4 link mr2"
-                  href="/posts/running-a-marathon-or-not.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/running-a-marathon-or-not.html"
                   >Running a Marathon, Or Not</a
-                ><span class="db dib-ns f6">January 2014</span>
+                ><span class="block h5">January 2014</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/code-simplicity-review.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/code-simplicity-review.html"
                   >Code Simplicity</a
-                ><span class="db dib-ns f6">January 2014</span>
+                ><span class="block h5">January 2014</span>
               </li>
-              <li class="mb3">
-                <a
-                  class="f4 link mr2"
-                  href="/posts/what-do-we-need-to-know.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/what-do-we-need-to-know.html"
                   >What do we need to know?</a
-                ><span class="db dib-ns f6">December 2013</span>
+                ><span class="block h5">December 2013</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/sculleys-disease.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/sculleys-disease.html"
                   >Sculley's Disease</a
-                ><span class="db dib-ns f6">December 2013</span>
+                ><span class="block h5">December 2013</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/a-resurrection-post.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/a-resurrection-post.html"
                   >A Resurrection Post</a
-                ><span class="db dib-ns f6">December 2013</span>
+                ><span class="block h5">December 2013</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/a-trip-to-the-us.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/a-trip-to-the-us.html"
                   >A Trip To The US</a
-                ><span class="db dib-ns f6">September 2013</span>
+                ><span class="block h5">September 2013</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/analytics-data.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/analytics-data.html"
                   >Analytics Data</a
-                ><span class="db dib-ns f6">April 2013</span>
+                ><span class="block h5">April 2013</span>
               </li>
-              <li class="mb3">
-                <a
-                  class="f4 link mr2"
-                  href="/posts/asynchronous-communication.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/asynchronous-communication.html"
                   >Asynchronous Communication</a
-                ><span class="db dib-ns f6">April 2013</span>
+                ><span class="block h5">April 2013</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/from-zero-to-marathon-in-six-months.html"
                   >From Zero to Marathon in Six Monthts</a
-                ><span class="db dib-ns f6">March 2013</span>
+                ><span class="block h5">March 2013</span>
               </li>
-              <li class="mb3">
-                <a
-                  class="f4 link mr2"
-                  href="/posts/git-prompt-for-fish-shell.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/git-prompt-for-fish-shell.html"
                   >Git Information in Fish Shell&rsquo;s Prompt</a
-                ><span class="db dib-ns f6">December 2012</span>
+                ><span class="block h5">December 2012</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/when-we-build-stuff.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/when-we-build-stuff.html"
                   >When We Build Stuff</a
-                ><span class="db dib-ns f6">August 2012</span>
+                ><span class="block h5">August 2012</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/models-operations-views-and-events.html"
                   >Models, Operations, Views and Events</a
-                ><span class="db dib-ns f6">July 2012</span>
+                ><span class="block h5">July 2012</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/twelve-factor-app.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/twelve-factor-app.html"
                   >The Twelve Factor App</a
-                ><span class="db dib-ns f6">June 2012</span>
+                ><span class="block h5">June 2012</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/paris-and-back.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/paris-and-back.html"
                   >Paris And Back</a
-                ><span class="db dib-ns f6">May 2012</span>
+                ><span class="block h5">May 2012</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/a-friend-is-looking-for-a-summer-internship.html"
                   >A Friend Is Looking For A Summer Internship</a
-                ><span class="db dib-ns f6">May 2012</span>
+                ><span class="block h5">May 2012</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/kandan-team-chat.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/kandan-team-chat.html"
                   >Kandan Team Chat</a
-                ><span class="db dib-ns f6">May 2012</span>
+                ><span class="block h5">May 2012</span>
               </li>
-              <li class="mb3">
-                <a class="f4 link mr2" href="/posts/entypo-icon-set.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/entypo-icon-set.html"
                   >Entypo Icon Set</a
-                ><span class="db dib-ns f6">March 2012</span>
+                ><span class="block h5">March 2012</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/startups-this-is-how-design-works.html"
                   >Startups, This Is How Design Works</a
-                ><span class="db dib-ns f6">March 2012</span>
+                ><span class="block h5">March 2012</span>
               </li>
-              <li class="mb3">
-                <a
-                  class="f4 link mr2"
-                  href="/posts/hosting-a-static-site-on-s3.html"
+              <li class="mb2">
+                <a class="h3 mr1" href="/posts/hosting-a-static-site-on-s3.html"
                   >Hosting A Static Site On Amazon S3</a
-                ><span class="db dib-ns f6">February 2012</span>
+                ><span class="block h5">February 2012</span>
               </li>
-              <li class="mb3">
+              <li class="mb2">
                 <a
-                  class="f4 link mr2"
+                  class="h3 mr1"
                   href="/posts/fix-broken-decoding-of-mail-subjects-in-exim.html"
                   >Exim4 Fix Wrongly Decoded Mail Subject</a
-                ><span class="db dib-ns f6">January 2012</span>
+                ><span class="block h5">January 2012</span>
               </li>
             </ol>
           </section>
