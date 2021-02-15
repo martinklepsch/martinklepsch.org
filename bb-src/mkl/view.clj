@@ -195,14 +195,12 @@
     :index (index-page render-spec)))
 
 (defn render-all []
-  (let [posts (posts/sort-posts (map posts/read-post posts/post-files))]
-    (->> posts
-         (map (fn to-render-spec [post]
-                (assoc post :type :post)))
-         (into [{:type :index :all-posts posts :frontmatter {:permalink "/index.html"}}])
-         (map (fn [spec]
-                 (spit-hiccup-to-out (-> spec :frontmatter :permalink)
-                                     (render spec)))))))
+  (let [posts (posts/sort-posts (map posts/read-post posts/post-files))
+        index {:type :index :all-posts posts :frontmatter {:permalink "/index.html"}}]
+    (spit-hiccup-to-out (-> index :frontmatter :permalink) (render index))
+    (doseq [post posts]
+      (spit-hiccup-to-out (-> post :frontmatter :permalink)
+                          (render (assoc post :type :post))))))
 
 (defn -main []
   (render-all))
