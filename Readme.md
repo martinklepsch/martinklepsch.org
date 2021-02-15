@@ -14,23 +14,13 @@ This blog is built using Clojure, using Babashka and Bootleg. Source code can be
 
 Building the blog:
 ```
-boot build
+make site
 ```
 
 Continously build blog and serve on localhost:3000:
 ```
-boot dev
+overmind s
 ```
-
-Build and deploy site:
-```
-boot build deploy
-```
-**Note:** This requires the two env vars `S3_ACCESS_KEY` & `S3_SECRET_KEY` to be set.
-
-[boot-clj]: http://boot-clj.com/
-[perun]: https://github.com/hashobject/perun
-
 
 ### Rebuild
 
@@ -44,6 +34,7 @@ boot build deploy
 - [x] Randomly Chosen portraits as small opengraph Image
 - [x] Integrate snippet of text into opengraph view
 - [ ] Unstyled archive page
+- [ ] hide some posts from "Other posts" list
 - [x] Put permalinks into metadata to make it final
 - [x] Don’t do redirects, just maintain URLs of old posts
 - [x] GitHub action to add permalink if missing
@@ -52,5 +43,5 @@ boot build deploy
 - [x] There could be a hidden edit button leading to prose.io
 - [ ] A preprocessing step could turn raw links to YouTube or twitter into more useful embeds/views
 - [ ] Preprocessing step could replace add combinations of tachyons classes to matching nodes
-- [ ] revisit blockquote styling https://www.martinklepsch.org/posts/living-small.html
-- [ ] make headings bold
+- [x] revisit blockquote styling https://www.martinklepsch.org/posts/living-small.html
+- [x] make headings bold
