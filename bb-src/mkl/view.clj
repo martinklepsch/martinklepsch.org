@@ -135,11 +135,10 @@
       (println "Rendering %s failed:\n" (:permalink fm))
       (throw e))))
 
-(defn signed-post [post opts]
-  (conj (render-post post opts)
-        [:div.my3.em-before.max-width-2.mx-auto
-         [:a {:href +twitter-uri+} "@martinklepsch"] ", "
-         (date-fmt (:date-published (:frontmatter post))) " "]))
+(defn signature [post]
+  [:div.my3.em-before.max-width-2.mx-auto
+   [:a {:href +twitter-uri+} "@martinklepsch"] ", "
+   (date-fmt (:date-published (:frontmatter post))) " "])
 
 (defn posts-list [title entries]
   [:section.lh-copy
@@ -173,10 +172,26 @@
   }"]))
 
 (defn post-page [post]
-  (base
-    post
-    [:div.max-width-3.mx-auto.mb5
-     (signed-post post {:permalink-page? true})]))
+  [:html {:lang "en" :itemtype "http://schema.org/Blog"}
+   (head post)
+   [:body.post
+    [:div.mx1
+     [:div.max-width-3.mx-auto.mb5
+      (render-post post {:permalink-page? true})
+      (signature post)]]]])
+
+(defn onehundred-page [idx post]
+  (let [fm (:frontmatter post)]
+    [:html {:lang "en" :itemtype "http://schema.org/Blog"}
+     (head post)
+     [:body.onehundred
+      [:div.mx1.max-width-2.mx-auto.my4
+       [:h1.h3.bold.w-80-ns.lh-title.max-width-2.mx-auto
+        (:title fm)]
+       [:section.mkdwn.lh-copy
+        (:content post)]
+       [:div.mt3
+        [:a {:href "/100/writing-100-things.html"} (inc idx) " / 100"]]]]]))
 
 ;; Rendering API
 ;; Goals
@@ -188,19 +203,18 @@
     (println "Spitting" permalink)
     (spit out-file (str "<!DOCTYPE html>\n" (utils/as-html hiccup)))))
 
-(defn render
-  [{:keys [type] :as render-spec}]
-  (case type
-    :post (post-page render-spec)
-    :index (index-page render-spec)))
-
 (defn render-all []
   (let [posts (posts/sort-posts (map posts/read-post posts/post-files))
+        onehundreds (->> (map posts/read-post posts/onehundred-files)
+                         (posts/sort-posts)
+                         (map-indexed (fn [idx p] [idx p])))
         index {:type :index :all-posts posts :frontmatter {:permalink "/index.html"}}]
-    (spit-hiccup-to-out (-> index :frontmatter :permalink) (render index))
+    (spit-hiccup-to-out (-> index :frontmatter :permalink) (index-page index))
     (doseq [post posts]
-      (spit-hiccup-to-out (-> post :frontmatter :permalink)
-                          (render (assoc post :type :post))))))
+      (spit-hiccup-to-out (-> post :frontmatter :permalink) (post-page post)))
+    (doseq [[idx p] onehundreds]
+      (spit-hiccup-to-out (-> p :frontmatter :permalink)
+                          (onehundred-page idx p)))))
 
 (defn -main []
   (render-all))

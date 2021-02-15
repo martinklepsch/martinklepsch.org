@@ -12,7 +12,8 @@
   (let [path (.getPath file)
         filename (.getName file)]
     (cond
-      (.contains path "posts")
+     (or (.contains path "posts")
+         (.contains path "onehundred"))
       (->> (str/split filename #"[-\.]")
            (drop 3)
            drop-last
@@ -28,9 +29,20 @@
       :else (throw (ex-info "Could not build slug" {:file file})))))
 
 (defn permalink-fn [file]
-  (if (.startsWith (.getPath file) "content/posts")
-    (str "/posts/" (slug file) ".html")
-    (str "/" (slug file) ".html")))
+  (cond
+   (.startsWith (.getPath file) "content/posts")
+   (str "/posts/" (slug file) ".html")
+
+   (.startsWith (.getPath file) "content/onehundred")
+   (str "/100/" (slug file) ".html")
+
+   :else
+   (str "/" (slug file) ".html")))
+
+(defn entry-type [file]
+  (cond
+   (.startsWith (.getPath file) "content/posts") "post"
+   (.startsWith (.getPath file) "content/onehundred") "onehundred"))
 
 (defn day-str [d]
   (subs (.format java.time.format.DateTimeFormatter/ISO_INSTANT (.toInstant d)) 0 10))
@@ -66,6 +78,9 @@
                   (nil? (:og-image frontmatter))
                   (assoc :og-image (rand-nth selfies))
 
+                  (nil? (:type frontmatter))
+                  (assoc :type (entry-type f))
+
                   (nil? (:permalink frontmatter))
                   (assoc :permalink (permalink-fn f)))]
     (when (not= frontmatter updated)
@@ -85,7 +100,7 @@
 
 (def post-files
   (shuffle
-    (into (glob/glob "content/posts/*.markdown")
+    (into (glob/glob "content/onehundred/*.md")
           (glob/glob "content/posts/*.md"))))
 
 (defn -main []

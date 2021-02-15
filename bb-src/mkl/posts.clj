@@ -1,14 +1,14 @@
 (ns mkl.posts
   (:require [mkl.pods]
             [mkl.frontmatter :as fm]
-            [pod.retrogradeorbit.bootleg.utils :as utils]
             [pod.retrogradeorbit.bootleg.markdown :as markdown]
             [pod.retrogradeorbit.bootleg.glob :as glob]))
 
 (def post-files
-  (sort
-    (into (glob/glob "content/posts/*.markdown")
-          (glob/glob "content/posts/*.md"))))
+  (sort (glob/glob "content/posts/*.md")))
+
+(def onehundred-files
+  (sort (glob/glob "content/onehundred/*.md")))
 
 (defn read-post [file]
   {:file file
