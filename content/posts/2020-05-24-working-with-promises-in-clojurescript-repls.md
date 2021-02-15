@@ -31,7 +31,6 @@ Now that we know how we can access the resulting value of a promise, let's make 
 
 What I came up with is a function I just named `t` which can be used like this:
 
-    
     (let [s (atom {})]
       (defn t
         ([kw] (get @s kw))
