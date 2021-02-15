@@ -200,6 +200,7 @@
 (defn spit-hiccup-to-out [permalink hiccup]
   (let [out-dir "_site"
         out-file (io/file (str out-dir permalink))]
+    (io/make-parents out-file)
     (println "Spitting" permalink)
     (spit out-file (str "<!DOCTYPE html>\n" (utils/as-html hiccup)))))
 
