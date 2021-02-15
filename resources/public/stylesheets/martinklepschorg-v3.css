@@ -17,6 +17,7 @@ html {
 }
 
 body {
+  margin: 0;
   background-color: var(--bg);
   color: var(--text);
   font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif

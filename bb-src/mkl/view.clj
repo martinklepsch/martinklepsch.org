@@ -185,7 +185,7 @@
     [:html {:lang "en" :itemtype "http://schema.org/Blog"}
      (head post)
      [:body.onehundred
-      [:div.mx1.max-width-2.mx-auto.my4
+      [:div.max-width-2.mx-auto.my4.px1
        [:h1.h3.bold.w-80-ns.lh-title.max-width-2.mx-auto
         (:title fm)]
        [:section.mkdwn.lh-copy
