@@ -84,7 +84,7 @@
      [:link {:type "text/css"
              :rel "stylesheet"
              :href "/stylesheets/martinklepschorg-v3.css"}]
-     (when (= "/index.html" permalink)
+     (when (= "/index.html" (:permalink frontmatter))
        [:script {:src "https://identity.netlify.com/v1/netlify-identity-widget.js"}])
      (google-analytics)]))
 
