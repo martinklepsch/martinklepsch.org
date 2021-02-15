@@ -80,6 +80,7 @@
      ;; Misc
      [:link {:rel "shortcut icon" :href "/images/favicon.ico"}]
      [:link {:rel "alternate" :type "application/atom+xml" :title "Sitewide Atom Feed" :href "/atom.xml"}]
+     [:link {:type "text/css" :rel "stylesheet" :href "https://unpkg.com/basscss@8.0.2/css/basscss.min.css"}]
      [:link {:type "text/css"
              :rel "stylesheet"
              :href "/stylesheets/martinklepschorg-v3.css"}]
@@ -103,21 +104,21 @@
   [:html {:lang "en" :itemtype "http://schema.org/Blog"}
    (head opts)
    [:body.system-sans-serif.dark-gray
-    (into [:div.mh3] content)]])
+    (into [:div.mx1] content)]])
 
 (defn render-post [{fm :frontmatter :as post} opts]
   (try
-    [:article.mt5 {:itemprop "blogPost" :itemscope "" :itemtype "http://schema.org/BlogPosting"}
-     [:div.f6.db.normal.mw6.center
-      [:a.link {:href (:permalink fm) :title (str "Permalink: " (:title fm))}
+    [:article.mt4 {:itemprop "blogPost" :itemscope "" :itemtype "http://schema.org/BlogPosting"}
+     [:div.h4.db.mx-auto.max-width-2
+      [:a {:href (:permalink fm) :title (str "Permalink: " (:title fm))}
        (if (:permalink-page? opts)
          (date-fmt (:date-published fm))
          "Latest Post")]
-      (when (:permalink-page? opts) [:span.ph2 "/"])
-      (when (:permalink-page? opts) [:a.link {:href "/" :title "Home"} "Home"])
-      [:span.ph2 "/"]
-      [:a.link {:href +twitter-uri+ :title "@martinklepsch on Twitter"} "@martinklepsch"]]
-     [:h1.f3.fw5.w-80-ns.lh-title.mw6.center.mv4
+      (when (:permalink-page? opts) [:span.px1 "/"])
+      (when (:permalink-page? opts) [:a {:href "/" :title "Home"} "Home"])
+      [:span.px1 "/"]
+      [:a {:href +twitter-uri+ :title "@martinklepsch on Twitter"} "@martinklepsch"]]
+     [:h1.h3.bold.w-80-ns.lh-title.max-width-2.mx-auto.my3
       ;; TODO add linkthing here
       (if (:resource fm) (:title fm) (:title fm))]
      [:section.mkdwn.lh-copy
@@ -134,39 +135,31 @@
       (println "Rendering %s failed:\n" (:permalink fm))
       (throw e))))
 
-(defn prose-edit-link [p]
-  [:a.white
-   {:target "_blank"
-    :href (str "https://prose.io/#martinklepsch/martinklepsch.org/edit/master/" p)}
-   "edit on prose.io"])
-
 (defn signed-post [post opts]
   (conj (render-post post opts)
-        [:div.mv4.em-before.mw6.center
-         [:a.link {:href +twitter-uri+} "@martinklepsch"] ", "
-         (date-fmt (:date-published (:frontmatter post))) " "
-         (prose-edit-link (:file post))]))
+        [:div.my3.em-before.max-width-2.mx-auto
+         [:a {:href +twitter-uri+} "@martinklepsch"] ", "
+         (date-fmt (:date-published (:frontmatter post))) " "]))
 
 (defn posts-list [title entries]
   [:section.lh-copy
-   (when title [:h3.mb0 title])
-   (when title [:div.bb.bw1.b--silver.w2.mv4])
+   (when title [:h3.mb2 title])
    (into
-     [:ol.list.pa0]
+     [:ol.list-reset]
      (for [post entries]
-       [:li.mb3
-        [:a.f4.link.mr2
+       [:li.mb2
+        [:a.h3.mr1
          {:href (-> post :frontmatter :permalink)}
          (-> post :frontmatter :title)]
-        [:span.db.dib-ns.f6 (date-fmt (:date-published (:frontmatter post)))]]))])
+        [:span.block.h5 (date-fmt (:date-published (:frontmatter post)))]]))])
 
 (defn index-page [{:keys [all-posts]}]
   (base
     {:frontmatter {:permalink "/index.html"
                    :og-image "/images/selfies/1.jpg"}}
-    [:div.mw7.center
+    [:div.max-width-3.mx-auto
      (render-post (first all-posts) {})
-     [:div.mv6.mw6.center
+     [:div.my4.max-width-2.mx-auto
       (posts-list "Other Posts" (rest all-posts))]]
     [:script
      "if (window.netlifyIdentity) {
@@ -182,7 +175,7 @@
 (defn post-page [post]
   (base
     post
-    [:div.mw7.center.mb6
+    [:div.max-width-3.mx-auto.mb5
      (signed-post post {:permalink-page? true})]))
 
 ;; Rendering API
