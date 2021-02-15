@@ -1,15 +1,14 @@
 # This is my blog
 
-This blog is built using Clojure, [Boot][boot-clj] & [perun][perun]. To get an
-overview you can take a look at the `build.boot` file. Templates are
-defined as functions returning hiccup in `src/org/martinklepsch/blog.clj`.
+This blog is built using Clojure, using Babashka and Bootleg. Source code can be found in `bb-src`.
 
 ### Dependencies
 
 - `filterdiff` from [patchutils](http://cyberelk.net/tim/software/patchutils/)
 - `bb` 0.0.99+ from [babashka](https://github.com/borkdude/babashka)
 - `bootleg` 0.1.9+ from [bootleg](https://github.com/retrogradeorbit/bootleg)
-- `boot` from [boot-clj](https://github.com/boot-clj/boot)
+- [`entr`](https://github.com/eradman/entr)
+
 
 ### Common workflows
 
