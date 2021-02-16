@@ -1,5 +1,10 @@
 ---
 title: How do you get a remote Clojure job?
+date-published: 2021-02-16T17:01:26.181Z
+uuid: e3aefa0b-1858-4fe8-9553-534b842ad209
+og-image: /images/selfies/2.jpg
+type: onehundred
+permalink: /100/how-do-you-get-a-remote-clojure-job.html
 ---
 I don't think there's a significant difference to getting any other remote job. In the end Clojure is a programming language and the ways you show you're qualified feel largely similar (with some aspects being more top-of-mind in individual communities). Also keep in mind that many roads lead to Rome and that my perspective on this isn't going to be an absolute truth but rather something that grew from my experiences. Yours might be different and the path of least resistance is always to find out what works best for you.
 
