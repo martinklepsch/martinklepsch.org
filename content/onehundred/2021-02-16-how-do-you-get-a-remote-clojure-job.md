@@ -22,6 +22,6 @@ I don't think there's a significant difference to getting any other remote job. 
 
 Hope this helps! 
 
-PS. I realize that a lot of these things require time and not everyone may have the luxury of a lot of free time. If you're a member of an underrepresented group and feel like a bit of cash would go a long way in terms of making time for the things above, send me a DM. (edited)Oct 23, 2020 at 8:53 PM
+PS. I realize that a lot of these things require time and not everyone may have the luxury of a lot of free time. If you're a member of an underrepresented group and feel like a bit of cash would go a long way in terms of making time for the things above, send me a DM.
 
 *Note: This was originally posted [on rep.ly](https://rep.ly/answer/5f92959f17801d0018370de4).*
