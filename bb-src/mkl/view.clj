@@ -208,6 +208,7 @@
   (let [posts (posts/sort-posts (map posts/read-post posts/post-files))
         onehundreds (->> (map posts/read-post posts/onehundred-files)
                          (posts/sort-posts)
+                         (reverse)
                          (map-indexed (fn [idx p] [idx p])))
         index {:type :index :all-posts posts :frontmatter {:permalink "/index.html"}}]
     (spit-hiccup-to-out (-> index :frontmatter :permalink) (index-page index))
