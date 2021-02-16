@@ -21,4 +21,4 @@ It also reinforces all the things I want when working on product stuff: learning
 
 To end this, here's a nice quote from [Kate Aronowitz](https://twitter.com/katearonowitz), back then Facebook’s Director of Design:
 
-> “We’re just now starting to get into mobile first and then web second for a lot of our products. What we’re finding is that the designers on mobile are really embracing the constraints \[and] that it’s actually teaching us a lot about how to design back to the desktop,”
+> We’re just now starting to get into mobile first and then web second for a lot of our products. What we’re finding is that the designers on mobile are really embracing the constraints \[and] that it’s actually teaching us a lot about how to design back to the desktop,
