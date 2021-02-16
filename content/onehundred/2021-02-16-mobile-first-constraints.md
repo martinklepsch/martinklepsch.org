@@ -1,5 +1,10 @@
 ---
 title: Mobile First Constraints
+date-published: 2021-02-16T08:27:11.989Z
+uuid: d80a3ffa-30de-40c8-84a5-b0a9857100c4
+og-image: /images/selfies/2.jpg
+type: onehundred
+permalink: /100/mobile-first-constraints.html
 ---
 I've been revisiting a book on [Mobile First](https://www.lukew.com/resources/mobile_first.asp) over the last couple of days. It's a very short and sweet book, like many others by [A Book Apart](https://abookapart.com/). The book argues that web experiences should be designed for mobile first for two main reasons: 
 
