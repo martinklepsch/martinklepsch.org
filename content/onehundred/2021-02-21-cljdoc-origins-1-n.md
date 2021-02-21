@@ -1,5 +1,10 @@
 ---
 title: cljdoc origins 1/n
+date-published: 2021-02-21T09:57:29.870Z
+uuid: 7d40d366-4fb0-44b0-a09e-baedb1ee9165
+og-image: /images/selfies/2.jpg
+type: onehundred
+permalink: /100/cljdoc-origins-1-n.html
 ---
 It was one of these cold and dark December evenings in 2018. Like every month [Ben](https://twitter.com/socksy) and [Paulus](https://twitter.com/pesterhazy) hosted the Clojure meetup on the second Wednesday of the month. This time it was at Thoughtworks, and I believe there was pizza. Some 50 people were about to attend the meetup that ignited a spark, which eventually led to cljdoc. 
 
