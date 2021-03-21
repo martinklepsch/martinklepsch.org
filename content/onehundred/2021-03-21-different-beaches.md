@@ -22,6 +22,6 @@ A few weeks later I listened to some podcast about speaking and one of the point
 
 Listening to this made me realize that surfing in different places, different "breaks" will also make a huge difference to my surfing abilities. I don't want to become a surfer or anything but who doesn't enjoy the feeling of improving and eventually being reasonably good at something. It certainly maps to my bouldering experience. 
 
-Cheers to Jaydon for showing me this stuff again. In particular during our last lesson — after having surfed a in a few more places — I understood a lot more about how my position affects things. If a wave isn't very strong shifting your board more to the front will make you go faster and will make it easier to catch the wave. If a wave is fast and strong being further back is important to avoid the nose-dive (of which I did plenty). And sometimes it makes sense to shift the weight around a bit even while you're on the wave. 
+Cheers to Jaydon for showing me this stuff again. In particular during our last lesson — after having surfed a in a few more places — I understood a lot more about how my position affects things. If a wave isn't very strong shifting your body more to the front will make you go faster and will make it easier to catch the wave. If a wave is fast and strong being further back is important to avoid the nose-dive (of which I did plenty). And sometimes it makes sense to shift the weight around a bit even while you're on the wave. 
 
 Anyways, let me know if you wanna surf some time! 😁
