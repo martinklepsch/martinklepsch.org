@@ -1,7 +1,7 @@
 ---
 title: 'Clojure Macros: Creating vars from a map'
 permalink: /posts/clojure-macro-magic-vars-from-map.html
-date-published: 2021-03-21T12:18:42.591Z
+date-published: 2021-02-25T12:18:42.591Z
 uuid: b2865f91-de5b-41f5-9632-6a3055b8e93d
 og-image: /images/selfies/2.jpg
 type: post
