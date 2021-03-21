@@ -1,5 +1,10 @@
 ---
 title: Different Beaches
+date-published: 2021-03-21T12:04:13.015Z
+uuid: 982b40f7-3d46-446d-a09d-d88b051452b6
+og-image: /images/selfies/3.jpg
+type: onehundred
+permalink: /100/different-beaches.html
 ---
 The last weeks haven't been very productive when it comes to this writing project, as I was mostly busy enjoying the last stretch of my South Africa trip that started at the end of 2020. Now I'm back in Berlin and under quarantine so in theory that should create lots of time to write.  
 
