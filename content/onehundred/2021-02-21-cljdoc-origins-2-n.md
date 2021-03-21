@@ -1,6 +1,6 @@
 ---
 title: cljdoc origins 2/n
-date-published: 2021-03-21T12:17:05.266Z
+date-published: 2021-02-21T12:17:05.266Z
 uuid: 183d3761-d354-4361-b903-e4e4d9ee9717
 og-image: /images/selfies/1.jpg
 type: onehundred
