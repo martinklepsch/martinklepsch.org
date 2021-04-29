@@ -1,5 +1,10 @@
 ---
 title: making music with a launchpad
+date-published: 2021-04-29T08:46:55.469Z
+uuid: 1d7b346d-8ee4-49f1-9e5c-c988c12944b6
+og-image: /images/selfies/2.jpg
+type: onehundred
+permalink: /100/making-music-with-a-launchpad.html
 ---
 Some time in the beginning of 2020 I got to play on synthesizer of a friend and realized that things can sound pretty cool when you just follow simple instructions like  "press three keys with one key in between each of them". Synthesizers make this fun, all the lack of musical knowledge you can make up for with knowledge of twisting knobs.
 
