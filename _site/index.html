@@ -98,8 +98,8 @@
         >
           <div class="h4 db mx-auto max-width-2">
             <a
-              href="/posts/clojure-macro-magic-vars-from-map.html"
-              title="Permalink: Clojure Macros: Creating vars from a map"
+              href="/posts/localizing-a-ghost-theme.html"
+              title="Permalink: Localizing a Ghost Theme"
               >Latest Post</a
             ><span class="px1">/</span
             ><a
@@ -109,68 +109,101 @@
             >
           </div>
           <h1 class="h3 bold w-80-ns lh-title max-width-2 mx-auto my3">
-            Clojure Macros: Creating vars from a map
+            Localizing a Ghost Theme
           </h1>
           <section class="mkdwn lh-copy">
             <p>
-              The other day I was looking for a way to turn a map into a bunch
-              of vars. I know a macro is what will get the job done but I write
-              macros so rarely that it always takes me a while to figure it out.
-              In the end I ended up with something like this:
+              Lately I've spent some time setting up a blog for a friend.
+              <a href="https://ghost.org/">Ghost</a> is where it's at these days
+              when it comes to blogging — unless you're a nerd and love to play
+              with static site generators like myself.
             </p>
-            <pre><code>(defmacro def-all [m]
-  (-&gt;&gt; (for [[n v] m]
-         `(def ~(symbol n) ~v))
-       (into [])))
+            <p>
+              Ghost provides many beautiful themes out of the box but most of
+              them don't seem to support localization, which would be a nice
+              thing to have for my friends blog. So I did some digging and
+              essentially it comes down to:
+            </p>
+            <ol>
+              <li>
+                Using the <code>{{t}}</code> helper for any strings that should
+                be localized (<a
+                  href="https://ghost.org/docs/themes/helpers/translate/"
+                  >docs</a
+                >)
+              </li>
+              <li>
+                Providing a <code>locales/de.json</code> file with mappings to
+                localized strings
+              </li>
+            </ol>
+            <p>
+              The <a href="https://github.com/TryGhost/Dawn">Dawn theme</a> that
+              we were using was pretty light on strings that needed localization
+              so with a little bit of
+              <a href="https://github.com/machakann/vim-sandwich"
+                >vim-sandwich</a
+              >
+              magic and a custom mapping I was able to update it to use the
+              <code>{{t}}</code> helper in maybe half an hour.
+            </p>
+            <pre><code>xmap &lt;Leader&gt;t sai{{t &quot;&lt;CR&gt;&quot;}}&lt;CR&gt;
 </code></pre>
             <p>
-              Using <code>macroexpand</code> you can see that this translates to
-              the a bunch of <code>def</code> calls in a vector:
-            </p>
-            <pre><code>user=&gt; (macroexpand '(def-all {:a 1 :b 2}))
-[(def a 1) (def b 2)]
-</code></pre>
-            <p>
-              Like myself, you may wonder why the vector is needed. The issue is
-              that <code>for</code> will return a list and that would result in
-              the macro emitting the following Clojure code:
-            </p>
-            <pre><code>((def a 1) (def b 2))
-</code></pre>
-            <p>
-              After evaluating the two inner <code>def</code> forms, this will
-              result in another function call where the return value of the
-              first <code>def</code> is used as a function. Depending on what
-              you are defining this may fail or lead to unexpected behavior.
+              With the visual mapping above all I needed to do is select the
+              text that I want to localize and hit <code>&lt;space&gt;t</code>.
             </p>
             <p>
-              After sharing my solution using <code>(into [])</code> in the <a
-                href="https://clojurians.net/"
-                >Clojurians Slack</a
-              > I was made aware that instead if turning the thing into a vector
-              you can also just prepend a do into that list, resulting in code
-              that feels slightly more aligned with my intention:
+              <img
+                alt="selecting some text and using vim-sandwich to wrap it in {{t}}"
+                src="/images/uploads/sandwich-magic.gif"
+                title="vim sandwich wrapping with custom head/tail"
+              />
             </p>
-            <pre><code>(defmacro def-all [m]
-  (-&gt;&gt; (for [[n v] m]
-         `(def ~(symbol n) ~v))
-       (cons 'do)))
+            <p>
+              Now the last step was to create the initial
+              <code>locales/en.json</code> file. Later on I will use the English
+              one as a template to create a German localization.
+            </p>
+            <p>
+              Since typing out the <em>more than a dozen</em> strings manually
+              would have been boring I instead wrote a
+              <a href="https://babashka.org/">babashka</a> script to generate
+              the English locales file for me.
+            </p>
+            <pre><code class="clojure">#!/usr/bin/env bb
+(require '[clojure.java.io :as io]
+         '[cheshire.core :as json]
+         '[babashka.fs :as fs])
 
-(macroexpand '(def-all {:a 1 :b 2}))
-; returns
-(do (def a 1) (def b 2))
+(def entries
+  (-&gt;&gt; (fs/glob &quot;.&quot; &quot;**/*.hbs&quot;)
+       (map (fn [p] (slurp (io/file (str p)))))
+       (mapcat (fn [file-contents]
+                 (map second (re-seq #&quot;\{\{t \&quot;(.*)\&quot;\}\}&quot; file-contents))))
+       (set)
+       (map (fn [s] [s s]))
+       (into {})))
+
+(println (json/generate-string entries {:pretty true}))
 </code></pre>
             <p>
-              I realize this is a super basic macro but I can totally see how
-              that might be useful to people starting to write their own macros.
-              If you're looking for a more full-fledged guide, <a
-                href="https://www.braveclojure.com/writing-macros/"
-                >Clojure for the Brave and True</a
-              > got you covered.
+              This script essentially finds all usages of the
+              <code>{{t}}</code> helper and spits out a JSON object where the
+              keys are identical to the values (i.e. if the theme was English,
+              that would be the <code>locales/en.json</code> file).
             </p>
             <p>
-              Thanks to Justin Smith for sharing his experience on Slack with me
-              so many times.
+              Babashka makes figuring this stuff out such a breeze because I can
+              just incrementally build this out in a connected babashka nREPL
+              session instead of changing the file and running the script as a
+              whole on every change. REPLs for the win!
+            </p>
+            <p>
+              In the end I created
+              <a href="https://github.com/TryGhost/Dawn/pull/38"
+                >this little PR to the theme</a
+              >.
             </p>
           </section>
         </article>
@@ -178,6 +211,13 @@
           <section class="lh-copy">
             <h3 class="mb2">Other Posts</h3>
             <ol class="list-reset">
+              <li class="mb2">
+                <a
+                  class="h3 mr1"
+                  href="/posts/clojure-macro-magic-vars-from-map.html"
+                  >Clojure Macros: Creating vars from a map</a
+                ><span class="block h5">February 2021</span>
+              </li>
               <li class="mb2">
                 <a
                   class="h3 mr1"
