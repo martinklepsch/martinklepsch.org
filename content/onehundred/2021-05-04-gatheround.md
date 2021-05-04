@@ -1,5 +1,10 @@
 ---
 title: Gatheround
+date-published: 2021-05-04T18:01:34.293Z
+uuid: 6510e162-2a88-47d8-bdea-a60894ab999d
+og-image: /images/selfies/3.jpg
+type: onehundred
+permalink: /100/gatheround.html
 ---
 Until recently I worked for a company called Icebreaker. Now I work for a company called [Gatheround](https://gatheround.com). After months of behind the scenes work we finally changed our name to something a little more open. Something that better reflects the ambitions behind the product. 
 
