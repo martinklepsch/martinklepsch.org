@@ -8,7 +8,7 @@ permalink: /100/gatheround.html
 ---
 Until recently I worked for a company called Icebreaker. Now I work for a company called [Gatheround](https://gatheround.com). After months of behind the scenes work we finally changed our name to something a little more open. Something that better reflects the ambitions behind the product. 
 
-Some time last year we started with a list of a dozen or so names. 
+Some time last year we started with a list of a dozen or so names. And here we are today.
 
 [![screenshot of the Gatheround homepage](/images/uploads/gatheround-homepage-screenshot.png "Gatheround")](https://gatheround.com)
 
