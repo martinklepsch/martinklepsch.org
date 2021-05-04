@@ -1,6 +1,6 @@
 ---
 title: Localizing a Ghost Theme
-permalink: localizing-a-ghost-theme
+permalink: /posts/localizing-a-ghost-theme.html
 ---
 Lately I've spent some time setting up a blog for a friend. [Ghost](https://ghost.org/) is where it's at these days when it comes to blogging — unless you're a nerd and love to play with static site generators like myself. 
 
