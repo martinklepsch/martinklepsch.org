@@ -1,6 +1,10 @@
 ---
 title: Localizing a Ghost Theme
 permalink: /posts/localizing-a-ghost-theme.html
+date-published: 2021-05-04T16:25:56.005Z
+uuid: 542795e9-4a9c-4542-b57d-0bbe4e3e332c
+og-image: /images/selfies/2.jpg
+type: post
 ---
 Lately I've spent some time setting up a blog for a friend. [Ghost](https://ghost.org/) is where it's at these days when it comes to blogging — unless you're a nerd and love to play with static site generators like myself. 
 
