@@ -1,7 +1,7 @@
 ---
 title: Homoiconicity & Feature Flags
 date-published: 2020-05-24T11:09:30.032Z
-uuid:
+uuid: a9a77281-eb62-472c-a08b-1e9935c8a9c2
 og-image: /images/selfies/3.jpg
 permalink: /posts/homoiconicity-and-feature-flags.html
 published: false
