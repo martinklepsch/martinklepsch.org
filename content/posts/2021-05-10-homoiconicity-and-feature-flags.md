@@ -18,7 +18,7 @@ What we're left with now is some 250+ conditionals involving our `use-new-brand?
 
 ## Introducing Homoiconicity
 
-If you're well familiar with homoiconicity this may not be entirely new but for those who aren't: homoiconicity is the fancy word for when you can read your program as data. Among many other llisp/scheme languages Clojure is homoiconic:
+If you're well familiar with homoiconicity this may not be entirely new but for those who aren't: homoiconicity is the fancy word for when you can read your program as data. Among many other lisp/scheme languages Clojure is homoiconic:
 
 ```clojure
 (doseq [n (range 10)]
@@ -52,7 +52,7 @@ With this basic understanding of homoiconicity, lets take a look at what those f
               :class "prxxs h3"}))
 ```
 
-And so on. Now we have 250+ of those in our codebase but don't really plan on reversing that change any time soon... so we got to get rid of them. Fortunately Clojure is homoiconic and doing this is possible in a way that really tickles my brain in a nice way. 
+And so on. Now we have 250+ of those in our codebase but don't really plan on reversing that change any time soon... so we got to get rid of them. Fortunately Clojure is homoiconic and doing this is possible in a fashion that really tickles my brain in a nice way. 
 
 ## Code Rewriting
 
@@ -66,17 +66,17 @@ The next two sections will be about some 30 lines of code got us there about 90%
 
 One of the libraries that is included is [rewrite-clj](https://github.com/clj-commons/rewrite-clj). And, you guessed it, rewrite-clj helps you 🥁 ... rewrite Clojure/Script code. 
 
-I hadn't use rewrite-clj before much am still a bit unfamiliar with it's API but after asking some questions on Slack [@borkdude](https://twitter.com/borkdude) (who also created Babashka) helped me out with an example of transforming conditionals that I then adapted for my specific situation.
+I hadn't used rewrite-clj before much am still a bit unfamiliar with it's API but after asking some questions on Slack [@borkdude](https://twitter.com/borkdude) (who also created Babashka) helped me out with an example of transforming conditionals that I then adapted for my specific situation.
 
 I will not go into the code in detail here but if you're interested, I recorded [a short 4 minute video explaining it at a surface level and demonstrating my workflow](https://www.loom.com/share/70c1d3c45d9f45e9833344b5bd076813).
 
-The rewriting logic showed in the video ignores many edge cases and isn't an attempt at an wholistic tool to remove dead code branches but in our case this basic tool removed about 95% of the feature flag usages, leaving a mere 12 cases behind that used things like `cond->` or conjunctions.
+The rewriting logic showed in the video ignores many edge cases and isn't an attempt at an holistic tool to remove dead code branches but in our case this basic tool removed about 95% of the feature flag usages, leaving a mere 12 cases behind that used things like `cond->` or conjunctions.
 
 Of the more than 230 feature flags that have been removed only about ten needed additional adjustments for indentation. This happened mostly when a feature-flag-using conditional wrapped multiple lines of code. Due to the locality of our changes that (fortunately) was relatively uncommon. If we had set up an automatic formatter for our code this also wouldn't have required any extra work.
 
 ## Onward
 
-This has been an extremely satisfying project, if you can even all those 30 lines a "project". I hope you also learned something or found it helpful in other ways!
+This has been an extremely satisfying project, if you can even call those 30 lines a "project". I hope you also learned something or found it helpful in other ways!
 
 Thanks to [Michiel Borkent @borkdude](https://github.com/sponsors/borkdude) for all his work on Babashka. The interactive development workflow shown in [the video](https://www.loom.com/share/70c1d3c45d9f45e9833344b5bd076813) paired with blazing startup times and a rich ecosystem makes it feel like there is a lot of potential still to be uncovered.
 
