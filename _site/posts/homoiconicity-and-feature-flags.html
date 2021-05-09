@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+      itemprop="author"
+      name="author"
+    />
+    <meta
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+      itemprop="keywords"
+      name="keywords"
+    />
+    <meta
+      content="At work we've been using feature flags to roll out various changes of the product. Most recently the rebrand from Icebreaker to Gatheround . This allowed us to continuously ship small pieces..."
+      itemprop="description"
+      name="description"
+    />
+    <link
+      href="https://martinklepsch.org/posts/homoiconicity-and-feature-flags.html"
+      rel="canonical"
+    />
+    <title>Homoiconicity & Feature Flags — Martin Klepsch</title>
+    <meta content="Homoiconicity &amp; Feature Flags" property="og:title" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="At work we've been using feature flags to roll out various changes of the product. Most recently the rebrand from Icebreaker to Gatheround . This allowed us to continuously ship small pieces..."
+      property="og:description"
+    />
+    <meta
+      content="https://martinklepsch.org/posts/homoiconicity-and-feature-flags.html"
+      property="og:url"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      property="og:image"
+    />
+    <meta content="martinklepsch.org" property="og:site_name" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="@martinklepsch" name="twitter:site" />
+    <meta content="@martinklepsch" name="twitter:creator" />
+    <meta content="Homoiconicity &amp; Feature Flags" name="twitter:title" />
+    <meta
+      content="At work we've been using feature flags to roll out various changes of the product. Most recently the rebrand from Icebreaker to Gatheround . This allowed us to continuously ship small pieces..."
+      name="twitter:description"
+    />
+    <meta
+      content="https://martinklepsch.org/images/selfies/3.jpg"
+      name="twitter:image"
+    />
+    <link href="/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Sitewide Atom Feed"
+      type="application/atom+xml"
+    />
+    <link
+      href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="/stylesheets/martinklepschorg-v3.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-3138561-8"]);
+      _gaq.push(["_setDomainName", "martinklepsch.org"]);
+      _gaq.push(["_trackPageview"]);
+
+      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body class="post">
+    <div class="mx1">
+      <div class="max-width-3 mx-auto mb5">
+        <article
+          class="mt4"
+          itemprop="blogPost"
+          itemscope=""
+          itemtype="http://schema.org/BlogPosting"
+        >
+          <div class="h4 db mx-auto max-width-2">
+            <a
+              href="/posts/homoiconicity-and-feature-flags.html"
+              title="Permalink: Homoiconicity &amp; Feature Flags"
+              >May 2020</a
+            ><span class="px1">/</span><a href="/" title="Home">Home</a
+            ><span class="px1">/</span
+            ><a
+              href="https://twitter.com/martinklepsch"
+              title="@martinklepsch on Twitter"
+              >@martinklepsch</a
+            >
+          </div>
+          <h1 class="h3 bold w-80-ns lh-title max-width-2 mx-auto my3">
+            Homoiconicity & Feature Flags
+          </h1>
+          <section class="mkdwn lh-copy">
+            <p>
+              At work we've been using feature flags to roll out various changes
+              of the product. Most recently the rebrand from Icebreaker to
+              <a href="https://gatheround.com">Gatheround</a>. This allowed us
+              to continuously ship small pieces and review and improve these on
+              their own pace without creating two vastly different branches of
+              changes.
+            </p>
+            <p>
+              With the rebrand work in particular there were lots of places
+              where we needed relatively small, local differentiations between
+              the old and the new appearance. Oftentimes just applying a
+              different set of classes to a DOM element. Less often, up to
+              swapping entire components.
+            </p>
+            <p>
+              Overall this approach seemed to work really well and we shipped
+              the rebrand without significant delays and at a level of quality
+              that made everyone happy. What we're left with now is some 250+
+              conditionals involving our <code>use-new-brand?</code> feature
+              flag.
+            </p>
+            <p><em>This tells the story of how we got rid of those.</em></p>
+            <h2>Introducing Homoiconicity</h2>
+            <p>
+              If you're well familiar with homoiconicity this may not be
+              entirely new but for those who aren't: homoiconicity is the fancy
+              word for when you can read your program as data. Among many other
+              llisp/scheme languages Clojure is homoiconic:
+            </p>
+            <pre><code class="clojure">(doseq [n (range 10)]
+  (println n))
+</code></pre>
+            <p>
+              The program above can be run but it can also be read as multiple
+              nested lists:
+            </p>
+            <pre><code class="clojure">[doseq     [n [range 10]]    [println n]]
+</code></pre>
+            <p>
+              Now, if you know what I'm talking about you will see that I
+              skipped over a small detail here, namely that the code above uses
+              two types of parenthesis and that information got lost in this
+              simplified array representation.
+            </p>
+            <p>
+              When doing it right we would end up with exactly the same
+              representation as in the first code sample. And that is
+              homoiconicity.
+            </p>
+            <h2>Homoiconicity &amp; Feature Flags</h2>
+            <p>
+              With this basic understanding of homoiconicity, lets take a look
+              at what those feature flags looked like in practice:
+            </p>
+            <pre><code class="clojure">[:div
+ {:class (if (config/use-new-brand?)
+           &quot;bg-new-brand typo-body&quot;
+           &quot;bg-old-brand typo-large&quot;)}]
+</code></pre>
+            <pre><code class="clojure">(when (config/use-new-brand?)
+  (icon/Icon {:name &quot;conversation-color&quot;
+              :class &quot;prxxs h3&quot;}))
+</code></pre>
+            <p>
+              And so on. Now we have 250+ of those in our codebase but don't
+              really plan on reversing that change any time soon... so we got to
+              get rid of them. Fortunately Clojure is homoiconic and doing this
+              is possible in a way that really tickles my brain in a nice way.
+            </p>
+            <h2>Code Rewriting</h2>
+            <p>
+              ... isn't new of course, CircleCI famously
+              <a
+                href="https://circleci.com/blog/rewriting-your-test-suite-in-clojure-in-24-hours/"
+                >rewrote 14.000 lines of test code to use a new testing
+                framework</a
+              >. I'm sure many others have done similar stuff and this general
+              idea also isn't limited to Clojure. Code rewriting tools exist in
+              many language ecosystems.
+              <strong
+                >But how easily you can do it in Clojure felt very
+                empowering.</strong
+              >
+            </p>
+            <p>
+              The next two sections will be about some 30 lines of code got us
+              there about 90% of the way.
+            </p>
+            <h2>Babashka + rewrite-clj</h2>
+            <p>
+              <a href="https://babashka.org/">Babashka</a> is a &quot;fast,
+              native Clojure scripting runtime&quot;. With Babashka you can work
+              with the filesystem with shell-like abstractions, make http
+              requests and much more. You can't use every Clojure library from
+              Babashka but many useful ones are included right out of the box.
+            </p>
+            <p>
+              One of the libraries that is included is
+              <a href="https://github.com/clj-commons/rewrite-clj"
+                >rewrite-clj</a
+              >. And, you guessed it, rewrite-clj helps you 🥁 ... rewrite
+              Clojure/Script code.
+            </p>
+            <p>
+              I hadn't use rewrite-clj before much am still a bit unfamiliar
+              with it's API but after asking some questions on Slack
+              <a href="https://twitter.com/borkdude">@borkdude</a> (who also
+              created Babashka) helped me out with an example of transforming
+              conditionals that I then adapted for my specific situation.
+            </p>
+            <p>
+              I will not go into the code in detail here but if you're
+              interested, I recorded
+              <a
+                href="https://www.loom.com/share/70c1d3c45d9f45e9833344b5bd076813"
+                >a short 4 minute video explaining it at a surface level and
+                demonstrating my workflow</a
+              >.
+            </p>
+            <p>
+              The rewriting logic showed in the video ignores many edge cases
+              and isn't an attempt at an wholistic tool to remove dead code
+              branches but in our case this basic tool removed about 95% of the
+              feature flag usages, leaving a mere 12 cases behind that used
+              things like <code>cond-&gt;</code> or conjunctions.
+            </p>
+            <p>
+              Of the more than 230 feature flags that have been removed only
+              about ten needed additional adjustments for indentation. This
+              happened mostly when a feature-flag-using conditional wrapped
+              multiple lines of code. Due to the locality of our changes that
+              (fortunately) was relatively uncommon. If we had set up an
+              automatic formatter for our code this also wouldn't have required
+              any extra work.
+            </p>
+            <h2>Onward</h2>
+            <p>
+              This has been an extremely satisfying project, if you can even all
+              those 30 lines a &quot;project&quot;. I hope you also learned
+              something or found it helpful in other ways!
+            </p>
+            <p>
+              Thanks to
+              <a href="https://github.com/sponsors/borkdude"
+                >Michiel Borkent @borkdude</a
+              >
+              for all his work on Babashka. The interactive development workflow
+              shown in
+              <a
+                href="https://www.loom.com/share/70c1d3c45d9f45e9833344b5bd076813"
+                >the video</a
+              >
+              paired with blazing startup times and a rich ecosystem feels like
+              it has truly a long way to go.
+            </p>
+            <p>
+              I'd also like to thank
+              <a href="https://github.com/lread">Lee Read</a>, who has done such
+              an amazing job making rewrite-clj ready for more platforms like
+              ClojureScript and Babashka as well as making sure it's
+              future-proof.
+            </p>
+            <p>
+              If you thought this was interesting, consider
+              <a href="https://twitter.com/martinklepsch"
+                >following me on Twitter</a
+              >!
+            </p>
+          </section>
+        </article>
+        <div class="my3 em-before max-width-2 mx-auto">
+          <a href="https://twitter.com/martinklepsch">@martinklepsch</a>, May
+          2020
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
