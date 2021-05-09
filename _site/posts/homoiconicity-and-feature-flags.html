@@ -146,7 +146,7 @@
               If you're well familiar with homoiconicity this may not be
               entirely new but for those who aren't: homoiconicity is the fancy
               word for when you can read your program as data. Among many other
-              llisp/scheme languages Clojure is homoiconic:
+              lisp/scheme languages Clojure is homoiconic:
             </p>
             <pre><code class="clojure">(doseq [n (range 10)]
   (println n))
@@ -186,7 +186,8 @@
               And so on. Now we have 250+ of those in our codebase but don't
               really plan on reversing that change any time soon... so we got to
               get rid of them. Fortunately Clojure is homoiconic and doing this
-              is possible in a way that really tickles my brain in a nice way.
+              is possible in a fashion that really tickles my brain in a nice
+              way.
             </p>
             <h2>Code Rewriting</h2>
             <p>
@@ -223,7 +224,7 @@
               Clojure/Script code.
             </p>
             <p>
-              I hadn't use rewrite-clj before much am still a bit unfamiliar
+              I hadn't used rewrite-clj before much am still a bit unfamiliar
               with it's API but after asking some questions on Slack
               <a href="https://twitter.com/borkdude">@borkdude</a> (who also
               created Babashka) helped me out with an example of transforming
@@ -240,7 +241,7 @@
             </p>
             <p>
               The rewriting logic showed in the video ignores many edge cases
-              and isn't an attempt at an wholistic tool to remove dead code
+              and isn't an attempt at an holistic tool to remove dead code
               branches but in our case this basic tool removed about 95% of the
               feature flag usages, leaving a mere 12 cases behind that used
               things like <code>cond-&gt;</code> or conjunctions.
@@ -256,8 +257,8 @@
             </p>
             <h2>Onward</h2>
             <p>
-              This has been an extremely satisfying project, if you can even all
-              those 30 lines a &quot;project&quot;. I hope you also learned
+              This has been an extremely satisfying project, if you can even
+              call those 30 lines a &quot;project&quot;. I hope you also learned
               something or found it helpful in other ways!
             </p>
             <p>
