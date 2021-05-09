@@ -8,6 +8,7 @@ This blog is built using Clojure, using Babashka and Bootleg. Source code can be
 - `bb` 0.0.99+ from [babashka](https://github.com/borkdude/babashka)
 - `bootleg` 0.1.9+ from [bootleg](https://github.com/retrogradeorbit/bootleg)
 - [`entr`](https://github.com/eradman/entr)
+- `npm install --global http-server`
 
 
 ### Common workflows
