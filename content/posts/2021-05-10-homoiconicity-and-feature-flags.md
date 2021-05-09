@@ -1,13 +1,12 @@
 ---
 title: Homoiconicity & Feature Flags
 date-published: 2020-05-24T11:09:30.032Z
-uuid: a9a77281-eb62-472c-a08b-1e9935c8a9c2
-og-image: /images/selfies/3.jpg
 permalink: /posts/homoiconicity-and-feature-flags.html
+og-image: /images/selfies/3.jpg
+uuid: a9a77281-eb62-472c-a08b-1e9935c8a9c2
 published: false
 type: post
 ---
-
 At work we've been using feature flags to roll out various changes of the product. Most recently the rebrand from Icebreaker to [Gatheround](https://gatheround.com). This allowed us to continuously ship small pieces and review and improve these on their own pace without creating two vastly different branches of changes.
 
 With the rebrand work in particular there were lots of places where we needed relatively small, local differentiations between the old and the new appearance. Oftentimes just applying a different set of classes to a DOM element. Less often, up to swapping entire components.
@@ -36,8 +35,8 @@ Now, if you know what I'm talking about you will see that I skipped over a small
 
 When doing it right we would end up with exactly the same representation as in the first code sample. And that is homoiconicity.
 
-
 ## Homoiconicity & Feature Flags
+
 With this basic understanding of homoiconicity, lets take a look at what those feature flags looked like in practice:
 
 ```clojure
@@ -79,7 +78,7 @@ Of the more than 230 feature flags that have been removed only about ten needed 
 
 This has been an extremely satisfying project, if you can even all those 30 lines a "project". I hope you also learned something or found it helpful in other ways!
 
-Thanks to [Michiel Borkent @borkdude](https://github.com/sponsors/borkdude) for all his work on Babashka. The interactive development workflow shown in [the video](https://www.loom.com/share/70c1d3c45d9f45e9833344b5bd076813) paired with blazing  startup times and a rich ecosystem feels like it has truly a long way to go.
+Thanks to [Michiel Borkent @borkdude](https://github.com/sponsors/borkdude) for all his work on Babashka. The interactive development workflow shown in [the video](https://www.loom.com/share/70c1d3c45d9f45e9833344b5bd076813) paired with blazing startup times and a rich ecosystem makes it feel like there is a lot of potential still to be uncovered.
 
 I'd also like to thank [Lee Read](https://github.com/lread), who has done such an amazing job making rewrite-clj ready for more platforms like ClojureScript and Babashka as well as making sure it's future-proof.
 
