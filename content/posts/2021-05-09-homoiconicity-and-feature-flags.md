@@ -1,10 +1,10 @@
 ---
 title: Homoiconicity & Feature Flags
-date-published: 2020-05-24T11:09:30.032Z
+date-published: 2021-05-09T22:09:30.032Z
 permalink: /posts/homoiconicity-and-feature-flags.html
 og-image: /images/selfies/3.jpg
 uuid: a9a77281-eb62-472c-a08b-1e9935c8a9c2
-published: false
+published: true
 type: post
 ---
 At work we've been using feature flags to roll out various changes of the product. Most recently the rebrand from Icebreaker to [Gatheround](https://gatheround.com). This allowed us to continuously ship small pieces and review and improve these on their own pace without creating two vastly different branches of changes.
