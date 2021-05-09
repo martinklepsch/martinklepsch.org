@@ -78,8 +78,8 @@ Of the more than 230 feature flags that have been removed only about ten needed 
 
 This has been an extremely satisfying project, if you can even call those 30 lines a "project". I hope you also learned something or found it helpful in other ways!
 
-Thanks to [Michiel Borkent @borkdude](https://github.com/sponsors/borkdude) for all his work on Babashka. The interactive development workflow shown in [the video](https://www.loom.com/share/70c1d3c45d9f45e9833344b5bd076813) paired with blazing startup times and a rich ecosystem makes it feel like there is a lot of potential still to be uncovered.
+Thanks to [Michiel "borkdude" Borkent](https://github.com/sponsors/borkdude) for all his work on Babashka. The interactive development workflow shown in [the video](https://www.loom.com/share/70c1d3c45d9f45e9833344b5bd076813) paired with blazing startup times and a rich ecosystem makes it feel like there is a lot of potential still to be uncovered.
 
-I'd also like to thank [Lee Read](https://github.com/lread), who has done such an amazing job making rewrite-clj ready for more platforms like ClojureScript and Babashka as well as making sure it's future-proof.
+I'd also like to thank [Lee Read](https://github.com/lread), who has done such an amazing job making rewrite-clj ready for more platforms like ClojureScript and Babashka as well as making sure it's future-proof by adding more tests and fixing many long standing bugs.
 
 If you thought this was interesting, consider [following me on Twitter](https://twitter.com/martinklepsch)!
