@@ -82,4 +82,6 @@ Thanks to [Michiel "borkdude" Borkent](https://github.com/sponsors/borkdude) for
 
 I'd also like to thank [Lee Read](https://github.com/lread), who has done such an amazing job making rewrite-clj ready for more platforms like ClojureScript and Babashka as well as making sure it's future-proof by adding more tests and fixing many long standing bugs.
 
+After writing this blog post and detailing the beginnings of this idea I also took a bit more time **[to clean up the code and put it on GitHub](https://github.com/martinklepsch/prune-feature-flags.clj)**.
+
 If you thought this was interesting, consider [following me on Twitter](https://twitter.com/martinklepsch)!
