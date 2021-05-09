@@ -57,7 +57,9 @@
 (def selfies
   (->> (file-seq (io/file "resources/public/images/selfies/"))
        (filter #(.isFile %))
-       (map #(str/replace % #"^resources/public/" "/"))))
+       (remove #(contains? #{"3.jpg"} (.getName %)))
+       (map #(str/replace % #"^resources/public/" "/"))
+       (sort)))
 
 (defn get-frontmatter [f]
   (let [[yml _] (file-contents f)]
