@@ -2,7 +2,7 @@
 title: Homoiconicity & Feature Flags
 date-published: 2021-05-09T22:09:30.032Z
 permalink: /posts/homoiconicity-and-feature-flags.html
-og-image: /images/selfies/3.jpg
+og-image: /images/selfies/10.jpg
 uuid: a9a77281-eb62-472c-a08b-1e9935c8a9c2
 published: true
 type: post
