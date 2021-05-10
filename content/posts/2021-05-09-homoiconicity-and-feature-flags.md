@@ -33,7 +33,7 @@ The program above can be run but it can also be read as multiple nested lists:
 
 Now, if you know what I'm talking about you will see that I skipped over a small detail here, namely that the code above uses two types of parenthesis and that information got lost in this simplified array representation.
 
-When doing it right we would end up with exactly the same representation as in the first code sample. And that is homoiconicity.
+When doing it right (by differentiating between the two types of lists) we would end up with exactly the same representation as in the first code sample. And that is homoiconicity.
 
 ## Homoiconicity & Feature Flags
 
@@ -58,7 +58,7 @@ And so on. Now we have 250+ of those in our codebase but don't really plan on re
 
 ... isn't new of course, CircleCI famously [rewrote 14.000 lines of test code to use a new testing framework](https://circleci.com/blog/rewriting-your-test-suite-in-clojure-in-24-hours/). I'm sure many others have done similar stuff and this general idea also isn't limited to Clojure. Code rewriting tools exist in many language ecosystems. **But how easily you can do it in Clojure felt very empowering.** 
 
-The next two sections will be about some 30 lines of code got us there about 90% of the way.
+The next two sections will be about some 30 lines of code that got us there about 90% of the way.
 
 ## Babashka + rewrite-clj
 
