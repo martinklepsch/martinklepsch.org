@@ -1,5 +1,5 @@
 ---
-title: Drawing a 6 Thousands of Times
+title: drawing sixes
 ---
 There's a guy in my neighborhood following a strange art project. He paints the digit '6' on all kinds of crap that you can find on the street. He paints it pretty much exclusively on things that will disappear again. Trash, poster ads, giveaway boxes, you name it. 
 
