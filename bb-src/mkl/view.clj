@@ -171,6 +171,19 @@
     });
   }"]))
 
+(defn comment-input []
+  [:div.my3.max-width-2.mx-auto
+   [:input {:style {:width "80%"
+                    :color "var(--text)"
+                    :background-color "var(--bg)"
+                    :padding "8px"
+                    :border-radius "3px"
+                    :border "1px solid var(--link)"}
+            :id "feedback-input"
+            :placeholder "have something to say?"}]
+   [:script {:src "https://comments-321314.web.app/cmts.js"}]
+   [:script "setupInput(document.getElementById(\"feedback-input\"))"]])
+
 (defn post-page [post]
   [:html {:lang "en" :itemtype "http://schema.org/Blog"}
    (head post)
@@ -178,7 +191,8 @@
     [:div.mx1
      [:div.max-width-3.mx-auto.mb5
       (render-post post {:permalink-page? true})
-      (signature post)]]]])
+      (signature post)
+      (comment-input)]]]])
 
 (defn onehundred-page [idx post]
   (let [fm (:frontmatter post)]
@@ -190,8 +204,9 @@
         (:title fm)]
        [:section.mkdwn.lh-copy
         (:content post)]
-       [:div.mt3
-        [:a {:href "/100/writing-100-things.html"} (inc idx) " / 100"]]]]]))
+       [:div.my3
+        [:a {:href "/100/writing-100-things.html"} (inc idx) " / 100"]]
+       (comment-input)]]]))
 
 ;; Rendering API
 ;; Goals
