@@ -1,5 +1,10 @@
 ---
 title: interactive design system docs
+date-published: 2021-08-02T23:58:51.578Z
+uuid: 10080765-1b49-42c1-8a65-0047a1b4cb42
+og-image: /images/selfies/14.jpg
+type: onehundred
+permalink: /100/interactive-design-system-docs.html
 ---
 Having [worked on design systems](https://martinklepsch.org/100/gatheround.html) for a good amount of time I've also been thinking about design system documentation quite a bit. Storybook is great but it's also [so intertwined with build tools](https://storybook.js.org/tutorials/intro-to-storybook/react/en/get-started/) that it's not really fun to target from ClojureScript. I know some people are doing it but they didn't seem too excited about it. 
 
