@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/Blog" lang="en"><head><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"><meta content="Martin Klepsch (martinklepsch@googlemail.com)" itemprop="author" name="author"><meta content="blog, clojure, development, clojurescript, heroku, amazon s3, aws" itemprop="keywords" name="keywords"><meta content="Having worked on design systems for a good amount of time I've also been thinking about design system documentation quite a bit. Storybook is great but it's also so intertwined with build to..." itemprop="description" name="description"><link href="https://martinklepsch.org/100/interactive-design-system-docs.html" rel="canonical"><title>interactive design system docs — Martin Klepsch</title><meta content="interactive design system docs" property="og:title"><meta content="article" property="og:type"><meta content="Having worked on design systems for a good amount of time I've also been thinking about design system documentation quite a bit. Storybook is great but it's also so intertwined with build to..." property="og:description"><meta content="https://martinklepsch.org/100/interactive-design-system-docs.html" property="og:url"><meta content="https://martinklepsch.org/images/selfies/6.jpg" property="og:image"><meta content="martinklepsch.org" property="og:site_name"><meta content="summary" name="twitter:card"><meta content="@martinklepsch" name="twitter:site"><meta content="@martinklepsch" name="twitter:creator"><meta content="interactive design system docs" name="twitter:title"><meta content="Having worked on design systems for a good amount of time I've also been thinking about design system documentation quite a bit. Storybook is great but it's also so intertwined with build to..." name="twitter:description"><meta content="https://martinklepsch.org/images/selfies/6.jpg" name="twitter:image"><link href="/images/favicon.ico" rel="shortcut icon"><link href="/atom.xml" rel="alternate" title="Sitewide Atom Feed" type="application/atom+xml"><link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet" type="text/css"><link href="/stylesheets/martinklepschorg-v3.css" rel="stylesheet" type="text/css"><script type="text/javascript">var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3138561-8']);
+    _gaq.push(['_setDomainName', 'martinklepsch.org']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+    : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+    })();</script></head><body class="onehundred"><div class="max-width-2 mx-auto my4 px1"><h1 class="h3 bold w-80-ns lh-title max-width-2 mx-auto">interactive design system docs</h1><section class="mkdwn lh-copy"><p>Having <a href="https://martinklepsch.org/100/gatheround.html">worked on design systems</a> for a good amount of time I've also been thinking about design system documentation quite a bit. Storybook is great but it's also so intertwined with build tools that it's not really fun to target from ClojureScript. I know some people are doing it but they didn't seem too excited about it. </p><p>We ended up just making yet another component which shows all our components. It's basic but it's good enough for our current needs. </p><p>Now recently there's been quite a lot of interesting things happening around the <a href="https://github.com/borkdude/sci">small clojure interpreter (sci)</a>, which made me wonder if maybe it could also be used as tool to provide interactive design system / component documentation. </p><p>And... it looks like it could be quite nice. <code>sci</code> makes it very easy to access any function in your ClojureScript code and after that you don't need much more than a small textarea with an example of using the component and a place to render it.</p><p>With a bit more work you could probably colocate the examples with the component via macros or metadata. Another macro could be used to fully expose specific namespaces.</p><p>Seems nice? </p><pre><code>(rum/defc Button &lt; rum/static
+  [attrs label]
+  [:button attrs label])
+
+(rum/defc ComponentViewer &lt; rum/static
+  []
+  (let [[input set-input!] (rum/use-state &quot;(ui/Button {:on-click #(js/alert :hello)} \&quot;hello\&quot;)&quot;)
+        [c set-c!] (rum/use-state nil)]
+    (rum/use-effect!
+     (fn []
+       (set-c!
+        (sci/eval-string input
+                         {:classes {'js goog/global :allow :all}
+                          ;; make the Button component available
+                          :namespaces {'ui {'Button Button}}})))
+     [input])
+    [:div
+     [:div c]
+     [:textarea {:on-change #(set-input! (.. % -target -value))
+                 :default-value input
+                 :style {:font-family &quot;monospace&quot;}}]]))
+</code></pre></section><div class="my3"><a href="/100/writing-100-things.html">15 / 100</a></div><div class="my3 max-width-2 mx-auto"><input id="feedback-input" placeholder="have something to say?" style="width:80%;color:var(--text);background-color:var(--bg);padding:8px;border-radius:3px;border:1px solid var(--link);"><script src="https://comments-321314.web.app/cmts.js"></script><script>setupInput(document.getElementById("feedback-input"))</script></div></div></body></html>
