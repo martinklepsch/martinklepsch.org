@@ -1,12 +1,7 @@
 ---
 title: interactive design system docs
-date-published: 2021-08-02T23:58:05.147Z
-uuid: 3e54f09c-c30f-46d4-a066-684924a34983
-og-image: /images/selfies/6.jpg
-type: onehundred
-permalink: /100/interactive-design-system-docs.html
 ---
-Having [worked on design systems](https://martinklepsch.org/100/gatheround.html) for a good amount of time I've also been thinking about design system documentation quite a bit. Storybook is great but it's also so intertwined with build tools that it's not really fun to target from ClojureScript. I know some people are doing it but they didn't seem too excited about it. 
+Having [worked on design systems](https://martinklepsch.org/100/gatheround.html) for a good amount of time I've also been thinking about design system documentation quite a bit. Storybook is great but it's also [so intertwined with build tools](https://storybook.js.org/tutorials/intro-to-storybook/react/en/get-started/) that it's not really fun to target from ClojureScript. I know some people are doing it but they didn't seem too excited about it. 
 
 We ended up just making yet another component which shows all our components. It's basic but it's good enough for our current needs. 
 
