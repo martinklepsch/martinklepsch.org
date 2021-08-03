@@ -41,3 +41,5 @@ Seems nice?
                  :default-value input
                  :style {:font-family "monospace"}}]]))
 ```
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Tiny demo GIF of rendering a ClojureScript React component via `sci` and updating it from the same page. <a href="https://t.co/RZuKQjlZ1F">pic.twitter.com/RZuKQjlZ1F</a></p>&mdash; Martin Klepsch (14/100 posts) (@martinklepsch) <a href="https://twitter.com/martinklepsch/status/1422473867663192121?ref_src=twsrc%5Etfw">August 3, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
