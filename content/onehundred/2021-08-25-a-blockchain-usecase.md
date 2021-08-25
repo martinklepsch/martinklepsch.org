@@ -1,10 +1,5 @@
 ---
 title: a blockchain usecase
-date-published: 2021-08-25T23:31:26.517Z
-uuid: bbc3fe3e-8b76-4d1c-b3d5-b392261d8a4a
-og-image: /images/selfies/5.jpg
-type: onehundred
-permalink: /100/a-blockchain-usecase.html
 ---
 yes, I know — but bear with me here for a second...
 
@@ -22,4 +17,4 @@ Add on top that large private collections, museums and even private collectors w
 
 I don't have a horse in this race really but I think it's undeniable that there's *some innovation* in the basic concept of a blockchain. Plus, it's just fun to think about an application like that. It's not going to magically solve all problems in this space but it does seem to fix some of the more annoying ones.
 
-Oh, and of course there's a platform doing just this: https://www.artory.com/.
+Oh, and of course there's a platform doing just this: <https://www.artory.com/>.
