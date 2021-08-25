@@ -1,7 +1,7 @@
 ---
 title: a blockchain usecase
 ---
-yes, I know. But bear with me here for a second.
+yes, I know — but bear with me here for a second...
 
 Yesterday I was at a small birthday gathering. We all had some chili and talked about this and that. One of my friends works at a private art collection that had recently gifted a large chunk of it to another institution. The process of gifting all these art pieces **took five years**. 
 
