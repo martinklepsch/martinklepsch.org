@@ -1,5 +1,10 @@
 ---
 title: luma gets it
+date-published: 2021-08-25T11:01:48.696Z
+uuid: a163c594-b1a7-4204-b03f-c23b42a841d6
+og-image: /images/selfies/4.jpg
+type: onehundred
+permalink: /100/luma-gets-it.html
 ---
 I really love [Luma](https://lu.ma/). It fits so well into my internal narrative about how to build a business/audience/community.
 
