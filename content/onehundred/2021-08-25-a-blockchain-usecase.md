@@ -1,10 +1,5 @@
 ---
 title: a blockchain usecase
-date-published: 2021-08-25T23:27:36.356Z
-uuid: cfbddcf2-74ea-436c-a0e2-5f11cd933f59
-og-image: /images/selfies/5.jpg
-type: onehundred
-permalink: /100/a-blockchain-usecase.html
 ---
 yes, I know. But bear with me here for a second.
 
@@ -20,6 +15,6 @@ The longer the time between transactions the harder it will be to verify a paint
 
 Add on top that large private collections, museums and even private collectors would operate on the same database making the exchange of information significantly easier in situations like the large gifting my friend helped with.
 
-I don't have a horse in this race really but I think it's undeniable that there's *some innovation* in the basic concept. Plus, it's just fun to think about an application like that. It's not going to magically solve all problems in this space but it does seem to fix some of the more annoying ones.
+I don't have a horse in this race really but I think it's undeniable that there's *some innovation* in the basic concept of a blockchain. Plus, it's just fun to think about an application like that. It's not going to magically solve all problems in this space but it does seem to fix some of the more annoying ones.
 
 Oh, and of course there's a platform doing just this: https://www.artory.com/.
