@@ -1,5 +1,10 @@
 ---
 title: a blockchain usecase
+date-published: 2021-08-25T23:44:42.623Z
+uuid: 983fcaac-c4c5-489c-a73f-c7247519942c
+og-image: /images/selfies/14.jpg
+type: onehundred
+permalink: /100/a-blockchain-usecase.html
 ---
 yes, I know — but bear with me here for a second...
 
