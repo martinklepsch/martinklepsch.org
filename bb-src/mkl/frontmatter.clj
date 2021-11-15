@@ -106,6 +106,9 @@
           (glob/glob "content/posts/*.md"))))
 
 (defn -main []
+  (when (seq (into (glob/glob "content/onehundred/*.markdown")
+                   (glob/glob "content/posts/*.markdown")))
+    (throw (ex-info "Found files with .markdown extension, use .md instead" {})))
   (doseq [f post-files]
     (println f)
     (update-frontmatter! (io/file f))))
