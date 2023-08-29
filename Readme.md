@@ -46,3 +46,31 @@ overmind s
 - [ ] Preprocessing step could replace add combinations of tachyons classes to matching nodes
 - [x] revisit blockquote styling https://www.martinklepsch.org/posts/living-small.html
 - [x] make headings bold
+
+
+### AWS User Policy
+
+```
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "",
+			"Effect": "Allow",
+			"Action": "s3:*",
+			"Resource": [
+				"arn:aws:s3:::{BUCKET_NAME}/*",
+				"arn:aws:s3:::{BUCKET_NAME}"
+			]
+		},
+		{
+			"Sid": "",
+			"Effect": "Allow",
+			"Action": "cloudfront:CreateInvalidation",
+			"Resource": [
+				"*"
+			]
+		}
+	]
+}
+```
