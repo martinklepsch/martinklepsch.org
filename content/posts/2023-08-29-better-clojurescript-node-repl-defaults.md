@@ -8,7 +8,7 @@ permalink: /posts/better-clojurescript-node-repl-defaults.html
 ---
 
 Hi there! Welcome back — to you as much as to me. It's been a while that I've
-published anything but here we go: **a little quality of live improvement for anyone driving a Node.js REPL from ClojureScript.**
+published anything but here we go: **a little quality of life improvement for anyone driving a Node.js REPL from ClojureScript.**
 
 ### The Problems
 
