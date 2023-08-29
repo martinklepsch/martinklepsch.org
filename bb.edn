@@ -1,0 +1,4 @@
+{:paths ["bb-src"]
+ :tasks {update-frontmatter
+         {:requires ([mkl.frontmatter :as fm])
+          :task (fm/-main)}}}
