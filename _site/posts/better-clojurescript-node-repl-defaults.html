@@ -138,17 +138,17 @@
               ClojureScript and Node.js REPLs:
             </p>
             <ol>
-              <li>uncaught errors will cause the Node.js process to exit</li>
               <li>
                 many values are async, resulting in a
-                <code>&lt;#Promise&gt;</code>
+                <code>&lt;#Promise&gt;</code> return value
               </li>
+              <li>uncaught errors will cause the Node.js process to exit</li>
             </ol>
             <p>
               The first applies to any kind of ClojureScript REPL while the
               second is a more Node-specific problem. Losing your REPL state
               whenever something fails is annoying. This behavior makes sense
-              when you're in production but for a REPL... not ideal.
+              when you run Node.js in production but for a REPL... not ideal.
             </p>
             <h3>A Workaround</h3>
             <p>
