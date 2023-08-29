@@ -173,14 +173,16 @@
 
 (defn comment-input []
   [:div.my3.max-width-2.mx-auto
-   [:input {:style {:width "80%"
-                    :color "var(--text)"
-                    :background-color "var(--bg)"
-                    :padding "8px"
-                    :border-radius "3px"
-                    :border "1px solid var(--link)"}
-            :id "feedback-input"
-            :placeholder "have something to say?"}]
+   [:textarea
+    {:style {:width "80%"
+             :font-family "sans-serif"
+             :color "var(--text)"
+             :background-color "var(--bg)"
+             :padding "8px"
+             :border-radius "3px"
+             :border "1px solid var(--link)"}
+     :id "feedback-input"
+     :placeholder "Thoughts or feedback? This is the box for it. Also happy to hear how you've been but maybe leave your name in that case :)"}]
    [:script {:src "https://comments-321314.web.app/cmts.js"}]
    [:script "setupInput(document.getElementById(\"feedback-input\"))"]])
 
