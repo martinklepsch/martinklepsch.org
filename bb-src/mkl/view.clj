@@ -152,11 +152,21 @@
          (-> post :frontmatter :title)]
         [:span.block.h5 (date-fmt (:date-published (:frontmatter post)))]]))])
 
+(defn dynogee-callout
+  []
+  [:div
+   {:class "p2 max-width-2 mx-auto border-left border-right border-bottom",
+    :style {:box-shadow "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)"
+            :border-radius "0 0 4px 4px"
+            :border-color "rgb(0 0 0 / 0.3)"}}
+   "Check out " [:a {:href "https://dynogee.com?ref=mk"} "Dynogee"] ", a new project I'm working on."])
+
 (defn index-page [{:keys [all-posts]}]
   (base
     {:frontmatter {:permalink "/index.html"
                    :og-image "/images/selfies/1.jpg"}}
     [:div.max-width-3.mx-auto
+     (dynogee-callout)
      (render-post (first all-posts) {})
      [:div.my4.max-width-2.mx-auto
       (posts-list "Other Posts" (rest all-posts))]]
@@ -192,6 +202,7 @@
    [:body.post
     [:div.mx1
      [:div.max-width-3.mx-auto.mb5
+      (dynogee-callout)
       (render-post post {:permalink-page? true})
       (signature post)
       (comment-input)]]]])
