@@ -84,8 +84,6 @@
      [:link {:type "text/css"
              :rel "stylesheet"
              :href "/stylesheets/martinklepschorg-v3.css"}]
-     (when (= "/index.html" (:permalink frontmatter))
-       [:script {:src "https://identity.netlify.com/v1/netlify-identity-widget.js"}])
      (google-analytics)]))
 
 (def +twitter-uri+
@@ -170,16 +168,7 @@
      (render-post (first all-posts) {})
      [:div.my4.max-width-2.mx-auto
       (posts-list "Other Posts" (rest all-posts))]]
-    [:script
-     "if (window.netlifyIdentity) {
-    window.netlifyIdentity.on(\"init\", user => {
-      if (!user) {
-        window.netlifyIdentity.on(\"login\", () => {
-          document.location.href = \"/admin/\";
-        });
-      }
-    });
-  }"]))
+    ))
 
 (defn comment-input []
   [:div.my3.max-width-2.mx-auto
