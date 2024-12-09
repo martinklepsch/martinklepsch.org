@@ -54,5 +54,5 @@ jobs:
         # Any activity created using the GITHUB_TOKEN provided by the GitHub Action environment does
         # not trigger any workflows, so we use a personal access token
         # https://github.community/t5/GitHub-Actions/Push-from-Action-does-not-trigger-subsequent-action/m-p/37872
-        github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
