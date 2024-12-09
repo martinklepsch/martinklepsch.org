@@ -10,12 +10,22 @@
 (def onehundred-files
   (sort (glob/glob "content/onehundred/*.md")))
 
+(def date-format (java.text.SimpleDateFormat. "MMM dd"))
+(def date-long-format (java.text.SimpleDateFormat. "MMM dd, YYY"))
+(def year-format (java.text.SimpleDateFormat. "YYY"))
+(.format date-format (java.util.Date.))
+
 (defn read-post [file]
-  {:file file
-   :frontmatter (fm/get-frontmatter file)
-   :source (slurp file)
-   ;; :content to be compatible with view code
-   :content (-> file fm/file-contents second (markdown/markdown :data))})
+    (let [frontmatter (fm/get-frontmatter file)]
+      {:file file
+       :frontmatter frontmatter
+       :ui {:year (.format  year-format (:date-published frontmatter))
+            :date-short (.format  date-format (:date-published frontmatter))
+            :date-long (.format  date-long-format (:date-published frontmatter))
+            }
+       :source (slurp file)
+    ;; :content to be compatible with view code
+       :content (-> file fm/file-contents second (markdown/markdown :data))}))
 
 (defn sort-posts [posts]
   (->> posts (sort-by (comp :date-published :frontmatter)) reverse))
