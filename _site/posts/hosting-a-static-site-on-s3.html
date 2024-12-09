@@ -62,166 +62,159 @@
       type="application/atom+xml"
     />
     <link
-      href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css"
+      href="/stylesheets/martinklepschorg-v4.css"
       rel="stylesheet"
       type="text/css"
     />
-    <link
-      href="/stylesheets/martinklepschorg-v3.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(["_setAccount", "UA-3138561-8"]);
-      _gaq.push(["_setDomainName", "martinklepsch.org"]);
-      _gaq.push(["_trackPageview"]);
-
-      setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])", 15000);
-
-      (function () {
-        var ga = document.createElement("script");
-        ga.type = "text/javascript";
-        ga.async = true;
-        ga.src =
-          ("https:" == document.location.protocol
-            ? "https://ssl"
-            : "http://www") + ".google-analytics.com/ga.js";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
   </head>
   <body class="post">
     <div class="mx1">
-      <div class="max-width-3 mx-auto mb5">
+      <div>
         <div
-          class="p2 max-width-2 mx-auto border-left border-right border-bottom"
-          style="
-            box-shadow:
-              0 1px 3px 0 rgb(0 0 0 / 0.1),
-              0 1px 2px -1px rgb(0 0 0 / 0.1);
-            border-radius: 0 0 4px 4px;
-            border-color: rgb(0 0 0 / 0.3);
-          "
+          class="flex justify-between mt-8 mb-16 items-baseline max-w-5xl mx-auto px-6"
         >
-          Check out <a href="https://dynogee.com?ref=mk">Dynogee</a>, a new
-          project I'm working on.
+          <a
+            class="group"
+            href="/"
+            style="view-transition-name: logo"
+            title="Home"
+            ><h1 class="text-xl font-semibold tracking-tight">
+              Mostly clueless
+            </h1>
+            <div
+              class="font-serif text-sm text-slate-500 italic group-hover:translate-x-1 transition-all duration-250 ease-out group-hover:text-primary"
+            >
+              but curious to find out
+            </div></a
+          >
+          <div style="view-transition-name: socials">
+            <a
+              class="hover:text-[#0c84fc] hover:scale-125 duration-800 transition-all ease-out"
+              href="https://bsky.app/profile/martinklepsch.org"
+              target="_blank"
+              ><svg
+                data-icon="fa6-brands:bluesky"
+                height="1em"
+                viewbox="0 0 576 512"
+                width="1.13em"
+              >
+                <symbol id="ai:fa6-brands:bluesky">
+                  <path
+                    d="M407.8 294.7c-3.3-.4-6.7-.8-10-1.3c3.4.4 6.7.9 10 1.3M288 227.1c-26.1-50.7-97.1-145.2-163.1-191.8C61.6-9.4 37.5-1.7 21.6 5.5C3.3 13.8 0 41.9 0 58.4S9.1 194 15 213.9c19.5 65.7 89.1 87.9 153.2 80.7c3.3-.5 6.6-.9 10-1.4c-3.3.5-6.6 1-10 1.4c-93.9 14-177.3 48.2-67.9 169.9C220.6 589.1 265.1 437.8 288 361.1c22.9 76.7 49.2 222.5 185.6 103.4c102.4-103.4 28.1-156-65.8-169.9c-3.3-.4-6.7-.8-10-1.3c3.4.4 6.7.9 10 1.3c64.1 7.1 133.6-15.1 153.2-80.7C566.9 194 576 75 576 58.4s-3.3-44.7-21.6-52.9c-15.8-7.1-40-14.9-103.2 29.8C385.1 81.9 314.1 176.4 288 227.1"
+                    fill="currentColor"
+                  ></path>
+                </symbol>
+                <use xlink:href="#ai:fa6-brands:bluesky"></use></svg
+            ></a>
+          </div>
         </div>
         <article
-          class="mt4"
+          class="mt-8 max-w-3xl mx-auto px-6"
           itemprop="blogPost"
           itemscope=""
           itemtype="http://schema.org/BlogPosting"
         >
-          <div class="h4 db mx-auto max-width-2">
-            <a
-              href="/posts/hosting-a-static-site-on-s3.html"
-              title="Permalink: Hosting A Static Site On Amazon S3"
-              >February 2012</a
-            ><span class="px1">/</span><a href="/" title="Home">Home</a
-            ><span class="px1">/</span
-            ><a
-              href="https://twitter.com/martinklepsch"
-              title="@martinklepsch on Twitter"
-              >@martinklepsch</a
-            >
+          <div class="text-center">
+            <div class="text-slate-600 uppercase text-xs">Feb 20, 2012</div>
+            <h1 class="mt-2 mb-12 text-3xl sm:text-5xl font-bold text-balance">
+              Hosting A Static Site On Amazon S3
+            </h1>
           </div>
-          <h1 class="h3 bold w-80-ns lh-title max-width-2 mx-auto my3">
-            Hosting A Static Site On Amazon S3
-          </h1>
-          <section class="mkdwn lh-copy">
-            <h2>Preface</h2>
-            <p>
-              Hosting a static site is preferred by many developers because it
-              gives you a maximum of control at a minimum of maintenance. While
-              there are other tools available
-              <a href="https://github.com/mojombo/jekyll">Jekyll</a> became
-              something like a reference implementation, especially under Ruby
-              developers. Since Jekyll's creator, Tom Preston Werner, also
-              founded Github it is not surprising that Github is providing a
-              service to autogenerate and host your static site as soon as you
-              push it.
-            </p>
-            <p>
-              Now, that sounds like perfect all around. It is. As long as you
-              are not using custom generators or converters with Jekyll
-              everything is good. If you do however you'll quickly notice that
-              Github
-              <a href="https://github.com/mojombo/jekyll/issues/325"
-                >disabled custom Ruby code</a
-              >
-              to keep everything secure.
-            </p>
-            <p></p>
-            <aside>
+          <section class="max-w-xl mx-auto">
+            <div
+              class="max-w-none prose prose-base prose-slate -- Text prose-h1:font-bold prose-h1:text-3xl -- Images prose-img:rounded-xl -- Italics prose-em:bg-orange-100/60 prose-em:px-0.5 prose-em:rounded-sm -- Bold prose-strong:bg-primary/10 prose-strong:px-0.5 prose-strong:font-medium prose-strong:rounded-sm --- Links prose-a:decoration-1 prose-a:transition-text-decoration prose-a:decoration-primary/50 prose-a:font-medium prose-a:underline prose-a:underline-offset-4 prose-a:hover:decoration-2 prose-a:hover:decoration-primary/50 --- Code prose-code:text-sm prose-code:font-light --- Inline Code prose-code-inline:text-orange-600 prose-code-inline:bg-orange-50 prose-code-inline:ring-orange-400/20 prose-code-inline:rounded-md prose-code-inline:text-sm prose-code-inline:px-2 prose-code-inline:py-1 prose-code-inline:ring-1 prose-code-inline:ring-inset --- Blockquote prose-blockquote:text-lg prose-blockquote:font-light prose-blockquote:text-slate-500 prose-blockquote:border-l-4 prose-blockquote:border-blue-400/70 prose-blockquote:pl-4 prose-blockquote:ml-4 prose-blockquote:mt-4"
+            >
+              <h2>Preface</h2>
               <p>
-                There are still ways to host your static site with Github but
-                using these would mean losing nearly all the benefits from
-                hosting at Github (eg. Autogeneration).
+                Hosting a static site is preferred by many developers because it
+                gives you a maximum of control at a minimum of maintenance.
+                While there are other tools available
+                <a href="https://github.com/mojombo/jekyll">Jekyll</a> became
+                something like a reference implementation, especially under Ruby
+                developers. Since Jekyll's creator, Tom Preston Werner, also
+                founded Github it is not surprising that Github is providing a
+                service to autogenerate and host your static site as soon as you
+                push it.
               </p>
-            </aside>
-            <p></p>
-            <p>
-              Since the requirements for hosting a static site are nearly
-              non-existent you can easily move it onto any Server.
-            </p>
-            <p>
-              I decided for Amazon S3 because it's widely used, reliable and
-              cheap.
-            </p>
-            <h2>Static Site Generators</h2>
-            <p>
-              While there are
-              <a href="http://nanoc.stoneship.org/" title="Nanoc">quite</a>
-              <a href="http://middlemanapp.com" title="Middleman">a</a>
-              <a
-                href="https://www.ruby-toolbox.com/categories/static_website_generation"
-                title="Ruby-Toolbox Listing"
-                >lot</a
-              >. Jekyll is used by most people. When I chose Jekyll it was
-              mostly because of it's active community and the fact that it is
-              developed and used heavily by Github. Before I settled on Jekyll I
-              gave nanoc a try. I don't exactly remember why I ditched nanoc but
-              in the end Jekyll feels lighter and I also prefer Liquid Markup
-              over ERB Syntax.
-            </p>
-            <h2>Setting Up Amazon S3</h2>
-            <p>
-              Comparing Github's free hosting with Amazon S3 is somewhat unfair
-              since you got to pay for S3 storage and bandwith. Doing the math
-              however you'll quickly notice that the price for hosting your
-              static site on S3 is low. With a complete page size of 100M and
-              traffic of 10G you would not pay more than 2$.
-            </p>
-            <p>
-              After creating a new bucket in your S3 instance there are only a
-              few steps you need to do in order to have a proper static site
-              hosted by S3.
-            </p>
-            <p>
-              <strong>Important:</strong> When creating your bucket make sure
-              that it has the same name as the domain name you want to use for
-              your static site (ex. www.martinklepsch.org). This domain has to
-              have some subdomain.
-            </p>
-            <p>
-              <strong>Step 1:</strong> Enable S3's website feature by enabling
-              it in the properties pane of your bucket.
-            </p>
-            <p></p>
-            <figure>
-              <img
-                alt="Website settings in the bucket propertie pane"
-                src="/images/website-settings-s3.png"
-              />
-            </figure>
-            <p></p>
-            <p>
-              <strong>Step 2:</strong> Set a bucket policy that basically allows
-              everyone to view the contents of your bucket.
-            </p>
-            <pre><code>{
+              <p>
+                Now, that sounds like perfect all around. It is. As long as you
+                are not using custom generators or converters with Jekyll
+                everything is good. If you do however you'll quickly notice that
+                Github
+                <a href="https://github.com/mojombo/jekyll/issues/325"
+                  >disabled custom Ruby code</a
+                >
+                to keep everything secure.
+              </p>
+              <p></p>
+              <aside>
+                <p>
+                  There are still ways to host your static site with Github but
+                  using these would mean losing nearly all the benefits from
+                  hosting at Github (eg. Autogeneration).
+                </p>
+              </aside>
+              <p></p>
+              <p>
+                Since the requirements for hosting a static site are nearly
+                non-existent you can easily move it onto any Server.
+              </p>
+              <p>
+                I decided for Amazon S3 because it's widely used, reliable and
+                cheap.
+              </p>
+              <h2>Static Site Generators</h2>
+              <p>
+                While there are
+                <a href="http://nanoc.stoneship.org/" title="Nanoc">quite</a>
+                <a href="http://middlemanapp.com" title="Middleman">a</a>
+                <a
+                  href="https://www.ruby-toolbox.com/categories/static_website_generation"
+                  title="Ruby-Toolbox Listing"
+                  >lot</a
+                >. Jekyll is used by most people. When I chose Jekyll it was
+                mostly because of it's active community and the fact that it is
+                developed and used heavily by Github. Before I settled on Jekyll
+                I gave nanoc a try. I don't exactly remember why I ditched nanoc
+                but in the end Jekyll feels lighter and I also prefer Liquid
+                Markup over ERB Syntax.
+              </p>
+              <h2>Setting Up Amazon S3</h2>
+              <p>
+                Comparing Github's free hosting with Amazon S3 is somewhat
+                unfair since you got to pay for S3 storage and bandwith. Doing
+                the math however you'll quickly notice that the price for
+                hosting your static site on S3 is low. With a complete page size
+                of 100M and traffic of 10G you would not pay more than 2$.
+              </p>
+              <p>
+                After creating a new bucket in your S3 instance there are only a
+                few steps you need to do in order to have a proper static site
+                hosted by S3.
+              </p>
+              <p>
+                <strong>Important:</strong> When creating your bucket make sure
+                that it has the same name as the domain name you want to use for
+                your static site (ex. www.martinklepsch.org). This domain has to
+                have some subdomain.
+              </p>
+              <p>
+                <strong>Step 1:</strong> Enable S3's website feature by enabling
+                it in the properties pane of your bucket.
+              </p>
+              <p></p>
+              <figure>
+                <img
+                  alt="Website settings in the bucket propertie pane"
+                  src="/images/website-settings-s3.png"
+                />
+              </figure>
+              <p></p>
+              <p>
+                <strong>Step 2:</strong> Set a bucket policy that basically
+                allows everyone to view the contents of your bucket.
+              </p>
+              <pre><code>{
   &quot;Version&quot;:&quot;2008-10-17&quot;,
   &quot;Statement&quot;:[{
     &quot;Sid&quot;:&quot;PublicReadForGetBucketObjects&quot;,
@@ -233,75 +226,123 @@
     &quot;Resource&quot;:[&quot;arn:aws:s3:::www.REPLACE-THIS.org/*&quot;]
   }]
 }</code></pre>
-            <p>
-              <strong>Step 3:</strong> Upload your static website to S3. You can
-              either do that manually by using the AWS Management Console or you
-              can automate the process by writing some small programm. There are
-              S3 libraries for many programming languages. I built a
-              <a
-                href="https://github.com/martinklepsch/martinklepsch.org/blob/master/Rakefile"
-                title="Rakefile on Github"
-                >small rake task</a
-              >
-              that does the job.
-            </p>
-            <p>
-              If you are experiencing problems with the setup of S3 I recommend
-              the official
-              <a
-                href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/WebsiteHosting.html"
-                title="AWS Static Website Hosting Documentation"
-                >AWS documentation</a
-              >.
-            </p>
-            <h2>Naked Domain Name Fowarding</h2>
-            <p>
-              DNS does not allow to set the whats apparently called &quot;zone
-              apex&quot; (<code>&quot;example.com&quot;</code>) to be a CNAME
-              for another domain like
-              <code>www.example.com.s3-website-us-east-1.amazonaws.com</code>.
-              Therefore you need to redirect all requests going to your domain
-              without <code>www</code> to you domain with
-              <code>www</code> (<code>example.com</code> to
-              <code>www.example.com</code>).
-              <a
-                href="https://forums.aws.amazon.com/thread.jspa?threadID=55995"
-                title="A thread in AWS forums with good information about the issue"
-                >Read more.</a
-              >
-            </p>
-            <p>
-              You can either do this by using your domain registrars control
-              panel or by using a service like
-              <a href="http://wwwizer.com/naked-domain-redirect">wwwizer</a>. I
-              did it with <a href="http://gandi.net">Gandi</a>'s control panel
-              and it works fine.
-            </p>
+              <p>
+                <strong>Step 3:</strong> Upload your static website to S3. You
+                can either do that manually by using the AWS Management Console
+                or you can automate the process by writing some small programm.
+                There are S3 libraries for many programming languages. I built a
+                <a
+                  href="https://github.com/martinklepsch/martinklepsch.org/blob/master/Rakefile"
+                  title="Rakefile on Github"
+                  >small rake task</a
+                >
+                that does the job.
+              </p>
+              <p>
+                If you are experiencing problems with the setup of S3 I
+                recommend the official
+                <a
+                  href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/WebsiteHosting.html"
+                  title="AWS Static Website Hosting Documentation"
+                  >AWS documentation</a
+                >.
+              </p>
+              <h2>Naked Domain Name Fowarding</h2>
+              <p>
+                DNS does not allow to set the whats apparently called &quot;zone
+                apex&quot; (<code>&quot;example.com&quot;</code>) to be a CNAME
+                for another domain like
+                <code>www.example.com.s3-website-us-east-1.amazonaws.com</code>.
+                Therefore you need to redirect all requests going to your domain
+                without <code>www</code> to you domain with
+                <code>www</code> (<code>example.com</code> to
+                <code>www.example.com</code>).
+                <a
+                  href="https://forums.aws.amazon.com/thread.jspa?threadID=55995"
+                  title="A thread in AWS forums with good information about the issue"
+                  >Read more.</a
+                >
+              </p>
+              <p>
+                You can either do this by using your domain registrars control
+                panel or by using a service like
+                <a href="http://wwwizer.com/naked-domain-redirect">wwwizer</a>.
+                I did it with <a href="http://gandi.net">Gandi</a>'s control
+                panel and it works fine.
+              </p>
+            </div>
           </section>
         </article>
-        <div class="my3 em-before max-width-2 mx-auto">
-          <a href="https://twitter.com/martinklepsch">@martinklepsch</a>,
-          February 2012
+        <div class="max-w-3xl mx-auto px-6 my-16">
+          <h2 class="text-3xl font-bold text-center">Comments</h2>
+          <script
+            data-bluesky-comments="yes"
+            data-uri="at://martinklepsch.org/app.bsky.feed.post/3lcumsy2lls2f"
+            src="/bluesky-comments.js"
+            type="module"
+          ></script>
         </div>
-        <div class="my3 max-width-2 mx-auto">
-          <textarea
-            id="feedback-input"
-            placeholder="Thoughts or feedback? This is the box for it. Also happy to hear how you've been but maybe leave your name in that case :)"
-            style="
-              width: 80%;
-              font-family: sans-serif;
-              color: var(--text);
-              background-color: var(--bg);
-              padding: 8px;
-              border-radius: 3px;
-              border: 1px solid var(--link);
-            "
-          ></textarea>
-          <script src="https://comments-321314.web.app/cmts.js"></script>
-          <script>
-            setupInput(document.getElementById("feedback-input"));
-          </script>
-        </div>
+        <footer
+          class="w-full bg-white flex flex-col items-center justify-end mt-12 sticky border-t border-slate-200"
+        >
+          <ul class="flex justify-center px-6 py-8 space-x-8 text-slate-400/70">
+            <li class="hover:text-[#0c84fc]">
+              <a
+                href="https://bsky.app/profile/martinklepsch.org"
+                target="_blank"
+                ><svg
+                  data-icon="fa6-brands:bluesky"
+                  height="1em"
+                  viewbox="0 0 576 512"
+                  width="1.13em"
+                >
+                  <symbol id="ai:fa6-brands:bluesky">
+                    <path
+                      d="M407.8 294.7c-3.3-.4-6.7-.8-10-1.3c3.4.4 6.7.9 10 1.3M288 227.1c-26.1-50.7-97.1-145.2-163.1-191.8C61.6-9.4 37.5-1.7 21.6 5.5C3.3 13.8 0 41.9 0 58.4S9.1 194 15 213.9c19.5 65.7 89.1 87.9 153.2 80.7c3.3-.5 6.6-.9 10-1.4c-3.3.5-6.6 1-10 1.4c-93.9 14-177.3 48.2-67.9 169.9C220.6 589.1 265.1 437.8 288 361.1c22.9 76.7 49.2 222.5 185.6 103.4c102.4-103.4 28.1-156-65.8-169.9c-3.3-.4-6.7-.8-10-1.3c3.4.4 6.7.9 10 1.3c64.1 7.1 133.6-15.1 153.2-80.7C566.9 194 576 75 576 58.4s-3.3-44.7-21.6-52.9c-15.8-7.1-40-14.9-103.2 29.8C385.1 81.9 314.1 176.4 288 227.1"
+                      fill="currentColor"
+                    ></path>
+                  </symbol>
+                  <use xlink:href="#ai:fa6-brands:bluesky"></use></svg
+              ></a>
+            </li>
+            <li class="hover:text-slate-600">
+              <a href="https://github.com/martinklepsch" target="_blank"
+                ><svg
+                  data-icon="fa6-brands:github"
+                  height="1em"
+                  viewbox="0 0 496 512"
+                  width="0.97em"
+                >
+                  <symbol id="ai:fa6-brands:github">
+                    <path
+                      d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6c-3.3.3-5.6-1.3-5.6-3.6c0-2 2.3-3.6 5.2-3.6c3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9c2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9c.3 2 2.9 3.3 5.9 2.6c2.9-.7 4.9-2.6 4.6-4.6c-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2c12.8 2.3 17.3-5.6 17.3-12.1c0-6.2-.3-40.4-.3-61.4c0 0-70 15-84.7-29.8c0 0-11.4-29.1-27.8-36.6c0 0-22.9-15.7 1.6-15.4c0 0 24.9 2 38.6 25.8c21.9 38.6 58.6 27.5 72.9 20.9c2.3-16 8.8-27.1 16-33.7c-55.9-6.2-112.3-14.3-112.3-110.5c0-27.5 7.6-41.3 23.6-58.9c-2.6-6.5-11.1-33.3 2.6-67.9c20.9-6.5 69 27 69 27c20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27c13.7 34.7 5.2 61.4 2.6 67.9c16 17.7 25.8 31.5 25.8 58.9c0 96.5-58.9 104.2-114.8 110.5c9.2 7.9 17 22.9 17 46.4c0 33.7-.3 75.4-.3 83.6c0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252C496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2c1.6 1.6 3.9 2.3 5.2 1c1.3-1 1-3.3-.7-5.2c-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9c1.6 1 3.6.7 4.3-.7c.7-1.3-.3-2.9-2.3-3.9c-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2c2.3 2.3 5.2 2.6 6.5 1c1.3-1.3.7-4.3-1.3-6.2c-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2c-1.4-2.3-4-3.3-5.6-2"
+                      fill="currentColor"
+                    ></path>
+                  </symbol>
+                  <use xlink:href="#ai:fa6-brands:github"></use></svg
+              ></a>
+            </li>
+            <li class="hover:text-[#0077B5]">
+              <a
+                href="https://www.linkedin.com/in/martin-klepsch-b59134268/"
+                target="_blank"
+                ><svg
+                  data-icon="fa6-brands:linkedin"
+                  height="1em"
+                  viewbox="0 0 448 512"
+                  width="0.88em"
+                >
+                  <symbol id="ai:fa6-brands:linkedin">
+                    <path
+                      d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5c0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7c-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5c67.2 0 79.7 44.3 79.7 101.9z"
+                      fill="currentColor"
+                    ></path>
+                  </symbol>
+                  <use xlink:href="#ai:fa6-brands:linkedin"></use></svg
+              ></a>
+            </li>
+          </ul>
+        </footer>
       </div>
     </div>
   </body>
