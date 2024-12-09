@@ -6,6 +6,7 @@ title: Kandan Team Chat
 uuid: 31835991-b050-4b17-b56d-c2fcbb06dbb7
 permalink: /posts/kandan-team-chat.html
 og-image: /images/selfies/2.jpg
+hidden: true
 type: post
 ---
 I just discovered [Kandan](http://kandan.me) which seems to be a great opensource alternative to

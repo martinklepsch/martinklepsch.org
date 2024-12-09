@@ -4,6 +4,7 @@ title: Exim4 Fix Wrongly Decoded Mail Subject
 uuid: 6ff5c174-6f89-4449-9a6c-2315bedaed33
 permalink: /posts/fix-broken-decoding-of-mail-subjects-in-exim.html
 og-image: /images/selfies/3.jpg
+hidden: true
 type: post
 ---
 

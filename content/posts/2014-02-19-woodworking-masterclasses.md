@@ -3,6 +3,7 @@ resource: http://woodworkingmasterclasses.com/
 date-published: 2014-02-19T00:00:00Z
 title: Woodworking Masterclasses
 uuid: 103f391e-8ccb-46ab-ac3b-7051d646a5fb
+hidden: true
 permalink: /posts/woodworking-masterclasses.html
 og-image: /images/selfies/3.jpg
 type: post

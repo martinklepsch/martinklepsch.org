@@ -4,6 +4,7 @@ date-published: 2012-02-20T00:00:00Z
 title: Hosting A Static Site On Amazon S3
 uuid: 0af93d8a-9216-4b83-857e-b9bb4f7127d9
 permalink: /posts/hosting-a-static-site-on-s3.html
+hidden: true
 og-image: /images/selfies/3.jpg
 type: post
 ---

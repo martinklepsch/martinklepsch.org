@@ -3,6 +3,7 @@ date-published: 2014-10-02T00:00:00Z
 title: Patalyze &mdash; An Experiment Exploring Publicly Available Patent Data
 uuid: 15184838-af2e-4ea1-b9a5-57f1ed52cf77
 permalink: /posts/patalyze-an-experiment-exploring-patent-data.html
+hidden: true
 og-image: /images/selfies/3.jpg
 type: post
 ---

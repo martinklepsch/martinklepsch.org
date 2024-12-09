@@ -6,6 +6,7 @@ title: Startups, This Is How Design Works
 uuid: e5058531-a427-4791-8146-ae2f24e6973b
 permalink: /posts/startups-this-is-how-design-works.html
 og-image: /images/selfies/1.jpg
+hidden: true
 type: post
 ---
 

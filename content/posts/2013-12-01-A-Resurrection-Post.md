@@ -4,6 +4,7 @@ title: A Resurrection Post
 uuid: ecc821bc-1816-4571-aab4-da5ef4e8d346
 permalink: /posts/a-resurrection-post.html
 og-image: /images/selfies/3.jpg
+hidden: true
 type: post
 ---
 

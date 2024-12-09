@@ -4,6 +4,7 @@ abstract: I'm going on a short trip to the US (NYC, PHL & MIA) and I'd love to m
 title: A Trip To The US
 uuid: adc62a3d-a5de-43b3-831f-56c3ee377d29
 permalink: /posts/a-trip-to-the-us.html
+hidden: true
 og-image: /images/selfies/2.jpg
 type: post
 ---

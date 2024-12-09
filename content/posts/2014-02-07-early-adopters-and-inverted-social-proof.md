@@ -14,6 +14,6 @@ type: post
 > or wikipedia pages that can be made, so a user can always keep traveling west
 > until they find something that’s worth sticking around to defend.
 
-[A great analysis]({{page.resource}}) of why people are early adopters and how the constantly changing face
+[A great analysis](http://ideolalia.com/early-adopters-and-inverted-social-proof/index.html) of why people are early adopters and how the constantly changing face
 of a community can affect their loyality to a product. One of those timeless
 reads you should probably re-read every now and then.
