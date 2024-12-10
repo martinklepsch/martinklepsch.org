@@ -165,7 +165,7 @@
    ;; (nav)
    (head opts)
    [:body.system-sans-serif.dark-gray
-    (into [:div.mx1] content)]])
+    (into [:div] content)]])
 
 (def prose-classes
   "max-w-none
@@ -331,22 +331,6 @@
    (footer)
    ))
 
-(defn comment-input
-  []
-  [:div.my3.max-width-2.mx-auto
-   [:textarea
-    {:style {:width "80%"
-             :font-family "sans-serif"
-             :color "var(--text)"
-             :background-color "var(--bg)"
-             :padding "8px"
-             :border-radius "3px"
-             :border "1px solid var(--link)"}
-     :id "feedback-input"
-     :placeholder "Thoughts or feedback? This is the box for it. Also happy to hear how you've been but maybe leave your name in that case :)"}]
-   [:script {:src "https://comments-321314.web.app/cmts.js"}]
-   [:script "setupInput(document.getElementById(\"feedback-input\"))"]])
-
 (defn post-page
   [post]
   [:html {:lang "en" :itemtype "http://schema.org/Blog"}
@@ -354,18 +338,29 @@
    [:body.post
     [:div.mx1
      [:div
-      ;; (dynogee-callout)
       (header)
       (render-post post {:permalink-page? true})
-      [:div.max-w-3xl.mx-auto.px-6.my-16
-       [:h2.text-3xl.font-bold.text-center "Comments"]
-       [:script
-        {:data-bluesky-comments "yes" ,
-         :data-uri "at://martinklepsch.org/app.bsky.feed.post/3lcumsy2lls2f",
-         :src "/bluesky-comments.js",
-         :type "module"}]]
-      (footer)
-      #_(comment-input)]]]])
+      (if-let [bsky-id (-> post :frontmatter :bluesky-post-id)]
+        [:div.max-w-3xl.mx-auto.px-6.my-16
+         [:h2.text-3xl.font-bold.text-center "Comments"]
+         [:script
+          {:data-bluesky-uri (str "at://martinklepsch.org/app.bsky.feed.post/" bsky-id)
+           ;;https://bsky.app/profile/martinklepsch.org/post/3lcumsy2lls2f
+           :src "/bluesky-comments.js",
+           :type "module"}]]
+
+        [:div.px-6.my-16
+         [:div
+          {:class "mx-auto max-w-[700px]"}
+          #_[:script
+             {:async "true" ,
+              :data-uid "e1d62639cd",
+              :src "https://martinklepsch.kit.com/e1d62639cd/index.js"}]
+          [:script
+           {:async "yes" ,
+            :data-uid "f620e7ab36",
+            :src "https://martinklepsch.kit.com/f620e7ab36/index.js"}]]])
+      (footer)]]]])
 
 (defn onehundred-page
   [idx post]
@@ -380,7 +375,7 @@
         (:content post)]
        [:div.my3
         [:a {:href "/100/writing-100-things.html"} (inc idx) " / 100"]]
-       #_(comment-input)]]]))
+       ]]]))
 
 ;; Rendering API
 ;; Goals
