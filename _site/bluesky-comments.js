@@ -129,11 +129,11 @@ const BlueskyComments = ({ uri }) => {
 };
 
 function init() {
-  const scripts = document.querySelectorAll('script[data-bluesky-comments]');
+  const scripts = document.querySelectorAll('script[data-bluesky-uri]');
   scripts.forEach(script => {
-    const uri = script.getAttribute('data-uri');
+    const uri = script.getAttribute('data-bluesky-uri');
     if (!uri) {
-      console.error('Bluesky Comments: Missing data-uri attribute');
+      console.error('Bluesky Comments: Missing data-bluesky-uri attribute');
       return;
     }
     const container = document.createElement('div');
