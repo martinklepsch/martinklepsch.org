@@ -38,6 +38,8 @@ jobs:
         ./stage-if-changed.sh content/
         git diff --staged --exit-code || git commit -m "Update frontmatter"
 
+    - run: npm ci
+
     - name: Build site
       run: make site
 
