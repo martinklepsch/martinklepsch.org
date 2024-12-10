@@ -231,33 +231,14 @@
   [{fm :frontmatter :as post} opts]
   (try
     [:article.mt-8.max-w-3xl.mx-auto.px-6 {:itemprop "blogPost" :itemscope "" :itemtype "http://schema.org/BlogPosting"}
-     #_[:div.h4.db.mx-auto.max-width-2
-        [:a {:href (:permalink fm) :title (str "Permalink: " (:title fm))}
-         (if (:permalink-page? opts)
-           (date-fmt (:date-published fm))
-           "Latest Post")]
-        (when (:permalink-page? opts) [:span.px1 "/"])
-        (when (:permalink-page? opts) [:a {:href "/" :title "Home"} "Home"])
-        [:span.px1 "/"]
-        [:a {:href +twitter-uri+ :title "@martinklepsch on Twitter"} "@martinklepsch"]]
      [:div.text-center
       [:div.text-slate-600.uppercase.text-xs
        (:date-long (:ui post))]
       [:h1.mt-2.mb-12.text-3xl.sm:text-5xl.font-bold.text-balance
-      ;; TODO add linkthing here
-       (if (:resource fm) (:title fm) (:title fm))]]
+       (:title fm)]]
      [:section.max-w-xl.mx-auto
-      ;; {:class "w-full"}
       [:div {:class prose-classes}
-       (:content post)]]
-     ;; Maybe implrement some of that stuff later
-     ;; [:div.item-meta
-     ;;    [:meta {:itemprop "author" :content (str (:author post) " (" (:author_email post) ")" )}]
-     ;;    [:img.author-avatar {:src (:author_avatar post) :title (:author post)}]
-     ;;    #_[:p.pub-data (str (dates/reformat-datestr (:date_published post) "YYYY-MM-dd", "MMM dd, YYYY") ", by " (:author post))
-     ;;       [:span.reading-time (str " " (:ttr post) " mins read")]]
-     ;;    [:p {:itemprop "description"} (:description post)]]
-     ]
+       (:content post)]]]
     (catch Exception e
       (println "Rendering %s failed:\n" (:permalink fm))
       (throw e))))
