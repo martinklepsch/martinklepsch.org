@@ -11,5 +11,5 @@ site:
 	bb -cp bb-src -m mkl.view
 	bb -cp bb-src -m mkl.atom
 	cp -r resources/public/* _site/
-	npx tailwindcss -w -i stylesheets/martinklepschorg-v4.css -o _site/stylesheets/martinklepschorg-v4.css
+	npx tailwindcss -i stylesheets/martinklepschorg-v4.css -o _site/stylesheets/martinklepschorg-v4.css
 	npx prettier --write _site/**.html _site/posts/*.html
