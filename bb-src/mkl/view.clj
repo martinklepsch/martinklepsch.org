@@ -204,8 +204,8 @@
     
     --- Code
     prose-code:text-sm
-    prose-code:font-light
-    
+    prose-code:font-medium
+
     --- Inline Code
     prose-code-inline:text-orange-600
     prose-code-inline:bg-orange-50
