@@ -6067,10 +6067,10 @@
       line-height: var(--tw-leading, var(--text-sm--line-height));
     }
   }
-  .prose-code\:font-light {
+  .prose-code\:font-medium {
     & :is(:where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
-      --tw-font-weight: var(--font-weight-light);
-      font-weight: var(--font-weight-light);
+      --tw-font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-medium);
     }
   }
   .prose-pre\:font-mono {
@@ -6151,6 +6151,9 @@
   --color-accent-8: oklch(73.38% 0.3268 265.47);
   --color-accent-9: oklch(84.08% 0.3461 250.47);
   --color-accent-10: oklch(94.79% 0.3655 235.47);
+}
+.prose code::before, .prose code::after {
+  content: normal;
 }
 @view-transition {
   navigation: auto;
