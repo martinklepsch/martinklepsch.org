@@ -20,6 +20,11 @@
   --color-error: var(--color-red-500);
 }
 
+.prose code::before,
+.prose code::after {
+  content: normal;
+}
+
 @view-transition {
   navigation: auto;
 }
