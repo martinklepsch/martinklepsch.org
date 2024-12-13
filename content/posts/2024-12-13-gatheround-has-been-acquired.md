@@ -1,8 +1,10 @@
 ---
 title: Gatheround Got Acquired
-date-published: 2024-12-13
+date-published: 2024-12-13T00:00:00Z
 type: post
 permalink: /posts/gatheround-got-acquired.html
+uuid: 643387bc-e58a-480d-9047-42f0b81399c9
+og-image: /images/selfies/7.jpg
 ---
 
 
