@@ -6,9 +6,9 @@ og-image: /images/selfies/10.jpg
 date-published: 2025-02-05T23:18:12.514Z
 uuid: 813135fb-d709-4fbd-8fbd-a3ce33091b69
 ---
-Like everyone I've been exploring AI tools and reading Simon Willisons excellent blog I discovered [how he uses LLMs to generate CLI scripts](https://simonwillison.net/2024/Dec/19/one-shot-python-tools/).
+Like everyone I've been exploring AI tools and reading Simon Willisons excellent blog I discovered [how he uses LLMs to generate one-off Python tools](https://simonwillison.net/2024/Dec/19/one-shot-python-tools/).
 
-In this post I'm gonna share a bit more about how I generate babashka scripts in similar ways.
+In this post I'm gonna share a bit more about how I generate Babashka scripts in similar ways.
 
 ## It's all in the context
 
@@ -16,22 +16,21 @@ While Claude is pretty good at Clojure already it often generated code that didn
 
 So I started to copy together some pieces of documentation into a snippet that I'd always provide as context. Among the documentation I also included some guidelines for how I want things to be done.
 
-```
+```md
 # general tips for writing babashka code
 
 1. When using `p/process` and `p/shell` a variable list of strings is expected at the end. When creating the command using a vector or similar, be sure to use `apply` so that the vector is unwrapped
-        1. Example: `(apply p/process {} ["echo" "123"])`
+  1. Example: `(apply p/process {} ["echo" "123"])`
 
 2. Some useful flags for file processing scripts
-        1. `--dry-run` only print actions, don’t execute
-        2. `--verbose` log additional input
+  1. `--dry-run` only print actions, don’t execute
+  2. `--verbose` log additional input
 
 3. When creating namespaces and functions using the babashka.cli APIs, it is useful to alias them into your `bb.edn` file so that they can used as a shorter command
-
-            e.g. {:tasks {prune some.ns/prune}}
+  -  e.g. `{:tasks {prune some.ns/prune}}`
 ```
 
-Maintaining a list of prompts and context windows seems like a useful thing to do! There's a link to this one and a few others at the end. 
+Maintaining a list of prompts and context windows seems like a useful thing to do! *There's a link to this one and a few others at the end.*
 
 ## Generating a script
 
@@ -39,7 +38,7 @@ Let's say I have a directory of markdown files and I want to add some frontmatte
 
 With the provided context I'd write a short prompt
 
-> Please write a babashka CLI script that transforms markdown files by adding `type: post` to their YAML frontmatter. It should be possible to specify individual files as well as a regex pattern.
+> Please write a babashka CLI script that transforms markdown files by adding `type: post` to their YAML frontmatter. It should be possible to specify individual files as well as a glob pattern.
 
 The result will be a script like this one. It's not the prettiest and if you look closely there's definitely a few interesting idiosyncrasies but overall it's pretty good for something I didn't have 30 seconds ago!
 
@@ -47,6 +46,7 @@ The result will be a script like this one. It's not the prettiest and if you loo
 - Files to process can be specified via files or pattern options
 - Emojis are used in progress messages 
 - It's readable!
+
 
 ```clojure
 #!/usr/bin/env bb
@@ -132,12 +132,12 @@ The result will be a script like this one. It's not the prettiest and if you loo
 
 ## Context windows
 
-Using a prepared context window I can describe something very generic and turn it into something concrete in a twist.
+Using a prepared context window/prompt I can describe something in a generic way and turn it into something concrete in a twist.
 
 Here's two context windows that might be helpful to you:
 
-1. [The Babashka one](https://github.com/ctxs-ai/ctxs.ai/blob/main/contexts/martinklepsch/babashka.md) previewed here
-1. [A JS/ClojureScript conversion helper](https://github.com/ctxs-ai/ctxs.ai/blob/main/contexts/martinklepsch/js-cljs-conv.md) that understands Uix, Reagent & React and lets you translate code between those.
+1. [**The Babashka one**](https://github.com/ctxs-ai/ctxs.ai/blob/main/contexts/martinklepsch/babashka.md) previewed here
+1. [**A JS/ClojureScript conversion helper**](https://github.com/ctxs-ai/ctxs.ai/blob/main/contexts/martinklepsch/js-cljs-conv.md) that understands Uix, Reagent & React and lets you translate code between those.
 
 PRs to improve these are welcome!
 
