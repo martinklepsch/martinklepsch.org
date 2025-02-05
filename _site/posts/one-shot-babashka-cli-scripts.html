@@ -18,7 +18,7 @@
       name="keywords"
     />
     <meta
-      content="Like everyone I've been exploring AI tools and reading Simon Willisons excellent blog I discovered how he uses LLMs to generate CLI scripts . In this post I'm gonna share a bit more about ho..."
+      content="Like everyone I've been exploring AI tools and reading Simon Willisons excellent blog I discovered how he uses LLMs to generate one-off Python tools . In this post I'm gonna share a bit more..."
       itemprop="description"
       name="description"
     />
@@ -30,7 +30,7 @@
     <meta content="One-Shot Babashka CLI Scripts" property="og:title" />
     <meta content="article" property="og:type" />
     <meta
-      content="Like everyone I've been exploring AI tools and reading Simon Willisons excellent blog I discovered how he uses LLMs to generate CLI scripts . In this post I'm gonna share a bit more about ho..."
+      content="Like everyone I've been exploring AI tools and reading Simon Willisons excellent blog I discovered how he uses LLMs to generate one-off Python tools . In this post I'm gonna share a bit more..."
       property="og:description"
     />
     <meta
@@ -47,7 +47,7 @@
     <meta content="@martinklepsch" name="twitter:creator" />
     <meta content="One-Shot Babashka CLI Scripts" name="twitter:title" />
     <meta
-      content="Like everyone I've been exploring AI tools and reading Simon Willisons excellent blog I discovered how he uses LLMs to generate CLI scripts . In this post I'm gonna share a bit more about ho..."
+      content="Like everyone I've been exploring AI tools and reading Simon Willisons excellent blog I discovered how he uses LLMs to generate one-off Python tools . In this post I'm gonna share a bit more..."
       name="twitter:description"
     />
     <meta
@@ -129,12 +129,12 @@
                 Willisons excellent blog I discovered
                 <a
                   href="https://simonwillison.net/2024/Dec/19/one-shot-python-tools/"
-                  >how he uses LLMs to generate CLI scripts</a
+                  >how he uses LLMs to generate one-off Python tools</a
                 >.
               </p>
               <p>
                 In this post I'm gonna share a bit more about how I generate
-                babashka scripts in similar ways.
+                Babashka scripts in similar ways.
               </p>
               <h2>It's all in the context</h2>
               <p>
@@ -151,22 +151,21 @@
                 documentation I also included some guidelines for how I want
                 things to be done.
               </p>
-              <pre><code># general tips for writing babashka code
+              <pre><code class="md"># general tips for writing babashka code
 
-</code><ol><code><li>When using `p/process` and `p/shell` a variable list of strings is expected at the end. When creating the command using a vector or similar, be sure to use `apply` so that the vector is unwrapped        1. Example: `(apply p/process {} [&quot;echo&quot; &quot;123&quot;])`
+</code><ol><code><li>When using `p/process` and `p/shell` a variable list of strings is expected at the end. When creating the command using a vector or similar, be sure to use `apply` so that the vector is unwrapped  1. Example: `(apply p/process {} [&quot;echo&quot; &quot;123&quot;])`
 
 2. Some useful flags for file processing scripts
-        1. `--dry-run` only print actions, don’t execute
-        2. `--verbose` log additional input
+  1. `--dry-run` only print actions, don’t execute
+  2. `--verbose` log additional input
 
 3. When creating namespaces and functions using the babashka.cli APIs, it is useful to alias them into your `bb.edn` file so that they can used as a shorter command
-
-            e.g. {:tasks {prune some.ns/prune}}
+  -  e.g. `{:tasks {prune some.ns/prune}}`
 </li></code></ol></pre>
               <p>
                 Maintaining a list of prompts and context windows seems like a
-                useful thing to do! There's a link to this one and a few others
-                at the end.
+                useful thing to do!
+                <em>There's a link to this one and a few others at the end.</em>
               </p>
               <h2>Generating a script</h2>
               <p>
@@ -179,7 +178,7 @@
                   Please write a babashka CLI script that transforms markdown
                   files by adding <code>type: post</code> to their YAML
                   frontmatter. It should be possible to specify individual files
-                  as well as a regex pattern.
+                  as well as a glob pattern.
                 </p>
               </blockquote>
               <p>
@@ -194,9 +193,9 @@
                   Files to process can be specified via files or pattern options
                 </li>
                 <li>Emojis are used in progress messages</li>
-                <li>
-                  It's readable!
-                  <pre><code class="clojure">#!/usr/bin/env bb
+                <li>It's readable!</li>
+              </ul>
+              <pre><code class="clojure">#!/usr/bin/env bb
 
 (require '[babashka.cli :as cli]
          '[babashka.fs :as fs]
@@ -276,26 +275,24 @@
 (when (= *file* (System/getProperty &quot;babashka.file&quot;))
   (apply -main *command-line-args*))
 </code></pre>
-                </li>
-              </ul>
               <h2>Context windows</h2>
               <p>
-                Using a prepared context window I can describe something very
-                generic and turn it into something concrete in a twist.
+                Using a prepared context window/prompt I can describe something
+                in a generic way and turn it into something concrete in a twist.
               </p>
               <p>Here's two context windows that might be helpful to you:</p>
               <ol>
                 <li>
                   <a
                     href="https://github.com/ctxs-ai/ctxs.ai/blob/main/contexts/martinklepsch/babashka.md"
-                    >The Babashka one</a
+                    ><strong>The Babashka one</strong></a
                   >
                   previewed here
                 </li>
                 <li>
                   <a
                     href="https://github.com/ctxs-ai/ctxs.ai/blob/main/contexts/martinklepsch/js-cljs-conv.md"
-                    >A JS/ClojureScript conversion helper</a
+                    ><strong>A JS/ClojureScript conversion helper</strong></a
                   >
                   that understands Uix, Reagent &amp; React and lets you
                   translate code between those.
