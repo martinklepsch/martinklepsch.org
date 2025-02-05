@@ -1,4 +1,94 @@
-<?xml version="1.0" encoding="UTF-8"?><feed xmlns:a="http://www.w3.org/2005/Atom"><title>Martin Klepsch</title><subtitle>Martin Klepsch's blog</subtitle><generator>a bespoke mix of babashka and bootleg</generator><link href="https://www.martinklepsch.org" type="text/html"/><updated>2025-01-15T20:20:00.00Z</updated><id>https://www.martinklepsch.org</id><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author><entry><id>urn:uuid:0a5c60c6-a252-4075-a9d1-23fc2ccf402e</id><title>Converting a 700 Page PDF to Excel</title><published>2025-01-15T20:20:00.00Z</published><updated>2025-01-15T20:20:00.00Z</updated><link href="https://www.martinklepsch.org/posts/pdf-to-csv-with-gemini-and-claude.html" type="text/html" title="Converting a 700 Page PDF to Excel" rel="alternate"/><content type="html" xml:base="https://www.martinklepsch.org/posts/pdf-to-csv-with-gemini-and-claude.html">&lt;h1&gt;Converting a 700 Page PDF to Excel&lt;/h1&gt;&lt;p&gt;The other day, my flatmate mentioned that a colleague had a 700 page PDF with a bunch of tables that would be nice to have in a spreadsheet. &lt;/p&gt;&lt;p&gt;With the understanding that those problems are a thing of the past and poor impulse control, we went ahead and started playing with Gemini Advanced and other LLMs trying to extract the data. This blogpost details some of the steps that were necessary to do that reliably.&lt;/p&gt;&lt;h2&gt;Model Choice&lt;/h2&gt;&lt;p&gt;While I’ve recently been toying with Gemini Flash 2.0 it didn’t take long to bump against its limits. No matter how many things I called out in the prompt, I couldn’t get it to put empty cells into the CSV as an empty string &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;. Instead, it would simply omit the cell, making every cell slide left and corrupting the entire CSV.&lt;/p&gt;&lt;p&gt;For fun I even tried adding more vertical cell separation by quickly drawing in some black lines but that didn’t help much. Not that it would’ve been a feasible approach anyways.&lt;/p&gt;&lt;p&gt;GPT 4o didn’t do much better either.&lt;/p&gt;&lt;p&gt;In the end I tried Claude and was surprised by just how much better it was. Even with a reduced prompt that didn’t list out the columns it got things right fairly reliably. While my verification isn’t perfect it looks like only a few rows got messed up. &lt;/p&gt;&lt;p&gt;The full prompt I used:&lt;/p&gt;&lt;pre&gt;&lt;code class="md"&gt;Extract the tabular data on this page as csv. Respond with only the content of the csv file without any additional text.
+<?xml version="1.0" encoding="UTF-8"?><feed xmlns:a="http://www.w3.org/2005/Atom"><title>Martin Klepsch</title><subtitle>Martin Klepsch's blog</subtitle><generator>a bespoke mix of babashka and bootleg</generator><link href="https://www.martinklepsch.org" type="text/html"/><updated>2025-02-05T23:18:12.51Z</updated><id>https://www.martinklepsch.org</id><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author><entry><id>urn:uuid:813135fb-d709-4fbd-8fbd-a3ce33091b69</id><title>One-Shot Babashka CLI Scripts</title><published>2025-02-05T23:18:12.51Z</published><updated>2025-02-05T23:18:12.51Z</updated><link href="https://www.martinklepsch.org/posts/one-shot-babashka-cli-scripts.html" type="text/html" title="One-Shot Babashka CLI Scripts" rel="alternate"/><content type="html" xml:base="https://www.martinklepsch.org/posts/one-shot-babashka-cli-scripts.html">&lt;h1&gt;One-Shot Babashka CLI Scripts&lt;/h1&gt;&lt;p&gt;Like everyone I've been exploring AI tools and reading Simon Willisons excellent blog I discovered &lt;a href="https://simonwillison.net/2024/Dec/19/one-shot-python-tools/"&gt;how he uses LLMs to generate CLI scripts&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;In this post I'm gonna share a bit more about how I generate babashka scripts in similar ways.&lt;/p&gt;&lt;h2&gt;It's all in the context&lt;/h2&gt;&lt;p&gt;While Claude is pretty good at Clojure already it often generated code that didn't quite work. One particular case that kept occurring was that Claude kept thinking that &lt;code&gt;babashka.fs/glob&lt;/code&gt; returns files (something that &lt;code&gt;slurp&lt;/code&gt; could read) when in reality it returns a path. Globs can match directories after all.&lt;/p&gt;&lt;p&gt;So I started to copy together some pieces of documentation into a snippet that I'd always provide as context. Among the documentation I also included some guidelines for how I want things to be done.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;# general tips for writing babashka code
+
+&lt;/code&gt;&lt;ol&gt;&lt;code&gt;&lt;li&gt;When using `p/process` and `p/shell` a variable list of strings is expected at the end. When creating the command using a vector or similar, be sure to use `apply` so that the vector is unwrapped        1. Example: `(apply p/process {} [&amp;quot;echo&amp;quot; &amp;quot;123&amp;quot;])`
+
+2. Some useful flags for file processing scripts
+        1. `--dry-run` only print actions, don’t execute
+        2. `--verbose` log additional input
+
+3. When creating namespaces and functions using the babashka.cli APIs, it is useful to alias them into your `bb.edn` file so that they can used as a shorter command
+
+            e.g. {:tasks {prune some.ns/prune}}
+&lt;/li&gt;&lt;/code&gt;&lt;/ol&gt;&lt;/pre&gt;&lt;p&gt;Maintaining a list of prompts and context windows seems like a useful thing to do! There's a link to this one and a few others at the end. &lt;/p&gt;&lt;h2&gt;Generating a script&lt;/h2&gt;&lt;p&gt;Let's say I have a directory of markdown files and I want to add some frontmatter to each of them, say &lt;code&gt;type: post&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;With the provided context I'd write a short prompt&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt; Please write a babashka CLI script that transforms markdown files by adding &lt;code&gt;type: post&lt;/code&gt; to their YAML frontmatter. It should be possible to specify individual files as well as a regex pattern. &lt;/p&gt;&lt;/blockquote&gt;&lt;p&gt;The result will be a script like this one. It's not the prettiest and if you look closely there's definitely a few interesting idiosyncrasies but overall it's pretty good for something I didn't have 30 seconds ago!&lt;/p&gt;&lt;ul&gt;&lt;li&gt;There's CLI options for verbose and dry-run modes&lt;/li&gt;&lt;li&gt;Files to process can be specified via files or pattern options&lt;/li&gt;&lt;li&gt;Emojis are used in progress messages&lt;/li&gt;&lt;li&gt;It's readable!&lt;pre&gt;&lt;code class="clojure"&gt;#!/usr/bin/env bb
+
+(require '[babashka.cli :as cli]
+         '[babashka.fs :as fs]
+         '[clojure.string :as str]
+         '[clj-yaml.core :as yaml])
+
+(def cli-opts
+  {:spec {:files {:desc &amp;quot;Individual markdown files to process&amp;quot;
+                  :coerce []}
+          :pattern {:desc &amp;quot;Regex pattern to match markdown files (e.g. \&amp;quot;posts/*.md\&amp;quot;)&amp;quot;
+                   :alias :p}
+          :dry-run {:desc &amp;quot;Print what would be changed without making changes&amp;quot;
+                   :coerce :boolean}
+          :verbose {:desc &amp;quot;Print additional information during processing&amp;quot;
+                   :coerce :boolean}}})
+
+(defn extract-frontmatter
+  &amp;quot;Extracts YAML frontmatter from markdown content.
+   Returns [frontmatter remaining-content] or nil if no frontmatter found.&amp;quot;
+  [content]
+  (when (str/starts-with? content &amp;quot;---\n&amp;quot;)
+    (when-let [end-idx (str/index-of content &amp;quot;\n---\n&amp;quot; 4)]
+      (let [frontmatter (subs content 4 end-idx)
+            remaining (subs content (+ end-idx 5))]
+        [frontmatter remaining]))))
+
+(defn update-frontmatter
+  &amp;quot;Updates the frontmatter by adding type: post if not present&amp;quot;
+  [markdown-str]
+  (if-let [[frontmatter content] (extract-frontmatter markdown-str)]
+    (let [data (yaml/parse-string frontmatter)
+          updated-data (cond-&amp;gt; data
+                        (not (:type data)) (assoc :type &amp;quot;post&amp;quot;))
+          new-frontmatter (yaml/generate-string updated-data :dumper-options {:flow-style :block})]
+      (str &amp;quot;---\n&amp;quot; new-frontmatter &amp;quot;---\n&amp;quot; content))
+    markdown-str))
+
+(defn process-file
+  &amp;quot;Process a single markdown file, updating its frontmatter&amp;quot;
+  [file {:keys [dry-run verbose]}]
+  (let [content (slurp file)
+        updated-content (update-frontmatter content)]
+    (when verbose
+      (println &amp;quot;📝 Processing&amp;quot; (str file)))
+    (if (= content updated-content)
+      (when verbose
+        (println &amp;quot;⏭️ No changes needed for&amp;quot; (str file)))
+      (do
+        (when verbose
+          (println &amp;quot;🔄 Updating frontmatter in&amp;quot; (str file)))
+        (when-not dry-run
+          (spit file updated-content))))))
+
+(defn process-files
+  &amp;quot;Process multiple markdown files based on CLI options&amp;quot;
+  [{:keys [files pattern] :as opts}]
+  (let [pattern-files (when pattern
+                       (-&amp;gt;&amp;gt; (fs/glob &amp;quot;.&amp;quot; pattern)
+                            (map fs/file)
+                            (filter #(str/ends-with? (str %) &amp;quot;.md&amp;quot;))))
+        all-files (concat (map fs/file files) pattern-files)]
+    (if (seq all-files)
+      (do
+        (when (:verbose opts)
+          (println &amp;quot;🔍 Found&amp;quot; (count all-files) &amp;quot;files to process&amp;quot;))
+        (doseq [file all-files]
+          (process-file file opts))
+        (println &amp;quot;✨ Processing complete!&amp;quot;))
+      (println &amp;quot;⚠️ No markdown files found to process&amp;quot;))))
+
+(defn -main [&amp;amp; args]
+  (let [opts (cli/parse-opts args cli-opts)]
+    (if (:help opts)
+      (println (cli/format-opts cli-opts))
+      (process-files opts))))
+
+(when (= *file* (System/getProperty &amp;quot;babashka.file&amp;quot;))
+  (apply -main *command-line-args*))
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Context windows&lt;/h2&gt;&lt;p&gt;Using a prepared context window I can describe something very generic and turn it into something concrete in a twist.&lt;/p&gt;&lt;p&gt;Here's two context windows that might be helpful to you:&lt;/p&gt;&lt;ol&gt;&lt;li&gt;&lt;a href="https://github.com/ctxs-ai/ctxs.ai/blob/main/contexts/martinklepsch/babashka.md"&gt;The Babashka one&lt;/a&gt; previewed here&lt;/li&gt;&lt;li&gt;&lt;a href="https://github.com/ctxs-ai/ctxs.ai/blob/main/contexts/martinklepsch/js-cljs-conv.md"&gt;A JS/ClojureScript conversion helper&lt;/a&gt; that understands Uix, Reagent &amp;amp; React and lets you translate code between those.&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;PRs to improve these are welcome!&lt;/p&gt;&lt;p&gt;I'm curious to make a full REPL loop that runs code that was generated this way. Natural language in, Clojure forms out, confirm to run. Could be fun!&lt;/p&gt;&lt;p&gt;&lt;a href="https://twitter.com/martinklepsch"&gt;reply on twitter&lt;/a&gt;&lt;/p&gt;</content><author><name>Martin Klepsch</name><email>martinklepsch@googlemail.com</email></author></entry><entry><id>urn:uuid:0a5c60c6-a252-4075-a9d1-23fc2ccf402e</id><title>Converting a 700 Page PDF to Excel</title><published>2025-01-15T20:20:00.00Z</published><updated>2025-01-15T20:20:00.00Z</updated><link href="https://www.martinklepsch.org/posts/pdf-to-csv-with-gemini-and-claude.html" type="text/html" title="Converting a 700 Page PDF to Excel" rel="alternate"/><content type="html" xml:base="https://www.martinklepsch.org/posts/pdf-to-csv-with-gemini-and-claude.html">&lt;h1&gt;Converting a 700 Page PDF to Excel&lt;/h1&gt;&lt;p&gt;The other day, my flatmate mentioned that a colleague had a 700 page PDF with a bunch of tables that would be nice to have in a spreadsheet. &lt;/p&gt;&lt;p&gt;With the understanding that those problems are a thing of the past and poor impulse control, we went ahead and started playing with Gemini Advanced and other LLMs trying to extract the data. This blogpost details some of the steps that were necessary to do that reliably.&lt;/p&gt;&lt;h2&gt;Model Choice&lt;/h2&gt;&lt;p&gt;While I’ve recently been toying with Gemini Flash 2.0 it didn’t take long to bump against its limits. No matter how many things I called out in the prompt, I couldn’t get it to put empty cells into the CSV as an empty string &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;. Instead, it would simply omit the cell, making every cell slide left and corrupting the entire CSV.&lt;/p&gt;&lt;p&gt;For fun I even tried adding more vertical cell separation by quickly drawing in some black lines but that didn’t help much. Not that it would’ve been a feasible approach anyways.&lt;/p&gt;&lt;p&gt;GPT 4o didn’t do much better either.&lt;/p&gt;&lt;p&gt;In the end I tried Claude and was surprised by just how much better it was. Even with a reduced prompt that didn’t list out the columns it got things right fairly reliably. While my verification isn’t perfect it looks like only a few rows got messed up. &lt;/p&gt;&lt;p&gt;The full prompt I used:&lt;/p&gt;&lt;pre&gt;&lt;code class="md"&gt;Extract the tabular data on this page as csv. Respond with only the content of the csv file without any additional text.
 
 Ignore any linebreaks in the table cells. Make sure to quote every cell value.
 When encountering empty cells, provide an empty string as value.
