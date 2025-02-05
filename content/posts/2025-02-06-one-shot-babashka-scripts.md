@@ -47,6 +47,7 @@ The result will be a script like this one. It's not the prettiest and if you loo
 - Emojis are used in progress messages 
 - It's readable!
 
+(If you properly want to read this code, [this Gist](https://gist.github.com/martinklepsch/b534f6be88cd48bf9aad4076dc2ccbfa) will display it better.)
 
 ```clojure
 #!/usr/bin/env bb
