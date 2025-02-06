@@ -3,3 +3,5 @@ target
 .nrepl-history
 .nrepl-port
 .clj-kondo/imports
+.obsidian
+.lsp
