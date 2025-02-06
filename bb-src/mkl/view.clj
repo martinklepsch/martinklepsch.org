@@ -64,7 +64,7 @@
      (when img [:meta {:property "og:image" :content img}])
      [:meta {:property "og:site_name" :content "martinklepsch.org"}]
      ;; Twitter
-     [:meta {:name "twitter:card" :content "summary"}]
+     [:meta {:name "twitter:card" :content "summary_large_image"}]
      [:meta {:name "twitter:site" :content "@martinklepsch"}]
      [:meta {:name "twitter:creator" :content "@martinklepsch"}]
      [:meta {:name "twitter:title" :content title-social}]
