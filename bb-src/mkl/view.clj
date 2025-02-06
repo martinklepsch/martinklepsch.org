@@ -63,9 +63,8 @@
      [:meta {:name "twitter:description" :content desc}]
      (when img [:meta {:name "twitter:image" :content img}])
      ;; Misc
-     [:link {:rel "shortcut icon" :href "/images/favicon.ico"}]
+     [:link {:rel "shortcut icon" :type "image/png" :href "/images/favicon.png"}]
      [:link {:rel "alternate" :type "application/atom+xml" :title "Sitewide Atom Feed" :href "/atom.xml"}]
-     ;; [:link {:type "text/css" :rel "stylesheet" :href "https://unpkg.com/basscss@8.0.2/css/basscss.min.css"}]
      [:link {:type "text/css"
              :rel "stylesheet"
              :href "/stylesheets/martinklepschorg-v4.css"}]]))
