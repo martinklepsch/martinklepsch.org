@@ -3,7 +3,8 @@
             [clojure.string :as string]
             [mkl.pods]
             [mkl.posts :as posts]
-            [pod.retrogradeorbit.bootleg.utils :as utils]))
+            [pod.retrogradeorbit.bootleg.utils :as utils])
+  (:import [java.net URLEncoder]))
 
 (defn with-base-url
   [s]
@@ -27,13 +28,20 @@
            (string/join " ")
            (truncate 190)))
 
+(defn- url-encode
+  "Returns an UTF-8 URL encoded version of the given string."
+  [^String unencoded]
+  (URLEncoder/encode unencoded "UTF-8"))
+
 (defn head
   [{:keys [frontmatter] :as opts}]
   (let [title (if-let [t (:title frontmatter)]
                 (str t " — Martin Klepsch")
                 "Martin Klepsch")
         title-social (or (:title frontmatter) "Martin Klepsch")
-        img   (some-> frontmatter :og-image with-base-url)
+        img   (if (:title frontmatter)
+                (str "https://dynogee.com/gen?id=kw9xren5k1gw1si&title=" (url-encode (:title frontmatter)))
+                (some-> frontmatter :og-image with-base-url))
         permalink (some-> frontmatter :permalink with-base-url)
         desc (or (:description frontmatter)
                  (content->desc (:content opts))
@@ -269,9 +277,7 @@
    [:div
     {:style {:view-transition-name "socials"}}
     [:a {:href +bluesky-uri+, :target "_blank" :class "hover:text-[#0c84fc] hover:scale-125 duration-800 transition-all ease-out"}
-     bluesky-icon
-     ]
-    ]
+     bluesky-icon]]
 
 
    #_[:a {:href "/about.html"} "About"]])
@@ -284,10 +290,8 @@
    [:div.max-w-xl.mx-auto
     [:div
      (header)
-     (posts-list all-posts)
-     ]]
-   (footer)
-   ))
+     (posts-list all-posts)]]
+   (footer)))
 
 (defn post-page
   [post]
@@ -332,8 +336,7 @@
        [:section.mkdwn.leading-relaxed
         (:content post)]
        [:div.my3
-        [:a {:href "/100/writing-100-things.html"} (inc idx) " / 100"]]
-       ]]]))
+        [:a {:href "/100/writing-100-things.html"} (inc idx) " / 100"]]]]]))
 
 ;; Rendering API
 ;; Goals
