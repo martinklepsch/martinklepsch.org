@@ -136,28 +136,6 @@
      (+ 1900 (.getYear date)))
     (println "date missing")))
 
-#_(defn nav
-    []
-    [:div
-     {:class "max-w-[120ch] w-full flex justify-between items-center py-4 px-8"}
-     [:div {:class "flex flex-col"}
-      [:a
-       {:class "nav-link text-lg font-bold text-slate-800",
-        :href "/"} "Mostly Harmless"]]
-     [:div
-      {:class "flex space-x-2 text-sm items-center"}
-      [:a {:class "nav-link px-2 py-1", :href "/"}
-       "Home"]
-    ;; [:span {:class "nav-divider"} "/"]
-    ;; [:a
-    ;;  {:class "px-2 py-1", :href "/about"}
-    ;;  "About"]
-      [:span {:class "nav-divider"} "/"]
-      [:a
-       {:class
-        "nav-link px-2 py-1 text-sky-500 ring-1 ring-sky-200 rounded-sm bg-sky-50",
-        :href "/subscribe.html"} "Subscribe"]]])
-
 (defn base
   [opts & content]
   [:html {:lang "en" :itemtype "http://schema.org/Blog"}
