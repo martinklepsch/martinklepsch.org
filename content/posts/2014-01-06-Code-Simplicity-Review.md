@@ -4,6 +4,7 @@ title: Code Simplicity
 uuid: 798632b6-60b7-4163-b1cc-ef3f49bbbc7b
 permalink: /posts/code-simplicity-review.html
 og-image: /images/selfies/2.jpg
+hidden: true
 type: post
 ---
 When O'Reilly promoted their cyber monday I somehow really got into a shopping
