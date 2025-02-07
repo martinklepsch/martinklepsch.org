@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const posts = await getCollection("posts");
+const postsByYear = posts
+  .filter((post) => !post.data.hidden)
+  .sort(
+    (a, b) =>
+      new Date(b.data["date-published"]) - new Date(a.data["date-published"]),
+  )
+  .reduce((acc, post) => {
+    const year = new Date(post.data["date-published"]).getFullYear();
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(post);
+    return acc;
+  }, {});
+---
+
+<Base>
+  <div class="max-w-xl mx-auto">
+    <Header />
+    <div>
+      <section class="space-y-4 px-6">
+        {
+          Object.entries(postsByYear)
+            .sort(([a], [b]) => Number(b) - Number(a))
+            .map(([year, posts]) => (
+              <div>
+                <h3 class="font-bold text-xl mb-2">{year}</h3>
+                <ol class="divide-y divide-slate-200">
+                  {posts.map((post) => {
+                    const date = new Date(post.data["date-published"]);
+                    const month = date.toLocaleString("default", {
+                      month: "short",
+                    });
+                    return (
+                      <li>
+                        <a
+                          class="flex items-baseline gap-2 py-3 group text-slate-700 hover:text-primary"
+                          href={`/posts/${post.data.slug}`}
+                        >
+                          <div class="min-w-16 text-xs text-slate-600 uppercase font-medium transition-all">
+                            {month} {date.getDate()}
+                          </div>
+                          <div class="group-hover:translate-x-0.5 transition-all duration-250 ease-out text-balance pr-6">
+                            {post.data.title}
+                          </div>
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+            ))
+        }
+      </section>
+    </div>
+  </div>
+  <Footer />
+</Base>
