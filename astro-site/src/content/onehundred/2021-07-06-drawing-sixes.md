@@ -4,7 +4,7 @@ date-published: 2021-07-06T10:12:57.048Z
 uuid: 58e4bedf-8f2a-416d-aba4-2c606416c41e
 og-image: /images/selfies/14.jpg
 type: onehundred
-permalink: /100/drawing-sixes.html
+slug: drawing-sixes
 ---
 There's a guy in my neighborhood following a strange art project. He paints the digit '6' on all kinds of crap that you can find on the street. He paints it pretty much exclusively on things that will disappear again. Trash, poster ads, giveaway boxes, you name it. 
 

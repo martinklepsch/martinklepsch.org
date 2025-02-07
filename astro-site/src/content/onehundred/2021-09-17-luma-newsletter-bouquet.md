@@ -4,7 +4,7 @@ date-published: 2021-11-15T09:51:54.998Z
 uuid: 4781b69d-da73-42a3-be8f-d1e6d1e33d4f
 og-image: /images/selfies/9.jpg
 type: onehundred
-permalink: /100/luma-newsletter-bouquet.html
+slug: luma-newsletter-bouquet
 ---
 
 > I'm not really sure why but in the spirit of exploration I started a kind of irregular newsletter. You can read [the first edition here](https://lu.ma/p/MnWMR5rLJHDcWL5/Martin-says-Welcome) and it's also in full below. Since I started this project here of writing 100 things I decided to be generous with myself and I'll also count any newsletters I'm sending.

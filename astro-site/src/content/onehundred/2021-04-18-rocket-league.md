@@ -4,7 +4,7 @@ date-published: 2021-04-18T18:47:44.556Z
 uuid: d659580c-f51d-42a3-a930-6f14ec470d1d
 og-image: /images/selfies/3.jpg
 type: onehundred
-permalink: /100/rocket-league.html
+slug: rocket-league
 ---
 I've you've talked to me about computer/console games I've probably mentioned Rocket League. 
 

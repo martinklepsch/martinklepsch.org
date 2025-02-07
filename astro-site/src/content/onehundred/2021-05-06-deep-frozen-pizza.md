@@ -4,7 +4,7 @@ date-published: 2021-05-06T08:35:26.914Z
 uuid: ccf1ae3a-254f-4976-9081-60656d4f5214
 og-image: /images/selfies/1.jpg
 type: onehundred
-permalink: /100/deep-frozen-pizza.html
+slug: deep-frozen-pizza
 ---
 Every now and then I'd order pizza. Maybe it's Sunday, the fridge is empty and you're not really feeling like Sushi or Indian. You're craving the carbs of a nice pizza. Unfortunately almost all the time I'd be disappointed by my decision. Pizza that is in a delivery box for anything between 10-30 minutes just can't be the same as one that's fresh out of the oven. You all know what I'm talking about. 
 
