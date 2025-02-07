@@ -1,0 +1,111 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("onehundred");
+    return posts.map((post) => ({
+        params: { slug: post.data.slug },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base>
+    <div class="mx1">
+        <div>
+            <Header />
+            <article
+                class="mt-8 max-w-3xl mx-auto px-6"
+                itemprop="blogPost"
+                itemscope
+                itemtype="http://schema.org/BlogPosting"
+            >
+                <div class="text-center">
+                    <div class="text-slate-600 uppercase text-xs">
+                        {
+                            new Date(
+                                post.data["date-published"],
+                            ).toLocaleDateString("en-US", {
+                                month: "long",
+                                year: "numeric",
+                            })
+                        }
+                    </div>
+                    <h1
+                        class="mt-2 mb-12 text-3xl sm:text-5xl font-bold text-balance"
+                    >
+                        {post.data.title}
+                    </h1>
+                </div>
+                <section class="max-w-xl mx-auto">
+                    <div
+                        class={`
+            max-w-none
+            prose
+            prose-base
+            prose-slate
+            prose-h1:font-bold
+            prose-h1:text-3xl
+            prose-img:rounded-xl
+            prose-em:bg-orange-100/60
+            prose-em:px-0.5
+            prose-em:rounded-sm
+            prose-strong:bg-primary/10
+            prose-strong:px-0.5
+            prose-strong:font-medium
+            prose-strong:rounded-sm
+            prose-a:decoration-1
+            prose-a:transition-text-decoration
+            prose-a:decoration-primary/50
+            prose-a:font-medium
+            prose-a:underline
+            prose-a:underline-offset-4
+            prose-a:hover:decoration-2
+            prose-a:hover:decoration-primary/50
+            prose-code:text-sm
+            prose-code:font-medium
+            prose-code-inline:text-orange-600
+            prose-code-inline:bg-orange-50
+            prose-code-inline:ring-orange-400/20
+            prose-code-inline:rounded-md
+            prose-code-inline:text-sm
+            prose-code-inline:px-2
+            prose-code-inline:py-1
+            prose-code-inline:ring-1
+            prose-code-inline:ring-inset
+            prose-blockquote:text-lg
+            prose-blockquote:font-light
+            prose-blockquote:text-slate-500
+            prose-blockquote:border-l-4
+            prose-blockquote:border-blue-400/70
+            prose-blockquote:pl-4
+            prose-blockquote:ml-4
+            prose-blockquote:mt-4
+          `}
+                    >
+                        <Content />
+                    </div>
+                </section>
+            </article>
+            <!-- {
+        post.data["bluesky-post-id"] && (
+          <div class="max-w-3xl mx-auto px-6 my-16">
+            <h2 class="text-3xl font-bold text-center">Comments</h2>
+            <script
+              data-bluesky-uri={`at://martinklepsch.org/app.bsky.feed.post/${post.data["bluesky-post-id"]}`}
+              src="/bluesky-comments.js"
+              type="module"
+            />
+          </div>
+        )
+      } -->
+            <Footer />
+        </div>
+    </div>
+</Base>
