@@ -16,6 +16,19 @@ const posts = defineCollection({
   })
 });
 
+const onehundred = defineCollection({
+  loader: glob({ pattern: ['*.md'], base: 'src/content/onehundred' }),
+
+  schema: z.object({
+    title: z.string(),
+    'date-published': z.date(),
+    uuid: z.string(),
+    slug: z.string()
+  })
+});
+
 export const collections = {
   posts,
+  onehundred
 };
+
