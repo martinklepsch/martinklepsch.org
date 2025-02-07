@@ -1,10 +1,10 @@
 ---
 title: 'Clojure Macros: Creating vars from a map'
-permalink: /posts/clojure-macro-magic-vars-from-map.html
 date-published: 2021-02-25T12:18:42.591Z
 uuid: b2865f91-de5b-41f5-9632-6a3055b8e93d
 og-image: /images/selfies/2.jpg
 type: post
+slug: clojure-macro-magic-vars-from-map
 ---
 The other day I was looking for a way to turn a map into a bunch of vars. I know a macro is what will get the job done but I write macros so rarely that it always takes me a while to figure it out. In the end I ended up with something like this:
 

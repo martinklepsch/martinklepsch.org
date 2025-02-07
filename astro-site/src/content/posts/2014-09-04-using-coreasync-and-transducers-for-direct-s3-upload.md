@@ -2,9 +2,9 @@
 date-published: 2014-09-04T00:00:00Z
 title: Using core.async and Transducers to upload files from the browser to S3
 uuid: a0c71769-4de2-476d-9453-2a00ccd527a5
-permalink: /posts/using-coreasync-and-transducers-for-direct-s3-upload.html
 og-image: /images/selfies/3.jpg
 type: post
+slug: using-coreasync-and-transducers-for-direct-s3-upload
 ---
 
 In a project I'm working on we needed to enable users to upload media

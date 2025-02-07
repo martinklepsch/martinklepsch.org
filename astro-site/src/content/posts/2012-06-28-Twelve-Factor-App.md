@@ -4,9 +4,9 @@ date-published: 2012-06-28T00:00:00Z
 resource: http://www.12factor.net/
 title: The Twelve Factor App
 uuid: 36e26c80-51ab-4350-b714-f5083763d86a
-permalink: /posts/twelve-factor-app.html
 og-image: /images/selfies/1.jpg
 type: post
+slug: twelve-factor-app
 ---
 Around December 2011 the awesome crowd around Heroku released a [now open-source document](https://github.com/adamwiggins/12factor) that describes 12 factors that
 build up a methodology of developing software-as-a-service products.

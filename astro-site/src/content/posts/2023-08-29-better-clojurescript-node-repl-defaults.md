@@ -4,7 +4,7 @@ date-published: 2023-08-29T11:34:31.066Z
 uuid: a5e97c9e-46a4-4a55-914b-d63af6f698bb
 og-image: /images/selfies/2.jpg
 type: post
-permalink: /posts/better-clojurescript-node-repl-defaults.html
+slug: better-clojurescript-node-repl-defaults
 ---
 
 Hi there! Welcome back — to you as much as to me. It's been a while that I've

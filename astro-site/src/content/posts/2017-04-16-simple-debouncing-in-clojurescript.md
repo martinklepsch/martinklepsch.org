@@ -2,9 +2,9 @@
 date-published: 2017-04-16T00:00:00Z
 title: Simple Debouncing in ClojureScript
 uuid: 271f273e-8587-42ce-be1a-6efe22a78d2e
-permalink: /posts/simple-debouncing-in-clojurescript.html
 og-image: /images/selfies/3.jpg
 type: post
+slug: simple-debouncing-in-clojurescript
 ---
 
 This is a short post on a problem that eventually occurs in any

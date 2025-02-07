@@ -5,9 +5,9 @@ resource: http://cirw.in/blog/time-to-move-on
 title: Models, Operations, Views and Events
 uuid: 22ccc641-b55e-4c29-83b1-631fbd4598f6
 hidden: true
-permalink: /posts/models-operations-views-and-events.html
 og-image: /images/selfies/3.jpg
 type: post
+slug: models-operations-views-and-events
 ---
 Conrad Irwin:
 

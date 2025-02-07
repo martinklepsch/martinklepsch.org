@@ -3,10 +3,10 @@ FBimage: /images/tough-mudder.jpg
 date-published: 2014-01-08T00:00:00Z
 title: Running a Marathon, Or Not
 uuid: a4f45de9-5915-46ed-a41a-b10f4560a177
-permalink: /posts/running-a-marathon-or-not.html
 hidden: true
 og-image: /images/selfies/2.jpg
 type: post
+slug: running-a-marathon-or-not
 ---
 Earlier this year I came to the “very” surprising conclusion that I'm not doing enough
 sports in relation to the hours I spend in front of a computer every day.

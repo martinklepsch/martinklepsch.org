@@ -1,11 +1,11 @@
 ---
 title: One-Shot Babashka CLI Scripts
 type: post
-permalink: /posts/one-shot-babashka-cli-scripts.html
 og-image: /images/selfies/10.jpg
 date-published: 2025-02-05T23:18:12.514Z
 uuid: 813135fb-d709-4fbd-8fbd-a3ce33091b69
 bluesky-post-id: 3lhhrisefmk2t
+slug: one-shot-babashka-cli-scripts
 ---
 Like everyone I've been exploring AI tools and reading Simon Willisons excellent blog I discovered [how he uses LLMs to generate one-off Python tools](https://simonwillison.net/2024/Dec/19/one-shot-python-tools/).
 
