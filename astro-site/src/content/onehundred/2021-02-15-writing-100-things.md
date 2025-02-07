@@ -4,7 +4,7 @@ date-published: 2021-02-15T19:06:42.148Z
 uuid: e0ebd76e-e415-4623-a9a1-8f2d69e19cec
 og-image: /images/selfies/2.jpg
 type: onehundred
-permalink: /100/writing-100-things.html
+slug: writing-100-things
 ---
 In order to write more I'm going to embark on a little project: publishing 100 pieces of writing. This is inspired by a bunch of Twitter strangers putting things like "(22/100 Youtube videos)" next to their display names and by [Mike](https://critter.blog/) who has been blogging every day for the last 100+ days, producing a wonderful array of short but insightful articles.
 

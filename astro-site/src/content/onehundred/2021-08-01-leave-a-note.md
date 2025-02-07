@@ -1,10 +1,10 @@
 ---
 title: leave a note
-permalink: /100/leave-a-note.html
 date-published: 2021-08-01T17:26:10.111Z
 uuid: 40337570-916f-4e0e-bdb6-8af83f8b01dd
 og-image: /images/selfies/4.jpg
 type: post
+slug: leave-a-note
 ---
 My little "write a 100 things" project isn't really coming along all that well. Or maybe it's coming along well, but slowly. I could go full-on introspective now and carefully analyze what I'd need to do to produce more of these little random pieces but I also just came home from camping at a lake for 2 days so I'll defer that and take a hot shower instead. 
 

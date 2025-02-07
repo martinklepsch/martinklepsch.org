@@ -4,7 +4,7 @@ date-published: 2021-02-21T12:17:05.266Z
 uuid: 183d3761-d354-4361-b903-e4e4d9ee9717
 og-image: /images/selfies/1.jpg
 type: onehundred
-permalink: /100/cljdoc-origins-2-n.html
+slug: cljdoc-origins-2-n
 ---
 Okay, surfing [is done](https://twitter.com/martinklepsch/status/1363428911422521346?s=20). Back to January 2018. As [I said](https://martinklepsch.org/100/cljdoc-origins-1-n.html) I created a [small presentation](https://clojureverse.org/uploads/default/original/1X/3ecba3a15c85783f14044da7b8be57020304ecce.pdf) and shared it, full of excitement, with the attendees of that January Clojure Berlin meetup. At the time I had a prototype that analyzed a jar, and created a super basic page listing vars in the available namespaces.
 

@@ -4,7 +4,7 @@ date-published: 2021-08-20T14:04:06.667Z
 uuid: 4f639b1f-7e97-467c-be84-73b5589f80e5
 og-image: /images/selfies/10.jpg
 type: onehundred
-permalink: /100/the-cljdoc-contributions-strategy.html
+slug: the-cljdoc-contributions-strategy
 ---
 Since [cljdocs](https://martinklepsch.org/100/cljdoc-origins-1-n.html) [inception](https://martinklepsch.org/100/cljdoc-origins-2-n.html) I've always been very eager to make it easy for folks to contribute. I wrote almost [two dozen Architecture Decision Records](https://github.com/cljdoc/cljdoc/tree/master/doc/adr) (ADR) hoping it would help future contributors navigate the codebase. I encouraged people to contribute and tried to spec out smaller "good first issue" type contributions so folks could start with something small. 
 
