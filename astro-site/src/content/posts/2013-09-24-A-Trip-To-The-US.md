@@ -3,10 +3,10 @@ date-published: 2013-09-24T00:00:00Z
 abstract: I'm going on a short trip to the US (NYC, PHL & MIA) and I'd love to meet some fun people!
 title: A Trip To The US
 uuid: adc62a3d-a5de-43b3-831f-56c3ee377d29
-permalink: /posts/a-trip-to-the-us.html
 hidden: true
 og-image: /images/selfies/2.jpg
 type: post
+slug: a-trip-to-the-us
 ---
 Wow. It has been quite a while since I wrote anything here. Almost 5 months, phew.
 

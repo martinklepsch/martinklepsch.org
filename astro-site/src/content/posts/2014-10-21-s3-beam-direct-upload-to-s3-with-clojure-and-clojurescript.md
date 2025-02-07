@@ -2,9 +2,9 @@
 date-published: 2014-10-21T00:00:00Z
 title: S3-Beam — Direct Upload to S3 with Clojure & Clojurescript
 uuid: 8b07ff10-d213-41b5-b388-5cc9dbc17bfd
-permalink: /posts/s3-beam-direct-upload-to-s3-with-clojure-and-clojurescript.html
 og-image: /images/selfies/3.jpg
 type: post
+slug: s3-beam-direct-upload-to-s3-with-clojure-and-clojurescript
 ---
 
 In a

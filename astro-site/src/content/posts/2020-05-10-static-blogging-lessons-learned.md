@@ -2,9 +2,9 @@
 title: Static Blogging, Some Lessons Learned
 date-published: 2020-05-10T12:13:00.303Z
 uuid: 731b58c0-836e-4448-b225-67123f69d9af
-permalink: /posts/static-blogging-lessons-learned.html
 og-image: /images/selfies/2.jpg
 type: post
+slug: static-blogging-lessons-learned
 ---
 
 I've been running this blog for more than eight years now. Over these years it went through multiple rewrites, occasionally satisfying my urge to play with new toys. Now I'm in the middle of the next rewrite and I'm realizing some things that I'd love to have done from the start.

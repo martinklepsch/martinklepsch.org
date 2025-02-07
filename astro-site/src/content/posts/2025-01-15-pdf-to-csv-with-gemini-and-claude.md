@@ -1,10 +1,10 @@
 ---
 title: Converting a 700 Page PDF to Excel
 type: post
-permalink: /posts/pdf-to-csv-with-gemini-and-claude.html
 og-image: /images/selfies/10.jpg
 date-published: 2025-01-15T20:20:00Z
 uuid: 0a5c60c6-a252-4075-a9d1-23fc2ccf402e
+slug: pdf-to-csv-with-gemini-and-claude
 ---
 
 The other day, my flatmate mentioned that a colleague had a 700 page PDF with a bunch of tables that would be nice to have in a spreadsheet. 
