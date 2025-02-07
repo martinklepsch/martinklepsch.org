@@ -1,0 +1,20 @@
+{
+  "name": "astro-site",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.8",
+    "@astrojs/rss": "^4.0.11",
+    "@tailwindcss/vite": "^4.0.4",
+    "astro": "^5.2.5",
+    "markdown-it": "^14.1.0",
+    "sanitize-html": "^2.14.0",
+    "tailwindcss": "^4.0.4"
+  }
+}

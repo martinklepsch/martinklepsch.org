@@ -1,0 +1,81 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  frontmatter?: {
+    title?: string;
+    description?: string;
+    permalink?: string;
+    ogImage?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+
+const title = frontmatter?.title
+  ? `${frontmatter.title} — Martin Klepsch`
+  : "Martin Klepsch";
+const titleSocial = frontmatter?.title || "Martin Klepsch";
+const description =
+  frontmatter?.description || "Personal Website and Blog of Martin Klepsch";
+const permalink = frontmatter?.permalink;
+const image =
+  frontmatter?.ogImage ||
+  (frontmatter?.title
+    ? `https://dynogee.com/gen?id=kw9xren5k1gw1si&title=${encodeURIComponent(frontmatter.title)}`
+    : undefined);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      itemprop="author"
+      name="author"
+      content="Martin Klepsch (martinklepsch@googlemail.com)"
+    />
+    <meta
+      name="keywords"
+      itemprop="keywords"
+      content="blog, clojure, development, clojurescript, heroku, amazon s3, aws"
+    />
+    <meta name="description" itemprop="description" content={description} />
+    {permalink && <link rel="canonical" href={permalink} />}
+    <title>{title}</title>
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content={titleSocial} />
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content={description} />
+    {permalink && <meta property="og:url" content={permalink} />}
+    {image && <meta property="og:image" content={image} />}
+    <meta property="og:site_name" content="martinklepsch.org" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@martinklepsch" />
+    <meta name="twitter:creator" content="@martinklepsch" />
+    <meta name="twitter:title" content={titleSocial} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={image} />}
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
+    <link
+      href="/atom.xml"
+      rel="alternate"
+      title="Martin Klepsch's Blog"
+      type="application/atom+xml"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
