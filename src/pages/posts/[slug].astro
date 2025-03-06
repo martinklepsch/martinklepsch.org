@@ -16,7 +16,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Base>
+<Base frontmatter={post.data}>
   <div class="mx1">
     <div>
       <Header />
