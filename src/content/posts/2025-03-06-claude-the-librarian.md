@@ -3,9 +3,15 @@ title: Claude, the librarian
 slug: claude-the-librarian
 date-published: 2025-03-06
 uuid: a6e5be1b-e974-471b-8ea7-45c920acdd6c
+tweet: |
+  Cursor makes you write code, but maybe you don't have to?
+
+  Recently I was trying to organize a personal knowledge base of sorts, dozens of markdown files, many of which I regularly use as context with LLMs.
+
+  Now I wanted to 
 ---
 
-Recently I was trying to create knowledge base of sorts, dozens of markdown files with various contents. My little treasure trove of context windows that I feed to Cursor, Claude and friends. 
+Recently I was trying to create a knowledge base of sorts, dozens of markdown files with various contents. My little treasure trove of context windows that I feed to Cursor, Claude and friends. 
 
 To get a better overview of whats in my library I wanted to add some tags and descriptions to each entry. 
 
@@ -47,3 +53,5 @@ Claude Code is still new but it is intriguing to think about what this could do 
 For now its slow, kind of expensive and a bit clunky. That said no crystal ball is needed to see this being fast and polished, Goose already is showing the way.
 
 Alright, back to topping up my Anthropic credits.
+
+Oh, and MCP! (bingo!)
