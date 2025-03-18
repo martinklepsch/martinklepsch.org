@@ -66,3 +66,12 @@ Good question. [The PDF](https://downloads.ctfassets.net/xytfb1vrn7of/2upzYS0Ehi
 The law seemingly did not state anything about the format in which those plans should be published. So, the publishers, Netze BW GmbH / EnBw, decided: PDF it is!
 
 For those who might have use for this data, you can download it here: [Google Sheet Netzbauplan](https://ggl.link/netzbauplan).
+
+## Update 2024-03-18
+
+I've also run a small experiment with [Mistral's latest OCR model](https://mistral.ai/news/mistral-ocr) after reading [Simon Willison's blog about it](https://simonwillison.net/2025/Mar/7/mistral-ocr/). **Results were not very impressive unfortunately:**
+
+- Several words were garbled, "Projektkategorie" turned into "Projektbiologie", "Baubeginn" into "Boubejims"
+- I found these interesting because the PDF does have selectable text so these errors were unexpected
+
+Here are permalinks to [input](/attachments/netzbauplan-page-123.pdf) and [output](/attachments/mistral-ocr-netzbauplan-page-123.html).
