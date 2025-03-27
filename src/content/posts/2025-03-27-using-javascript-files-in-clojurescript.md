@@ -6,7 +6,7 @@ uuid: 7d3e9c12-f458-41a7-9e2f-e5a8c2f9b3d4
 type: post
 ---
 
-The pull toward JavaScript has never been stronger. While ClojureScript remains an extremely expressive language, the JavaScript ecosystem continues to explode with tools like [v0](https://v0.dev/), [Subframe](https://subframe.com/) & [Paper](https://subframe.com/) generating entire UI trees and even full websites.
+The pull toward JavaScript has never been stronger. While ClojureScript remains an extremely expressive language, the JavaScript ecosystem continues to explode with tools like [v0](https://v0.dev/), [Subframe](https://subframe.com/) & [Paper](https://paper.design/) generating entire UI trees and even full websites.
 
 I found the feedback loop of these tools extremely quick and often use v0 to prototype specific components or interactions. 
 
@@ -55,7 +55,10 @@ Now this code would be kind of annoying (and not very valuable) to rewrite to Cl
    ["recharts" :as rc]))
 ```
 
-Note the path `/app/atoms/charts/rounded_step` - shadow-cljs understands this refers to a JavaScript file in your source tree and will look for it in on the class path. 
+Note the path `/app/atoms/charts/rounded_step` - shadow-cljs understands this refers to a JavaScript file in your source tree and will look for it in on the classpath. 
+
+Assuming you have `:paths “src”` then the file would be at `src/app/atoms/charts/rounded_step.js`.
+
 
 ## When to use JavaScript directly
 
