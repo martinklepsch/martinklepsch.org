@@ -8,6 +8,9 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://martinklepsch.org',
   output: 'static',
+  prefetch: {
+    defaultStrategy: 'hover'
+  },
   markdown: {
     shikiConfig: { theme: 'github-dark' }
   },
