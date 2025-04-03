@@ -8,9 +8,6 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://martinklepsch.org',
   output: 'static',
-  redirects: {
-    "/posts/[slug].html": "/posts/[...slug]/"
-  },
   markdown: {
     shikiConfig: { theme: 'github-dark' }
   },
